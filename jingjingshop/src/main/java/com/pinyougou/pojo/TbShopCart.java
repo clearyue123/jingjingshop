@@ -1,5 +1,7 @@
 package com.pinyougou.pojo;
 
+import java.util.List;
+
 /**
  * 
  * 
@@ -8,7 +10,10 @@ package com.pinyougou.pojo;
  * @date 2019-04-30
  */
 public class TbShopCart {
-    /**
+	
+	private List<TbShopCartSpe> cartSpeList;
+
+	/**
      * 购物车id
      */
     private Long cartId;
@@ -137,4 +142,12 @@ public class TbShopCart {
     public void setPostFee(Long postFee) {
         this.postFee = postFee;
     }
+    
+    public List<TbShopCartSpe> getCartSpeList() {
+		return cartSpeList;
+	}
+
+	public void setCartSpeList(List<TbShopCartSpe> cartSpeList) {
+		this.cartSpeList = cartSpeList;
+	}
 }

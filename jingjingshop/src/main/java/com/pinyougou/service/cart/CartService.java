@@ -1,6 +1,7 @@
 package com.pinyougou.service.cart;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.pojo.TbShopCart;
 
@@ -28,5 +29,5 @@ public interface CartService {
 	  * 新增
 	  * @param cart
 	  */
-	 void add(TbShopCart cart);
+	 void add(TbShopCart cart,Map<String,Object> map);
 }

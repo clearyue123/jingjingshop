@@ -95,11 +95,11 @@ public class IdWorker {
         }
         lastTimestamp = timestamp;
         // ID偏移组合生成最终的ID，并返回ID
-        long nextId = ((timestamp - twepoch) << timestampLeftShift)
+        Long nextId = ((timestamp - twepoch) << timestampLeftShift)
                 | (datacenterId << datacenterIdShift)
                 | (workerId << workerIdShift) | sequence;
 
-        return nextId;
+        return Long.parseLong(nextId.toString().substring(8));
     }
 
     private long tilNextMillis(final long lastTimestamp) {

@@ -120,7 +120,6 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	public List<TbAddress> findListByUserId(String userId) {
-		
 		TbAddressExample example=new TbAddressExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andUserIdEqualTo(userId);

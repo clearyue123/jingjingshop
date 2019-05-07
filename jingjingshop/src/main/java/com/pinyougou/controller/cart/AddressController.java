@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
+import com.pinyougou.mapper.TbAddressMapper;
 import com.pinyougou.pojo.TbAddress;
+import com.pinyougou.pojo.TbAddressExample;
+import com.pinyougou.pojo.TbAddressExample.Criteria;
 import com.pinyougou.service.user.AddressService;
 
 import entity.PageResult;
@@ -27,6 +30,9 @@ public class AddressController {
 
 	@Autowired
 	private AddressService addressService;
+	
+	@Autowired
+	private TbAddressMapper addressMapper;
 	
 	/**
 	 * 返回全部列表
@@ -118,9 +124,9 @@ public class AddressController {
     public Object findListByUserId(String userId){
 		try{
 			List<TbAddress> listAddress = (List<TbAddress>) addressService.findListByUserId(userId);
-			return new ApiResult(200, "地址列表查询成功", listAddress);
+			return new ApiResult(200, "地址信息查询成功", listAddress);
 		}catch(Exception e){
-			return new ApiResult(201, "地址列表查询失败", null);
+			return new ApiResult(201, "地址信息查询失败", null);
 		}
 		
 	}	
@@ -138,8 +144,8 @@ public class AddressController {
 	 * @param notes 备注
 	 * @return
 	 */
-	@RequestMapping("/add")
-	public Object add(@RequestParam(required = true, value = "userId")String userId,
+	@RequestMapping("/save")
+	public Object save(@RequestParam(required = true, value = "userId")String userId,
 			          @RequestParam(required = true, value = "provinceId")String provinceId,
 			          @RequestParam(required = true, value = "cityId")String cityId,
 			          @RequestParam(required = true, value = "townId")String townId,
@@ -158,13 +164,25 @@ public class AddressController {
 			tbAddress.setAddress(address);
 			tbAddress.setContact(contact);
 			tbAddress.setAlias(alias);
-			tbAddress.setCreateDate(new Date());
-			tbAddress.setIsDefault("0");//是否默认地址 1:是 0:否
-			addressService.add(tbAddress);
-			return new ApiResult(200, "地址新增成功", "");
+			tbAddress.setIsDefault("1");//是否默认地址 1:是 0:否
+			tbAddress.setNotes(notes);
+			TbAddressExample addressExample = new TbAddressExample();
+			Criteria criteria = addressExample.createCriteria();
+			criteria.andUserIdEqualTo(userId);
+			List<TbAddress> adddList = addressMapper.selectByExample(addressExample);
+			if(adddList!=null&&adddList.size()!=0){
+				tbAddress.setId(adddList.get(0).getId());
+				tbAddress.setCreateDate(adddList.get(0).getCreateDate());
+				addressMapper.updateByPrimaryKey(tbAddress);
+				return new ApiResult(200, "地址修改成功", "");
+			}else{
+				tbAddress.setCreateDate(new Date());
+				addressService.add(tbAddress);
+				return new ApiResult(200, "地址新增成功", "");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ApiResult(201, "地址新增失败", "");
+			return new ApiResult(201, "地址保存失败,请检查参数是否异常！", "");
 		}
 	}
 	

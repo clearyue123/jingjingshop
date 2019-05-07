@@ -13,6 +13,8 @@ import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbShopCart;
 import com.pinyougou.service.cart.CartService;
 
+import util.IdWorker;
+
 /**
  * 购物车 控制层
  * @author yue
@@ -24,6 +26,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
+	private IdWorker idWorker = new IdWorker();
 	/**
 	 * 新增订单
 	 * @param userId 用户id
@@ -38,28 +41,38 @@ public class CartController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Object add(@RequestParam(value="userId",required=false)String userId,
-			@RequestParam(value="itemId",required=false)String itemId,
+	public Object add(@RequestParam(value="userId",required=true)String userId,
+			@RequestParam(value="itemId",required=true)String itemId,
 			@RequestParam(value="sellerId",required=false)String sellerId,
 			@RequestParam(value="image",required=false)String image,
 			@RequestParam(value="title",required=false)String title,
 			@RequestParam(value="marketCost",required=false)String marketCost,
 	        @RequestParam(value="costPirce",required=false)String costPirce,
-            @RequestParam(value="num",required=false)String num,
-            @RequestParam(value="postFee",required=false)String postFee){
+            @RequestParam(value="num",required=true)String num,
+            @RequestParam(value="speIds",required=false)String[] speIds,
+            @RequestParam(value="speOpIds",required=false)String[] speOpIds){
 		try{
-			TbShopCart tbShopCart = new TbShopCart();
-			tbShopCart.setUserId(userId);
-			tbShopCart.setItemId(Long.parseLong(itemId));
-			tbShopCart.setSellerId(sellerId);
-			tbShopCart.setImage(image);
-			tbShopCart.setTitle(title);
-			tbShopCart.setMarketCost(Long.parseLong(marketCost));
-			tbShopCart.setCostPirce(Long.parseLong(costPirce));
-			tbShopCart.setNum(Integer.parseInt(num));
-			tbShopCart.setPostFee(Long.parseLong(postFee));
-			cartService.add(tbShopCart);
-			return new ApiResult(200, "购物车添加成功!", "");
+			if(speIds!=null&&speIds.length!=speOpIds.length){
+				return new ApiResult(201, "参数错误","");
+			}else{
+				long cartId = idWorker.nextId();
+				TbShopCart tbShopCart = new TbShopCart();
+				tbShopCart.setCartId(cartId);
+				tbShopCart.setUserId(userId);
+				tbShopCart.setItemId(Long.parseLong(itemId));
+				tbShopCart.setSellerId(sellerId);
+				tbShopCart.setImage(image);
+				tbShopCart.setTitle(title);
+				tbShopCart.setMarketCost(Long.parseLong(marketCost));
+				tbShopCart.setCostPirce(Long.parseLong(costPirce));
+				tbShopCart.setNum(Integer.parseInt(num));
+				tbShopCart.setPostFee(0L);
+				Map<String,Object> speMap = new HashMap<>();
+				speMap.put("speIds",speIds);
+				speMap.put("speOpIds", speOpIds);
+				cartService.add(tbShopCart,speMap);
+				return new ApiResult(200, "购物车添加成功!", "");
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			return new ApiResult(201, "购物车添加失败!", "");
@@ -94,8 +107,6 @@ public class CartController {
 	 */
 	@RequestMapping("/clearCart")
 	public Object clearCart(@RequestParam(value="userId",required=true)String userId,
-			@RequestParam(value="userType",required=false)String userType,
-			@RequestParam(value="isClearFlag",required=false)String isClearFlag,
 			@RequestParam(value="cartIds",required=true)String[] cartIds){
 		try{
 			for(String cartId:cartIds){
@@ -105,6 +116,18 @@ public class CartController {
 		}catch(Exception e){
 			e.printStackTrace();
 			return new ApiResult(201, "购物车清空失败！", "");
+		}
+	}
+	
+	@RequestMapping()
+	public Object updateCart(@RequestParam(value="cartId",required=true)String cartId,
+			                @RequestParam(value="num",required=true)String num){
+		try{
+			
+			return new ApiResult(200,"","");
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201,"","");
 		}
 	}
 }
