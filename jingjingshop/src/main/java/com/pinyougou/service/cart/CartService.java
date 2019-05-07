@@ -17,7 +17,7 @@ public interface CartService {
 	  * @param userId
 	  * @return
 	  */
-	 List<TbShopCart> listTbShopCart(String userId);
+	 List<Map<String,Object>> listTbShopCart(String userId);
 	 
 	 /**
 	  * 删除购物车

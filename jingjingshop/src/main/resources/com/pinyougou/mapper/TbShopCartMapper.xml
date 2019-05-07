@@ -5,14 +5,8 @@
     <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbShopCart" >
         <id column="cart_id" property="cartId" jdbcType="BIGINT" />
         <result column="user_id" property="userId" jdbcType="VARCHAR" />
-        <result column="item_id" property="itemId" jdbcType="BIGINT" />
-        <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
-        <result column="image" property="image" jdbcType="VARCHAR" />
-        <result column="title" property="title" jdbcType="VARCHAR" />
-        <result column="market_cost" property="marketCost" jdbcType="DECIMAL" />
-        <result column="cost_pirce" property="costPirce" jdbcType="DECIMAL" />
+        <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
         <result column="num" property="num" jdbcType="INTEGER" />
-        <result column="post_fee" property="postFee" jdbcType="BIGINT" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -76,8 +70,7 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        cart_id, user_id, item_id, seller_id, image, title, market_cost, cost_pirce, num, 
-        post_fee
+        cart_id, user_id, goods_id, num
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbShopCartExample" >
@@ -115,14 +108,10 @@
     </delete>
 
     <insert id="insert" parameterType="com.pinyougou.pojo.TbShopCart" >
-        insert into tb_shop_cart (cart_id, user_id, item_id, 
-            seller_id, image, title, 
-            market_cost, cost_pirce, num, 
-            post_fee)
-        values (#{cartId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{itemId,jdbcType=BIGINT}, 
-            #{sellerId,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-            #{marketCost,jdbcType=DECIMAL}, #{costPirce,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, 
-            #{postFee,jdbcType=BIGINT})
+        insert into tb_shop_cart (cart_id, user_id, goods_id, 
+            num)
+        values (#{cartId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, 
+            #{num,jdbcType=INTEGER})
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbShopCart" >
@@ -134,29 +123,11 @@
             <if test="userId != null" >
                 user_id,
             </if>
-            <if test="itemId != null" >
-                item_id,
-            </if>
-            <if test="sellerId != null" >
-                seller_id,
-            </if>
-            <if test="image != null" >
-                image,
-            </if>
-            <if test="title != null" >
-                title,
-            </if>
-            <if test="marketCost != null" >
-                market_cost,
-            </if>
-            <if test="costPirce != null" >
-                cost_pirce,
+            <if test="goodsId != null" >
+                goods_id,
             </if>
             <if test="num != null" >
                 num,
-            </if>
-            <if test="postFee != null" >
-                post_fee,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -166,29 +137,11 @@
             <if test="userId != null" >
                 #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="itemId != null" >
-                #{itemId,jdbcType=BIGINT},
-            </if>
-            <if test="sellerId != null" >
-                #{sellerId,jdbcType=VARCHAR},
-            </if>
-            <if test="image != null" >
-                #{image,jdbcType=VARCHAR},
-            </if>
-            <if test="title != null" >
-                #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="marketCost != null" >
-                #{marketCost,jdbcType=DECIMAL},
-            </if>
-            <if test="costPirce != null" >
-                #{costPirce,jdbcType=DECIMAL},
+            <if test="goodsId != null" >
+                #{goodsId,jdbcType=BIGINT},
             </if>
             <if test="num != null" >
                 #{num,jdbcType=INTEGER},
-            </if>
-            <if test="postFee != null" >
-                #{postFee,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
@@ -209,29 +162,11 @@
             <if test="record.userId != null" >
                 user_id = #{record.userId,jdbcType=VARCHAR},
             </if>
-            <if test="record.itemId != null" >
-                item_id = #{record.itemId,jdbcType=BIGINT},
-            </if>
-            <if test="record.sellerId != null" >
-                seller_id = #{record.sellerId,jdbcType=VARCHAR},
-            </if>
-            <if test="record.image != null" >
-                image = #{record.image,jdbcType=VARCHAR},
-            </if>
-            <if test="record.title != null" >
-                title = #{record.title,jdbcType=VARCHAR},
-            </if>
-            <if test="record.marketCost != null" >
-                market_cost = #{record.marketCost,jdbcType=DECIMAL},
-            </if>
-            <if test="record.costPirce != null" >
-                cost_pirce = #{record.costPirce,jdbcType=DECIMAL},
+            <if test="record.goodsId != null" >
+                goods_id = #{record.goodsId,jdbcType=BIGINT},
             </if>
             <if test="record.num != null" >
                 num = #{record.num,jdbcType=INTEGER},
-            </if>
-            <if test="record.postFee != null" >
-                post_fee = #{record.postFee,jdbcType=BIGINT},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -243,14 +178,8 @@
         update tb_shop_cart
         set cart_id = #{record.cartId,jdbcType=BIGINT},
             user_id = #{record.userId,jdbcType=VARCHAR},
-            item_id = #{record.itemId,jdbcType=BIGINT},
-            seller_id = #{record.sellerId,jdbcType=VARCHAR},
-            image = #{record.image,jdbcType=VARCHAR},
-            title = #{record.title,jdbcType=VARCHAR},
-            market_cost = #{record.marketCost,jdbcType=DECIMAL},
-            cost_pirce = #{record.costPirce,jdbcType=DECIMAL},
-            num = #{record.num,jdbcType=INTEGER},
-            post_fee = #{record.postFee,jdbcType=BIGINT}
+            goods_id = #{record.goodsId,jdbcType=BIGINT},
+            num = #{record.num,jdbcType=INTEGER}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -262,29 +191,11 @@
             <if test="userId != null" >
                 user_id = #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="itemId != null" >
-                item_id = #{itemId,jdbcType=BIGINT},
-            </if>
-            <if test="sellerId != null" >
-                seller_id = #{sellerId,jdbcType=VARCHAR},
-            </if>
-            <if test="image != null" >
-                image = #{image,jdbcType=VARCHAR},
-            </if>
-            <if test="title != null" >
-                title = #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="marketCost != null" >
-                market_cost = #{marketCost,jdbcType=DECIMAL},
-            </if>
-            <if test="costPirce != null" >
-                cost_pirce = #{costPirce,jdbcType=DECIMAL},
+            <if test="goodsId != null" >
+                goods_id = #{goodsId,jdbcType=BIGINT},
             </if>
             <if test="num != null" >
                 num = #{num,jdbcType=INTEGER},
-            </if>
-            <if test="postFee != null" >
-                post_fee = #{postFee,jdbcType=BIGINT},
             </if>
         </set>
         where cart_id = #{cartId,jdbcType=BIGINT}
@@ -293,14 +204,49 @@
     <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbShopCart" >
         update tb_shop_cart
         set user_id = #{userId,jdbcType=VARCHAR},
-            item_id = #{itemId,jdbcType=BIGINT},
-            seller_id = #{sellerId,jdbcType=VARCHAR},
-            image = #{image,jdbcType=VARCHAR},
-            title = #{title,jdbcType=VARCHAR},
-            market_cost = #{marketCost,jdbcType=DECIMAL},
-            cost_pirce = #{costPirce,jdbcType=DECIMAL},
-            num = #{num,jdbcType=INTEGER},
-            post_fee = #{postFee,jdbcType=BIGINT}
+            goods_id = #{goodsId,jdbcType=BIGINT},
+            num = #{num,jdbcType=INTEGER}
         where cart_id = #{cartId,jdbcType=BIGINT}
     </update>
+    
+    <select id="cartMapList" parameterType="long" resultType="java.util.Map">
+           SELECT
+				t1.cart_id cartId,
+				t2.id,
+				t2.price,
+				t2.reduced_price reducedPrice,
+				t2.goods_name goodsName,
+				t2.small_pic smallPic
+			FROM
+				tb_shop_cart t1
+			LEFT JOIN tb_goods t2 ON t1.goods_id = t2.id
+			LEFT JOIN tb_goods_desc t3 ON t2.id = t3.goods_id
+			where t1.user_id = #{userId}
+    </select>
+    
+    <select id="cartSpeMapList" parameterType="long" resultType="java.util.Map">
+          SELECT
+				t.spe_id speId,
+				t.spe_op_id speOpId,
+				(
+					SELECT
+						t1.spec_name
+					FROM
+						tb_specification t1
+					WHERE
+						t1.id = t.spe_id
+				) speName,
+				(
+					SELECT
+						t2.option_name
+					FROM
+						tb_specification_option t2
+					WHERE
+						t2.id = t.spe_op_id
+				) speOptionName
+			FROM
+				tb_shop_cart_spe t
+			WHERE
+				t.cart_id = #{cartId}
+    </select>
 </mapper>

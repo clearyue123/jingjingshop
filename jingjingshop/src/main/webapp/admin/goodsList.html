@@ -45,15 +45,15 @@
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
                                         <button type="button" ng-click="dele()" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
-                                        <button type="button" ng-click="updateStatus('1')" class="btn btn-default" title="审核通过" ><i class="fa fa-check"></i> 审核通过</button>
-                                        <button type="button" ng-click="updateStatus('2')" class="btn btn-default" title="驳回" ><i class="fa fa-ban"></i> 驳回</button>                                  
                                         <button type="button" class="btn btn-default" title="刷新" ><i class="fa fa-refresh"></i> 刷新</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-                                                                                      商品名称：<input >
+                                                                                      商品名称：<input type="text" ng-model="searchEntity.goodsName">
+                                                                                      品牌名称：<input type="text" ng-model="searchEntity.brandName">
+                                                                                      店铺名称：<input type="text" ng-model="searchEntity.sellerName">
 									<button class="btn btn-default" >查询</button>                                    
                                 </div>
                             </div>
@@ -69,10 +69,11 @@
 										  <th class="sorting_asc">商品ID</th>
 									      <th class="sorting">商品名称</th>
 									      <th class="sorting">是否上架</th>
-									      <th class="sorting">商品品牌</th>
+									      <th class="sorting">品牌名称</th>
+									      <th class="sorting">店铺名称</th>
 									      <th class="sorting">商城价</th>
 									      <th class="sorting">打折价</th>
-									      <th class="sorting">状态</th>									     						
+									      <th class="sorting">商品图片</th>
 					                      <th class="text-center">操作</th>
 			                          </tr>
 			                      </thead>
@@ -80,11 +81,13 @@
 			                          <tr ng-repeat="entity in list">
 			                              <td><input ng-click="updateSelection($event,entity.id)" type="checkbox"></td>			                              
 				                          <td>{{entity.id}}</td>
-									      <td>{{entity.goodsName}}</td>
-									      <td>{{entity.price}}</td>
-									      <td>{{itemCatList[entity.category1Id]}}</td>
-									      <td>{{itemCatList[entity.category2Id]}}</td>
-									      <td>{{itemCatList[entity.category3Id]}}</td>
+				                          <td>{{entity.id}}</td>
+				                          <td>{{entity.id}}</td>
+				                          <td>{{entity.id}}</td>
+				                          <td>{{entity.id}}</td>
+				                          <td>{{entity.id}}</td>
+				                          <td>{{entity.id}}</td>
+				                          <td>{{entity.id}}</td>
 		                                  <td>		                                  
 		                                  	<span>
 		                                  		{{status[entity.auditStatus]}}

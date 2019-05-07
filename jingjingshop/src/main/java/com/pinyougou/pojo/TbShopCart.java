@@ -1,18 +1,19 @@
 package com.pinyougou.pojo;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
  * 
- * @author wcyong
+ * @author yue
  * 
- * @date 2019-04-30
+ * @date 2019-05-07
  */
-public class TbShopCart {
-	
-	private List<TbShopCartSpe> cartSpeList;
-
+public class TbShopCart implements Serializable {
+   
+	private List<Map<String,Object>> cartSpeList;
 	/**
      * 购物车id
      */
@@ -26,42 +27,12 @@ public class TbShopCart {
     /**
      * 商品id
      */
-    private Long itemId;
-
-    /**
-     * 商家id
-     */
-    private String sellerId;
-
-    /**
-     * 商品封面图片
-     */
-    private String image;
-
-    /**
-     * 商品标题
-     */
-    private String title;
-
-    /**
-     * 打折价
-     */
-    private Long marketCost;
-
-    /**
-     * 原价
-     */
-    private Long costPirce;
+    private Long goodsId;
 
     /**
      * 购买的商品数量
      */
     private Integer num;
-
-    /**
-     * 邮费
-     */
-    private Long postFee;
 
     public Long getCartId() {
         return cartId;
@@ -79,52 +50,12 @@ public class TbShopCart {
         this.userId = userId == null ? null : userId.trim();
     }
 
-    public Long getItemId() {
-        return itemId;
+    public Long getGoodsId() {
+        return goodsId;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
-    }
-
-    public String getSellerId() {
-		return sellerId;
-	}
-
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
-	}
-
-	public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public Long getMarketCost() {
-        return marketCost;
-    }
-
-    public void setMarketCost(Long marketCost) {
-        this.marketCost = marketCost;
-    }
-
-    public Long getCostPirce() {
-        return costPirce;
-    }
-
-    public void setCostPirce(Long costPirce) {
-        this.costPirce = costPirce;
+    public void setGoodsId(Long goodsId) {
+        this.goodsId = goodsId;
     }
 
     public Integer getNum() {
@@ -135,19 +66,12 @@ public class TbShopCart {
         this.num = num;
     }
 
-    public Long getPostFee() {
-        return postFee;
-    }
-
-    public void setPostFee(Long postFee) {
-        this.postFee = postFee;
-    }
-    
-    public List<TbShopCartSpe> getCartSpeList() {
+	public List<Map<String, Object>> getCartSpeList() {
 		return cartSpeList;
 	}
 
-	public void setCartSpeList(List<TbShopCartSpe> cartSpeList) {
+	public void setCartSpeList(List<Map<String, Object>> cartSpeList) {
 		this.cartSpeList = cartSpeList;
 	}
+    
 }

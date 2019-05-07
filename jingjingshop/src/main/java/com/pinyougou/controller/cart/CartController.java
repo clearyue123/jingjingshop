@@ -30,27 +30,19 @@ public class CartController {
 	private TbShopCartMapper cartMapper;
 	
 	private IdWorker idWorker = new IdWorker();
+	
 	/**
-	 * 新增订单
+	 * 新增购物车
 	 * @param userId 用户id
-	 * @param itemId 商品id
-	 * @param sellerId 店铺id
-	 * @param image 商品封面
-	 * @param title 商品标题
-	 * @param marketCost 打折价
-	 * @param costPirce 商城价
-	 * @param num
-	 * @param postFee
+	 * @param goodsId 商品id
+	 * @param num 商品数量
+	 * @param speIds 规格id数组
+	 * @param speOpIds 规格选项id数组
 	 * @return
 	 */
 	@RequestMapping("/add")
 	public Object add(@RequestParam(value="userId",required=true)String userId,
-			@RequestParam(value="itemId",required=true)String itemId,
-			@RequestParam(value="sellerId",required=false)String sellerId,
-			@RequestParam(value="image",required=false)String image,
-			@RequestParam(value="title",required=false)String title,
-			@RequestParam(value="marketCost",required=false)String marketCost,
-	        @RequestParam(value="costPirce",required=false)String costPirce,
+			@RequestParam(value="goodsId",required=true)String goodsId,
             @RequestParam(value="num",required=true)String num,
             @RequestParam(value="speIds",required=false)String[] speIds,
             @RequestParam(value="speOpIds",required=false)String[] speOpIds){
@@ -62,14 +54,8 @@ public class CartController {
 				TbShopCart tbShopCart = new TbShopCart();
 				tbShopCart.setCartId(cartId);
 				tbShopCart.setUserId(userId);
-				tbShopCart.setItemId(Long.parseLong(itemId));
-				tbShopCart.setSellerId(sellerId);
-				tbShopCart.setImage(image);
-				tbShopCart.setTitle(title);
-				tbShopCart.setMarketCost(Long.parseLong(marketCost));
-				tbShopCart.setCostPirce(Long.parseLong(costPirce));
+				tbShopCart.setGoodsId(Long.parseLong(goodsId));
 				tbShopCart.setNum(Integer.parseInt(num));
-				tbShopCart.setPostFee(0L);
 				Map<String,Object> speMap = new HashMap<>();
 				speMap.put("speIds",speIds);
 				speMap.put("speOpIds", speOpIds);
@@ -91,7 +77,7 @@ public class CartController {
 	public Object listCart(@RequestParam(value="userId",required=true)String userId){
 		try{
 			Map<String,Object> data = new HashMap<String,Object>();
-			List<TbShopCart> listCart = cartService.listTbShopCart(userId);
+			List<Map<String,Object>> listCart = cartService.listTbShopCart(userId);
 			data.put("listCart", listCart);
 			return new ApiResult(200, "查询成功！", data);
 		}catch(Exception e){

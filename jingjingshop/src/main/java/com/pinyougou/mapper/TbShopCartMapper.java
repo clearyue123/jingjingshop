@@ -1,12 +1,11 @@
 package com.pinyougou.mapper;
 
+import com.pinyougou.pojo.TbShopCart;
+import com.pinyougou.pojo.TbShopCartExample;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-
-import com.pinyougou.pojo.TbShopCart;
-import com.pinyougou.pojo.TbShopCartExample;
 
 public interface TbShopCartMapper {
     int countByExample(TbShopCartExample example);
@@ -30,6 +29,8 @@ public interface TbShopCartMapper {
     int updateByPrimaryKeySelective(TbShopCart record);
 
     int updateByPrimaryKey(TbShopCart record);
-    
-    int insertCartSpe(Map<String,Object> map);
+
+	List<Map<String, Object>> cartSpeMapList(Long cartId);
+
+	List<Map<String, Object>> cartMapList(long userId);
 }

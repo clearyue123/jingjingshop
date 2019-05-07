@@ -1,9 +1,10 @@
 package com.pinyougou.mapper;
 
-import com.pinyougou.pojo.TbShopCartSpe;
-import com.pinyougou.pojo.TbShopCartSpeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import com.pinyougou.pojo.TbShopCartSpe;
+import com.pinyougou.pojo.TbShopCartSpeExample;
 
 public interface TbShopCartSpeMapper {
     int countByExample(TbShopCartSpeExample example);

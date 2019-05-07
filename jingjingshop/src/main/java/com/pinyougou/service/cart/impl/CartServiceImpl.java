@@ -26,20 +26,14 @@ public class CartServiceImpl implements CartService {
 	private TbShopCartSpeMapper cartSpeMapper;
 	
 	@Override
-	public List<TbShopCart> listTbShopCart(String userId) {
-		TbShopCartExample cartExample = new TbShopCartExample();
-		Criteria criteria = cartExample.createCriteria();
-		criteria.andUserIdEqualTo(userId);
-		List<TbShopCart> listShopCart = cartMapper.selectByExample(cartExample);
-		for(TbShopCart shopCart: listShopCart){
-			Long cartId = shopCart.getCartId();
-			TbShopCartSpeExample cartSpeExample = new TbShopCartSpeExample();
-			com.pinyougou.pojo.TbShopCartSpeExample.Criteria c2 = cartSpeExample.createCriteria();
-			c2.andCartIdEqualTo(cartId);
-			List<TbShopCartSpe> cartSpeList = cartSpeMapper.selectByExample(cartSpeExample);
-			shopCart.setCartSpeList(cartSpeList);
+	public List<Map<String,Object>> listTbShopCart(String userId) {
+		List<Map<String,Object>> cartMapList = cartMapper.cartMapList(Long.parseLong(userId));
+		for(Map<String,Object> shopCartMap: cartMapList){
+			Long cartId = (Long)shopCartMap.get("cartId");
+			List<Map<String, Object>> cartSpeMapList = cartMapper.cartSpeMapList(cartId);
+			shopCartMap.put("cartSpeMapList", cartSpeMapList);
 		}
-		return listShopCart;
+		return cartMapList;
 	}
 
 	@Override
