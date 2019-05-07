@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
+import com.pinyougou.mapper.TbShopCartMapper;
 import com.pinyougou.pojo.TbShopCart;
 import com.pinyougou.service.cart.CartService;
 
@@ -25,6 +26,8 @@ public class CartController {
     
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private TbShopCartMapper cartMapper;
 	
 	private IdWorker idWorker = new IdWorker();
 	/**
@@ -112,22 +115,24 @@ public class CartController {
 			for(String cartId:cartIds){
 				cartService.delTbShopCart(Long.parseLong(cartId));
 			}
-			return new ApiResult(200, "已清空购物车！", "");
+			return new ApiResult(200, "已删除购物车！", "");
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ApiResult(201, "购物车清空失败！", "");
+			return new ApiResult(201, "购物车删除失败！", "");
 		}
 	}
 	
-	@RequestMapping()
+	@RequestMapping("/updateCart")
 	public Object updateCart(@RequestParam(value="cartId",required=true)String cartId,
 			                @RequestParam(value="num",required=true)String num){
 		try{
-			
-			return new ApiResult(200,"","");
+			TbShopCart updateModel = cartMapper.selectByPrimaryKey(Long.parseLong(cartId));
+			updateModel.setNum(Integer.parseInt(num));
+			cartMapper.updateByPrimaryKey(updateModel);
+			return new ApiResult(200,"购物车更新成功","");
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ApiResult(201,"","");
+			return new ApiResult(201,"购物车更新成功","");
 		}
 	}
 }
