@@ -33,8 +33,8 @@ public class HttpUtils {
 
     public static  final String WXGETAPPID="https://api.weixin.qq.com/sns/jscode2session";
     /*测试环境下的*/
-    public static final String APPID="wx6821df338c75633c";
-    public static final String secret="2c0c7a2fcaaac2588bae152e8d98823e";
+    public static final String APPID="wxf243d0aca191eaf4";
+    public static final String secret="51afaf07b01d9fbab5f81e86192ecfaf";
     public static final String APPID2="wxbc8e96ef035cc6d0";
     public static final String secret2="ef25d2c0f252871787d98abce634c59f";
 
