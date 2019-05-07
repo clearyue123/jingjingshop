@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pinyougou.mapper.TbGoodsCartMapper" >
+
+    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbGoodsCart" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+        <result column="user_wx_id" property="userWxId" jdbcType="INTEGER" />
+        <result column="number" property="number" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, order_no, goods_id, user_wx_id, number, status, insert_time, update_time, delete_flag, 
+        delete_time
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbGoodsCartExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_goods_cart
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_goods_cart
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_goods_cart
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbGoodsCartExample" >
+        delete from tb_goods_cart
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.pinyougou.pojo.TbGoodsCart" >
+        insert into tb_goods_cart (id, order_no, goods_id, 
+            user_wx_id, number, status, 
+            insert_time, update_time, delete_flag, 
+            delete_time)
+        values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{goodsId,jdbcType=INTEGER}, 
+            #{userWxId,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+            #{insertTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, 
+            #{deleteTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbGoodsCart" >
+        insert into tb_goods_cart
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="orderNo != null" >
+                order_no,
+            </if>
+            <if test="goodsId != null" >
+                goods_id,
+            </if>
+            <if test="userWxId != null" >
+                user_wx_id,
+            </if>
+            <if test="number != null" >
+                number,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="insertTime != null" >
+                insert_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="deleteTime != null" >
+                delete_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null" >
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null" >
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="userWxId != null" >
+                #{userWxId,jdbcType=INTEGER},
+            </if>
+            <if test="number != null" >
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="insertTime != null" >
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteTime != null" >
+                #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.pinyougou.pojo.TbGoodsCartExample" resultType="java.lang.Integer" >
+        select count(*) from tb_goods_cart
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_goods_cart
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderNo != null" >
+                order_no = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.goodsId != null" >
+                goods_id = #{record.goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="record.userWxId != null" >
+                user_wx_id = #{record.userWxId,jdbcType=INTEGER},
+            </if>
+            <if test="record.number != null" >
+                number = #{record.number,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null" >
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.insertTime != null" >
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteTime != null" >
+                delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_goods_cart
+        set id = #{record.id,jdbcType=INTEGER},
+            order_no = #{record.orderNo,jdbcType=VARCHAR},
+            goods_id = #{record.goodsId,jdbcType=INTEGER},
+            user_wx_id = #{record.userWxId,jdbcType=INTEGER},
+            number = #{record.number,jdbcType=INTEGER},
+            status = #{record.status,jdbcType=INTEGER},
+            insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbGoodsCart" >
+        update tb_goods_cart
+        <set >
+            <if test="orderNo != null" >
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null" >
+                goods_id = #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="userWxId != null" >
+                user_wx_id = #{userWxId,jdbcType=INTEGER},
+            </if>
+            <if test="number != null" >
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="insertTime != null" >
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteTime != null" >
+                delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbGoodsCart" >
+        update tb_goods_cart
+        set order_no = #{orderNo,jdbcType=VARCHAR},
+            goods_id = #{goodsId,jdbcType=INTEGER},
+            user_wx_id = #{userWxId,jdbcType=INTEGER},
+            number = #{number,jdbcType=INTEGER},
+            status = #{status,jdbcType=INTEGER},
+            insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            delete_time = #{deleteTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

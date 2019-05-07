@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pinyougou.mapper.TbShopCartMapper" >
+
+    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbShopCart" >
+        <id column="cart_id" property="cartId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="item_id" property="itemId" jdbcType="BIGINT" />
+        <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
+        <result column="image" property="image" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="market_cost" property="marketCost" jdbcType="DECIMAL" />
+        <result column="cost_pirce" property="costPirce" jdbcType="DECIMAL" />
+        <result column="num" property="num" jdbcType="INTEGER" />
+        <result column="post_fee" property="postFee" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        cart_id, user_id, item_id, seller_id, image, title, market_cost, cost_pirce, num, 
+        post_fee
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbShopCartExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_shop_cart
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_shop_cart
+        where cart_id = #{cartId,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from tb_shop_cart
+        where cart_id = #{cartId,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbShopCartExample" >
+        delete from tb_shop_cart
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.pinyougou.pojo.TbShopCart" >
+        insert into tb_shop_cart (cart_id, user_id, item_id, 
+            seller_id, image, title, 
+            market_cost, cost_pirce, num, 
+            post_fee)
+        values (#{cartId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{itemId,jdbcType=BIGINT}, 
+            #{sellerId,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+            #{marketCost,jdbcType=DECIMAL}, #{costPirce,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, 
+            #{postFee,jdbcType=BIGINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbShopCart" >
+        insert into tb_shop_cart
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="cartId != null" >
+                cart_id,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="itemId != null" >
+                item_id,
+            </if>
+            <if test="sellerId != null" >
+                seller_id,
+            </if>
+            <if test="image != null" >
+                image,
+            </if>
+            <if test="title != null" >
+                title,
+            </if>
+            <if test="marketCost != null" >
+                market_cost,
+            </if>
+            <if test="costPirce != null" >
+                cost_pirce,
+            </if>
+            <if test="num != null" >
+                num,
+            </if>
+            <if test="postFee != null" >
+                post_fee,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="cartId != null" >
+                #{cartId,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                #{itemId,jdbcType=BIGINT},
+            </if>
+            <if test="sellerId != null" >
+                #{sellerId,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null" >
+                #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="marketCost != null" >
+                #{marketCost,jdbcType=DECIMAL},
+            </if>
+            <if test="costPirce != null" >
+                #{costPirce,jdbcType=DECIMAL},
+            </if>
+            <if test="num != null" >
+                #{num,jdbcType=INTEGER},
+            </if>
+            <if test="postFee != null" >
+                #{postFee,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.pinyougou.pojo.TbShopCartExample" resultType="java.lang.Integer" >
+        select count(*) from tb_shop_cart
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_shop_cart
+        <set >
+            <if test="record.cartId != null" >
+                cart_id = #{record.cartId,jdbcType=BIGINT},
+            </if>
+            <if test="record.userId != null" >
+                user_id = #{record.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.itemId != null" >
+                item_id = #{record.itemId,jdbcType=BIGINT},
+            </if>
+            <if test="record.sellerId != null" >
+                seller_id = #{record.sellerId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.image != null" >
+                image = #{record.image,jdbcType=VARCHAR},
+            </if>
+            <if test="record.title != null" >
+                title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marketCost != null" >
+                market_cost = #{record.marketCost,jdbcType=DECIMAL},
+            </if>
+            <if test="record.costPirce != null" >
+                cost_pirce = #{record.costPirce,jdbcType=DECIMAL},
+            </if>
+            <if test="record.num != null" >
+                num = #{record.num,jdbcType=INTEGER},
+            </if>
+            <if test="record.postFee != null" >
+                post_fee = #{record.postFee,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_shop_cart
+        set cart_id = #{record.cartId,jdbcType=BIGINT},
+            user_id = #{record.userId,jdbcType=VARCHAR},
+            item_id = #{record.itemId,jdbcType=BIGINT},
+            seller_id = #{record.sellerId,jdbcType=VARCHAR},
+            image = #{record.image,jdbcType=VARCHAR},
+            title = #{record.title,jdbcType=VARCHAR},
+            market_cost = #{record.marketCost,jdbcType=DECIMAL},
+            cost_pirce = #{record.costPirce,jdbcType=DECIMAL},
+            num = #{record.num,jdbcType=INTEGER},
+            post_fee = #{record.postFee,jdbcType=BIGINT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbShopCart" >
+        update tb_shop_cart
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="itemId != null" >
+                item_id = #{itemId,jdbcType=BIGINT},
+            </if>
+            <if test="sellerId != null" >
+                seller_id = #{sellerId,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null" >
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="marketCost != null" >
+                market_cost = #{marketCost,jdbcType=DECIMAL},
+            </if>
+            <if test="costPirce != null" >
+                cost_pirce = #{costPirce,jdbcType=DECIMAL},
+            </if>
+            <if test="num != null" >
+                num = #{num,jdbcType=INTEGER},
+            </if>
+            <if test="postFee != null" >
+                post_fee = #{postFee,jdbcType=BIGINT},
+            </if>
+        </set>
+        where cart_id = #{cartId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbShopCart" >
+        update tb_shop_cart
+        set user_id = #{userId,jdbcType=VARCHAR},
+            item_id = #{itemId,jdbcType=BIGINT},
+            seller_id = #{sellerId,jdbcType=VARCHAR},
+            image = #{image,jdbcType=VARCHAR},
+            title = #{title,jdbcType=VARCHAR},
+            market_cost = #{marketCost,jdbcType=DECIMAL},
+            cost_pirce = #{costPirce,jdbcType=DECIMAL},
+            num = #{num,jdbcType=INTEGER},
+            post_fee = #{postFee,jdbcType=BIGINT}
+        where cart_id = #{cartId,jdbcType=BIGINT}
+    </update>
+</mapper>

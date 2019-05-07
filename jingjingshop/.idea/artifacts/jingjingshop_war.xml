@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jingjingshop:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>jingjingshop</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="jingjingshop-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="jingjingshop:war exploded" />
+    </root>
+  </artifact>
+</component>

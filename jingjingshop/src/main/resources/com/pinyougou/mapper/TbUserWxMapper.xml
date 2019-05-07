@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pinyougou.mapper.TbUserWxMapper" >
+
+    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbUserWx" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="gender" property="gender" jdbcType="INTEGER" />
+        <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+        <result column="lastlogintime" property="lastlogintime" jdbcType="TIMESTAMP" />
+        <result column="wxname" property="wxname" jdbcType="VARCHAR" />
+        <result column="headimg" property="headimg" jdbcType="VARCHAR" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="wx_id" property="wxId" jdbcType="VARCHAR" />
+        <result column="integral" property="integral" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="insert_time" property="insertTime" jdbcType="TIMESTAMP" />
+        <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+        <result column="update_user_id" property="updateUserId" jdbcType="INTEGER" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+        <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, role_id, gender, idcard, lastlogintime, wxname, headimg, birthday, mobile, wx_id, 
+        integral, name, insert_time, login_time, update_user_id, update_time, is_delete, 
+        delete_time
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbUserWxExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_user_wx
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_user_wx
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_user_wx
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbUserWxExample" >
+        delete from tb_user_wx
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.pinyougou.pojo.TbUserWx" >
+        insert into tb_user_wx (id, role_id, gender, 
+            idcard, lastlogintime, wxname, 
+            headimg, birthday, mobile, 
+            wx_id, integral, name, 
+            insert_time, login_time, update_user_id, 
+            update_time, is_delete, delete_time
+            )
+        values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, 
+            #{idcard,jdbcType=VARCHAR}, #{lastlogintime,jdbcType=TIMESTAMP}, #{wxname,jdbcType=VARCHAR}, 
+            #{headimg,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{mobile,jdbcType=VARCHAR}, 
+            #{wxId,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+            #{insertTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, #{updateUserId,jdbcType=INTEGER}, 
+            #{updateTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER}, #{deleteTime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbUserWx" >
+        insert into tb_user_wx
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="roleId != null" >
+                role_id,
+            </if>
+            <if test="gender != null" >
+                gender,
+            </if>
+            <if test="idcard != null" >
+                idcard,
+            </if>
+            <if test="lastlogintime != null" >
+                lastlogintime,
+            </if>
+            <if test="wxname != null" >
+                wxname,
+            </if>
+            <if test="headimg != null" >
+                headimg,
+            </if>
+            <if test="birthday != null" >
+                birthday,
+            </if>
+            <if test="mobile != null" >
+                mobile,
+            </if>
+            <if test="wxId != null" >
+                wx_id,
+            </if>
+            <if test="integral != null" >
+                integral,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="insertTime != null" >
+                insert_time,
+            </if>
+            <if test="loginTime != null" >
+                login_time,
+            </if>
+            <if test="updateUserId != null" >
+                update_user_id,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="isDelete != null" >
+                is_delete,
+            </if>
+            <if test="deleteTime != null" >
+                delete_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null" >
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="gender != null" >
+                #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="idcard != null" >
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="lastlogintime != null" >
+                #{lastlogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wxname != null" >
+                #{wxname,jdbcType=VARCHAR},
+            </if>
+            <if test="headimg != null" >
+                #{headimg,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="wxId != null" >
+                #{wxId,jdbcType=VARCHAR},
+            </if>
+            <if test="integral != null" >
+                #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null" >
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginTime != null" >
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null" >
+                #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null" >
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="deleteTime != null" >
+                #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.pinyougou.pojo.TbUserWxExample" resultType="java.lang.Integer" >
+        select count(*) from tb_user_wx
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_user_wx
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.roleId != null" >
+                role_id = #{record.roleId,jdbcType=INTEGER},
+            </if>
+            <if test="record.gender != null" >
+                gender = #{record.gender,jdbcType=INTEGER},
+            </if>
+            <if test="record.idcard != null" >
+                idcard = #{record.idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastlogintime != null" >
+                lastlogintime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.wxname != null" >
+                wxname = #{record.wxname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.headimg != null" >
+                headimg = #{record.headimg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.birthday != null" >
+                birthday = #{record.birthday,jdbcType=DATE},
+            </if>
+            <if test="record.mobile != null" >
+                mobile = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wxId != null" >
+                wx_id = #{record.wxId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.integral != null" >
+                integral = #{record.integral,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null" >
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.insertTime != null" >
+                insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.loginTime != null" >
+                login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateUserId != null" >
+                update_user_id = #{record.updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isDelete != null" >
+                is_delete = #{record.isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteTime != null" >
+                delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_user_wx
+        set id = #{record.id,jdbcType=INTEGER},
+            role_id = #{record.roleId,jdbcType=INTEGER},
+            gender = #{record.gender,jdbcType=INTEGER},
+            idcard = #{record.idcard,jdbcType=VARCHAR},
+            lastlogintime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+            wxname = #{record.wxname,jdbcType=VARCHAR},
+            headimg = #{record.headimg,jdbcType=VARCHAR},
+            birthday = #{record.birthday,jdbcType=DATE},
+            mobile = #{record.mobile,jdbcType=VARCHAR},
+            wx_id = #{record.wxId,jdbcType=VARCHAR},
+            integral = #{record.integral,jdbcType=INTEGER},
+            name = #{record.name,jdbcType=VARCHAR},
+            insert_time = #{record.insertTime,jdbcType=TIMESTAMP},
+            login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+            update_user_id = #{record.updateUserId,jdbcType=INTEGER},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            is_delete = #{record.isDelete,jdbcType=INTEGER},
+            delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbUserWx" >
+        update tb_user_wx
+        <set >
+            <if test="roleId != null" >
+                role_id = #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="gender != null" >
+                gender = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="idcard != null" >
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="lastlogintime != null" >
+                lastlogintime = #{lastlogintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wxname != null" >
+                wxname = #{wxname,jdbcType=VARCHAR},
+            </if>
+            <if test="headimg != null" >
+                headimg = #{headimg,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="mobile != null" >
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="wxId != null" >
+                wx_id = #{wxId,jdbcType=VARCHAR},
+            </if>
+            <if test="integral != null" >
+                integral = #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="insertTime != null" >
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loginTime != null" >
+                login_time = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null" >
+                update_user_id = #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null" >
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="deleteTime != null" >
+                delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbUserWx" >
+        update tb_user_wx
+        set role_id = #{roleId,jdbcType=INTEGER},
+            gender = #{gender,jdbcType=INTEGER},
+            idcard = #{idcard,jdbcType=VARCHAR},
+            lastlogintime = #{lastlogintime,jdbcType=TIMESTAMP},
+            wxname = #{wxname,jdbcType=VARCHAR},
+            headimg = #{headimg,jdbcType=VARCHAR},
+            birthday = #{birthday,jdbcType=DATE},
+            mobile = #{mobile,jdbcType=VARCHAR},
+            wx_id = #{wxId,jdbcType=VARCHAR},
+            integral = #{integral,jdbcType=INTEGER},
+            name = #{name,jdbcType=VARCHAR},
+            insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            login_time = #{loginTime,jdbcType=TIMESTAMP},
+            update_user_id = #{updateUserId,jdbcType=INTEGER},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            is_delete = #{isDelete,jdbcType=INTEGER},
+            delete_time = #{deleteTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
