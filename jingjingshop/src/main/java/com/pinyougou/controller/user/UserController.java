@@ -2,12 +2,13 @@ package com.pinyougou.controller.user;
 
 import java.util.List;
 
-import com.pinyougou.common.ApiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.user.UserService;
 
@@ -30,10 +31,28 @@ public class UserController {
      * @param user
      * @return
      */
+    /**
+     * 修改
+     * @param user
+     * @return
+     */
     @RequestMapping("/userupdate")
-    public ApiResult userupdate(@RequestBody TbUser user) {
-        System.out.println(user);
+    public ApiResult userupdate(@RequestParam(required = false, value = "id" ) Long id,
+                                @RequestParam(required = false, value = "username" ) String  username,
+                                @RequestParam(required = false, value = "name" ) String  name,
+                                @RequestParam(required = false, value = "phone" ) String  phone,
+                                @RequestParam(required = false, value = "head_pic" ) String  head_pic,
+                                @RequestParam(required = false, value = "birthday" ) String  birthday
+                              ) {
         try {
+            TbUser  user=new TbUser();
+            user.setId(id);
+            user.setUsername(username);
+            user.setName(name);
+            user.setPhone(phone);
+            user.setBirthday(birthday);
+            user.setHeadPic(head_pic);
+            System.out.println(user);
             if (user.getId()==null||user.getId().equals("null")) {
                 userService.add(user);
                 return new ApiResult(200, "新增成功", "新增成功");
@@ -44,7 +63,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ApiResult(00004, "操作失败", "操作失败");
+        return new ApiResult(00004, "操作失败", "字段超出范围或者格式不正确");
     }
 
 

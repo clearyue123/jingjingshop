@@ -1,23 +1,23 @@
 package com.pinyougou.controller.manage;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.Page;
 import com.pinyougou.common.ApiResult;
-import com.pinyougou.pojo.TbContent;
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.group.Goods;
 import com.pinyougou.service.sellergoods.GoodsService;
 
 import entity.PageResult;
 import entity.Result;
-import util.TextUtils;
 
 /**
  * controller
@@ -114,19 +114,6 @@ public class GoodsController {
 		}
 	}
 
-	/**
-	 * 查询+分页
-	 * 
-	 * @param brand
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@RequestMapping("/search")
-	public PageResult search(@RequestBody TbGoods goods, int page, int rows) {
-		return goodsService.findPage(goods, page, rows);
-	}
-
 	@RequestMapping("/updateStatus")
 	public Result updateStatus(Long[] ids, String status) {
 		try {
@@ -143,8 +130,7 @@ public class GoodsController {
 	}
 
 	/**
-	 * 小程序接口
-	 * 
+	 * 小程序接口 商品列表功能
 	 * @param page
 	 * @param rows
 	 * @return
@@ -163,8 +149,7 @@ public class GoodsController {
 	}
 
 	/**
-	 * 根据id获取商品
-	 * 
+	 * 小程序接口 根据id获取商品
 	 * @param id
 	 * @return
 	 */
@@ -172,6 +157,27 @@ public class GoodsController {
 	public ApiResult getGoodsDetail(Long id) {
 		Goods goods = goodsService.findOne(id);
 		return new ApiResult(200, "查询成功", goods);
+	}
+	
+    /**
+     * 后台商品管理  查询分页
+     * @param searchMap 查询条件map
+     * @param page 页数
+     * @param rows 每页条数
+     * @return
+     */
+	@RequestMapping("/search")
+	public Map<String,Object> search(Map<String,Object> searchMap, int page, int rows) {
+		try{
+			Map<String,Object> data = new HashMap<>();
+			Page<Map<String,Object>> pageResult = goodsService.search(searchMap,page,rows);
+			data.put("total", pageResult.getTotal());
+			data.put("list", pageResult.getResult());
+			return data;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

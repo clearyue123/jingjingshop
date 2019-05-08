@@ -215,27 +215,27 @@ public class GoodsServiceImpl implements GoodsService {
 		criteria.andIsDeleteIsNull();
 		
 		if(goods!=null){			
-					if(goods.getSellerId()!=null && goods.getSellerId().length()>0){
+		    if(goods.getSellerId()!=null && goods.getSellerId().length()>0){
 			criteria.andSellerIdEqualTo(goods.getSellerId());
-		}
-		if(goods.getGoodsName()!=null && goods.getGoodsName().length()>0){
-			criteria.andGoodsNameLike("%"+goods.getGoodsName()+"%");
-		}
-		if(goods.getIsMarketable()!=null && goods.getIsMarketable().length()>0){
-			criteria.andIsMarketableLike("%"+goods.getIsMarketable()+"%");
-		}
-		if(goods.getSmallPic()!=null && goods.getSmallPic().length()>0){
-			criteria.andSmallPicLike("%"+goods.getSmallPic()+"%");
-		}
-		if(goods.getIsEnableSpec()!=null && goods.getIsEnableSpec().length()>0){
-			criteria.andIsEnableSpecLike("%"+goods.getIsEnableSpec()+"%");
-		}
-		if(goods.getCategory3Id()!=null && goods.getCategory3Id()!=-1){
-			criteria.andCategory3IdEqualTo(goods.getCategory3Id());
-		}
-		if(goods.getIsDelete()!=null && goods.getIsDelete().length()>0){
-			criteria.andIsDeleteLike("%"+goods.getIsDelete()+"%");
-		}
+		    }
+			if(goods.getGoodsName()!=null && goods.getGoodsName().length()>0){
+				criteria.andGoodsNameLike("%"+goods.getGoodsName()+"%");
+			}
+			if(goods.getIsMarketable()!=null && goods.getIsMarketable().length()>0){
+				criteria.andIsMarketableLike("%"+goods.getIsMarketable()+"%");
+			}
+			if(goods.getSmallPic()!=null && goods.getSmallPic().length()>0){
+				criteria.andSmallPicLike("%"+goods.getSmallPic()+"%");
+			}
+			if(goods.getIsEnableSpec()!=null && goods.getIsEnableSpec().length()>0){
+				criteria.andIsEnableSpecLike("%"+goods.getIsEnableSpec()+"%");
+			}
+			if(goods.getCategory3Id()!=null && goods.getCategory3Id()!=-1){
+				criteria.andCategory3IdEqualTo(goods.getCategory3Id());
+			}
+			if(goods.getIsDelete()!=null && goods.getIsDelete().length()>0){
+				criteria.andIsDeleteLike("%"+goods.getIsDelete()+"%");
+			}
 
 		}
 		
@@ -265,5 +265,19 @@ public class GoodsServiceImpl implements GoodsService {
 		criteria.andGoodsIdIn( Arrays.asList(goodsIds));//指定条件：SPUID集合
 		
 		return itemMapper.selectByExample(example);
+	}
+
+	@Override
+	public Page<Map<String, Object>> search(Map<String, Object> searchMap, int page, int rows) {
+		PageHelper.startPage(page, rows);
+		List<Map<String, Object>> searchGoodList = goodsMapper.searchGoodList(searchMap);
+		for(Map<String,Object> targetMap:searchGoodList){
+			String isMarketable = ((String)targetMap.get("isMarketable")).equals("1")?"已上架":"未上架";
+			String isEnableSpec = ((String)targetMap.get("isEnableSpec")).equals("1")?"已启用":"未启用";
+			targetMap.put("isMarketable", isMarketable);
+			targetMap.put("isEnableSpec", isEnableSpec);
+		}
+		Page<Map<String,Object>> pageResult = (Page<Map<String,Object>>)searchGoodList;
+		return pageResult;
 	}
 }

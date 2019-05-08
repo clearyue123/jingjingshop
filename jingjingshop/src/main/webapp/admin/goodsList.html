@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../js/service/itemCatService.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="searchEntity={auditStatus:'0'};findItemCatList()">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="searchEntity={};search()">
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -55,7 +55,7 @@
                                                                                       商品名称：<input type="text" ng-model="searchEntity.goodsName">
                                                                                       品牌名称：<input type="text" ng-model="searchEntity.brandName">
                                                                                       店铺名称：<input type="text" ng-model="searchEntity.sellerName">
-									<button class="btn btn-default" >查询</button>                                    
+									<button class="btn btn-default" ng-click="reloadList()">查询</button>                                    
                                 </div>
                             </div>
                             <!--工具栏/-->
@@ -68,12 +68,14 @@
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th> 
 										  <th class="sorting_asc">商品ID</th>
-									      <th class="sorting">商品名称</th>
-									      <th class="sorting">是否上架</th>
-									      <th class="sorting">品牌名称</th>
-									      <th class="sorting">店铺名称</th>
+									      <th class="sorting">商品名</th>
+									      <th class="sorting">类名</th>
+									      <th class="sorting">品牌名</th>
+									      <th class="sorting">店铺</th>
 									      <th class="sorting">商城价</th>
 									      <th class="sorting">打折价</th>
+									      <th class="sorting">是否上架</th>
+									      <th class="sorting">是否启用规格</th>
 									      <th class="sorting">商品图片</th>
 					                      <th class="text-center">操作</th>
 			                          </tr>
@@ -81,20 +83,16 @@
 			                      <tbody>
 			                          <tr ng-repeat="entity in list">
 			                              <td><input ng-click="updateSelection($event,entity.id)" type="checkbox"></td>			                              
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.id}}</td>
-		                                  <td>		                                  
-		                                  	<span>
-		                                  		{{status[entity.auditStatus]}}
-		                                  	</span>
-		                                  	
-		                                  </td>		                                  
+				                          <td>{{entity.goodsId}}</td>
+				                          <td>{{entity.goodsName}}</td>
+				                          <td>{{entity.categoryName}}</td>
+				                          <td>{{entity.brandName}}</td>
+				                          <td>{{entity.sellerName}}</td>
+				                          <td>{{entity.price}}</td>
+				                          <td>{{entity.reducedPrice}}</td>
+				                          <td>{{entity.isMarketable}}</td>
+				                          <td>{{entity.isEnableSpec}}</td>
+				                          <td>{{entity.smallPic}}</td>
 		                                  <td class="text-center">                                          
 		                                 	  <button type="button" class="btn bg-olive btn-xs" >详情</button>                  
 		                                  </td>

@@ -1,9 +1,12 @@
 package com.pinyougou.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbGoodsExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TbGoodsMapper {
     int countByExample(TbGoodsExample example);
@@ -27,4 +30,6 @@ public interface TbGoodsMapper {
     int updateByPrimaryKeySelective(TbGoods record);
 
     int updateByPrimaryKey(TbGoods record);
+    
+    List<Map<String,Object>> searchGoodList(Map<String,Object> searchMap);
 }

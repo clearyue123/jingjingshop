@@ -1,6 +1,8 @@
 package com.pinyougou.service.sellergoods;
 import java.util.List;
+import java.util.Map;
 
+import com.github.pagehelper.Page;
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbItem;
 import com.pinyougou.pojo.group.Goods;
@@ -71,4 +73,13 @@ public interface GoodsService {
 	 * @return
 	 */
 	public List<TbItem>	findItemListByGoodsIdListAndStatus(Long []goodsIds,String status);
+
+    /**
+     * 分页查询
+     * @param searchMap
+     * @param page
+     * @param rows
+     * @return
+     */
+	public Page<Map<String, Object>> search(Map<String, Object> searchMap, int page, int rows);
 }

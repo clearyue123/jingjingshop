@@ -365,4 +365,38 @@
             total_num = #{totalNum,jdbcType=DECIMAL}
         where id = #{id,jdbcType=BIGINT}
     </update>
+    
+    <select id="searchGoodList" parameterType="java.util.Map" resultType="java.util.Map">
+        select 
+		    t1.id goodsId,
+		    t1.goods_name goodsName,
+		    t1.price,
+		    t1.reduced_price reducedPrice,
+		    t1.small_pic smallPic,
+		    t1.is_marketable isMarketable,
+            t1.is_enable_spec isEnableSpec,
+		    t2.`name` brandName,
+		    t3.`name` sellerName,
+		    t4.item_images itemImages,
+		    t5.`name` categoryName
+		from tb_goods t1
+		LEFT JOIN tb_brand t2 ON t1.brand_id = t2.id
+		LEFT JOIN tb_seller t3 ON t3.seller_id = t1.seller_id
+		LEFT JOIN tb_goods_desc t4 on t4.goods_id = t1.id
+		LEFT JOIN tb_item_cat t5 on t5.id = t1.category3_id
+		<where>
+			<if test='goodsName !=null'>
+			   t1.goods_name like #{goodsName}
+			</if>
+			<if test='brandName !=null'>
+			   and t2.`name` like #{brandName}
+			</if>
+			<if test='sellerName !=null'>
+			   and t3.`name` like #{sellerName}
+			</if>
+			<if test='categoryName !=null'>
+			   and t5.`name` like #{categoryName}
+			</if>
+		</where> 
+    </select>
 </mapper>

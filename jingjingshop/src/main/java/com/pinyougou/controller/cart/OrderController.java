@@ -193,7 +193,11 @@ public class OrderController {
 			paramMap.put("ORDERID", orderId);
 			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
 			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(Long.parseLong(orderId));
-			orderDetailMap.put("itemMapList", itemMapList);
+			if(itemMapList!=null){
+				orderDetailMap.put("itemMapList", itemMapList);
+			}else{
+				orderDetailMap.put("itemMapList","");
+			}
 			return new ApiResult(200, "查询成功", orderDetailMap);
 		}catch(Exception e){
 			e.printStackTrace();
