@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 /**
  * 
  * 
- * @author yue
+ * @author wcyong
  * 
- * @date 2019-04-26
+ * @date 2019-05-08
  */
-public class TbGoods extends TbBase{
+public class TbGoods {
     /**
      * 主键
      */
@@ -21,21 +21,6 @@ public class TbGoods extends TbBase{
     private String sellerId;
 
     /**
-     * SPU名
-     */
-    private String goodsName;
-
-    /**
-     * 默认SKU
-     */
-    private Long defaultItemId;
-
-    /**
-     * 状态
-     */
-    private String auditStatus;
-
-    /**
      * 是否上架
      */
     private String isMarketable;
@@ -44,11 +29,6 @@ public class TbGoods extends TbBase{
      * 品牌
      */
     private Long brandId;
-
-    /**
-     * 副标题
-     */
-    private String caption;
 
     /**
      * 一级类目
@@ -76,11 +56,6 @@ public class TbGoods extends TbBase{
     private BigDecimal price;
 
     /**
-     * 分类模板ID
-     */
-    private Long typeTemplateId;
-
-    /**
      * 是否启用规格
      */
     private String isEnableSpec;
@@ -91,9 +66,19 @@ public class TbGoods extends TbBase{
     private String isDelete;
 
     /**
-     * 打折价
+     * 降价后商品
      */
     private BigDecimal reducedPrice;
+
+    /**
+     * 商品名称
+     */
+    private String goodsName;
+
+    /**
+     * 商品总数
+     */
+    private Long totalNum;
 
     public Long getId() {
         return id;
@@ -111,30 +96,6 @@ public class TbGoods extends TbBase{
         this.sellerId = sellerId == null ? null : sellerId.trim();
     }
 
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
-    }
-
-    public Long getDefaultItemId() {
-        return defaultItemId;
-    }
-
-    public void setDefaultItemId(Long defaultItemId) {
-        this.defaultItemId = defaultItemId;
-    }
-
-    public String getAuditStatus() {
-        return auditStatus;
-    }
-
-    public void setAuditStatus(String auditStatus) {
-        this.auditStatus = auditStatus == null ? null : auditStatus.trim();
-    }
-
     public String getIsMarketable() {
         return isMarketable;
     }
@@ -149,14 +110,6 @@ public class TbGoods extends TbBase{
 
     public void setBrandId(Long brandId) {
         this.brandId = brandId;
-    }
-
-    public String getCaption() {
-        return caption;
-    }
-
-    public void setCaption(String caption) {
-        this.caption = caption == null ? null : caption.trim();
     }
 
     public Long getCategory1Id() {
@@ -199,14 +152,6 @@ public class TbGoods extends TbBase{
         this.price = price;
     }
 
-    public Long getTypeTemplateId() {
-        return typeTemplateId;
-    }
-
-    public void setTypeTemplateId(Long typeTemplateId) {
-        this.typeTemplateId = typeTemplateId;
-    }
-
     public String getIsEnableSpec() {
         return isEnableSpec;
     }
@@ -229,5 +174,21 @@ public class TbGoods extends TbBase{
 
     public void setReducedPrice(BigDecimal reducedPrice) {
         this.reducedPrice = reducedPrice;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
+    }
+
+    public Long getTotalNum() {
+        return totalNum;
+    }
+
+    public void setTotalNum(Long totalNum) {
+        this.totalNum = totalNum;
     }
 }

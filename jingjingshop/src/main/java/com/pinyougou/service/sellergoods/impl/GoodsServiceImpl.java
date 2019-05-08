@@ -77,7 +77,6 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 增加
 	 */
 	public void add(Goods goods) {
-		goods.getGoods().setAuditStatus("0"); // 设置审核的状态
 		
 		goodsMapper.insert(goods.getGoods()); // 插入商品信息
 		
@@ -156,7 +155,6 @@ public class GoodsServiceImpl implements GoodsService {
 	 */
 	public void update(Goods goods){
 		// 修改商品信息
-		goods.getGoods().setAuditStatus("0");
 		goodsMapper.updateByPrimaryKey(goods.getGoods());
 		// 修改商品扩展信息:
 		goodsDescMapper.updateByPrimaryKey(goods.getGoodsDesc());
@@ -223,14 +221,8 @@ public class GoodsServiceImpl implements GoodsService {
 		if(goods.getGoodsName()!=null && goods.getGoodsName().length()>0){
 			criteria.andGoodsNameLike("%"+goods.getGoodsName()+"%");
 		}
-		if(goods.getAuditStatus()!=null && goods.getAuditStatus().length()>0){
-			criteria.andAuditStatusLike("%"+goods.getAuditStatus()+"%");
-		}
 		if(goods.getIsMarketable()!=null && goods.getIsMarketable().length()>0){
 			criteria.andIsMarketableLike("%"+goods.getIsMarketable()+"%");
-		}
-		if(goods.getCaption()!=null && goods.getCaption().length()>0){
-			criteria.andCaptionLike("%"+goods.getCaption()+"%");
 		}
 		if(goods.getSmallPic()!=null && goods.getSmallPic().length()>0){
 			criteria.andSmallPicLike("%"+goods.getSmallPic()+"%");
@@ -254,9 +246,6 @@ public class GoodsServiceImpl implements GoodsService {
 	public void updateStatus(Long[] ids, String status) {
 		for (Long id : ids) {
 			TbGoods tbGoods = goodsMapper.selectByPrimaryKey(id);
-			
-			tbGoods.setAuditStatus(status);
-			
 			goodsMapper.updateByPrimaryKey(tbGoods);
 		}
 	}

@@ -5,21 +5,18 @@
     <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbGoods" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
-        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-        <result column="default_item_id" property="defaultItemId" jdbcType="BIGINT" />
-        <result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
         <result column="is_marketable" property="isMarketable" jdbcType="VARCHAR" />
         <result column="brand_id" property="brandId" jdbcType="BIGINT" />
-        <result column="caption" property="caption" jdbcType="VARCHAR" />
         <result column="category1_id" property="category1Id" jdbcType="BIGINT" />
         <result column="category2_id" property="category2Id" jdbcType="BIGINT" />
         <result column="category3_id" property="category3Id" jdbcType="BIGINT" />
         <result column="small_pic" property="smallPic" jdbcType="VARCHAR" />
         <result column="price" property="price" jdbcType="DECIMAL" />
-        <result column="type_template_id" property="typeTemplateId" jdbcType="BIGINT" />
         <result column="is_enable_spec" property="isEnableSpec" jdbcType="VARCHAR" />
         <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
         <result column="reduced_price" property="reducedPrice" jdbcType="DECIMAL" />
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+        <result column="total_num" property="totalNum" jdbcType="DECIMAL" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -83,9 +80,8 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, seller_id, goods_name, default_item_id, audit_status, is_marketable, brand_id, 
-        caption, category1_id, category2_id, category3_id, small_pic, price, type_template_id, 
-        is_enable_spec, is_delete, reduced_price
+        id, seller_id, is_marketable, brand_id, category1_id, category2_id, category3_id, 
+        small_pic, price, is_enable_spec, is_delete, reduced_price, goods_name, total_num
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbGoodsExample" >
@@ -123,18 +119,16 @@
     </delete>
 
     <insert id="insert" parameterType="com.pinyougou.pojo.TbGoods" >
-        insert into tb_goods (id, seller_id, goods_name, 
-            default_item_id, audit_status, is_marketable, 
-            brand_id, caption, category1_id, 
-            category2_id, category3_id, small_pic, 
-            price, type_template_id, is_enable_spec, 
-            is_delete, reduced_price)
-        values (#{id,jdbcType=BIGINT}, #{sellerId,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
-            #{defaultItemId,jdbcType=BIGINT}, #{auditStatus,jdbcType=VARCHAR}, #{isMarketable,jdbcType=VARCHAR}, 
-            #{brandId,jdbcType=BIGINT}, #{caption,jdbcType=VARCHAR}, #{category1Id,jdbcType=BIGINT}, 
-            #{category2Id,jdbcType=BIGINT}, #{category3Id,jdbcType=BIGINT}, #{smallPic,jdbcType=VARCHAR}, 
-            #{price,jdbcType=DECIMAL}, #{typeTemplateId,jdbcType=BIGINT}, #{isEnableSpec,jdbcType=VARCHAR}, 
-            #{isDelete,jdbcType=VARCHAR}, #{reducedPrice,jdbcType=DECIMAL})
+        insert into tb_goods (id, seller_id, is_marketable, 
+            brand_id, category1_id, category2_id, 
+            category3_id, small_pic, price, 
+            is_enable_spec, is_delete, reduced_price, 
+            goods_name, total_num)
+        values (#{id,jdbcType=BIGINT}, #{sellerId,jdbcType=VARCHAR}, #{isMarketable,jdbcType=VARCHAR}, 
+            #{brandId,jdbcType=BIGINT}, #{category1Id,jdbcType=BIGINT}, #{category2Id,jdbcType=BIGINT}, 
+            #{category3Id,jdbcType=BIGINT}, #{smallPic,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+            #{isEnableSpec,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, #{reducedPrice,jdbcType=DECIMAL}, 
+            #{goodsName,jdbcType=VARCHAR}, #{totalNum,jdbcType=DECIMAL})
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbGoods" >
@@ -146,23 +140,11 @@
             <if test="sellerId != null" >
                 seller_id,
             </if>
-            <if test="goodsName != null" >
-                goods_name,
-            </if>
-            <if test="defaultItemId != null" >
-                default_item_id,
-            </if>
-            <if test="auditStatus != null" >
-                audit_status,
-            </if>
             <if test="isMarketable != null" >
                 is_marketable,
             </if>
             <if test="brandId != null" >
                 brand_id,
-            </if>
-            <if test="caption != null" >
-                caption,
             </if>
             <if test="category1Id != null" >
                 category1_id,
@@ -179,9 +161,6 @@
             <if test="price != null" >
                 price,
             </if>
-            <if test="typeTemplateId != null" >
-                type_template_id,
-            </if>
             <if test="isEnableSpec != null" >
                 is_enable_spec,
             </if>
@@ -191,6 +170,12 @@
             <if test="reducedPrice != null" >
                 reduced_price,
             </if>
+            <if test="goodsName != null" >
+                goods_name,
+            </if>
+            <if test="totalNum != null" >
+                total_num,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -199,23 +184,11 @@
             <if test="sellerId != null" >
                 #{sellerId,jdbcType=VARCHAR},
             </if>
-            <if test="goodsName != null" >
-                #{goodsName,jdbcType=VARCHAR},
-            </if>
-            <if test="defaultItemId != null" >
-                #{defaultItemId,jdbcType=BIGINT},
-            </if>
-            <if test="auditStatus != null" >
-                #{auditStatus,jdbcType=VARCHAR},
-            </if>
             <if test="isMarketable != null" >
                 #{isMarketable,jdbcType=VARCHAR},
             </if>
             <if test="brandId != null" >
                 #{brandId,jdbcType=BIGINT},
-            </if>
-            <if test="caption != null" >
-                #{caption,jdbcType=VARCHAR},
             </if>
             <if test="category1Id != null" >
                 #{category1Id,jdbcType=BIGINT},
@@ -232,9 +205,6 @@
             <if test="price != null" >
                 #{price,jdbcType=DECIMAL},
             </if>
-            <if test="typeTemplateId != null" >
-                #{typeTemplateId,jdbcType=BIGINT},
-            </if>
             <if test="isEnableSpec != null" >
                 #{isEnableSpec,jdbcType=VARCHAR},
             </if>
@@ -243,6 +213,12 @@
             </if>
             <if test="reducedPrice != null" >
                 #{reducedPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="goodsName != null" >
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalNum != null" >
+                #{totalNum,jdbcType=DECIMAL},
             </if>
         </trim>
     </insert>
@@ -263,23 +239,11 @@
             <if test="record.sellerId != null" >
                 seller_id = #{record.sellerId,jdbcType=VARCHAR},
             </if>
-            <if test="record.goodsName != null" >
-                goods_name = #{record.goodsName,jdbcType=VARCHAR},
-            </if>
-            <if test="record.defaultItemId != null" >
-                default_item_id = #{record.defaultItemId,jdbcType=BIGINT},
-            </if>
-            <if test="record.auditStatus != null" >
-                audit_status = #{record.auditStatus,jdbcType=VARCHAR},
-            </if>
             <if test="record.isMarketable != null" >
                 is_marketable = #{record.isMarketable,jdbcType=VARCHAR},
             </if>
             <if test="record.brandId != null" >
                 brand_id = #{record.brandId,jdbcType=BIGINT},
-            </if>
-            <if test="record.caption != null" >
-                caption = #{record.caption,jdbcType=VARCHAR},
             </if>
             <if test="record.category1Id != null" >
                 category1_id = #{record.category1Id,jdbcType=BIGINT},
@@ -296,9 +260,6 @@
             <if test="record.price != null" >
                 price = #{record.price,jdbcType=DECIMAL},
             </if>
-            <if test="record.typeTemplateId != null" >
-                type_template_id = #{record.typeTemplateId,jdbcType=BIGINT},
-            </if>
             <if test="record.isEnableSpec != null" >
                 is_enable_spec = #{record.isEnableSpec,jdbcType=VARCHAR},
             </if>
@@ -307,6 +268,12 @@
             </if>
             <if test="record.reducedPrice != null" >
                 reduced_price = #{record.reducedPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.goodsName != null" >
+                goods_name = #{record.goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalNum != null" >
+                total_num = #{record.totalNum,jdbcType=DECIMAL},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -318,21 +285,18 @@
         update tb_goods
         set id = #{record.id,jdbcType=BIGINT},
             seller_id = #{record.sellerId,jdbcType=VARCHAR},
-            goods_name = #{record.goodsName,jdbcType=VARCHAR},
-            default_item_id = #{record.defaultItemId,jdbcType=BIGINT},
-            audit_status = #{record.auditStatus,jdbcType=VARCHAR},
             is_marketable = #{record.isMarketable,jdbcType=VARCHAR},
             brand_id = #{record.brandId,jdbcType=BIGINT},
-            caption = #{record.caption,jdbcType=VARCHAR},
             category1_id = #{record.category1Id,jdbcType=BIGINT},
             category2_id = #{record.category2Id,jdbcType=BIGINT},
             category3_id = #{record.category3Id,jdbcType=BIGINT},
             small_pic = #{record.smallPic,jdbcType=VARCHAR},
             price = #{record.price,jdbcType=DECIMAL},
-            type_template_id = #{record.typeTemplateId,jdbcType=BIGINT},
             is_enable_spec = #{record.isEnableSpec,jdbcType=VARCHAR},
             is_delete = #{record.isDelete,jdbcType=VARCHAR},
-            reduced_price = #{record.reducedPrice,jdbcType=DECIMAL}
+            reduced_price = #{record.reducedPrice,jdbcType=DECIMAL},
+            goods_name = #{record.goodsName,jdbcType=VARCHAR},
+            total_num = #{record.totalNum,jdbcType=DECIMAL}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -344,23 +308,11 @@
             <if test="sellerId != null" >
                 seller_id = #{sellerId,jdbcType=VARCHAR},
             </if>
-            <if test="goodsName != null" >
-                goods_name = #{goodsName,jdbcType=VARCHAR},
-            </if>
-            <if test="defaultItemId != null" >
-                default_item_id = #{defaultItemId,jdbcType=BIGINT},
-            </if>
-            <if test="auditStatus != null" >
-                audit_status = #{auditStatus,jdbcType=VARCHAR},
-            </if>
             <if test="isMarketable != null" >
                 is_marketable = #{isMarketable,jdbcType=VARCHAR},
             </if>
             <if test="brandId != null" >
                 brand_id = #{brandId,jdbcType=BIGINT},
-            </if>
-            <if test="caption != null" >
-                caption = #{caption,jdbcType=VARCHAR},
             </if>
             <if test="category1Id != null" >
                 category1_id = #{category1Id,jdbcType=BIGINT},
@@ -377,9 +329,6 @@
             <if test="price != null" >
                 price = #{price,jdbcType=DECIMAL},
             </if>
-            <if test="typeTemplateId != null" >
-                type_template_id = #{typeTemplateId,jdbcType=BIGINT},
-            </if>
             <if test="isEnableSpec != null" >
                 is_enable_spec = #{isEnableSpec,jdbcType=VARCHAR},
             </if>
@@ -389,6 +338,12 @@
             <if test="reducedPrice != null" >
                 reduced_price = #{reducedPrice,jdbcType=DECIMAL},
             </if>
+            <if test="goodsName != null" >
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalNum != null" >
+                total_num = #{totalNum,jdbcType=DECIMAL},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -396,21 +351,18 @@
     <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbGoods" >
         update tb_goods
         set seller_id = #{sellerId,jdbcType=VARCHAR},
-            goods_name = #{goodsName,jdbcType=VARCHAR},
-            default_item_id = #{defaultItemId,jdbcType=BIGINT},
-            audit_status = #{auditStatus,jdbcType=VARCHAR},
             is_marketable = #{isMarketable,jdbcType=VARCHAR},
             brand_id = #{brandId,jdbcType=BIGINT},
-            caption = #{caption,jdbcType=VARCHAR},
             category1_id = #{category1Id,jdbcType=BIGINT},
             category2_id = #{category2Id,jdbcType=BIGINT},
             category3_id = #{category3Id,jdbcType=BIGINT},
             small_pic = #{smallPic,jdbcType=VARCHAR},
             price = #{price,jdbcType=DECIMAL},
-            type_template_id = #{typeTemplateId,jdbcType=BIGINT},
             is_enable_spec = #{isEnableSpec,jdbcType=VARCHAR},
             is_delete = #{isDelete,jdbcType=VARCHAR},
-            reduced_price = #{reducedPrice,jdbcType=DECIMAL}
+            reduced_price = #{reducedPrice,jdbcType=DECIMAL},
+            goods_name = #{goodsName,jdbcType=VARCHAR},
+            total_num = #{totalNum,jdbcType=DECIMAL}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
