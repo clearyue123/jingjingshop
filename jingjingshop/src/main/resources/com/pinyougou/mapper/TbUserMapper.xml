@@ -507,4 +507,10 @@
             last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+<select id="selectByOpenId" parameterType="com.pinyougou.pojo.TbUser"
+		resultMap="BaseResultMap">
+		select * from tb_user where open_id =
+		#{openId,jdbcType=VARCHAR}
+	</select>
 </mapper>

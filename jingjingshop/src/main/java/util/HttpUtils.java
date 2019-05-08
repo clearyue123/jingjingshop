@@ -35,8 +35,6 @@ public class HttpUtils {
     /*测试环境下的*/
     public static final String APPID="wxf243d0aca191eaf4";
     public static final String secret="51afaf07b01d9fbab5f81e86192ecfaf";
-    public static final String APPID2="wxbc8e96ef035cc6d0";
-    public static final String secret2="ef25d2c0f252871787d98abce634c59f";
 
     /*正式环境下的小程序*/
     //public static final String APPID="wx04666848fc542a4d";

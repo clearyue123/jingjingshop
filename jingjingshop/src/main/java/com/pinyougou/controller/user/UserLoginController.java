@@ -34,23 +34,12 @@ public class UserLoginController {
 	}
 
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
-	public ApiResult wxlogin(String wxcode, String flag) {
+	public ApiResult wxlogin(String wxcode) {
 		if (TextUtils.isBlank(wxcode)) {
 			return new ApiResult(101, "微信账号不能为空", null);
 		}
-		String url = "";
-		if (TextUtils.isBlank(flag)) {
-			return new ApiResult(101, "flag必须传", null);
-		}
-		if (flag.equals("1")) {
-			url = HttpUtils.WXGETAPPID + "?appid=" + HttpUtils.APPID + "&secret=" + HttpUtils.secret + "&js_code="
+		String url = HttpUtils.WXGETAPPID + "?appid=" + HttpUtils.APPID + "&secret=" + HttpUtils.secret + "&js_code="
 					+ wxcode + "&grant_type=authorization_code";
-		} else if (flag.equals("2")) {
-			url = HttpUtils.WXGETAPPID + "?appid=" + HttpUtils.APPID2 + "&secret=" + HttpUtils.secret2 + "&js_code="
-					+ wxcode + "&grant_type=authorization_code";
-		} else {
-			return new ApiResult(101, "flag参数错误", null);
-		}
 
 		String ss = HttpUtils.doGet(url);
 
@@ -59,7 +48,7 @@ public class UserLoginController {
 			if (jsonObject.getIntValue("errcode") != 0) {
 				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
 			} else {
-				System.out.println(jsonObject.toJSONString());
+				System.out.println("返回参数:"+jsonObject.toJSONString());
 				wxcode = jsonObject.getString("openid");
 				TbUser user = new TbUser();
 				user.setOpenId(wxcode);
