@@ -255,6 +255,7 @@
   
   <select id="selectSpeOptionById" parameterType="long" resultType="java.util.Map">
 		  SELECT
+		    t2.id optionId,
 			t2.option_name optionName
 		FROM
 			tb_specification t1
