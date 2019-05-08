@@ -44,6 +44,7 @@
                             <div class="pull-left">
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
+                                        <button type="button" ng-click="" data-toggle="modal" data-target="#addModal" class="btn btn-default" title="新增" ><i class="fa fa-trash-o"></i> 新增</button>
                                         <button type="button" ng-click="dele()" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
                                         <button type="button" class="btn btn-default" title="刷新" ><i class="fa fa-refresh"></i> 刷新</button>
                                     </div>
@@ -101,16 +102,78 @@
 			                      </tbody>
 			                  </table>
 			                  <!--数据列表/-->                        
-							  
-							 
                         </div>
                         <!-- 数据表格 /-->
                          <!-- 分页 -->
 						<tm-pagination conf="paginationConf"></tm-pagination>
-                        
                      </div>
                     <!-- /.box-body -->
-        
+   <!-- 新增窗口 -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">商品新增</h3>
+		</div>
+		<div class="modal-body">		
+			<table class="table table-bordered table-striped"  width="800px">
+		      	<tr>
+		      		<td>商品名称</td>
+		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      	</tr>		      	
+		      	<tr>
+		      		<td>是否上架</td>
+		      		<td>
+		      		   <input type="radio" name="sex" value="1" ng-model="person.sex" />男
+		      		   <input type="radio" name="sex" value="0" ng-model="person.sex" />女
+		      		</td>
+		      	</tr>
+		      	<tr>
+		      		<td>品牌</td>
+		      		<td>
+			      		 <select ng-model="province" class="btn btn-default"   ng-change="initTabelData()">
+	                        <option value=""  selected="selected">全部</option> 
+	                        <option ng-repeat="p in provinces" value="{{p.value}}" >{{p.text}}</option>
+	                     </select>
+                    </td>
+		      	</tr>
+		      	<tr>
+		      		<td>店铺</td>
+		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>商城价</td>
+		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>打折价</td>
+		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>类别</td>
+		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>是否启用规格</td>
+		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>规格：
+		      		<input type="checkbox" ng-true-value="true" ng-false-value="false" ng-model="" />款式
+					<input type="checkbox" ng-true-value="true" ng-false-value="false" ng-model="" />尺寸
+					</td>
+		      	</tr>		      	
+			 </table>				
+		</div>
+		<div class="modal-footer">						
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+     
 </body>
 
 </html>

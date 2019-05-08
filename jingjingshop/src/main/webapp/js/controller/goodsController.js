@@ -102,4 +102,37 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService   ,
 			}
 		});
 	}
+	
+	
+	 //过滤
+	$scope.filter = {};
+	//select下拉列表的内容
+	$scope.provinces = [
+	                       {
+	                            value: 1,
+	                            text: '充值',
+	                           
+	                        },
+	                        {
+	                            value: 2,
+	                            text: '消费',
+	                           
+	                        }
+	                    ];
+
+	  //列表数据
+	 $scope.initTabelData = function() {
+	        if($scope.province == 1){
+	             $scope.filter.transaction_type = 1;
+	         }else if($scope.province == 2){
+	             $scope.filter.transaction_type = 2;
+	         }else{
+	             $scope.filter = {};
+	         }
+
+	        $request.post("接口", $scope.filter,
+	                        function(response) {},
+	                        function(err) {});
+	                }
+	
 });	
