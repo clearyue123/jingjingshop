@@ -267,15 +267,15 @@
   
   <select id="showItemDetail" parameterType="long" resultType="java.util.Map">
         SELECT
-			t1.title,
-			t1.cost_pirce,
-			t1.market_price,
-			t2.item_images,
+			t1.price,
+			t1.reduced_price reducedPrice,
+			t1.goods_name goodsName,
+			t2.item_images itemImages,
 			t2.introduction,
-			t2.goods_id
+			t2.goods_id goodsId
 		FROM
-			tb_item t1
-		LEFT JOIN tb_goods_desc t2 ON t1.goods_id = t2.goods_id
+			tb_goods t1
+		LEFT JOIN tb_goods_desc t2 ON t1.id = t2.goods_id
 		WHERE
 			t2.goods_id = #{goodsId}
   </select>
