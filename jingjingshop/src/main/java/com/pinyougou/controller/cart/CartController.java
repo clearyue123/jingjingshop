@@ -108,6 +108,12 @@ public class CartController {
 		}
 	}
 	
+	/**
+	 * 更新购物车
+	 * @param cartId
+	 * @param num
+	 * @return
+	 */
 	@RequestMapping("/updateCart")
 	public Object updateCart(@RequestParam(value="cartId",required=true)String cartId,
 			                @RequestParam(value="num",required=true)String num){
