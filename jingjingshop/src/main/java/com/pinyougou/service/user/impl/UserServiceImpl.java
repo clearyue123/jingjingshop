@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
                 criteria.andHeadPicLike("%" + user.getHeadPic() + "%");
             }
             if (user.getWxCode()!= null && user.getWxCode().length() > 0) {
-                criteria.andQqLike("%" + user.getWxCode() + "%");
+                criteria.andWxCodeLike("%" + user.getWxCode() + "%");
             }
             if (user.getIsMobileCheck() != null && user.getIsMobileCheck().length() > 0) {
                 criteria.andIsMobileCheckLike("%" + user.getIsMobileCheck() + "%");

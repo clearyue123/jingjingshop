@@ -1,72 +1,122 @@
 package com.pinyougou.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class TbUser  extends  TbBase implements Serializable{
+/**
+ * 用户表
+ * 
+ * @author wcyong
+ * 
+ * @date 2019-05-08
+ */
+public class TbUser {
     private Long id;
 
+    /**
+     * 用户名
+     */
     private String username;
 
+    /**
+     * 密码，加密存储
+     */
     private String password;
 
+    /**
+     * 注册手机号
+     */
     private String phone;
 
+    /**
+     * 注册邮箱
+     */
     private String email;
 
+    /**
+     * 创建时间
+     */
     private Date created;
 
     private Date updated;
 
+    /**
+     * 会员来源：1:PC，2：H5，3：Android，4：IOS，5：WeChat
+     */
     private String sourceType;
 
-    private String nickName;
-
-    private String name;
-
-    private String status;
-
-    private String headPic;
-
-    private String wxCode;
-
-    private Long accountBalance;
-
-    private String isMobileCheck;
-
-    private String isEmailCheck;
-
-    private String sex;
-
-    private Integer userLevel;
-
-    private Integer points;
-
-    private Integer experienceValue;
-
-    private String birthday;
-
-    private Date lastLoginTime;
-    
     private String openId;
 
-    public String getOpenId() {
-		return openId;
-	}
+    /**
+     * 昵称
+     */
+    private String nickName;
 
-	public void setOpenId(String openId) {
-		this.openId = openId;
-	}
+    /**
+     * 真实姓名
+     */
+    private String name;
 
-    public String getHeadPic() {
-		return headPic;
-	}
+    /**
+     * 使用状态（Y正常 N非正常）
+     */
+    private String status;
 
-	public void setHeadPic(String headPic) {
-		this.headPic = headPic;
-	}
+    /**
+     * 头像地址
+     */
+    private String headPic;
 
-	public Long getId() {
+    /**
+     * QQ号码
+     */
+    private String wxCode;
+
+    /**
+     * 账户余额
+     */
+    private Long accountBalance;
+
+    /**
+     * 手机是否验证 （0否  1是）
+     */
+    private String isMobileCheck;
+
+    /**
+     * 邮箱是否检测（0否  1是）
+     */
+    private String isEmailCheck;
+
+    /**
+     * 性别，1男，0女
+     */
+    private String sex;
+
+    /**
+     * 会员等级
+     */
+    private Integer userLevel;
+
+    /**
+     * 积分
+     */
+    private Integer points;
+
+    /**
+     * 经验值
+     */
+    private Integer experienceValue;
+
+    /**
+     * 生日
+     */
+    private String birthday;
+
+    /**
+     * 最后登录时间
+     */
+    private Date lastLoginTime;
+
+    public Long getId() {
         return id;
     }
 
@@ -130,6 +180,14 @@ public class TbUser  extends  TbBase implements Serializable{
         this.sourceType = sourceType == null ? null : sourceType.trim();
     }
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId == null ? null : openId.trim();
+    }
+
     public String getNickName() {
         return nickName;
     }
@@ -154,15 +212,23 @@ public class TbUser  extends  TbBase implements Serializable{
         this.status = status == null ? null : status.trim();
     }
 
+    public String getHeadPic() {
+        return headPic;
+    }
+
+    public void setHeadPic(String headPic) {
+        this.headPic = headPic == null ? null : headPic.trim();
+    }
+
     public String getWxCode() {
-		return wxCode;
-	}
+        return wxCode;
+    }
 
-	public void setWxCode(String wxCode) {
-		this.wxCode = wxCode;
-	}
+    public void setWxCode(String wxCode) {
+        this.wxCode = wxCode == null ? null : wxCode.trim();
+    }
 
-	public Long getAccountBalance() {
+    public Long getAccountBalance() {
         return accountBalance;
     }
 
@@ -218,13 +284,12 @@ public class TbUser  extends  TbBase implements Serializable{
         this.experienceValue = experienceValue;
     }
 
-
     public String getBirthday() {
         return birthday;
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = birthday;
+        this.birthday = birthday == null ? null : birthday.trim();
     }
 
     public Date getLastLoginTime() {
@@ -234,5 +299,4 @@ public class TbUser  extends  TbBase implements Serializable{
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
-
 }

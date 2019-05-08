@@ -32,17 +32,19 @@ public class UserController {
      */
     @RequestMapping("/userupdate")
     public ApiResult userupdate(@RequestBody TbUser user) {
+        System.out.println(user);
         try {
-            if (user.getId()==null) {
+            if (user.getId()==null||user.getId().equals("null")) {
                 userService.add(user);
                 return new ApiResult(200, "新增成功", "新增成功");
-                }
+                }else{
              userService.update(user);
                 return new ApiResult(200, "编辑成功", "编辑成功");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ApiResult(00004, "操作失败", user);
+        return new ApiResult(00004, "操作失败", "操作失败");
     }
 
 
@@ -58,7 +60,7 @@ public class UserController {
         if (users != null) {
             return new ApiResult(200, "获取成功", users);
         }
-        return new ApiResult(00005, "无此人信息", users);
+        return new ApiResult(00005, "无此人信息", "无此人信息");
     }
 
     /**

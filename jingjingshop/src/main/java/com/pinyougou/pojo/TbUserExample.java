@@ -64,6 +64,13 @@ public class TbUserExample {
         distinct = false;
     }
 
+    /**
+     * 用户表
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-08
+     */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -374,11 +381,6 @@ public class TbUserExample {
             addCriterion("phone not between", value1, value2, "phone");
             return (Criteria) this;
         }
-        
-        public Criteria andOpenIdEqualTo(String value) {
-            addCriterion("open_id =", value, "open_id");
-            return (Criteria) this;
-        }
 
         public Criteria andEmailIsNull() {
             addCriterion("email is null");
@@ -637,6 +639,76 @@ public class TbUserExample {
 
         public Criteria andSourceTypeNotBetween(String value1, String value2) {
             addCriterion("source_type not between", value1, value2, "sourceType");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdIsNull() {
+            addCriterion("open_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdIsNotNull() {
+            addCriterion("open_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdEqualTo(String value) {
+            addCriterion("open_id =", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdNotEqualTo(String value) {
+            addCriterion("open_id <>", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdGreaterThan(String value) {
+            addCriterion("open_id >", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdGreaterThanOrEqualTo(String value) {
+            addCriterion("open_id >=", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdLessThan(String value) {
+            addCriterion("open_id <", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdLessThanOrEqualTo(String value) {
+            addCriterion("open_id <=", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdLike(String value) {
+            addCriterion("open_id like", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdNotLike(String value) {
+            addCriterion("open_id not like", value, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdIn(List<String> values) {
+            addCriterion("open_id in", values, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdNotIn(List<String> values) {
+            addCriterion("open_id not in", values, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdBetween(String value1, String value2) {
+            addCriterion("open_id between", value1, value2, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenIdNotBetween(String value1, String value2) {
+            addCriterion("open_id not between", value1, value2, "openId");
             return (Criteria) this;
         }
 
@@ -920,73 +992,73 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andQqIsNull() {
-            addCriterion("qq is null");
+        public Criteria andWxCodeIsNull() {
+            addCriterion("wx_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andQqIsNotNull() {
-            addCriterion("qq is not null");
+        public Criteria andWxCodeIsNotNull() {
+            addCriterion("wx_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andQqEqualTo(String value) {
-            addCriterion("qq =", value, "qq");
+        public Criteria andWxCodeEqualTo(String value) {
+            addCriterion("wx_code =", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqNotEqualTo(String value) {
-            addCriterion("qq <>", value, "qq");
+        public Criteria andWxCodeNotEqualTo(String value) {
+            addCriterion("wx_code <>", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqGreaterThan(String value) {
-            addCriterion("qq >", value, "qq");
+        public Criteria andWxCodeGreaterThan(String value) {
+            addCriterion("wx_code >", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqGreaterThanOrEqualTo(String value) {
-            addCriterion("qq >=", value, "qq");
+        public Criteria andWxCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("wx_code >=", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqLessThan(String value) {
-            addCriterion("qq <", value, "qq");
+        public Criteria andWxCodeLessThan(String value) {
+            addCriterion("wx_code <", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqLessThanOrEqualTo(String value) {
-            addCriterion("qq <=", value, "qq");
+        public Criteria andWxCodeLessThanOrEqualTo(String value) {
+            addCriterion("wx_code <=", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqLike(String value) {
-            addCriterion("qq like", value, "qq");
+        public Criteria andWxCodeLike(String value) {
+            addCriterion("wx_code like", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqNotLike(String value) {
-            addCriterion("qq not like", value, "qq");
+        public Criteria andWxCodeNotLike(String value) {
+            addCriterion("wx_code not like", value, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqIn(List<String> values) {
-            addCriterion("qq in", values, "qq");
+        public Criteria andWxCodeIn(List<String> values) {
+            addCriterion("wx_code in", values, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqNotIn(List<String> values) {
-            addCriterion("qq not in", values, "qq");
+        public Criteria andWxCodeNotIn(List<String> values) {
+            addCriterion("wx_code not in", values, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqBetween(String value1, String value2) {
-            addCriterion("qq between", value1, value2, "qq");
+        public Criteria andWxCodeBetween(String value1, String value2) {
+            addCriterion("wx_code between", value1, value2, "wxCode");
             return (Criteria) this;
         }
 
-        public Criteria andQqNotBetween(String value1, String value2) {
-            addCriterion("qq not between", value1, value2, "qq");
+        public Criteria andWxCodeNotBetween(String value1, String value2) {
+            addCriterion("wx_code not between", value1, value2, "wxCode");
             return (Criteria) this;
         }
 
@@ -1450,52 +1522,62 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayEqualTo(Date value) {
+        public Criteria andBirthdayEqualTo(String value) {
             addCriterion("birthday =", value, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayNotEqualTo(Date value) {
+        public Criteria andBirthdayNotEqualTo(String value) {
             addCriterion("birthday <>", value, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayGreaterThan(Date value) {
+        public Criteria andBirthdayGreaterThan(String value) {
             addCriterion("birthday >", value, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayGreaterThanOrEqualTo(Date value) {
+        public Criteria andBirthdayGreaterThanOrEqualTo(String value) {
             addCriterion("birthday >=", value, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayLessThan(Date value) {
+        public Criteria andBirthdayLessThan(String value) {
             addCriterion("birthday <", value, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayLessThanOrEqualTo(Date value) {
+        public Criteria andBirthdayLessThanOrEqualTo(String value) {
             addCriterion("birthday <=", value, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayIn(List<Date> values) {
+        public Criteria andBirthdayLike(String value) {
+            addCriterion("birthday like", value, "birthday");
+            return (Criteria) this;
+        }
+
+        public Criteria andBirthdayNotLike(String value) {
+            addCriterion("birthday not like", value, "birthday");
+            return (Criteria) this;
+        }
+
+        public Criteria andBirthdayIn(List<String> values) {
             addCriterion("birthday in", values, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayNotIn(List<Date> values) {
+        public Criteria andBirthdayNotIn(List<String> values) {
             addCriterion("birthday not in", values, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayBetween(Date value1, Date value2) {
+        public Criteria andBirthdayBetween(String value1, String value2) {
             addCriterion("birthday between", value1, value2, "birthday");
             return (Criteria) this;
         }
 
-        public Criteria andBirthdayNotBetween(Date value1, Date value2) {
+        public Criteria andBirthdayNotBetween(String value1, String value2) {
             addCriterion("birthday not between", value1, value2, "birthday");
             return (Criteria) this;
         }
@@ -1568,6 +1650,13 @@ public class TbUserExample {
         }
     }
 
+    /**
+     * 用户表
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-08
+     */
     public static class Criterion {
         private String condition;
 
