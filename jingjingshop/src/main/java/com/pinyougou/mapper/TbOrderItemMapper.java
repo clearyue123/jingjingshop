@@ -1,11 +1,9 @@
 package com.pinyougou.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.pinyougou.pojo.TbOrderItem;
 import com.pinyougou.pojo.TbOrderItemExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TbOrderItemMapper {
     int countByExample(TbOrderItemExample example);

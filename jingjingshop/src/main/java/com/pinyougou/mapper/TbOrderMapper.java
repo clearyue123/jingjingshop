@@ -9,7 +9,7 @@ import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbOrderExample;
 
 public interface TbOrderMapper {
-    int countByExample(TbOrderExample example);
+	int countByExample(TbOrderExample example);
 
     int deleteByExample(TbOrderExample example);
 

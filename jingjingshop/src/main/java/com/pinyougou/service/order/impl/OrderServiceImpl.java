@@ -63,11 +63,7 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public void add(TbOrder order) {
-		
-		//1.从redis中提取购物车列表
-		
-		List<String> orderIdList=new ArrayList();//订单ID集合
-		double total_money=0;//总金额
+		orderMapper.insert(order);
 	}
 
 	

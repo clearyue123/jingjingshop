@@ -1,5 +1,4 @@
 package com.pinyougou.controller.cart;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.mapper.TbOrderItemMapper;
+import com.pinyougou.pojo.TbAddress;
 import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbOrderItem;
+import com.pinyougou.pojo.TbShopCart;
+import com.pinyougou.service.cart.CartService;
 import com.pinyougou.service.order.OrderService;
+import com.pinyougou.service.user.AddressService;
 
 import entity.PageResult;
 import entity.Result;
@@ -34,6 +37,13 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private TbOrderItemMapper orderItemMapper;
+	@Autowired
+	private AddressService addressService;
+	@Autowired
+	private CartService cartService;
+   
+	//设置id生成器
+	private IdWorker idWorker = new IdWorker();
 	/**
 	 * 返回全部列表
 	 * @return
@@ -142,7 +152,7 @@ public class OrderController {
 		try{
 			List<Map<String,Object>> orderMapList = orderService.orderList(userId, status);
 			for(Map<String,Object> orderMap:orderMapList){
-				Long orderId = (Long)orderMap.get("order_id");
+				Long orderId = (Long)orderMap.get("orderId");
 				List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(orderId);
 				orderMap.put("itemMap", itemMapList);
 			}
@@ -279,47 +289,46 @@ public class OrderController {
 	@RequestMapping("/createOrder")
 	public Object createOrder(
 			@RequestParam(required=true,value="userId")String userId,
-	        @RequestParam(required=false,value="userType")String userType,
-	        @RequestParam(required=true,value="receiverAreaName")String receiverAreaName,
-	        @RequestParam(required=true,value="receiverMobile")String receiverMobile,
-	        @RequestParam(required=true,value="receiver")String receiver,
-	        @RequestParam(required=true,value="listOrderParams")List<Map<String,Object>> listOrderParams){
+			@RequestParam(required=true,value="cartIds")String[] cartIds){
 		try{	
-			TbOrder tbOrder = new TbOrder();
-			TbOrderItem tbOrderItem = new TbOrderItem();
-			//设置orderId
-			IdWorker idWorker = new IdWorker(0,0);
-			long orderId = idWorker.nextId();
-			tbOrder.setOrderId(orderId);
-			tbOrder.setPaymentType("1");//支付类型
-			tbOrder.setStatus("1");//未付款 
-			tbOrder.setCreateTime(new Date());//下单时间
-			tbOrder.setUpdateTime(new Date());//更新时间
-			tbOrder.setUserId(userId);//当前用户
-			tbOrder.setReceiverAreaName(receiverAreaName);//收货人地址
-			tbOrder.setReceiverMobile(receiverMobile);//收货人电话
-			tbOrder.setReceiver(receiver);//收货人
-			orderService.add(tbOrder);
-			for(Map<String,Object> orderParams:listOrderParams){
-				long orderItemId = idWorker.nextId();
-				Long itemId = (Long)orderParams.get("itemId");
-				Long goodsId = (Long)orderParams.get("goodsId");
-				String sellerId = (String)orderParams.get("sellerId");
-				Integer num = (Integer)orderParams.get("num");
-				String picPath = (String)orderParams.get("picPath");
-				Double price = (Double)orderParams.get("price");
-				Double totalFee = price*num;
-				tbOrderItem.setId(orderItemId);
-				tbOrderItem.setItemId(itemId);
-				tbOrderItem.setGoodsId(goodsId);
-				tbOrderItem.setSellerId(sellerId);
-				tbOrderItem.setNum(num);
-				tbOrderItem.setPicPath(picPath);
-				tbOrderItem.setPrice(new BigDecimal(price.toString()));
-				tbOrderItem.setTotalFee(new BigDecimal(totalFee.toString()));
-				orderItemMapper.insert(tbOrderItem);
+			List<TbAddress> addressList = addressService.findListByUserId(userId);
+            if(addressList==null||addressList.get(0)==null){
+            	return new ApiResult(201, "请先去添加收货信息！","");
+            }else{
+				//获取用户地址
+				TbAddress addr = addressList.get(0);
+				TbOrder tbOrder = new TbOrder();
+				TbOrderItem tbOrderItem = new TbOrderItem();
+				List<TbShopCart> shopCartList = cartService.findShopCartByUId(userId);
+				//设置orderId
+				long orderId = idWorker.nextId();
+				tbOrder.setOrderId(orderId);
+				tbOrder.setPaymentType("1");//支付类型
+				tbOrder.setStatus("1");//未付款 
+				tbOrder.setCreateTime(new Date());//下单时间
+				tbOrder.setUpdateTime(new Date());//更新时间
+				tbOrder.setUserId(userId);//当前用户
+				tbOrder.setReceiverAreaName(addr.getAddress());//收货人地址
+				tbOrder.setReceiverMobile(addr.getMobile());//收货人电话
+				tbOrder.setReceiver(addr.getContact());//收货人
+				tbOrder.setPostFee("0.0");
+				Integer itemNum = 0;
+				for(int i=0;i<shopCartList.size();i++){
+					TbShopCart tbShopCart = shopCartList.get(i);
+					Long goodsId = tbShopCart.getGoodsId();
+					Long cartId = tbShopCart.getCartId();
+					Integer num = tbShopCart.getNum();
+					itemNum += num;
+					tbOrderItem.setOrderId(orderId);
+					tbOrderItem.setGoodsId(goodsId);
+					tbOrderItem.setNum(num);
+					tbOrderItem.setCartId(cartId);
+					orderItemMapper.insert(tbOrderItem);
+				}
+				tbOrder.setItemNum(itemNum);
+				orderService.add(tbOrder);
+				return new ApiResult(200, "订单支付成功", null);
 			}
-			return new ApiResult(200, "订单支付成功", null);
 		}catch(Exception e){
 			e.printStackTrace();
 			return new ApiResult(201, "订单支付失败", null);

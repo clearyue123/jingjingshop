@@ -65,6 +65,13 @@ public class TbOrderExample {
         distinct = false;
     }
 
+    /**
+     * 
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-08
+     */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -1765,6 +1772,136 @@ public class TbOrderExample {
             addCriterion("seller_id not between", value1, value2, "sellerId");
             return (Criteria) this;
         }
+
+        public Criteria andItemNumIsNull() {
+            addCriterion("item_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumIsNotNull() {
+            addCriterion("item_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumEqualTo(Integer value) {
+            addCriterion("item_num =", value, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumNotEqualTo(Integer value) {
+            addCriterion("item_num <>", value, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumGreaterThan(Integer value) {
+            addCriterion("item_num >", value, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("item_num >=", value, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumLessThan(Integer value) {
+            addCriterion("item_num <", value, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumLessThanOrEqualTo(Integer value) {
+            addCriterion("item_num <=", value, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumIn(List<Integer> values) {
+            addCriterion("item_num in", values, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumNotIn(List<Integer> values) {
+            addCriterion("item_num not in", values, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumBetween(Integer value1, Integer value2) {
+            addCriterion("item_num between", value1, value2, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("item_num not between", value1, value2, "itemNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeIsNull() {
+            addCriterion("shipping_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeIsNotNull() {
+            addCriterion("shipping_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeEqualTo(String value) {
+            addCriterion("shipping_type =", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeNotEqualTo(String value) {
+            addCriterion("shipping_type <>", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeGreaterThan(String value) {
+            addCriterion("shipping_type >", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("shipping_type >=", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeLessThan(String value) {
+            addCriterion("shipping_type <", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeLessThanOrEqualTo(String value) {
+            addCriterion("shipping_type <=", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeLike(String value) {
+            addCriterion("shipping_type like", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeNotLike(String value) {
+            addCriterion("shipping_type not like", value, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeIn(List<String> values) {
+            addCriterion("shipping_type in", values, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeNotIn(List<String> values) {
+            addCriterion("shipping_type not in", values, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeBetween(String value1, String value2) {
+            addCriterion("shipping_type between", value1, value2, "shippingType");
+            return (Criteria) this;
+        }
+
+        public Criteria andShippingTypeNotBetween(String value1, String value2) {
+            addCriterion("shipping_type not between", value1, value2, "shippingType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1774,6 +1911,13 @@ public class TbOrderExample {
         }
     }
 
+    /**
+     * 
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-08
+     */
     public static class Criterion {
         private String condition;
 

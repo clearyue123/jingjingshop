@@ -1,28 +1,65 @@
 package com.pinyougou.pojo;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class TbOrderItem implements Serializable{
+/**
+ * 
+ * 
+ * @author wcyong
+ * 
+ * @date 2019-05-08
+ */
+public class TbOrderItem {
     private Long id;
 
+    /**
+     * 商品id
+     */
     private Long itemId;
 
+    /**
+     * SPU_ID
+     */
     private Long goodsId;
 
+    /**
+     * 订单id
+     */
     private Long orderId;
 
+    /**
+     * 商品标题
+     */
     private String title;
 
+    /**
+     * 商品单价
+     */
     private BigDecimal price;
 
+    /**
+     * 商品购买数量
+     */
     private Integer num;
 
+    /**
+     * 商品总金额
+     */
     private BigDecimal totalFee;
 
+    /**
+     * 商品图片地址
+     */
     private String picPath;
 
     private String sellerId;
+
+    /**
+     * 商品打折后价格
+     */
+    private Long discountPrice;
+
+    private Long cartId;
 
     public Long getId() {
         return id;
@@ -102,5 +139,21 @@ public class TbOrderItem implements Serializable{
 
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId == null ? null : sellerId.trim();
+    }
+
+    public Long getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(Long discountPrice) {
+        this.discountPrice = discountPrice;
+    }
+
+    public Long getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(Long cartId) {
+        this.cartId = cartId;
     }
 }

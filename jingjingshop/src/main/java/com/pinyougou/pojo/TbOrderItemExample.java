@@ -64,6 +64,13 @@ public class TbOrderItemExample {
         distinct = false;
     }
 
+    /**
+     * 
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-08
+     */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -734,6 +741,126 @@ public class TbOrderItemExample {
             addCriterion("seller_id not between", value1, value2, "sellerId");
             return (Criteria) this;
         }
+
+        public Criteria andDiscountPriceIsNull() {
+            addCriterion("discount_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceIsNotNull() {
+            addCriterion("discount_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceEqualTo(Long value) {
+            addCriterion("discount_price =", value, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceNotEqualTo(Long value) {
+            addCriterion("discount_price <>", value, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceGreaterThan(Long value) {
+            addCriterion("discount_price >", value, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceGreaterThanOrEqualTo(Long value) {
+            addCriterion("discount_price >=", value, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceLessThan(Long value) {
+            addCriterion("discount_price <", value, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceLessThanOrEqualTo(Long value) {
+            addCriterion("discount_price <=", value, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceIn(List<Long> values) {
+            addCriterion("discount_price in", values, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceNotIn(List<Long> values) {
+            addCriterion("discount_price not in", values, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceBetween(Long value1, Long value2) {
+            addCriterion("discount_price between", value1, value2, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountPriceNotBetween(Long value1, Long value2) {
+            addCriterion("discount_price not between", value1, value2, "discountPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdIsNull() {
+            addCriterion("cart_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdIsNotNull() {
+            addCriterion("cart_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdEqualTo(Long value) {
+            addCriterion("cart_id =", value, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdNotEqualTo(Long value) {
+            addCriterion("cart_id <>", value, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdGreaterThan(Long value) {
+            addCriterion("cart_id >", value, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("cart_id >=", value, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdLessThan(Long value) {
+            addCriterion("cart_id <", value, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdLessThanOrEqualTo(Long value) {
+            addCriterion("cart_id <=", value, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdIn(List<Long> values) {
+            addCriterion("cart_id in", values, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdNotIn(List<Long> values) {
+            addCriterion("cart_id not in", values, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdBetween(Long value1, Long value2) {
+            addCriterion("cart_id between", value1, value2, "cartId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCartIdNotBetween(Long value1, Long value2) {
+            addCriterion("cart_id not between", value1, value2, "cartId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -743,6 +870,13 @@ public class TbOrderItemExample {
         }
     }
 
+    /**
+     * 
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-08
+     */
     public static class Criterion {
         private String condition;
 

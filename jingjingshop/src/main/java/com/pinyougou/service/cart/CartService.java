@@ -30,4 +30,11 @@ public interface CartService {
 	  * @param cart
 	  */
 	 void add(TbShopCart cart,Map<String,Object> map);
+	 
+	 /**
+	  * 用户id查购物车
+	  * @param userId
+	  * @return
+	  */
+	 List<TbShopCart> findShopCartByUId(String userId);
 }

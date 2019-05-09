@@ -56,5 +56,19 @@ public class CartServiceImpl implements CartService {
 		cartMapper.insert(cart);
 	}
 
+	@Override
+	public List<TbShopCart> findShopCartByUId(String userId) {
+		try{
+			TbShopCartExample example = new TbShopCartExample();
+			Criteria criteria = example.createCriteria();
+			criteria.andUserIdEqualTo(userId);
+			List<TbShopCart> listCart = cartMapper.selectByExample(example);
+			return listCart;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 }
