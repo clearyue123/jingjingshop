@@ -1,6 +1,5 @@
 package com.pinyougou.service.cart.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +12,6 @@ import com.pinyougou.pojo.TbShopCart;
 import com.pinyougou.pojo.TbShopCartExample;
 import com.pinyougou.pojo.TbShopCartExample.Criteria;
 import com.pinyougou.pojo.TbShopCartSpe;
-import com.pinyougou.pojo.TbShopCartSpeExample;
 import com.pinyougou.service.cart.CartService;
 
 @Service

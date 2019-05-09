@@ -575,7 +575,7 @@
   
   <select id="selectItemsByOrderId" parameterType="long" resultType="java.util.Map">
 		      SELECT
-					t2.id,
+					t2.id goodsId,
 					t2.price,
 					t2.goods_name goodsName,
 					t2.small_pic smallPic,

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pinyougou.mapper.TbShopCartMapper" >
+<mapper namespace="com.pinyougou.mapper.TbOrderSpeMapper" >
 
-    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbShopCart" >
-        <id column="cart_id" property="cartId" jdbcType="BIGINT" />
-        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbOrderSpe" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="order_id" property="orderId" jdbcType="BIGINT" />
         <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
-        <result column="num" property="num" jdbcType="INTEGER" />
+        <result column="spe_id" property="speId" jdbcType="BIGINT" />
+        <result column="spe_op_id" property="speOpId" jdbcType="BIGINT" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -70,16 +71,16 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        cart_id, user_id, goods_id, num
+        id, order_id, goods_id, spe_id, spe_op_id
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbShopCartExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbOrderSpeExample" >
         select
         <if test="distinct" >
             distinct
         </if>
         <include refid="Base_Column_List" />
-        from tb_shop_cart
+        from tb_order_spe
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
@@ -91,82 +92,91 @@
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
         select 
         <include refid="Base_Column_List" />
-        from tb_shop_cart
-        where cart_id = #{cartId,jdbcType=BIGINT}
+        from tb_order_spe
+        where id = #{id,jdbcType=BIGINT}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-        delete from tb_shop_cart
-        where cart_id = #{cartId,jdbcType=BIGINT}
+        delete from tb_order_spe
+        where id = #{id,jdbcType=BIGINT}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbShopCartExample" >
-        delete from tb_shop_cart
+    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbOrderSpeExample" >
+        delete from tb_order_spe
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.pinyougou.pojo.TbShopCart" >
-        insert into tb_shop_cart (cart_id, user_id, goods_id, 
-            num)
-        values (#{cartId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, 
-            #{num,jdbcType=INTEGER})
+    <insert id="insert" parameterType="com.pinyougou.pojo.TbOrderSpe" >
+        insert into tb_order_spe (id, order_id, goods_id, 
+            spe_id, spe_op_id)
+        values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, 
+            #{speId,jdbcType=BIGINT}, #{speOpId,jdbcType=BIGINT})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbShopCart" >
-        insert into tb_shop_cart
+    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbOrderSpe" >
+        insert into tb_order_spe
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="cartId != null" >
-                cart_id,
+            <if test="id != null" >
+                id,
             </if>
-            <if test="userId != null" >
-                user_id,
+            <if test="orderId != null" >
+                order_id,
             </if>
             <if test="goodsId != null" >
                 goods_id,
             </if>
-            <if test="num != null" >
-                num,
+            <if test="speId != null" >
+                spe_id,
+            </if>
+            <if test="speOpId != null" >
+                spe_op_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="cartId != null" >
-                #{cartId,jdbcType=BIGINT},
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
             </if>
-            <if test="userId != null" >
-                #{userId,jdbcType=VARCHAR},
+            <if test="orderId != null" >
+                #{orderId,jdbcType=BIGINT},
             </if>
             <if test="goodsId != null" >
                 #{goodsId,jdbcType=BIGINT},
             </if>
-            <if test="num != null" >
-                #{num,jdbcType=INTEGER},
+            <if test="speId != null" >
+                #{speId,jdbcType=BIGINT},
+            </if>
+            <if test="speOpId != null" >
+                #{speOpId,jdbcType=BIGINT},
             </if>
         </trim>
     </insert>
 
-    <select id="countByExample" parameterType="com.pinyougou.pojo.TbShopCartExample" resultType="java.lang.Integer" >
-        select count(*) from tb_shop_cart
+    <select id="countByExample" parameterType="com.pinyougou.pojo.TbOrderSpeExample" resultType="java.lang.Integer" >
+        select count(*) from tb_order_spe
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
-        update tb_shop_cart
+        update tb_order_spe
         <set >
-            <if test="record.cartId != null" >
-                cart_id = #{record.cartId,jdbcType=BIGINT},
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
             </if>
-            <if test="record.userId != null" >
-                user_id = #{record.userId,jdbcType=VARCHAR},
+            <if test="record.orderId != null" >
+                order_id = #{record.orderId,jdbcType=BIGINT},
             </if>
             <if test="record.goodsId != null" >
                 goods_id = #{record.goodsId,jdbcType=BIGINT},
             </if>
-            <if test="record.num != null" >
-                num = #{record.num,jdbcType=INTEGER},
+            <if test="record.speId != null" >
+                spe_id = #{record.speId,jdbcType=BIGINT},
+            </if>
+            <if test="record.speOpId != null" >
+                spe_op_id = #{record.speOpId,jdbcType=BIGINT},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -175,79 +185,69 @@
     </update>
 
     <update id="updateByExample" parameterType="map" >
-        update tb_shop_cart
-        set cart_id = #{record.cartId,jdbcType=BIGINT},
-            user_id = #{record.userId,jdbcType=VARCHAR},
+        update tb_order_spe
+        set id = #{record.id,jdbcType=BIGINT},
+            order_id = #{record.orderId,jdbcType=BIGINT},
             goods_id = #{record.goodsId,jdbcType=BIGINT},
-            num = #{record.num,jdbcType=INTEGER}
+            spe_id = #{record.speId,jdbcType=BIGINT},
+            spe_op_id = #{record.speOpId,jdbcType=BIGINT}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbShopCart" >
-        update tb_shop_cart
+    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbOrderSpe" >
+        update tb_order_spe
         <set >
-            <if test="userId != null" >
-                user_id = #{userId,jdbcType=VARCHAR},
+            <if test="orderId != null" >
+                order_id = #{orderId,jdbcType=BIGINT},
             </if>
             <if test="goodsId != null" >
                 goods_id = #{goodsId,jdbcType=BIGINT},
             </if>
-            <if test="num != null" >
-                num = #{num,jdbcType=INTEGER},
+            <if test="speId != null" >
+                spe_id = #{speId,jdbcType=BIGINT},
+            </if>
+            <if test="speOpId != null" >
+                spe_op_id = #{speOpId,jdbcType=BIGINT},
             </if>
         </set>
-        where cart_id = #{cartId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbShopCart" >
-        update tb_shop_cart
-        set user_id = #{userId,jdbcType=VARCHAR},
+    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbOrderSpe" >
+        update tb_order_spe
+        set order_id = #{orderId,jdbcType=BIGINT},
             goods_id = #{goodsId,jdbcType=BIGINT},
-            num = #{num,jdbcType=INTEGER}
-        where cart_id = #{cartId,jdbcType=BIGINT}
+            spe_id = #{speId,jdbcType=BIGINT},
+            spe_op_id = #{speOpId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     
-    <select id="cartMapList" parameterType="long" resultType="java.util.Map">
-           SELECT
-				t1.cart_id cartId,
-				t1.num goodsNum,
-				t2.id,
-				t2.price,
-				t2.reduced_price reducedPrice,
-				t2.goods_name goodsName,
-				t2.small_pic smallPic
-			FROM
-				tb_shop_cart t1
-			LEFT JOIN tb_goods t2 ON t1.goods_id = t2.id
-			LEFT JOIN tb_goods_desc t3 ON t2.id = t3.goods_id
-			where t1.user_id = #{userId}
-    </select>
-    
-    <select id="cartSpeMapList" parameterType="long" resultType="java.util.Map">
-          SELECT
-				t.spe_id speId,
-				t.spe_op_id speOpId,
-				(
-					SELECT
-						t1.spec_name
-					FROM
-						tb_specification t1
-					WHERE
-						t1.id = t.spe_id
-				) speName,
-				(
-					SELECT
-						t2.option_name
-					FROM
-						tb_specification_option t2
-					WHERE
-						t2.id = t.spe_op_id
-				) speOptionName
-			FROM
-				tb_shop_cart_spe t
-			WHERE
-				t.cart_id = #{cartId}
+    <select id="selectOrdSpeListByOGID" parameterType="java.util.Map" resultType="java.util.Map">
+               SELECT
+					t.spe_id speId,
+					(
+						SELECT
+							t1.spec_name
+						FROM
+							tb_specification t1
+						WHERE
+							t1.id = t.spe_id
+					) speName,
+					t.spe_op_id speOpId,
+					(
+						SELECT
+							t2.option_name
+						FROM
+							tb_specification_option t2
+						WHERE
+							t2.id = t.spe_op_id
+					) optionName
+				FROM
+					tb_order_spe t
+				WHERE
+					t.goods_id = #{goodsId}
+				AND t.order_id = #{orderId}
     </select>
 </mapper>

@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.mapper.TbOrderItemMapper;
+import com.pinyougou.mapper.TbOrderSpeMapper;
+import com.pinyougou.mapper.TbShopCartSpeMapper;
 import com.pinyougou.pojo.TbAddress;
 import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbOrderItem;
+import com.pinyougou.pojo.TbOrderSpe;
 import com.pinyougou.pojo.TbShopCart;
+import com.pinyougou.pojo.TbShopCartSpe;
+import com.pinyougou.pojo.TbShopCartSpeExample;
+import com.pinyougou.pojo.TbShopCartSpeExample.Criteria;
 import com.pinyougou.service.cart.CartService;
 import com.pinyougou.service.order.OrderService;
 import com.pinyougou.service.user.AddressService;
@@ -41,6 +47,10 @@ public class OrderController {
 	private AddressService addressService;
 	@Autowired
 	private CartService cartService;
+	@Autowired
+	private TbOrderSpeMapper orderSpeMapper;
+	@Autowired
+	private TbShopCartSpeMapper cartSpeMapper;
    
 	//设置id生成器
 	private IdWorker idWorker = new IdWorker();
@@ -154,6 +164,14 @@ public class OrderController {
 			for(Map<String,Object> orderMap:orderMapList){
 				Long orderId = (Long)orderMap.get("orderId");
 				List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(orderId);
+				for (Map<String, Object> itemMap : itemMapList) {
+					Long goodsId = (Long)itemMap.get("goodsId");
+					Map<String,Object> paramMap = new HashMap<String,Object>();
+					paramMap.put("orderId", orderId);
+					paramMap.put("goodsId", goodsId);
+					List<Map<String, Object>> ordSpeMapList = orderSpeMapper.selectOrdSpeListByOGID(paramMap);
+					itemMap.put("ordSpeMapList", ordSpeMapList);
+				}
 				orderMap.put("itemMap", itemMapList);
 			}
 			return new ApiResult(200, "订单列表查询成功", orderMapList);
@@ -194,8 +212,7 @@ public class OrderController {
 	public Object showOrderDetail(
 			          @RequestParam(required=true,value="userId")String userId,
 			          @RequestParam(required=false,value="userType")String userType,
-			          @RequestParam(required=true,value="orderId")String orderId
-			          ){
+			          @RequestParam(required=true,value="orderId")String orderId){
 		try{
 			Map<String,Object> paramMap = new HashMap<>();
 			paramMap.put("USERID", userId);
@@ -280,14 +297,14 @@ public class OrderController {
 	}
 	
 	/**
-	 * 订单支付成功
+	 * 购物车 创建订单	 
 	 * @param userId
 	 * @param userType
 	 * @param listParams
 	 * @return
 	 */
-	@RequestMapping("/createOrder")
-	public Object createOrder(
+	@RequestMapping("/createOrderFromCart")
+	public Object createOrderFromCart(
 			@RequestParam(required=true,value="userId")String userId,
 			@RequestParam(required=true,value="cartIds")String[] cartIds){
 		try{	
@@ -303,7 +320,7 @@ public class OrderController {
 				//设置orderId
 				long orderId = idWorker.nextId();
 				tbOrder.setOrderId(orderId);
-				tbOrder.setPaymentType("1");//支付类型
+				tbOrder.setPaymentType("1");//支付类型：1:在线支付 2:货到付款
 				tbOrder.setStatus("1");//未付款 
 				tbOrder.setCreateTime(new Date());//下单时间
 				tbOrder.setUpdateTime(new Date());//更新时间
@@ -324,14 +341,89 @@ public class OrderController {
 					tbOrderItem.setNum(num);
 					tbOrderItem.setCartId(cartId);
 					orderItemMapper.insert(tbOrderItem);
+					TbShopCartSpeExample cartSpeExample = new TbShopCartSpeExample();
+					Criteria cri = cartSpeExample.createCriteria();
+					cri.andCartIdEqualTo(cartId);
+					List<TbShopCartSpe> cartSpeList = cartSpeMapper.selectByExample(cartSpeExample);
+					for (TbShopCartSpe tbShopCartSpe : cartSpeList) {
+						TbOrderSpe tbOrderSpe = new TbOrderSpe();
+				    	tbOrderSpe.setOrderId(orderId);
+				    	tbOrderSpe.setGoodsId(goodsId);
+				    	tbOrderSpe.setSpeId(tbShopCartSpe.getSpeId());
+				    	tbOrderSpe.setSpeOpId(tbShopCartSpe.getSpeOpId());
+				    	orderSpeMapper.insert(tbOrderSpe);
+					}
 				}
 				tbOrder.setItemNum(itemNum);
 				orderService.add(tbOrder);
-				return new ApiResult(200, "订单支付成功", null);
+				return new ApiResult(200, "订单创建成功", null);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ApiResult(201, "订单支付失败", null);
+			return new ApiResult(201, "订单失败", null);
+		}
+	}
+	
+	/**
+	 * 商品详情 创建订单
+	 * @param userId
+	 * @param goodsId
+	 * @param num
+	 * @param speIds
+	 * @param speOpIds
+	 * @return
+	 */
+	@RequestMapping("/createOrderFromGoods")
+	public Object createOrderFromGoods(
+			@RequestParam(required=true,value="userId")String userId,
+			@RequestParam(required=true,value="goodsId")String goodsId,
+			@RequestParam(required=true,value="num")String num,
+			@RequestParam(value="speIds",required=false)String[] speIds,
+            @RequestParam(value="speOpIds",required=false)String[] speOpIds){
+		try{
+			if(speIds!=null&&speIds.length!=speOpIds.length){
+				return new ApiResult(201, "参数错误","");
+			}
+			List<TbAddress> addressList = addressService.findListByUserId(userId);
+	        if(addressList==null||addressList.get(0)==null){
+	        	return new ApiResult(201, "请先去添加收货信息！","");
+	        }else{
+	        	//获取用户地址
+				TbAddress addr = addressList.get(0);
+				TbOrder tbOrder = new TbOrder();
+				TbOrderItem tbOrderItem = new TbOrderItem();
+				long orderId = idWorker.nextId();
+				tbOrder.setOrderId(orderId);
+				tbOrder.setPaymentType("1");//支付类型 1:在线支付 2:货到付款
+				tbOrder.setStatus("1");//未付款 
+				tbOrder.setCreateTime(new Date());//下单时间
+				tbOrder.setUpdateTime(new Date());//更新时间
+				tbOrder.setUserId(userId);//当前用户
+				tbOrder.setReceiverAreaName(addr.getAddress());//收货人地址
+				tbOrder.setReceiverMobile(addr.getMobile());//收货人电话
+				tbOrder.setReceiver(addr.getContact());//收货人
+				tbOrder.setPostFee("0.0");
+				tbOrder.setItemNum(Integer.parseInt(num));
+				//保存orderItem
+				tbOrderItem.setOrderId(orderId);
+				tbOrderItem.setNum(Integer.parseInt(num));
+				tbOrderItem.setGoodsId(Long.parseLong(goodsId));
+			    tbOrderItem.setCartId(0L);
+			    for(int i=0;i<speIds.length;i++){
+			    	TbOrderSpe tbOrderSpe = new TbOrderSpe();
+			    	tbOrderSpe.setOrderId(orderId);
+			    	tbOrderSpe.setGoodsId(Long.parseLong(goodsId));
+			    	tbOrderSpe.setSpeId(Long.parseLong(speIds[i]));
+			    	tbOrderSpe.setSpeOpId(Long.parseLong(speOpIds[i]));
+			    	orderSpeMapper.insert(tbOrderSpe);
+			    }
+			    orderItemMapper.insert(tbOrderItem);
+			    orderService.add(tbOrder);
+				return new ApiResult(200, "订单创建成功", null);
+	        }
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "订单创建失败", null);
 		}
 	}
 }
