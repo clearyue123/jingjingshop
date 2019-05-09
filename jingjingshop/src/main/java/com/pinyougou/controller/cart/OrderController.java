@@ -309,7 +309,7 @@ public class OrderController {
 			@RequestParam(required=true,value="cartIds")String[] cartIds){
 		try{	
 			List<TbAddress> addressList = addressService.findListByUserId(userId);
-            if(addressList==null||addressList.get(0)==null){
+            if(addressList==null||addressList.size()==0){
             	return new ApiResult(201, "请先去添加收货信息！","");
             }else{
 				//获取用户地址
@@ -385,7 +385,7 @@ public class OrderController {
 				return new ApiResult(201, "参数错误","");
 			}
 			List<TbAddress> addressList = addressService.findListByUserId(userId);
-	        if(addressList==null||addressList.get(0)==null){
+	        if(addressList==null||addressList.size()==0){
 	        	return new ApiResult(201, "请先去添加收货信息！","");
 	        }else{
 	        	//获取用户地址
