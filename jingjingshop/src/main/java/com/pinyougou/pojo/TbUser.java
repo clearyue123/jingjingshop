@@ -1,122 +1,125 @@
 package com.pinyougou.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 用户表
- * 
- * @author wcyong
- * 
- * @date 2019-05-08
- */
-public class TbUser {
+public class TbUser  extends  TbBase implements Serializable{
     private Long id;
 
-    /**
-     * 用户名
-     */
     private String username;
 
-    /**
-     * 密码，加密存储
-     */
     private String password;
 
-    /**
-     * 注册手机号
-     */
     private String phone;
 
-    /**
-     * 注册邮箱
-     */
     private String email;
 
-    /**
-     * 创建时间
-     */
     private Date created;
 
     private Date updated;
 
-    /**
-     * 会员来源：1:PC，2：H5，3：Android，4：IOS，5：WeChat
-     */
     private String sourceType;
 
-    private String openId;
-
-    /**
-     * 昵称
-     */
     private String nickName;
 
-    /**
-     * 真实姓名
-     */
     private String name;
 
-    /**
-     * 使用状态（Y正常 N非正常）
-     */
     private String status;
 
-    /**
-     * 头像地址
-     */
     private String headPic;
 
-    /**
-     * QQ号码
-     */
     private String wxCode;
 
-    /**
-     * 账户余额
-     */
     private Long accountBalance;
 
-    /**
-     * 手机是否验证 （0否  1是）
-     */
     private String isMobileCheck;
 
-    /**
-     * 邮箱是否检测（0否  1是）
-     */
     private String isEmailCheck;
 
-    /**
-     * 性别，1男，0女
-     */
     private String sex;
 
-    /**
-     * 会员等级
-     */
     private Integer userLevel;
 
-    /**
-     * 积分
-     */
-    private Integer points;
 
-    /**
-     * 经验值
-     */
+
     private Integer experienceValue;
 
-    /**
-     * 生日
-     */
     private String birthday;
 
-    /**
-     * 最后登录时间
-     */
     private Date lastLoginTime;
+    
+    private String openId;
 
-    public Long getId() {
+    private  String  wx_code;
+
+    /**
+     * 未兑换积分
+     */
+
+    private Integer points;
+
+
+    /**
+     * 累计积分
+     */
+
+    private  Integer  points_all;
+
+
+    /**
+     * 外联用户表
+     * @return
+     */
+    private TbRepresentative  tbRepresentative;
+
+
+
+
+
+
+
+    public TbRepresentative getTbRepresentative() {
+        return tbRepresentative;
+    }
+
+    public void setTbRepresentative(TbRepresentative tbRepresentative) {
+        this.tbRepresentative = tbRepresentative;
+    }
+
+
+    public Integer getPoints_all() {
+        return points_all;
+    }
+
+    public void setPoints_all(Integer points_all) {
+        this.points_all = points_all;
+    }
+
+    public String getWx_code() {
+        return wx_code;
+    }
+
+    public void setWx_code(String wx_code) {
+        this.wx_code = wx_code;
+    }
+
+    public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
+    public String getHeadPic() {
+		return headPic;
+	}
+
+	public void setHeadPic(String headPic) {
+		this.headPic = headPic;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -180,14 +183,6 @@ public class TbUser {
         this.sourceType = sourceType == null ? null : sourceType.trim();
     }
 
-    public String getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(String openId) {
-        this.openId = openId == null ? null : openId.trim();
-    }
-
     public String getNickName() {
         return nickName;
     }
@@ -212,23 +207,15 @@ public class TbUser {
         this.status = status == null ? null : status.trim();
     }
 
-    public String getHeadPic() {
-        return headPic;
-    }
-
-    public void setHeadPic(String headPic) {
-        this.headPic = headPic == null ? null : headPic.trim();
-    }
-
     public String getWxCode() {
-        return wxCode;
-    }
+		return wxCode;
+	}
 
-    public void setWxCode(String wxCode) {
-        this.wxCode = wxCode == null ? null : wxCode.trim();
-    }
+	public void setWxCode(String wxCode) {
+		this.wxCode = wxCode;
+	}
 
-    public Long getAccountBalance() {
+	public Long getAccountBalance() {
         return accountBalance;
     }
 
@@ -284,12 +271,13 @@ public class TbUser {
         this.experienceValue = experienceValue;
     }
 
+
     public String getBirthday() {
         return birthday;
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = birthday == null ? null : birthday.trim();
+        this.birthday = birthday;
     }
 
     public Date getLastLoginTime() {
@@ -298,5 +286,36 @@ public class TbUser {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+
+    @Override
+    public String toString() {
+        return "TbUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", sourceType='" + sourceType + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", name='" + name + '\'' +
+                ", status='" + status + '\'' +
+                ", headPic='" + headPic + '\'' +
+                ", wxCode='" + wxCode + '\'' +
+                ", accountBalance=" + accountBalance +
+                ", isMobileCheck='" + isMobileCheck + '\'' +
+                ", isEmailCheck='" + isEmailCheck + '\'' +
+                ", sex='" + sex + '\'' +
+                ", userLevel=" + userLevel +
+                ", points=" + points +
+                ", experienceValue=" + experienceValue +
+                ", birthday='" + birthday + '\'' +
+                ", lastLoginTime=" + lastLoginTime +
+                ", openId='" + openId + '\'' +
+                ", wx_code='" + wx_code + '\'' +
+                '}';
     }
 }

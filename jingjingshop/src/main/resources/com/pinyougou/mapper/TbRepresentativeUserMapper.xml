@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.pinyougou.mapper.TbRepresentativeUserMapper" >
+
+
+<!--&lt;!&ndash;设置一对多  其中column为数据库的字段&ndash;&gt;-->
+    <resultMap id="FindReDoc" type="com.pinyougou.pojo.TbRepresentative">
+            <id  column="rid"  property="rid"></id>
+            <result  column="name"  property="name"></result>
+            <result  column="head_pic"  property="head_pic"></result>
+            <result  column="points"  property="points"></result>
+            <result  column="phone"  property="phone"></result>
+            <result  column="points_all"  property="points_all"></result>
+            <result  column="username"  property="username"></result>
+            <result  column="script"  property="script"></result>
+            <result  column="createDate"  property="createDate"></result>
+        <collection    column="did"  property="tbDocs"  ofType="com.pinyougou.pojo.TbDoc">
+            <id column="rdid"  property="rdid"></id>
+            <result  column="name"  property="name"></result>
+            <result  column="head_pic"  property="head_pic"></result>
+            <result  column="points"  property="points"></result>
+            <result  column="points_all"  property="points_all"></result>
+            <result  column="username"  property="username"></result>
+            <result  column="his"  property="his"></result>
+            <result  column="script"  property="script"></result>
+            <result  column="createDate"  property="createDate"></result>
+        </collection>
+    </resultMap>
+
+
+
+
+
+<!--    &lt;!&ndash;查询个人信息&ndash;&gt;-->
+    <select id="findAllByIdRepresentative" parameterType="java.lang.String" resultType="com.pinyougou.pojo.TbRepresentative">
+            SELECT   *  FROM  tb_representative  WHERE  rid=#{rid}
+    </select>
+
+
+
+
+<!--    &lt;!&ndash;编辑个人信息&ndash;&gt;-->
+    <update id="Editrepresentative"  parameterType="com.pinyougou.pojo.TbRepresentative">
+        UPDATE  tb_representative
+        <set>
+            <if  test="username!=null">
+                username=#{username}
+            </if>
+            <if test="phone!=null">
+                phone=#{phone}
+            </if>
+        </set>
+        WHERE  rid=#{rid}
+    </update>
+
+
+
+
+<!--&lt;!&ndash;新增銀行卡&ndash;&gt;-->
+    <insert id="AddCard"  parameterType="java.util.Map">
+       INSERT  INTO  tb_card (cid,cpoint,cname,cphone,crid)  VALUE(UUID(),#{card.cpoint},#{crad.cname},#{crad.cphone},#{crad.crid})
+    </insert>
+
+
+
+<!--&lt;!&ndash;编辑银行卡&ndash;&gt;-->
+    <update id="EditCard"  parameterType="com.pinyougou.pojo.TbCard">
+        UPDATE tb_card
+        <set>
+            <if test="cpoint!=null">
+                cpoint=#{cpoint},
+            </if>
+            <if test="cname!=null">
+                cname=#{cname},
+            </if>
+            <if test="cphone!=null">
+                cphone=#{cphone}
+            </if>
+        </set>
+        WHERE  cid=#{cid}
+    </update>
+
+
+
+<!--    <sql  id="innersql">-->
+<!--        r.points,r.points_all,d.name,d.createDate,d.his,d.points-->
+<!--    </sql>-->
+
+
+<!-- &lt;!&ndash;根据代表查询医生信息&ndash;&gt;-->
+<select id="FindReDocInner"   parameterType="java.lang.String"  resultMap="FindReDoc">
+SELECT r.points,r.points_all,d.name,d.createDate,d.his,d.points FROM tb_doc   d
+INNER  JOIN   tb_redoc  rd
+ON rd.did=d.did
+INNER  JOIN    tb_representative r
+ON rd.rid=r.rid
+WHERE  r.rid=#{rid}
+</select>
+
+
+
+
+<!--    &lt;!&ndash;根据代表查询医生信息 count&ndash;&gt;-->
+    <select id="FindReDocInnerCount"   parameterType="java.lang.String"  resultType="java.lang.Integer">
+SELECT COUNT(*) FROM tb_doc   d
+INNER  JOIN   tb_redoc  rd
+ON
+rd.did=d.did
+INNER  JOIN    tb_representative r
+ON rd.rid=r.rid
+WHERE  r.rid=#{rid}
+</select>
+
+
+
+
+
+<!--    &lt;!&ndash;查询个人信息&ndash;&gt;-->
+    <select id="findAllByIdDoc" parameterType="java.lang.String" resultType="com.pinyougou.pojo.TbDoc">
+            SELECT   *  FROM  tb_doc  WHERE  did=#{did}
+    </select>
+
+
+
+
+</mapper>
