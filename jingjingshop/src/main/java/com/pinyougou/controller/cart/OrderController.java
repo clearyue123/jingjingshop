@@ -211,12 +211,10 @@ public class OrderController {
 	@RequestMapping("/showOrderDetail")
 	public Object showOrderDetail(
 			          @RequestParam(required=true,value="userId")String userId,
-			          @RequestParam(required=false,value="userType")String userType,
 			          @RequestParam(required=true,value="orderId")String orderId){
 		try{
 			Map<String,Object> paramMap = new HashMap<>();
 			paramMap.put("USERID", userId);
-			paramMap.put("USERTYPE", userType);
 			paramMap.put("ORDERID", orderId);
 			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
 			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(Long.parseLong(orderId));

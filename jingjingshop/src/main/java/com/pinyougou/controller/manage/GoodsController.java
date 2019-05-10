@@ -59,9 +59,9 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody Goods goods) {
+	public Result add(@RequestBody Map<String,Object> goodsMap) {
 		try {
-			goodsService.add(goods);
+			System.out.println(goodsMap);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
 			e.printStackTrace();

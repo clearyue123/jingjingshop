@@ -3,11 +3,9 @@ package com.pinyougou.pojo;
 import java.math.BigDecimal;
 
 /**
- * 
- * 
- * @author wcyong
- * 
- * @date 2019-05-08
+ * @author:yuejingjing
+ * @desc:商品信息
+ * @date:2019-05-08
  */
 public class TbGoods {
     /**

@@ -118,54 +118,81 @@
 			<table class="table table-bordered table-striped"  width="800px">
 		      	<tr>
 		      		<td>商品名称</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      		<td><input ng-model="entity.goodsName" class="form-control" placeholder="商品名称" >  </td>
 		      	</tr>		      	
-		      	<tr>
-		      		<td>是否上架</td>
-		      		<td>
-		      		   <input type="radio" name="sex" value="1" ng-model="person.sex" />男
-		      		   <input type="radio" name="sex" value="0" ng-model="person.sex" />女
-		      		</td>
-		      	</tr>
 		      	<tr>
 		      		<td>品牌</td>
 		      		<td>
-			      		 <select ng-model="province" class="btn btn-default"   ng-change="initTabelData()">
-	                        <option value=""  selected="selected">全部</option> 
-	                        <option ng-repeat="p in provinces" value="{{p.value}}" >{{p.text}}</option>
+			      		 <select ng-model="entity.brandId" class="btn btn-default"   ng-init="initBrandList();">
+	                       <option >-----------请选择----------</option> 
+	                       <option ng-repeat="brand in brandList" value="{{brand.id}}">{{brand.name}}</option> 
 	                     </select>
                     </td>
 		      	</tr>
 		      	<tr>
 		      		<td>店铺</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      		<td>
+		      		    <select ng-model="entity.sellerId" class="btn btn-default"   ng-init="initSellerList();">
+		      		       <option >-----------请选择----------</option> 
+	                       <option ng-repeat="seller in sellerList" value="{{seller.sellerId}}">{{seller.name}}</option> 
+	                     </select>
+		      		</td>
+		      	<tr>
+		      		<td>类别</td>
+		      		<td>
+		      		     <select ng-model="entity.categoryId" class="btn btn-default"   ng-init="initCategoryList();">
+		      		       <option >-----------请选择----------</option> 
+	                       <option ng-repeat="category in categoryList" value="{{category.id}}">{{category.name}}</option> 
+	                     </select>
+		      		</td>
+		      	</tr>
 		      	</tr>
 		      	<tr>
 		      		<td>商城价</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      		<td><input ng-model="entity.price" class="form-control" placeholder="商城价" >  </td>
 		      	</tr>
 		      	<tr>
 		      		<td>打折价</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      		<td><input ng-model="entity.reducedPrice" class="form-control" placeholder="打折价" >  </td>
 		      	</tr>
 		      	<tr>
-		      		<td>类别</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      		<td>是否上架</td>
+		      		<td ng-init="entity.isMarketable=1">
+		      		   <input type="radio"  name="isMarketable" ng-checked="true" ng-click="setIsMarketable(1)"/>上架
+		      		   <input type="radio"  name="isMarketable" ng-click="setIsMarketable(0)"/>不上架
+		      		</td>
 		      	</tr>
 		      	<tr>
 		      		<td>是否启用规格</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
+		      		<td ng-init="entity.isEnableSpec=1">
+                       <input type="radio"  name="isEnableSpec" ng-checked="true"  ng-click="setIsEnableSpec(1)"/>启用
+		      		   <input type="radio"  name="isEnableSpec" ng-click="setIsEnableSpec(0)"/>不启用		      		
+		      		</td>
 		      	</tr>
 		      	<tr>
-		      		<td>规格：
-		      		<input type="checkbox" ng-true-value="true" ng-false-value="false" ng-model="" />款式
-					<input type="checkbox" ng-true-value="true" ng-false-value="false" ng-model="" />尺寸
+		      	    <td>规格</td>
+		      		<td ng-init="entity.speIds=[]">
+		      			<input type="checkbox"  ng-click="setSpeIds($event,34)"/>款式
+		      			<input type="checkbox"  ng-click="setSpeIds($event,35)"/>尺寸
+		      			{{entity.speIds}}
 					</td>
+		      	</tr>
+		      	<tr>
+		      	   <td>商品列表小图片上传</td>
+		      	   <td>
+		      	       <input type="file" file-model="entity.smallPic"/> 
+		      	   </td>
+		      	</tr>
+		      	<tr>
+		      	   <td>商品详情轮播图片上传</td>
+		      	   <td>
+		      	       <input type="file" file-model="entity.itemImages" multiple="multiple"/>
+		      	   </td>
 		      	</tr>		      	
 			 </table>				
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="add()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

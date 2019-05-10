@@ -1,5 +1,5 @@
  //控制层 
-app.controller('goodsController' ,function($scope,$controller,itemCatService   ,goodsService){	
+app.controller('goodsController' ,function($scope,$controller,itemCatService,goodsService,$http){	
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -31,14 +31,24 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService   ,
 		);				
 	}
 	
-	//保存 
+	//新增
+	$scope.add=function(){
+		alert("add...");
+		var serviceObject=goodsService.add($scope.entity);//增加 
+		serviceObject.success(
+				function(response){
+					if(response.flag){
+						//重新查询 
+			        	$scope.reloadList();//重新加载
+					}else{
+						alert(response.message);
+					}
+				}		
+			);	
+	}
+	//修改
 	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
-			serviceObject=goodsService.update( $scope.entity ); //修改  
-		}else{
-			serviceObject=goodsService.add( $scope.entity  );//增加 
-		}				
+		var serviceObject=goodsService.update($scope.entity); //修改  
 		serviceObject.success(
 			function(response){
 				if(response.flag){
@@ -103,36 +113,51 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService   ,
 		});
 	}
 	
-	
-	 //过滤
-	$scope.filter = {};
-	//select下拉列表的内容
-	$scope.provinces = [
-	                       {
-	                            value: 1,
-	                            text: '充值',
-	                           
-	                        },
-	                        {
-	                            value: 2,
-	                            text: '消费',
-	                           
-	                        }
-	                    ];
-
-	  //列表数据
-	 $scope.initTabelData = function() {
-	        if($scope.province == 1){
-	             $scope.filter.transaction_type = 1;
-	         }else if($scope.province == 2){
-	             $scope.filter.transaction_type = 2;
-	         }else{
-	             $scope.filter = {};
-	         }
-
-	        $request.post("接口", $scope.filter,
-	                        function(response) {},
-	                        function(err) {});
-	                }
-	
+	 //品牌列表
+	 $scope.initBrandList = function() {
+	    $http.get("../brand/findAll.do").success(function(response){
+	    	$scope.brandList=response;
+	    });
+	 }
+	//店铺列表
+	$scope.initSellerList = function(){
+		$http.get("../seller/findAll.do").success(function(response){
+	    	$scope.sellerList=response;
+	    });
+	}
+	//类别列表
+    $scope.initCategoryList = function(){
+    	$http.get("../itemCat/findAll.do").success(function(response){
+	    	$scope.categoryList=response;
+	    });
+    }
+	//规格列表
+    $scope.initSpeList = function(){
+    	$http.get('../specification/findAll.do').success(function(response){
+    		$scope.speList=response;
+    		alert("spe test...");
+    	});
+    }
+    //设置是否上架
+    $scope.setIsMarketable = function(val){
+    	$scope.entity.isMarketable=val
+    }
+    //设置是否启用规格
+    $scope.setIsEnableSpec = function(val){
+    	$scope.entity.isEnableSpec=val
+    }
+    //设置规格ids
+    $scope.setSpeIds = function($event,speId){
+    	// 复选框选中
+		if($event.target.checked){
+			// 向数组中添加元素
+			$scope.entity.speIds.push(speId);
+		}else{
+			// 从数组中移除
+			var idx = $scope.entity.speIds.indexOf(speId);
+			$scope.entity.speIds.splice(idx,1);
+		}
+    }
+    
+    
 });	
