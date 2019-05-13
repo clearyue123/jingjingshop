@@ -60,4 +60,10 @@ public interface UserService {
 	public PageResult findPage(TbUser user, int pageNum, int pageSize);
 	
 	public TbUser firstInfo(TbUser user);
+
+
+	public PageResult selectListByDid(String did);
+
+
+	public int BindDid(TbUser user);
 }

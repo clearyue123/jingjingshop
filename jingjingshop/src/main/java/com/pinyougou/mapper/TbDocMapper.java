@@ -42,4 +42,6 @@ public interface TbDocMapper {
 
 	int updateInfo(TbDoc user);
 
+	List<TbDoc> selectList();
+
 }

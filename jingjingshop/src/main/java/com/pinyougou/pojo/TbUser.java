@@ -58,6 +58,10 @@ public class TbUser  extends  TbBase implements Serializable{
 
     private Integer points;
 
+    /**
+     * 医生id
+     */
+    private String did;
 
     /**
      * 累计积分
@@ -78,7 +82,15 @@ public class TbUser  extends  TbBase implements Serializable{
 
 
 
-    public TbRepresentative getTbRepresentative() {
+    public String getDid() {
+		return did;
+	}
+
+	public void setDid(String did) {
+		this.did = did;
+	}
+
+	public TbRepresentative getTbRepresentative() {
         return tbRepresentative;
     }
 

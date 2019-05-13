@@ -16,6 +16,7 @@
             <result  column="username"  property="username"></result>
             <result  column="script"  property="script"></result>
             <result  column="createDate"  property="createDate"></result>
+            <result  column="open_id"  property="openId"></result>
         <collection    column="did"  property="tbDocs"  ofType="com.pinyougou.pojo.TbDoc">
             <id column="rdid"  property="rdid"></id>
             <result  column="name"  property="name"></result>
@@ -123,6 +124,21 @@ WHERE  r.rid=#{rid}
     </select>
 
 
-
+<select id="selectByOpenId" resultType="com.pinyougou.pojo.TbRepresentative" parameterType="com.pinyougou.pojo.TbRepresentative">
+  	select * from tb_representative where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="add" parameterType="com.pinyougou.pojo.TbRepresentative">
+  	insert into tb_representative (rid,open_id) values (UUID(),#{openId,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="updateInfo" parameterType="com.pinyougou.pojo.TbRepresentative">
+  	update tb_representative set 
+  	name = #{name,jdbcType = VARCHAR} ,
+  	head_pic = #{head_pic,jdbcType=VARCHAR}
+  	where rid = #{rid,jdbcType=VARCHAR}
+  </update>
+  
+  
 
 </mapper>

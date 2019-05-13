@@ -28,6 +28,12 @@ public interface RepresentativeService {
 
     public TbDoc findAllByIdDoc(String did);
 
+	public TbRepresentative firstInfo(TbRepresentative user);
+
+	public int add(TbRepresentative user);
+
+	public int updateInfo(TbRepresentative user);
+
 
 
 }

@@ -2,6 +2,7 @@ package com.pinyougou.controller.doctor;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,12 @@ import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoc;
 import com.pinyougou.pojo.TbPatient;
 import com.pinyougou.pojo.TbRepresentative;
+import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.card.CardService;
 import com.pinyougou.service.doctor.DoctorService;
 import com.pinyougou.service.order.OrderService;
 import com.pinyougou.service.patient.PatientService;
+import com.pinyougou.service.user.UserService;
 
 import entity.PageResult;
 
@@ -38,6 +41,9 @@ public class DoctorController {
     
     @Autowired
     private OrderService orderService;
+    
+    @Autowired
+    private UserService uesrService;
 
 
 /**
@@ -137,7 +143,7 @@ public class DoctorController {
     public    ApiResult  getPatientList(
     		@RequestParam(required = false,value = "did")  String  did ){
         try{
-        	PageResult result = patientService.selectListByDid(did);
+        	PageResult result = uesrService.selectListByDid(did);
             return new ApiResult(200, "查询成功", result);
         }catch (Exception e){
             e.printStackTrace();
@@ -151,10 +157,9 @@ public class DoctorController {
      */
 
     @RequestMapping("/getPatientDetail")
-    public    ApiResult  getPatientDetail(
-    		@RequestParam(required = false,value = "pid")  String  pid ){
+    public    ApiResult  getPatientDetail( Long  uid ){
         try{
-        	TbPatient result = patientService.selectListBypid(pid);
+        	TbUser result = uesrService.findOne(uid);
             return new ApiResult(200, "查询成功", result);
         }catch (Exception e){
             e.printStackTrace();
@@ -168,9 +173,9 @@ public class DoctorController {
 
     @RequestMapping("/getPatientOrder")
     public    ApiResult  getPatientOrder(
-    		@RequestParam(required = false,value = "pid")  String  pid ){
+    		@RequestParam(required = false,value = "uid")  String  uid ){
         try{
-//        	TbPatient result = orderService.selectListBypid(pid);
+//        	TbPatient result = orderService.selectListByuid(uid);
             return new ApiResult(200, "查询成功", null);
         }catch (Exception e){
             e.printStackTrace();
@@ -186,14 +191,46 @@ public class DoctorController {
     public    ApiResult  sendMessageByDoc(
     		@RequestParam(required = false,value = "did")  String  did,
     		@RequestParam(required = false,value = "message")  String  message,
-    		@RequestParam(required = false,value = "pid")  String  pid ){
+    		@RequestParam(required = false,value = "uid")  String  uid ){
         try{
-//        	TbPatient result = orderService.selectListBypid(pid);
+//        	TbPatient result = orderService.selectListByuid(uid);
             return new ApiResult(200, "查询成功", null);
         }catch (Exception e){
             e.printStackTrace();
         }
         return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
+    }
+    
+    
+    
+    /**
+     * 查询所有医生
+     * @return
+     */
+    @RequestMapping("/selectList")
+    public ApiResult selectList(){
+    	List<TbDoc> result = doctorService.selectList();
+    	return new ApiResult(200, "查询成功", result);
+    }
+    /**
+     * 用户绑定医生
+     * @param did  医生id
+     * @param uid  用户id
+     * @return
+     */
+   
+    @RequestMapping("/PatientBindDoc")
+    public ApiResult PatientBindDoc(
+    		@RequestParam(required = true,value = "did")  String  did,
+    		@RequestParam(required = true,value = "uid")  Long  uid ){
+    	TbUser user = new TbUser();
+    	user.setId(uid);
+    	user.setDid(did);
+    	int a = uesrService.BindDid(user);
+    	if(a == 1){
+    		return new ApiResult(200, "操作成功", "");
+    	}
+    	return new ApiResult(201, "操作失败", "请确定用户id是否存在");
     }
 
 }

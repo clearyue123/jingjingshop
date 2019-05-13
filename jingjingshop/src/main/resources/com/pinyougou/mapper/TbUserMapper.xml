@@ -513,4 +513,14 @@
 		select * from tb_user where open_id =
 		#{openId,jdbcType=VARCHAR}
 	</select>
+	
+	
+	<select id="selectListByDid" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from tb_user where did = #{did,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="BindDid" parameterType="com.pinyougou.pojo.TbUser">
+		update tb_user set did = #{did,jdbcType=VARCHAR} where id = #{id,jdbcType=BIGINT}
+	</update>
 </mapper>

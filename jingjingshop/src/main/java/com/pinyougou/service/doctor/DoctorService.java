@@ -1,6 +1,7 @@
 package com.pinyougou.service.doctor;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.pinyougou.pojo.TbDoc;
 import com.pinyougou.pojo.TbRepresentative;
@@ -26,5 +27,7 @@ public interface DoctorService {
 	TbDoc selectById(String did);
 
 	int updateInfo(TbDoc user);
+
+	List<TbDoc> selectList();
 
 }

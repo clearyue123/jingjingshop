@@ -322,4 +322,9 @@
   	head_pic = #{headPic,jdbcType=VARCHAR}
   	where did = #{did,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectList" resultMap="BaseResultMap">
+  	select * from tb_doc
+  </select>
+  
 </mapper>

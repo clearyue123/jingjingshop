@@ -147,4 +147,14 @@ public class UserServiceImpl implements UserService {
 		return tbUser;
 	}
 
+	@Override
+	public PageResult selectListByDid(String did) {
+		return userMapper.selectListByDid(did);
+	}
+
+	@Override
+	public int BindDid(TbUser user) {
+		return userMapper.BindDid(user);
+	}
+
 }

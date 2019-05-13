@@ -54,4 +54,23 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     public TbDoc findAllByIdDoc(String did) {
         return tbRepresentativeUserMapper.findAllByIdDoc(did);
     }
+
+
+	@Override
+	public TbRepresentative firstInfo(TbRepresentative user) {
+		return tbRepresentativeUserMapper.selectByOpenId(user);
+	}
+
+
+	@Override
+	public int add(TbRepresentative user) {
+		return tbRepresentativeUserMapper.add(user);
+	}
+
+
+	@Override
+	public int updateInfo(TbRepresentative user) {
+		return tbRepresentativeUserMapper.updateInfo(user);
+	}
+	
 }

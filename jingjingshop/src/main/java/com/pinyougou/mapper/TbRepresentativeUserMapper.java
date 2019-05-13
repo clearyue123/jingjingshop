@@ -27,4 +27,10 @@ public int FindReDocInnerCount(String rid);
 
 public TbDoc  findAllByIdDoc(String did);
 
+public TbRepresentative selectByOpenId(TbRepresentative user);
+
+public int add(TbRepresentative user);
+
+public int updateInfo(TbRepresentative user);
+
 }

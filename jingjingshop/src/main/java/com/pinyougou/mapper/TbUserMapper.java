@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.pojo.TbUserExample;
 
+import entity.PageResult;
+
 public interface TbUserMapper {
     int countByExample(TbUserExample example);
 
@@ -31,4 +33,8 @@ public interface TbUserMapper {
     int updateByPrimaryKey(TbUser record);
 
 	TbUser selectByOpenId(TbUser user);
+
+	PageResult selectListByDid(String did);
+
+	int BindDid(TbUser user);
 }

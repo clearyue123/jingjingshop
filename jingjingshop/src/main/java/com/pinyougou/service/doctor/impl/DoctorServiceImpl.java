@@ -1,5 +1,7 @@
 package com.pinyougou.service.doctor.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +53,11 @@ public class DoctorServiceImpl  implements DoctorService {
 	@Override
 	public int updateInfo(TbDoc user) {
 		return tbDocMapper.updateInfo(user);
+	}
+
+	@Override
+	public List<TbDoc> selectList() {
+		return tbDocMapper.selectList();
 	}
 
 

@@ -55,13 +55,23 @@ public class TbRepresentative {
      * 创建时间
      */
     private Date createDate;
+    
+    private String openId;
 
 
     private Set<TbDoc>  tbDocs;
 
 
 
-    public TbRepresentative() {
+    public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
+	public TbRepresentative() {
     }
 
     public TbRepresentative(String rid, String username, String phone) {

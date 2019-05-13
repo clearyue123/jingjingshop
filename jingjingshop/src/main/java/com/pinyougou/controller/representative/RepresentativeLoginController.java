@@ -1,4 +1,4 @@
-package com.pinyougou.controller.doctor;
+package com.pinyougou.controller.representative;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,23 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pinyougou.common.ApiResult;
-import com.pinyougou.pojo.TbDoc;
-import com.pinyougou.service.doctor.DoctorService;
+import com.pinyougou.pojo.TbRepresentative;
+import com.pinyougou.service.representative.RepresentativeService;
 
 import util.HttpUtils;
 import util.TextUtils;
 
-/**
- * 医生登录
- * @author tian
- *
- */
-@RestController
-@RequestMapping("/doctorLogin")
-public class DoctorLoginController {
-	@Autowired
-	private DoctorService doctorService;
 
+@RestController
+@RequestMapping("/representativeLogin")
+public class RepresentativeLoginController {
+	
+	@Autowired 
+	private RepresentativeService  representativeService;
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
 	public ApiResult wxlogin(String wxcode) {
 		if (TextUtils.isBlank(wxcode)) {
@@ -42,14 +38,14 @@ public class DoctorLoginController {
 			} else {
 				System.out.println("返回参数:"+jsonObject.toJSONString());
 				wxcode = jsonObject.getString("openid");
-				TbDoc user = new TbDoc();
+				TbRepresentative user = new TbRepresentative();
 				user.setOpenId(wxcode);
-				TbDoc result = doctorService.firstInfo(user);
+				TbRepresentative result = representativeService.firstInfo(user);
 				if (result != null) {
 					return new ApiResult(200, "登录成功", result);
 				} else {
-					doctorService.add(user);
-					TbDoc result1 = doctorService.firstInfo(user);
+					representativeService.add(user);
+					TbRepresentative result1 = representativeService.firstInfo(user);
 					return new ApiResult(101, "请先绑定个人信息", result1);
 				}
 			}
@@ -67,28 +63,28 @@ public class DoctorLoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/bindwx", method = RequestMethod.POST)
-	public ApiResult bindWx(String did, String wxname, String headimg) {
+	public ApiResult bindWx(String rid, String wxname, String headimg) {
 		if (TextUtils.isBlank(wxname)) {
 			return new ApiResult(101, "微信昵称不能为空", null);
 		}
 		if (TextUtils.isBlank(headimg)) {
 			return new ApiResult(101, "微信头像不能为空", null);
 		}
-		TbDoc user = new TbDoc();
+		TbRepresentative user = new TbRepresentative();
 		user.setName(wxname);
 		user.setHead_pic(headimg);
-		TbDoc result = doctorService.selectById(did);
+		TbRepresentative result = representativeService.findAllByIdRepresentative(rid);
 		if (result != null) {
-			user.setDid(did);
-			doctorService.updateInfo(user);
-			TbDoc tbUser = doctorService.selectById(did);
+			user.setRid(rid);
+			representativeService.updateInfo(user);
+			TbRepresentative tbUser = representativeService.findAllByIdRepresentative(rid);
 			if (tbUser == null) {
 				return new ApiResult(101, "未知错误，请联系管理员", tbUser);
 			}
 			return new ApiResult(200, "绑定成功", tbUser);
 		} else {
-			doctorService.add(user);
-			TbDoc tbUser = doctorService.selectById(did);
+			representativeService.add(user);
+			TbRepresentative tbUser = representativeService.findAllByIdRepresentative(rid);
 			if (tbUser == null) {
 				return new ApiResult(101, "未知错误，请联系管理员", tbUser);
 			}

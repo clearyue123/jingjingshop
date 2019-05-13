@@ -14,11 +14,23 @@ import com.pinyougou.service.patient.PatientService;
 import util.HttpUtils;
 import util.TextUtils;
 
+
+/**
+ * 患者管理
+ * @author tian
+ *
+ */
+
 @RestController
 @RequestMapping("/patientLogin")
 public class PatientLoginController {
 	private PatientService patientService;
 	
+	/**
+	 * 患者登录
+	 * @param wxcode
+	 * @return
+	 */
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
 	public ApiResult wxlogin(String wxcode) {
 		if (TextUtils.isBlank(wxcode)) {
