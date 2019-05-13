@@ -1,4 +1,5 @@
 package com.pinyougou.controller.cart;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
+import com.pinyougou.mapper.TbGoodsMapper;
 import com.pinyougou.mapper.TbOrderItemMapper;
 import com.pinyougou.mapper.TbOrderSpeMapper;
 import com.pinyougou.mapper.TbShopCartSpeMapper;
 import com.pinyougou.pojo.TbAddress;
+import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbOrderItem;
 import com.pinyougou.pojo.TbOrderSpe;
@@ -51,7 +54,8 @@ public class OrderController {
 	private TbOrderSpeMapper orderSpeMapper;
 	@Autowired
 	private TbShopCartSpeMapper cartSpeMapper;
-   
+    @Autowired
+    private TbGoodsMapper goodsMapper;
 	//设置id生成器
 	private IdWorker idWorker = new IdWorker();
 	/**
@@ -328,11 +332,15 @@ public class OrderController {
 				tbOrder.setReceiver(addr.getContact());//收货人
 				tbOrder.setPostFee("0.0");
 				Integer itemNum = 0;
+				BigDecimal payment = new BigDecimal(0);
 				for(int i=0;i<shopCartList.size();i++){
 					TbShopCart tbShopCart = shopCartList.get(i);
 					Long goodsId = tbShopCart.getGoodsId();
 					Long cartId = tbShopCart.getCartId();
 					Integer num = tbShopCart.getNum();
+					TbGoods tbGoods = goodsMapper.selectByPrimaryKey(goodsId);
+		        	BigDecimal reducedPrice = tbGoods.getReducedPrice();
+		        	payment = payment.add(reducedPrice.multiply((new BigDecimal(num))));
 					itemNum += num;
 					tbOrderItem.setOrderId(orderId);
 					tbOrderItem.setGoodsId(goodsId);
@@ -353,6 +361,7 @@ public class OrderController {
 					}
 				}
 				tbOrder.setItemNum(itemNum);
+				tbOrder.setPayment(payment);
 				orderService.add(tbOrder);
 				return new ApiResult(200, "订单创建成功", null);
 			}
@@ -386,6 +395,9 @@ public class OrderController {
 	        if(addressList==null||addressList.size()==0){
 	        	return new ApiResult(201, "请先去添加收货信息！","");
 	        }else{
+	        	TbGoods tbGoods = goodsMapper.selectByPrimaryKey(Long.parseLong(goodsId));
+	        	BigDecimal reducedPrice = tbGoods.getReducedPrice();
+	        	BigDecimal payment = reducedPrice.multiply((new BigDecimal(num)));
 	        	//获取用户地址
 				TbAddress addr = addressList.get(0);
 				TbOrder tbOrder = new TbOrder();
@@ -402,6 +414,7 @@ public class OrderController {
 				tbOrder.setReceiver(addr.getContact());//收货人
 				tbOrder.setPostFee("0.0");
 				tbOrder.setItemNum(Integer.parseInt(num));
+				tbOrder.setPayment(payment);
 				//保存orderItem
 				tbOrderItem.setOrderId(orderId);
 				tbOrderItem.setNum(Integer.parseInt(num));
