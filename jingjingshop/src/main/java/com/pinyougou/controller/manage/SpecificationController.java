@@ -1,12 +1,16 @@
 package com.pinyougou.controller.manage;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pinyougou.common.ApiResult;
+import com.pinyougou.mapper.TbSpecificationCategoryMapper;
 import com.pinyougou.pojo.TbSpecification;
 import com.pinyougou.pojo.group.Specification;
 import com.pinyougou.service.sellergoods.SpecificationService;
@@ -24,6 +28,9 @@ public class SpecificationController {
 
 	@Autowired
 	private SpecificationService specificationService;
+	
+	@Autowired
+	private TbSpecificationCategoryMapper speCatMapper;
 	
 	/**
 	 * 返回全部列表
@@ -117,5 +124,19 @@ public class SpecificationController {
 	@RequestMapping("/selectOptionList")
 	public List<Map> selectOptionList(){
 		return specificationService.selectOptionList();
+	}
+	
+	@RequestMapping("/findSpeOpByCatId")
+	public ApiResult findSpeOpByCatId(@RequestParam(value="categoryId",required=true)String categorytId){
+		try{
+			Map<String,Object> paramMap = new HashMap<String,Object>();
+			paramMap.put("categorytId", categorytId);
+			paramMap.put("speId",37L);
+			List<Map<String, Object>> data = speCatMapper.getSpeOptionByCatId(paramMap);
+			return new ApiResult(200, "success",data);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

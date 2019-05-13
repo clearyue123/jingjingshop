@@ -1,5 +1,6 @@
 package com.pinyougou.controller.manage;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,13 +60,14 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody Map<String,Object> goodsMap) {
+	public Object add(@RequestBody Map<String,Object> goodsMap) {
 		try {
 			System.out.println(goodsMap);
-			return new Result(true, "增加成功");
+			goodsService.add(goodsMap);
+			return new ApiResult(200, "增加成功","");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "增加失败");
+			return new ApiResult(201, "增加失败","");
 		}
 	}
 

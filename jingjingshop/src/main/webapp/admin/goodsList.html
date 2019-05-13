@@ -21,6 +21,9 @@
     <script type="text/javascript" src="../plugins/angularjs/pagination.js"></script>
     <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
     
+    <script type="text/javascript" src="../js/ng-file-upload-shim.min.js"></script>
+    <script type="text/javascript" src="../js/ng-file-upload.min.js"></script>
+    
     <script type="text/javascript" src="../js/base_pagination.js"></script>
     <script type="text/javascript" src="../js/controller/baseController.js"></script>
     <script type="text/javascript" src="../js/controller/goodsController.js"></script>
@@ -140,9 +143,9 @@
 		      	<tr>
 		      		<td>类别</td>
 		      		<td>
-		      		     <select ng-model="entity.categoryId" class="btn btn-default"   ng-init="initCategoryList();">
+		      		     <select ng-model="entity.categoryId" class="btn btn-default"   ng-init="initCategoryList();" ng-change="initSpe();">
 		      		       <option >-----------请选择----------</option> 
-	                       <option ng-repeat="category in categoryList" value="{{category.id}}">{{category.name}}</option> 
+	                       <option ng-repeat="category in categoryList" value="{{category.id}}" >{{category.name}}</option> 
 	                     </select>
 		      		</td>
 		      	</tr>
@@ -172,22 +175,30 @@
 		      	<tr>
 		      	    <td>规格</td>
 		      		<td ng-init="entity.speIds=[]">
-		      			<input type="checkbox"  ng-click="setSpeIds($event,34)"/>款式
-		      			<input type="checkbox"  ng-click="setSpeIds($event,35)"/>尺寸
-		      			{{entity.speIds}}
+		      			型号 <input type="checkbox" ng-repeat="spe in speList" ng-click="setSpeIds($event,37)" value="{{spe.speOpId}}"/>{{spe.speOpName}}
 					</td>
 		      	</tr>
 		      	<tr>
 		      	   <td>商品列表小图片上传</td>
 		      	   <td>
-		      	       <input type="file" file-model="entity.smallPic"/> 
+		      	       <input type="file" id="smallPic" ngf-select ng-model="entity.smallPic" ngf-pattern="'image/*" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"/> 
 		      	   </td>
+		      	   <td>
+		      	   <button class="btn btn-primary" type="button" ng-click="uploadSmallPic()">
+				                   		上传
+				   </button>	
+				   </td>
 		      	</tr>
 		      	<tr>
 		      	   <td>商品详情轮播图片上传</td>
 		      	   <td>
-		      	       <input type="file" file-model="entity.itemImages" multiple="multiple"/>
+		      	       <input type="file" id="itemImages" ngf-select ng-model="entity.itemImages" multiple="multiple" ngf-pattern="'image/*" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"/>
 		      	   </td>
+		      	   <td>
+		      	   <button class="btn btn-primary" type="button" ng-click="uploadItemImages()">
+				                   		上传
+				   </button>
+				   </td>
 		      	</tr>		      	
 			 </table>				
 		</div>

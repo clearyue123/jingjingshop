@@ -33,7 +33,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	
 	//新增
 	$scope.add=function(){
-		alert("add...");
 		var serviceObject=goodsService.add($scope.entity);//增加 
 		serviceObject.success(
 				function(response){
@@ -135,7 +134,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     $scope.initSpeList = function(){
     	$http.get('../specification/findAll.do').success(function(response){
     		$scope.speList=response;
-    		alert("spe test...");
     	});
     }
     //设置是否上架
@@ -158,6 +156,74 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 			$scope.entity.speIds.splice(idx,1);
 		}
     }
+    //初始化规格数据
+    $scope.initSpe = function(){
+    	var categoryId=$scope.entity.categoryId;
+    	alert(categoryId);
+   	    $http.get('../specification/findSpeOpByCatId.do?categoryId='+categoryId).success(function(response){
+   	    	$scope.speList = response.data;
+   	    	alert(response.message);
+    	});
+    }
     
+    $scope.uploadFile = function()
+    {
+		// 向后台传递数据:
+		var formData = new FormData();
+		var smallPic = document.querySelector('input[id=smallPic]').files[0];
+		// 向formData中添加数据:
+		formData.append("smallPic",smallPic);
+		
+		return $http({
+			method:'post',
+			url:'../upload/uploadFile.do',
+			data:formData,
+			headers:{'Content-Type':undefined} ,// Content-Type : text/html  text/plain
+			transformRequest: angular.identity
+		});
+	}
+    //上传列表图片
+    $scope.uploadSmallPic = function(){
+    	// 调用uploadService的方法完成文件的上传
+    	$scope.uploadFile().success(function(response){
+			alert(response.code);
+    		if(response.code==200){
+				// 获得url
+				$scope.entity.smallPic=  response.data;
+				alert(response.message);
+			}else{
+				alert(response.message);
+			}
+		});
+    }
+    $scope.uploadFiles = function(){
+		// 向后台传递数据:
+		var formData = new FormData();
+		var itemImages = document.querySelector('input[id=itemImages]').files;
+		alert(itemImages.length);
+		// 向formData中添加数据:
+		 for (var i=0; i<itemImages.length; i++) {
+			 formData.append("itemImage", itemImages[i]);
+         }
+		return $http({
+			method:'post',
+			url:'../upload/uploadItemImages.do',
+			data:formData,
+			headers:{'Content-Type': undefined} ,// Content-Type : text/html  text/plain
+			transformRequest: angular.identity
+		});
+	}
+    //上传详情图片数组
+    $scope.uploadItemImages = function(){
+    	$scope.uploadFiles().success(function(response){
+			if(response.code==200){
+				// 获得url
+				$scope.entity.itemImages =  response.data;
+				alert(response.message);
+			}else{
+				alert(response.message);
+			}
+		});
+    }
     
 });	

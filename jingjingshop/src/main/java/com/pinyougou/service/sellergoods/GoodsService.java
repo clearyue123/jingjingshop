@@ -34,7 +34,11 @@ public interface GoodsService {
 	*/
 	public void add(Goods goods);
 	
-	
+	/**
+	 * 新增商品
+	 * @param goodsMap
+	 */
+	public void add(Map<String,Object> goodsMap);
 	/**
 	 * 修改
 	 */

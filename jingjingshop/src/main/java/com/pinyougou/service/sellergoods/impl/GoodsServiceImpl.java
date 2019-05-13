@@ -30,6 +30,7 @@ import com.pinyougou.pojo.group.Goods;
 import com.pinyougou.service.sellergoods.GoodsService;
 
 import entity.PageResult;
+import util.IdWorker;
 
 /**
  * 服务实现层
@@ -43,6 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
 	@Autowired
 	private TbGoodsMapper goodsMapper;
 	
+	private IdWorker idWorker = new IdWorker();
 	/**
 	 * 查询全部
 	 */
@@ -279,5 +281,26 @@ public class GoodsServiceImpl implements GoodsService {
 		}
 		Page<Map<String,Object>> pageResult = (Page<Map<String,Object>>)searchGoodList;
 		return pageResult;
+	}
+
+	@Override
+	public void add(Map<String, Object> goodsMap) {
+	  try{	
+		  Long goodsId = idWorker.nextId();
+		  String goodsName = "";
+		  String brandId = "";
+		  String sellerId = "";
+		  String categoryId = "";
+		  String price = "";
+		  String reducedPrice = "";
+		  String isMarketable = "";
+		  String isEnableSpec = "";
+		  String speIds = "";
+		  if(goodsMap.get("goodsName")!=null){
+			  goodsName = (String)goodsMap.get("goodsName");
+		  }
+	  }catch(Exception e){
+		  e.printStackTrace();
+	  }
 	}
 }
