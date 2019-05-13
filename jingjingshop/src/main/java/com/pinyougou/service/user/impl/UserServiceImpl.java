@@ -146,11 +146,16 @@ public class UserServiceImpl implements UserService {
 		TbUser tbUser = userMapper.selectByOpenId(user);
 		return tbUser;
 	}
-
-	@Override
-	public PageResult selectListByDid(String did) {
-		return userMapper.selectListByDid(did);
-	}
+	
+	 /**
+     * 按分页查询
+     */
+    public PageResult selectListByDid(int pageNum, int pageSize,String did) {
+        PageHelper.startPage(pageNum, pageSize);
+        Page<TbUser> page = (Page<TbUser>) userMapper.selectListByDid(did);
+        System.out.println(page);
+        return new PageResult(page.getTotal(), page.getResult());
+    }
 
 	@Override
 	public int BindDid(TbUser user) {

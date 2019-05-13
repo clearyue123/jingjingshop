@@ -34,7 +34,7 @@ public interface TbUserMapper {
 
 	TbUser selectByOpenId(TbUser user);
 
-	PageResult selectListByDid(String did);
+	List<TbUser> selectListByDid(String did);
 
 	int BindDid(TbUser user);
 }

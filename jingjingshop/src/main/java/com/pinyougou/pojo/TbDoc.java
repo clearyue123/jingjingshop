@@ -20,7 +20,7 @@ public class TbDoc {
 	/**
 	 * 头像
 	 */
-	private String headPic;
+	private String head_pic;
 
 	private String phone;
 
@@ -31,7 +31,7 @@ public class TbDoc {
 	/**
 	 * 最终累计积分
 	 */
-	private String pointsAll;
+	private String points_all;
 	/**
 	 * 真实姓名
 	 */
@@ -129,28 +129,12 @@ public class TbDoc {
 		this.name = name;
 	}
 
-	public String getHeadPic() {
-		return headPic;
-	}
-
-	public void setHead_pic(String headPic) {
-		this.headPic = headPic;
-	}
-
 	public String getPoints() {
 		return points;
 	}
 
 	public void setPoints(String points) {
 		this.points = points;
-	}
-
-	public String getPointsAll() {
-		return pointsAll;
-	}
-
-	public void setPointsAll(String pointsAll) {
-		this.pointsAll = pointsAll;
 	}
 
 	public String getUsername() {
@@ -177,10 +161,26 @@ public class TbDoc {
 		this.createDate = createDate;
 	}
 
+	public String getHead_pic() {
+		return head_pic;
+	}
+
+	public void setHead_pic(String head_pic) {
+		this.head_pic = head_pic;
+	}
+
+	public String getPoints_all() {
+		return points_all;
+	}
+
+	public void setPoints_all(String points_all) {
+		this.points_all = points_all;
+	}
+
 	@Override
 	public String toString() {
-		return "TbRepresentative{" + "did='" + did + '\'' + ", name='" + name + '\'' + ", head_pic='" + headPic + '\''
-				+ ", points='" + points + '\'' + ", points_all='" + pointsAll + '\'' + ", username='" + username + '\''
+		return "TbRepresentative{" + "did='" + did + '\'' + ", name='" + name + '\'' + ", head_pic='" + head_pic + '\''
+				+ ", points='" + points + '\'' + ", points_all='" + points_all + '\'' + ", username='" + username + '\''
 				+ ", script='" + script + '\'' + ", createDate=" + createDate + '}';
 	}
 }

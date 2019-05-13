@@ -62,7 +62,7 @@ public interface UserService {
 	public TbUser firstInfo(TbUser user);
 
 
-	public PageResult selectListByDid(String did);
+	public PageResult selectListByDid(int pageNum, int pageSize,String did);
 
 
 	public int BindDid(TbUser user);

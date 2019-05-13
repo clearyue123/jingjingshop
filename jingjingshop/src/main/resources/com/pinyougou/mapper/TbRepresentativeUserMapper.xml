@@ -47,7 +47,7 @@
         UPDATE  tb_representative
         <set>
             <if  test="username!=null">
-                username=#{username}
+                username=#{username},
             </if>
             <if test="phone!=null">
                 phone=#{phone}
