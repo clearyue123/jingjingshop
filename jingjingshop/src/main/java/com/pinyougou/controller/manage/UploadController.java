@@ -49,7 +49,7 @@ public class UploadController {
 			   }
 			  in.close();
 			  out.close();
-			return new ApiResult(200, "文件上传成功！", saveFile.getPath());
+			return new ApiResult(200, "文件上传成功！", "/smallPicUpload/"+saveFileName);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ApiResult(201, "文件上传失败！", "");

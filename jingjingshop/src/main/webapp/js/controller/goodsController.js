@@ -36,7 +36,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 		var serviceObject=goodsService.add($scope.entity);//增加 
 		serviceObject.success(
 				function(response){
-					if(response.flag){
+					if(response.code==200){
 						//重新查询 
 			        	$scope.reloadList();//重新加载
 					}else{
@@ -145,7 +145,8 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	$scope.entity.isEnableSpec=val
     }
     //设置规格ids
-    $scope.setSpeIds = function($event,speId){
+    $scope.setSpeIds = function($event){
+    	var speId = $event.target.value;
     	// 复选框选中
 		if($event.target.checked){
 			// 向数组中添加元素
@@ -162,6 +163,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	alert(categoryId);
    	    $http.get('../specification/findSpeOpByCatId.do?categoryId='+categoryId).success(function(response){
    	    	$scope.speList = response.data;
+   	    	$scope.entity.speIds=[];
    	    	alert(response.message);
     	});
     }
@@ -200,7 +202,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 		// 向后台传递数据:
 		var formData = new FormData();
 		var itemImages = document.querySelector('input[id=itemImages]').files;
-		alert(itemImages.length);
 		// 向formData中添加数据:
 		 for (var i=0; i<itemImages.length; i++) {
 			 formData.append("itemImage", itemImages[i]);

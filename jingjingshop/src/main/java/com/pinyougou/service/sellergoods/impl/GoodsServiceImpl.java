@@ -1,4 +1,5 @@
 package com.pinyougou.service.sellergoods.impl;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,9 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired
 	private TbGoodsMapper goodsMapper;
+	
+	@Autowired
+	private TbGoodsDescMapper tbGoodsDescMapper;
 	
 	private IdWorker idWorker = new IdWorker();
 	/**
@@ -286,19 +290,34 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public void add(Map<String, Object> goodsMap) {
 	  try{	
-		  Long goodsId = idWorker.nextId();
-		  String goodsName = "";
-		  String brandId = "";
-		  String sellerId = "";
-		  String categoryId = "";
-		  String price = "";
-		  String reducedPrice = "";
-		  String isMarketable = "";
-		  String isEnableSpec = "";
-		  String speIds = "";
-		  if(goodsMap.get("goodsName")!=null){
-			  goodsName = (String)goodsMap.get("goodsName");
-		  }
+		  TbGoods tbGoods = new TbGoods();
+		  TbGoodsDesc goodsDesc = new TbGoodsDesc();
+		  long goodsId = idWorker.nextId();
+		  String isMarketable = (String)goodsMap.get("isMarketable").toString();
+		  String isEnableSpec = (String)goodsMap.get("isEnableSpec").toString();
+		  String categoryId = (String)goodsMap.get("categoryId");
+		  String goodsName = (String)goodsMap.get("goodsName");
+		  String brandId = (String)goodsMap.get("brandId");
+		  String sellerId = (String)goodsMap.get("sellerId");
+		  String price = (String)goodsMap.get("price");
+		  String reducedPrice = (String)goodsMap.get("reducedPrice");
+		  String smallPic = (String)goodsMap.get("smallPic");
+		  String itemImages = (String)goodsMap.get("itemImages");
+		  tbGoods.setId(goodsId);
+		  tbGoods.setBrandId(Long.parseLong(brandId));
+		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
+		  tbGoods.setSellerId(sellerId);
+		  tbGoods.setGoodsName(goodsName);
+		  tbGoods.setIsEnableSpec(isEnableSpec);
+		  tbGoods.setIsMarketable(isMarketable);
+		  tbGoods.setIsDelete("0");
+		  tbGoods.setPrice(new BigDecimal(price));
+		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
+		  tbGoods.setSmallPic(smallPic);
+		  goodsDesc.setGoodsId(goodsId);
+		  goodsDesc.setItemImages(itemImages);
+		  goodsMapper.insert(tbGoods);
+		  tbGoodsDescMapper.insert(goodsDesc);
 	  }catch(Exception e){
 		  e.printStackTrace();
 	  }

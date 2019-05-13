@@ -95,7 +95,7 @@
 				                          <td>{{entity.reducedPrice}}</td>
 				                          <td>{{entity.isMarketable}}</td>
 				                          <td>{{entity.isEnableSpec}}</td>
-				                          <td>{{entity.smallPic}}</td>
+				                          <td><img alt="{{entity.goodsName}}" src="{{entity.smallPic}}" height="50" width="100"></td>
 		                                  <td class="text-center">                                          
 		                                 	  <button type="button" class="btn bg-olive btn-xs" >详情</button>                  
 		                                  </td>
@@ -173,9 +173,12 @@
 		      		</td>
 		      	</tr>
 		      	<tr>
-		      	    <td>规格</td>
+		      	    <td>型号</td>
 		      		<td ng-init="entity.speIds=[]">
-		      			型号 <input type="checkbox" ng-repeat="spe in speList" ng-click="setSpeIds($event,37)" value="{{spe.speOpId}}"/>{{spe.speOpName}}
+		      		    <span ng-repeat="spe in speList">
+		      			   <input type="checkbox"  ng-click="setSpeIds($event)" value="{{spe.speOpId}}">{{spe.speOpName}}</input>
+		      			</span>
+		      			{{entity.speIds}}
 					</td>
 		      	</tr>
 		      	<tr>
