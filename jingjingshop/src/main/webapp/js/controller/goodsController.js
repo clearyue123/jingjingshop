@@ -163,7 +163,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
    	    $http.get('../specification/findSpeOpByCatId.do?categoryId='+categoryId).success(function(response){
    	    	$scope.speList = response.data;
    	    	$scope.entity.speIds=[];
-   	    	alert(response.message);
     	});
     }
     
