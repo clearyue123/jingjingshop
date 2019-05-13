@@ -160,7 +160,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     //初始化规格数据
     $scope.initSpe = function(){
     	var categoryId=$scope.entity.categoryId;
-    	alert(categoryId);
    	    $http.get('../specification/findSpeOpByCatId.do?categoryId='+categoryId).success(function(response){
    	    	$scope.speList = response.data;
    	    	$scope.entity.speIds=[];
@@ -188,7 +187,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     $scope.uploadSmallPic = function(){
     	// 调用uploadService的方法完成文件的上传
     	$scope.uploadFile().success(function(response){
-			alert(response.code);
     		if(response.code==200){
 				// 获得url
 				$scope.entity.smallPic=  response.data;
