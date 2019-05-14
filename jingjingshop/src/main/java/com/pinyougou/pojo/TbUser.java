@@ -51,6 +51,8 @@ public class TbUser  extends  TbBase implements Serializable{
     private String openId;
 
     private  String  wx_code;
+    
+    private String unionId;
 
     /**
      * 未兑换积分
@@ -82,7 +84,15 @@ public class TbUser  extends  TbBase implements Serializable{
 
 
 
-    public String getDid() {
+    public String getUnionId() {
+		return unionId;
+	}
+
+	public void setUnionId(String unionId) {
+		this.unionId = unionId;
+	}
+
+	public String getDid() {
 		return did;
 	}
 

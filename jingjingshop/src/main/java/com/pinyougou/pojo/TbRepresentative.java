@@ -57,13 +57,22 @@ public class TbRepresentative {
     private Date createDate;
     
     private String openId;
+    
+    private String unionId;
 
 
     private Set<TbDoc>  tbDocs;
 
 
+    public String getUnionId() {
+		return unionId;
+	}
 
-    public String getOpenId() {
+	public void setUnionId(String unionId) {
+		this.unionId = unionId;
+	}
+
+	public String getOpenId() {
 		return openId;
 	}
 

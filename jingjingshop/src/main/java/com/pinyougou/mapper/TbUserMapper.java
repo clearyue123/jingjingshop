@@ -32,7 +32,7 @@ public interface TbUserMapper {
 
     int updateByPrimaryKey(TbUser record);
 
-	TbUser selectByOpenId(TbUser user);
+	TbUser selectByUnionId(TbUser user);
 
 	List<TbUser> selectListByDid(String did);
 

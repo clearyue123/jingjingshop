@@ -37,7 +37,7 @@ public class DoctorServiceImpl  implements DoctorService {
 
 	@Override
 	public TbDoc firstInfo(TbDoc user) {
-		return tbDocMapper.selectByOpenId(user);
+		return tbDocMapper.selectByUnionId(user);
 	}
 
 	@Override

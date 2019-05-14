@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pinyougou.common.ApiResult;
+import com.pinyougou.pojo.TbDoc;
 import com.pinyougou.pojo.TbRepresentative;
 import com.pinyougou.service.representative.RepresentativeService;
 
@@ -21,39 +22,26 @@ public class RepresentativeLoginController {
 	
 	@Autowired 
 	private RepresentativeService  representativeService;
+	
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
-	public ApiResult wxlogin(String wxcode) {
-		if (TextUtils.isBlank(wxcode)) {
-			return new ApiResult(101, "微信账号不能为空", null);
-		}
-		String url = HttpUtils.WXGETAPPID + "?appid=" + HttpUtils.APPID + "&secret=" + HttpUtils.secret + "&js_code="
-					+ wxcode + "&grant_type=authorization_code";
-
-		String ss = HttpUtils.doGet(url);
-
-		if (ss != null) {
-			JSONObject jsonObject = JSON.parseObject(ss);
-			if (jsonObject.getIntValue("errcode") != 0) {
-				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
-			} else {
-				System.out.println("返回参数:"+jsonObject.toJSONString());
-				wxcode = jsonObject.getString("openid");
-				TbRepresentative user = new TbRepresentative();
-				user.setOpenId(wxcode);
-				TbRepresentative result = representativeService.firstInfo(user);
-				if (result != null) {
-					return new ApiResult(200, "登录成功", result);
-				} else {
-					representativeService.add(user);
-					TbRepresentative result1 = representativeService.firstInfo(user);
-					return new ApiResult(101, "请先绑定个人信息", result1);
-				}
+	public ApiResult wxlogin(String openid, String unionid) {
+		// String unionid = jsonObject.getString("unionid");
+		TbRepresentative user = new TbRepresentative();
+		user.setOpenId(openid);
+		user.setUnionId(unionid);
+		TbRepresentative result = representativeService.firstInfo(user);
+		if (result != null) {
+			if(TextUtils.isBlank(result.getName())){
+				return new ApiResult(201, "登录成功，请绑定微信昵称和头像", result);
 			}
+			return new ApiResult(200, "登录成功", result);
 		} else {
-			return new ApiResult(102, "登录出错", ss);
+			representativeService.add(user);
+			TbRepresentative result1 = representativeService.firstInfo(user);
+			return new ApiResult(201, "登录成功，请绑定微信昵称和头像", result1);
 		}
 	}
-
+	
 	/**
 	 * 绑定微信信息
 	 * 

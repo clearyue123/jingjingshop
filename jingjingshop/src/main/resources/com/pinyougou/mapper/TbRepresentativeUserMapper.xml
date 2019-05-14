@@ -17,6 +17,7 @@
             <result  column="script"  property="script"></result>
             <result  column="createDate"  property="createDate"></result>
             <result  column="open_id"  property="openId"></result>
+            <result  column="union_id"  property="unionId"></result>
         <collection    column="did"  property="tbDocs"  ofType="com.pinyougou.pojo.TbDoc">
             <id column="rdid"  property="rdid"></id>
             <result  column="name"  property="name"></result>
@@ -124,12 +125,19 @@ WHERE  r.rid=#{rid}
     </select>
 
 
-<select id="selectByOpenId" resultType="com.pinyougou.pojo.TbRepresentative" parameterType="com.pinyougou.pojo.TbRepresentative">
-  	select * from tb_representative where open_id = #{openId,jdbcType=VARCHAR}
+<sql id="Base_Column_List" >
+    rid, name, head_pic, points, phone, points_all, username, script, createDate
+  </sql>
+
+
+<select id="selectByUnionId" resultType="com.pinyougou.pojo.TbRepresentative" parameterType="com.pinyougou.pojo.TbRepresentative">
+  	select 
+  	<include refid="Base_Column_List"></include>
+  	from tb_representative where union_id = #{unionId,jdbcType=VARCHAR}
   </select>
   
   <insert id="add" parameterType="com.pinyougou.pojo.TbRepresentative">
-  	insert into tb_representative (rid,open_id) values (UUID(),#{openId,jdbcType=VARCHAR})
+  	insert into tb_representative (rid,open_id,union_id) values (UUID(),#{openId,jdbcType=VARCHAR},#{unionId,jdbcType=VARCHAR})
   </insert>
   
   <update id="updateInfo" parameterType="com.pinyougou.pojo.TbRepresentative">

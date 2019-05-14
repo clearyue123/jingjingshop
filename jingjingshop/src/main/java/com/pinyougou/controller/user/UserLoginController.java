@@ -37,17 +37,21 @@ public class UserLoginController {
 			if (jsonObject.getIntValue("errcode") != 0) {
 				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
 			} else {
-				System.out.println("返回参数:"+jsonObject.toJSONString());
 				wxcode = jsonObject.getString("openid");
+				String unionid = jsonObject.getString("unionid");
 				TbUser user = new TbUser();
 				user.setOpenId(wxcode);
+				user.setUnionId(unionid);
 				TbUser result = userService.firstInfo(user);
 				if (result != null) {
+					if(TextUtils.isBlank(result.getName())){
+						return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result);
+					}
 					return new ApiResult(200, "登录成功", result);
 				} else {
 					userService.add(user);
 					TbUser result1 = userService.firstInfo(user);
-					return new ApiResult(101, "请先绑定个人信息", result1);
+					return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result1);
 				}
 			}
 		} else {

@@ -58,7 +58,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 
 	@Override
 	public TbRepresentative firstInfo(TbRepresentative user) {
-		return tbRepresentativeUserMapper.selectByOpenId(user);
+		return tbRepresentativeUserMapper.selectByUnionId(user);
 	}
 
 

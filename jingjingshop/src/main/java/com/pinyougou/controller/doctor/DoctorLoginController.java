@@ -1,5 +1,6 @@
 package com.pinyougou.controller.doctor;
 
+import org.jboss.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import util.TextUtils;
 
 /**
  * 医生登录
+ * 
  * @author tian
  *
  */
@@ -26,35 +28,21 @@ public class DoctorLoginController {
 	private DoctorService doctorService;
 
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
-	public ApiResult wxlogin(String wxcode) {
-		if (TextUtils.isBlank(wxcode)) {
-			return new ApiResult(101, "微信账号不能为空", null);
-		}
-		String url = HttpUtils.WXGETAPPID + "?appid=" + HttpUtils.APPID + "&secret=" + HttpUtils.secret + "&js_code="
-					+ wxcode + "&grant_type=authorization_code";
-
-		String ss = HttpUtils.doGet(url);
-
-		if (ss != null) {
-			JSONObject jsonObject = JSON.parseObject(ss);
-			if (jsonObject.getIntValue("errcode") != 0) {
-				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
-			} else {
-				System.out.println("返回参数:"+jsonObject.toJSONString());
-				wxcode = jsonObject.getString("openid");
-				TbDoc user = new TbDoc();
-				user.setOpenId(wxcode);
-				TbDoc result = doctorService.firstInfo(user);
-				if (result != null) {
-					return new ApiResult(200, "登录成功", result);
-				} else {
-					doctorService.add(user);
-					TbDoc result1 = doctorService.firstInfo(user);
-					return new ApiResult(101, "请先绑定个人信息", result1);
-				}
+	public ApiResult wxlogin(String openid, String unionid) {
+		// String unionid = jsonObject.getString("unionid");
+		TbDoc user = new TbDoc();
+		user.setOpenId(openid);
+		user.setUnionId(unionid);
+		TbDoc result = doctorService.firstInfo(user);
+		if (result != null) {
+			if(TextUtils.isBlank(result.getName())){
+				return new ApiResult(201, "登录成功，请绑定微信昵称和头像", result);
 			}
+			return new ApiResult(200, "登录成功", result);
 		} else {
-			return new ApiResult(102, "登录出错", ss);
+			doctorService.add(user);
+			TbDoc result1 = doctorService.firstInfo(user);
+			return new ApiResult(201, "登录成功，请绑定微信昵称和头像", result1);
 		}
 	}
 

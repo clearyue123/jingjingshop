@@ -36,12 +36,12 @@ public interface TbDocMapper {
 
 	int add(TbDoc user);
 
-	TbDoc selectByOpenId(TbDoc user);
-
 	TbDoc selectById(String did);
 
 	int updateInfo(TbDoc user);
 
 	List<TbDoc> selectList();
+
+	TbDoc selectByUnionId(TbDoc user);
 
 }

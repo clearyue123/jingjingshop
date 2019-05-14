@@ -10,6 +10,8 @@
     <result column="points_all" property="points_all" jdbcType="INTEGER" />
     <result column="office" property="office" jdbcType="VARCHAR" />
     <result column="his" property="his" jdbcType="VARCHAR" />
+    <result column="open_id" property="openId" jdbcType="VARCHAR" />
+    <result column="union_id" property="unionId" jdbcType="VARCHAR" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="script" property="script" jdbcType="VARCHAR" />
     <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
@@ -305,15 +307,19 @@
   </sql>
   
   <select id="selectPatientList" parameterType="com.pinyougou.pojo.TbDoc" resultMap="BaseResultMap">
-  	select * from tb_doc tb 
+  	select 
+  	<include refid="Base_Column_List"></include>
+  	from tb_doc tb 
   </select>
   
-  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbDoc">
-  	select * from tb_doc where open_id = #{openId,jdbcType=VARCHAR}
+  <select id="selectByUnionId" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbDoc">
+  	select 
+	<include refid="Base_Column_List"></include>
+	from tb_doc where union_id = #{unionId,jdbcType=VARCHAR}
   </select>
   
   <insert id="add" parameterType="com.pinyougou.pojo.TbDoc">
-  	insert into tb_doc (did,open_id) values (UUID(),#{openId,jdbcType=VARCHAR})
+  	insert into tb_doc (did,open_id,union_id) values (UUID(),#{openId,jdbcType=VARCHAR},#{unionId,jdbcType=VARCHAR})
   </insert>
   
   <update id="updateInfo" parameterType="com.pinyougou.pojo.TbDoc">
@@ -324,11 +330,15 @@
   </update>
   
   <select id="selectList" resultMap="BaseResultMap">
-  	select * from tb_doc
+  	select 
+  	<include refid="Base_Column_List"></include>
+  	from tb_doc
   </select>
   
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
-  	select * from tb_doc where did = #{did,jdbcType=VARCHAR}
+  	select 
+  	<include refid="Base_Column_List"></include>
+  	from tb_doc where did = #{did,jdbcType=VARCHAR}
   </select>
   
 </mapper>

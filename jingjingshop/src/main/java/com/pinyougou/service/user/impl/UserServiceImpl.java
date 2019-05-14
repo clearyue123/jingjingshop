@@ -143,8 +143,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
 	public TbUser firstInfo(TbUser user) {
-		TbUser tbUser = userMapper.selectByOpenId(user);
-		return tbUser;
+		return userMapper.selectByUnionId(user);
 	}
 	
 	 /**
@@ -153,7 +152,6 @@ public class UserServiceImpl implements UserService {
     public PageResult selectListByDid(int pageNum, int pageSize,String did) {
         PageHelper.startPage(pageNum, pageSize);
         Page<TbUser> page = (Page<TbUser>) userMapper.selectListByDid(did);
-        System.out.println(page);
         return new PageResult(page.getTotal(), page.getResult());
     }
 

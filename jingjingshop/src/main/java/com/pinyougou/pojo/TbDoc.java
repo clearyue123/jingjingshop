@@ -58,6 +58,16 @@ public class TbDoc {
 	 * 创建时间
 	 */
 	private Date createDate;
+	
+	private String unionId;
+
+	public String getUnionId() {
+		return unionId;
+	}
+
+	public void setUnionId(String unionId) {
+		this.unionId = unionId;
+	}
 
 	public String getOpenId() {
 		return openId;
