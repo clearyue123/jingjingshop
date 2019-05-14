@@ -75,7 +75,6 @@ public class UserLoginController {
 		if (TextUtils.isBlank(headimg)) {
 			return new ApiResult(101, "微信头像不能为空", null);
 		}
-		System.out.println(userId.longValue());
 		TbUser user = new TbUser();
 		user.setNickName(wxname);
 		user.setHeadPic(headimg);
