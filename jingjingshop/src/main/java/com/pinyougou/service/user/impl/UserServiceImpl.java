@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
      * 查询全部
      */
     public List<TbUser> findAll() {
-        List<TbUser> listTbUser = userMapper.selectByExample(null);
+    	List<TbUser> listTbUser = userMapper.selectByExample(null);
         for (int i = 0; i < listTbUser.size(); i++) {
             TbUser tbUser = listTbUser.get(i);
             tbUser.setSex(tbUser.getSex().equals("1") ? "男" : "女");
