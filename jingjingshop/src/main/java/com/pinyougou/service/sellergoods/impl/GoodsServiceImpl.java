@@ -254,7 +254,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public Page<Map<String, Object>> search(Map<String, Object> searchMap, int page, int rows) {
+	public Page<Map<String, Object>> search(Map<String, String> searchMap, int page, int rows) {
 		PageHelper.startPage(page, rows);
 		List<Map<String, Object>> searchGoodList = goodsMapper.searchGoodList(searchMap);
 		for(Map<String,Object> targetMap:searchGoodList){
@@ -273,8 +273,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  TbGoods tbGoods = new TbGoods();
 		  TbGoodsDesc goodsDesc = new TbGoodsDesc();
 		  long goodsId = idWorker.nextId();
-		  String isMarketable = (String)goodsMap.get("isMarketable").toString();
-		  String isEnableSpec = (String)goodsMap.get("isEnableSpec").toString();
+		  String isMarketable = (String)goodsMap.get("isMarketable")==null?"1":(String)goodsMap.get("isMarketable");
+		  String isEnableSpec = (String)goodsMap.get("isEnableSpec")==null?"1":(String)goodsMap.get("isEnableSpec");
 		  String categoryId = (String)goodsMap.get("categoryId");
 		  String goodsName = (String)goodsMap.get("goodsName");
 		  String brandId = (String)goodsMap.get("brandId");

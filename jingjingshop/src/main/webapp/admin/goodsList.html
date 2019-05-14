@@ -86,7 +86,7 @@
 			                      </thead>
 			                      <tbody>
 			                          <tr ng-repeat="entity in list">
-			                              <td><input ng-click="" type="checkbox"></td>			                              
+			                              <td><input ng-click="updateSelection($event,entity.goodsId)" type="checkbox"></td>			                              
 				                          <td>{{entity.goodsId}}</td>
 				                          <td>{{entity.goodsName}}</td>
 				                          <td>{{entity.categoryName}}</td>
@@ -162,14 +162,14 @@
 		      	</tr>
 		      	<tr>
 		      		<td>是否上架</td>
-		      		<td ng-init="entity.isMarketable=1">
+		      		<td >
 		      		   <input type="radio"  name="isMarketable" ng-checked="true" ng-click="setIsMarketable(1)"/>上架
 		      		   <input type="radio"  name="isMarketable" ng-click="setIsMarketable(0)"/>不上架
 		      		</td>
 		      	</tr>
 		      	<tr>
 		      		<td>是否启用规格</td>
-		      		<td ng-init="entity.isEnableSpec=1">
+		      		<td >
                        <input type="radio"  name="isEnableSpec" ng-checked="true"  ng-click="setIsEnableSpec(1)"/>启用
 		      		   <input type="radio"  name="isEnableSpec" ng-click="setIsEnableSpec(0)"/>不启用		      		
 		      		</td>

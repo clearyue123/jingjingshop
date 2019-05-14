@@ -86,5 +86,5 @@ public interface GoodsService {
      * @param rows
      * @return
      */
-	public Page<Map<String, Object>> search(Map<String, Object> searchMap, int page, int rows);
+	public Page<Map<String, Object>> search(Map<String, String> searchMap, int page, int rows);
 }

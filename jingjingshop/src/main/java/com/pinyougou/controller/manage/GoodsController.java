@@ -23,7 +23,7 @@ import entity.Result;
 /**
  * controller
  * 
- * @author Administrator
+ * @author yue
  *
  */
 @RestController
@@ -62,6 +62,7 @@ public class GoodsController {
 	@RequestMapping("/add")
 	public Object add(@RequestBody Map<String,Object> goodsMap) {
 		try {
+			System.out.println(goodsMap);
 			goodsService.add(goodsMap);
 			return new ApiResult(200, "增加成功","");
 		} catch (Exception e) {
@@ -77,13 +78,14 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody Map<String,String> goodsMap) {
+	public Object update(@RequestBody Map<String,String> goodsMap) {
 		try {
+			System.out.println(goodsMap);
 			goodsService.update(goodsMap);
-			return new Result(true, "修改成功");
+			return new ApiResult(200, "修改成功","");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "修改失败");
+			return new ApiResult(201, "修改失败","");
 		}
 	}
 
@@ -188,7 +190,7 @@ public class GoodsController {
      * @return
      */
 	@RequestMapping("/search")
-	public Map<String,Object> search(@RequestBody Map<String,Object> searchEntity, int page, int rows) {
+	public Map<String,Object> search(@RequestBody Map<String,String> searchEntity, int page, int rows) {
 		try{
 			Map<String,Object> data = new HashMap<>();
 			Page<Map<String,Object>> pageResult = goodsService.search(searchEntity,page,rows);

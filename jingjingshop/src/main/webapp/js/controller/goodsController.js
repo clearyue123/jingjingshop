@@ -53,21 +53,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 				}		
 			);	
 	}
-	//修改
-	$scope.save=function(){				
-		var serviceObject=goodsService.update($scope.entity); //修改  
-		serviceObject.success(
-			function(response){
-				if(response.flag){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
-				}else{
-					alert(response.message);
-				}
-			}		
-		);				
-	}
-	
 	 
 	//批量删除 
 	$scope.dele=function(){			
@@ -140,11 +125,11 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	    	$scope.categoryList=response;
 	    });
     }
-    //设置是否上架
+    //设置是否上架 默认1:上架
     $scope.setIsMarketable = function(val){
     	$scope.entity.isMarketable=val
     }
-    //设置是否启用规格
+    //设置是否启用规格 默认1:启用
     $scope.setIsEnableSpec = function(val){
     	$scope.entity.isEnableSpec=val;
     	$scope.tempSpeList = $scope.speList;
