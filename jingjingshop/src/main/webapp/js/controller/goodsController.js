@@ -33,7 +33,14 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	
 	//新增
 	$scope.add=function(){
-		var serviceObject=goodsService.add($scope.entity);//增加 
+		var serviceObject;
+		if($scope.entity.goodsId != null){
+			// 更新
+			serviceObject = goodsService.update($scope.entity);//修改
+		}else{
+			// 保存
+			serviceObject = goodsService.add($scope.entity);//增加 
+		}
 		serviceObject.success(
 				function(response){
 					if(response.code==200){
@@ -78,8 +85,9 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	$scope.searchEntity={};//定义搜索对象 
 	
 	//搜索
-	$scope.search=function(page,rows){	
-		alert("search controller...");
+	$scope.search=function(){
+		var page = $scope.paginationConf.currentPage;
+		var rows = $scope.paginationConf.itemsPerPage
 		goodsService.search(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.list;	
@@ -132,19 +140,19 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	    	$scope.categoryList=response;
 	    });
     }
-	//规格列表
-    $scope.initSpeList = function(){
-    	$http.get('../specification/findAll.do').success(function(response){
-    		$scope.speList=response;
-    	});
-    }
     //设置是否上架
     $scope.setIsMarketable = function(val){
     	$scope.entity.isMarketable=val
     }
     //设置是否启用规格
     $scope.setIsEnableSpec = function(val){
-    	$scope.entity.isEnableSpec=val
+    	$scope.entity.isEnableSpec=val;
+    	$scope.tempSpeList = $scope.speList;
+    	if(val=0){
+    		$scope.speList=[];
+    	}else{
+    		$scope.speList=$scope.tempSpeList;
+    	}
     }
     //设置规格ids
     $scope.setSpeIds = function($event){
@@ -225,5 +233,10 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 			}
 		});
     }
-    
+    //通过商品id查商品数据
+    $scope.findById = function(goodsId){
+    	goodsService.findOne(goodsId).success(function(response){
+    		$scope.entity = response;
+    	});
+    }
 });	

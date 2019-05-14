@@ -1,5 +1,6 @@
 package com.pinyougou.controller.manage;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,9 +77,9 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/update")
-	public Result update(@RequestBody Goods goods) {
+	public Result update(@RequestBody Map<String,String> goodsMap) {
 		try {
-			goodsService.update(goods);
+			goodsService.update(goodsMap);
 			return new Result(true, "修改成功");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,8 +94,28 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public Goods findOne(Long id) {
-		return goodsService.findOne(id);
+	public Object findOne(Long id) {
+		Goods goods = goodsService.findOne(id);
+		TbGoods tbGoods = goods.getGoods();
+		Long brandId = tbGoods.getBrandId();
+		Long categoryId = tbGoods.getCategory3Id();
+		String sellerId = tbGoods.getSellerId();
+		BigDecimal price = tbGoods.getPrice();
+		BigDecimal reducedPrice = tbGoods.getReducedPrice();
+		String isEnableSpec = tbGoods.getIsEnableSpec();
+		String isMarketable = tbGoods.getIsMarketable();
+		String goodsName = tbGoods.getGoodsName();
+		Map<String,Object> data = new HashMap<>();
+		data.put("goodsId", id);
+		data.put("brandId", brandId);
+		data.put("categoryId", categoryId);
+		data.put("sellerId", sellerId);
+		data.put("price", price);
+		data.put("reducedPrice", reducedPrice);
+		data.put("isEnableSpec", isEnableSpec);
+		data.put("isMarketable", isMarketable);
+		data.put("goodsName", goodsName);
+		return data;
 	}
 
 	/**
@@ -167,11 +188,10 @@ public class GoodsController {
      * @return
      */
 	@RequestMapping("/search")
-	public Map<String,Object> search(Map<String,Object> searchMap, int page, int rows) {
+	public Map<String,Object> search(@RequestBody Map<String,Object> searchEntity, int page, int rows) {
 		try{
-			System.out.println(searchMap);
 			Map<String,Object> data = new HashMap<>();
-			Page<Map<String,Object>> pageResult = goodsService.search(searchMap,page,rows);
+			Page<Map<String,Object>> pageResult = goodsService.search(searchEntity,page,rows);
 			data.put("total", pageResult.getTotal());
 			data.put("list", pageResult.getResult());
 			return data;

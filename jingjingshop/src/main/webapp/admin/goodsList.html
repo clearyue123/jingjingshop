@@ -47,7 +47,7 @@
                             <div class="pull-left">
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
-                                        <button type="button" ng-click="" data-toggle="modal" data-target="#addModal" class="btn btn-default" title="新增" ><i class="fa fa-trash-o"></i> 新增</button>
+                                        <button type="button" ng-click="entity={}" data-toggle="modal" data-target="#addModal" class="btn btn-default" title="新增" ><i class="fa fa-trash-o"></i> 新增</button>
                                         <button type="button" ng-click="dele()" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>
                                         <button type="button" class="btn btn-default" title="刷新" ><i class="fa fa-refresh"></i> 刷新</button>
                                     </div>
@@ -58,6 +58,7 @@
                                                                                       商品名称：<input type="text" ng-model="searchEntity.goodsName">
                                                                                       品牌名称：<input type="text" ng-model="searchEntity.brandName">
                                                                                       店铺名称：<input type="text" ng-model="searchEntity.sellerName">
+                                                                                      分类名称：<input type="text" ng-model="searchEntity.categoryName">
 									<button class="btn btn-default" ng-click="search()">查询</button>                                    
                                 </div>
                             </div>
@@ -85,7 +86,7 @@
 			                      </thead>
 			                      <tbody>
 			                          <tr ng-repeat="entity in list">
-			                              <td><input ng-click="updateSelection($event,entity.id)" type="checkbox"></td>			                              
+			                              <td><input ng-click="" type="checkbox"></td>			                              
 				                          <td>{{entity.goodsId}}</td>
 				                          <td>{{entity.goodsName}}</td>
 				                          <td>{{entity.categoryName}}</td>
@@ -97,7 +98,8 @@
 				                          <td>{{entity.isEnableSpec}}</td>
 				                          <td><img alt="{{entity.goodsName}}" src="{{entity.smallPic}}" height="50" width="100"></td>
 		                                  <td class="text-center">                                          
-		                                 	  <button type="button" class="btn bg-olive btn-xs" >详情</button>                  
+		                                 	  <button type="button" ng-click="findById(entity.goodsId)" data-toggle="modal" data-target="#addModal" class="btn bg-olive btn-xs" >修改</button>                  
+		                                 	  <!-- <button type="button" data-target="#addModal" class="btn bg-olive btn-xs" >详情</button>  -->                 
 		                                  </td>
 			                          </tr>
 			                      </tbody>
@@ -115,7 +117,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">商品新增</h3>
+			<h3 id="myModalLabel">商品编辑</h3>
 		</div>
 		<div class="modal-body">		
 			<table class="table table-bordered table-striped"  width="800px">

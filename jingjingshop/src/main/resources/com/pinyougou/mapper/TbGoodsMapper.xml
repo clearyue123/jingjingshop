@@ -385,17 +385,17 @@
 		LEFT JOIN tb_goods_desc t4 on t4.goods_id = t1.id
 		LEFT JOIN tb_item_cat t5 on t5.id = t1.category3_id
 		<where>
-			<if test='goodsName !=null'>
-			   t1.goods_name like #{goodsName}
+			<if test="goodsName !=null">
+			   t1.goods_name like CONCAT('%',#{goodsName},'%')
 			</if>
-			<if test='brandName !=null'>
-			   and t2.`name` like #{brandName}
+			<if test="brandName !=null">
+			   and t2.`name` like CONCAT('%',#{brandName},'%')
 			</if>
-			<if test='sellerName !=null'>
-			   and t3.`name` like #{sellerName}
+			<if test="sellerName !=null">
+			   and t3.`name` like CONCAT('%',#{sellerName},'%')
 			</if>
-			<if test='categoryName !=null'>
-			   and t5.`name` like #{categoryName}
+			<if test="categoryName !=null">
+			   and t5.`name` like CONCAT('%',#{categoryName},'%')
 			</if>
 		</where> 
     </select>

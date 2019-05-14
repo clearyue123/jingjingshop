@@ -40,9 +40,10 @@ public interface GoodsService {
 	 */
 	public void add(Map<String,Object> goodsMap);
 	/**
-	 * 修改
+	 * 商品修改
+	 * @param goodsMap
 	 */
-	public void update(Goods goods);
+	public void update(Map<String,String> goodsMap);
 	
 
 	/**

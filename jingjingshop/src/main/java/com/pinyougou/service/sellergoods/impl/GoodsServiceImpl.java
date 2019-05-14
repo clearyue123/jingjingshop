@@ -21,6 +21,7 @@ import com.pinyougou.mapper.TbSellerMapper;
 import com.pinyougou.pojo.TbBrand;
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbGoodsDesc;
+import com.pinyougou.pojo.TbGoodsDescExample;
 import com.pinyougou.pojo.TbGoodsExample;
 import com.pinyougou.pojo.TbGoodsExample.Criteria;
 import com.pinyougou.pojo.TbItem;
@@ -157,25 +158,6 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	/**
-	 * 修改
-	 */
-	public void update(Goods goods){
-		// 修改商品信息
-		goodsMapper.updateByPrimaryKey(goods.getGoods());
-		// 修改商品扩展信息:
-		goodsDescMapper.updateByPrimaryKey(goods.getGoodsDesc());
-		// 修改SKU信息:
-		// 先删除，再保存:
-		// 删除SKU的信息:
-		TbItemExample example = new TbItemExample();
-		com.pinyougou.pojo.TbItemExample.Criteria criteria = example.createCriteria();
-		criteria.andGoodsIdEqualTo(goods.getGoods().getId());
-		itemMapper.deleteByExample(example);
-		// 保存SKU的信息
-		setItemList(goods);
-	}	
-	
-	/**
 	 * 根据ID获取实体
 	 * @param id
 	 * @return
@@ -188,14 +170,12 @@ public class GoodsServiceImpl implements GoodsService {
 		// 查询商品扩展表的信息
 		TbGoodsDesc tbGoodsDesc = goodsDescMapper.selectByPrimaryKey(id);
 		goods.setGoodsDesc(tbGoodsDesc);
-		
 		// 查询SKU表的信息:
 		TbItemExample example = new TbItemExample();
 		com.pinyougou.pojo.TbItemExample.Criteria criteria = example.createCriteria();
 		criteria.andGoodsIdEqualTo(id);
 		List<TbItem> list = itemMapper.selectByExample(example);
 		goods.setItemList(list);
-		
 		return goods;
 	}
 
@@ -321,5 +301,43 @@ public class GoodsServiceImpl implements GoodsService {
 	  }catch(Exception e){
 		  e.printStackTrace();
 	  }
+	}
+	
+	/**
+	 * 修改
+	 */
+	public void update(Map<String,String> goodsMap){
+		  TbGoods tbGoods = new TbGoods();
+		  String goodsId =(String)goodsMap.get("goodsId");
+		  String isMarketable = (String)goodsMap.get("isMarketable").toString();
+		  String isEnableSpec = (String)goodsMap.get("isEnableSpec").toString();
+		  String categoryId = (String)goodsMap.get("categoryId");
+		  String goodsName = (String)goodsMap.get("goodsName");
+		  String brandId = (String)goodsMap.get("brandId");
+		  String sellerId = (String)goodsMap.get("sellerId");
+		  String price = (String)goodsMap.get("price");
+		  String reducedPrice = (String)goodsMap.get("reducedPrice");
+		  String smallPic = (String)goodsMap.get("smallPic");
+		  String itemImages = (String)goodsMap.get("itemImages");
+		  tbGoods.setId(Long.parseLong(goodsId));
+		  tbGoods.setBrandId(Long.parseLong(brandId));
+		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
+		  tbGoods.setSellerId(sellerId);
+		  tbGoods.setGoodsName(goodsName);
+		  tbGoods.setIsEnableSpec(isEnableSpec);
+		  tbGoods.setIsMarketable(isMarketable);
+		  tbGoods.setIsDelete("0");
+		  tbGoods.setPrice(new BigDecimal(price));
+		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
+		  tbGoods.setSmallPic(smallPic);
+		  TbGoodsDescExample goodsDescEmp = new TbGoodsDescExample();
+		  com.pinyougou.pojo.TbGoodsDescExample.Criteria cri = goodsDescEmp.createCriteria();
+		  cri.andGoodsIdEqualTo(Long.parseLong(goodsId));
+		  List<TbGoodsDesc> goodsDescList = tbGoodsDescMapper.selectByExample(goodsDescEmp);
+		  TbGoodsDesc tbGoodsDesc = goodsDescList.get(0);
+		  tbGoodsDesc.setGoodsId(Long.parseLong(goodsId));
+		  tbGoodsDesc.setItemImages(itemImages);
+		  goodsMapper.updateByPrimaryKey(tbGoods);
+		  tbGoodsDescMapper.updateByPrimaryKey(tbGoodsDesc);
 	}
 }
