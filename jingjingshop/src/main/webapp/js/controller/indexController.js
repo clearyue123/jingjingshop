@@ -1,9 +1,11 @@
-app.controller("indexController",function($scope,loginService){
+app.controller("indexController",function($scope){
 	
 	$scope.showName = function(){
-		loginService.showName().success(function(response){
-			$scope.loginName = response.username;
-		});
+//		alert("123123");
+//		loginService.showName().success(function(response){
+//			$scope.loginName = response.loginName;
+//		});
+		alert()
 	}
 	
 });

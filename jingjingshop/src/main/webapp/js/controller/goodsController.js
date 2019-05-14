@@ -38,6 +38,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 				function(response){
 					if(response.code==200){
 						//重新查询 
+						alert(response.message);
 			        	$scope.reloadList();//重新加载
 					}else{
 						alert(response.message);
@@ -77,7 +78,8 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	$scope.searchEntity={};//定义搜索对象 
 	
 	//搜索
-	$scope.search=function(page,rows){			
+	$scope.search=function(page,rows){	
+		alert("search controller...");
 		goodsService.search(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.list;	

@@ -1,10 +1,6 @@
 package com.pinyougou.controller.user;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +21,6 @@ public class UserLoginController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping("/name")
-	public Map showName() {
-		String name = SecurityContextHolder.getContext().getAuthentication().getName();
-		Map map = new HashMap();
-		map.put("loginName", name);
-		return map;
-	}
 
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
 	public ApiResult wxlogin(String wxcode) {

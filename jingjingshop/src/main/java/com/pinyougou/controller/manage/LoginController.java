@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 运营商登录的控制层的类
- * @author jt
+ * @author yuejingjing
  *
  */
 @RestController
@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
 	@RequestMapping("/showName")
-	public Map showName(){
-		Map map = new HashMap();
-		// 获得用户名信息:
-		String username = "yue jingjing";
-		map.put("username", username);
-		
+	public Map<String,Object> showName() {
+		String name = "yuejingjing";
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("loginName", name);
 		return map;
 	}
 	

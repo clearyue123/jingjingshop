@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.mapper.TbShopCartMapper;
 import com.pinyougou.pojo.TbShopCart;
+import com.pinyougou.pojo.TbShopCartExample;
+import com.pinyougou.pojo.TbShopCartExample.Criteria;
 import com.pinyougou.service.cart.CartService;
 
 import util.IdWorker;
@@ -50,17 +52,30 @@ public class CartController {
 			if(speIds!=null&&speIds.length!=speOpIds.length){
 				return new ApiResult(201, "参数错误","");
 			}else{
-				long cartId = idWorker.nextId();
-				TbShopCart tbShopCart = new TbShopCart();
-				tbShopCart.setCartId(cartId);
-				tbShopCart.setUserId(userId);
-				tbShopCart.setGoodsId(Long.parseLong(goodsId));
-				tbShopCart.setNum(Integer.parseInt(num));
-				Map<String,Object> speMap = new HashMap<>();
-				speMap.put("speIds",speIds);
-				speMap.put("speOpIds", speOpIds);
-				cartService.add(tbShopCart,speMap);
-				return new ApiResult(200, "购物车添加成功!", "");
+				TbShopCartExample cartExampe = new TbShopCartExample();
+				Criteria cri = cartExampe.createCriteria();
+				cri.andUserIdEqualTo(userId);
+				cri.andGoodsIdEqualTo(Long.parseLong(goodsId));
+				List<TbShopCart> cartList = cartMapper.selectByExample(cartExampe);
+				if(cartList!=null&&cartList.size()>0){
+					TbShopCart tbShopCart = cartList.get(0);
+					Integer addNum = tbShopCart.getNum()+Integer.parseInt(num);
+					tbShopCart.setNum(addNum);
+					cartMapper.updateByPrimaryKey(tbShopCart);
+					return new ApiResult(200, "商品新增成功!", "");
+				}else{
+					long cartId = idWorker.nextId();
+					TbShopCart tbShopCart = new TbShopCart();
+					tbShopCart.setCartId(cartId);
+					tbShopCart.setUserId(userId);
+					tbShopCart.setGoodsId(Long.parseLong(goodsId));
+					tbShopCart.setNum(Integer.parseInt(num));
+					Map<String,Object> speMap = new HashMap<>();
+					speMap.put("speIds",speIds);
+					speMap.put("speOpIds", speOpIds);
+					cartService.add(tbShopCart,speMap);
+					return new ApiResult(200, "购物车添加成功!", "");
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();

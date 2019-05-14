@@ -1,6 +1,5 @@
 package com.pinyougou.controller.manage;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -170,6 +169,7 @@ public class GoodsController {
 	@RequestMapping("/search")
 	public Map<String,Object> search(Map<String,Object> searchMap, int page, int rows) {
 		try{
+			System.out.println(searchMap);
 			Map<String,Object> data = new HashMap<>();
 			Page<Map<String,Object>> pageResult = goodsService.search(searchMap,page,rows);
 			data.put("total", pageResult.getTotal());
