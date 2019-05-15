@@ -1,13 +1,13 @@
 package com.pinyougou.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * @author:yuejingjing
- * @desc:商品信息
- * @date:2019-05-08
+ * @author yue
+ * @date 2019-05-15
  */
-public class TbGoods {
+public class TbGoods implements Serializable{
     /**
      * 主键
      */
@@ -77,6 +77,11 @@ public class TbGoods {
      * 商品总数
      */
     private Long totalNum;
+
+    /**
+     * 类型
+     */
+    private String type;
 
     public Long getId() {
         return id;
@@ -188,5 +193,13 @@ public class TbGoods {
 
     public void setTotalNum(Long totalNum) {
         this.totalNum = totalNum;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 }

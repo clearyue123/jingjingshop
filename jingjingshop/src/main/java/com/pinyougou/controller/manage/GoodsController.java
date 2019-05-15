@@ -62,7 +62,6 @@ public class GoodsController {
 	@RequestMapping("/add")
 	public Object add(@RequestBody Map<String,Object> goodsMap) {
 		try {
-			System.out.println(goodsMap);
 			goodsService.add(goodsMap);
 			return new ApiResult(200, "增加成功","");
 		} catch (Exception e) {

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pinyougou.mapper.TbGoodsMapper" >
-
-    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbGoods" >
+ <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbGoods" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
         <result column="is_marketable" property="isMarketable" jdbcType="VARCHAR" />
@@ -17,6 +16,7 @@
         <result column="reduced_price" property="reducedPrice" jdbcType="DECIMAL" />
         <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
         <result column="total_num" property="totalNum" jdbcType="DECIMAL" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -81,7 +81,8 @@
 
     <sql id="Base_Column_List" >
         id, seller_id, is_marketable, brand_id, category1_id, category2_id, category3_id, 
-        small_pic, price, is_enable_spec, is_delete, reduced_price, goods_name, total_num
+        small_pic, price, is_enable_spec, is_delete, reduced_price, goods_name, total_num, 
+        type
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbGoodsExample" >
@@ -123,12 +124,14 @@
             brand_id, category1_id, category2_id, 
             category3_id, small_pic, price, 
             is_enable_spec, is_delete, reduced_price, 
-            goods_name, total_num)
+            goods_name, total_num, type
+            )
         values (#{id,jdbcType=BIGINT}, #{sellerId,jdbcType=VARCHAR}, #{isMarketable,jdbcType=VARCHAR}, 
             #{brandId,jdbcType=BIGINT}, #{category1Id,jdbcType=BIGINT}, #{category2Id,jdbcType=BIGINT}, 
             #{category3Id,jdbcType=BIGINT}, #{smallPic,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
             #{isEnableSpec,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, #{reducedPrice,jdbcType=DECIMAL}, 
-            #{goodsName,jdbcType=VARCHAR}, #{totalNum,jdbcType=DECIMAL})
+            #{goodsName,jdbcType=VARCHAR}, #{totalNum,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}
+            )
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbGoods" >
@@ -176,6 +179,9 @@
             <if test="totalNum != null" >
                 total_num,
             </if>
+            <if test="type != null" >
+                type,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -219,6 +225,9 @@
             </if>
             <if test="totalNum != null" >
                 #{totalNum,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -275,6 +284,9 @@
             <if test="record.totalNum != null" >
                 total_num = #{record.totalNum,jdbcType=DECIMAL},
             </if>
+            <if test="record.type != null" >
+                type = #{record.type,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -296,7 +308,8 @@
             is_delete = #{record.isDelete,jdbcType=VARCHAR},
             reduced_price = #{record.reducedPrice,jdbcType=DECIMAL},
             goods_name = #{record.goodsName,jdbcType=VARCHAR},
-            total_num = #{record.totalNum,jdbcType=DECIMAL}
+            total_num = #{record.totalNum,jdbcType=DECIMAL},
+            type = #{record.type,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -344,6 +357,9 @@
             <if test="totalNum != null" >
                 total_num = #{totalNum,jdbcType=DECIMAL},
             </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -362,7 +378,8 @@
             is_delete = #{isDelete,jdbcType=VARCHAR},
             reduced_price = #{reducedPrice,jdbcType=DECIMAL},
             goods_name = #{goodsName,jdbcType=VARCHAR},
-            total_num = #{totalNum,jdbcType=DECIMAL}
+            total_num = #{totalNum,jdbcType=DECIMAL},
+            type = #{type,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
     
@@ -378,7 +395,8 @@
 		    t2.`name` brandName,
 		    t3.`name` sellerName,
 		    t4.item_images itemImages,
-		    t5.`name` categoryName
+		    t5.`name` categoryName,
+		    t1.type goodsType
 		from tb_goods t1
 		LEFT JOIN tb_brand t2 ON t1.brand_id = t2.id
 		LEFT JOIN tb_seller t3 ON t3.seller_id = t1.seller_id

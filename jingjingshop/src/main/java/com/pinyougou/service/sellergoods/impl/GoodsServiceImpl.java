@@ -283,6 +283,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  String reducedPrice = (String)goodsMap.get("reducedPrice");
 		  String smallPic = (String)goodsMap.get("smallPic");
 		  String itemImages = (String)goodsMap.get("itemImages");
+		  String goodsType = (String)goodsMap.get("goodsType");
+		  String introduce = (String)goodsMap.get("introduce");
 		  tbGoods.setId(goodsId);
 		  tbGoods.setBrandId(Long.parseLong(brandId));
 		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
@@ -294,8 +296,10 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setPrice(new BigDecimal(price));
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
 		  tbGoods.setSmallPic(smallPic);
+		  tbGoods.setType(goodsType);
 		  goodsDesc.setGoodsId(goodsId);
 		  goodsDesc.setItemImages(itemImages);
+		  goodsDesc.setIntroduction(introduce);
 		  goodsMapper.insert(tbGoods);
 		  tbGoodsDescMapper.insert(goodsDesc);
 	  }catch(Exception e){
@@ -319,6 +323,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  String reducedPrice = (String)goodsMap.get("reducedPrice");
 		  String smallPic = (String)goodsMap.get("smallPic");
 		  String itemImages = (String)goodsMap.get("itemImages");
+		  String goodsType = (String)goodsMap.get("goodsType");
+		  String introduce = (String)goodsMap.get("introduce");
 		  tbGoods.setId(Long.parseLong(goodsId));
 		  tbGoods.setBrandId(Long.parseLong(brandId));
 		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
@@ -330,6 +336,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setPrice(new BigDecimal(price));
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
 		  tbGoods.setSmallPic(smallPic);
+		  tbGoods.setType(goodsType);
 		  TbGoodsDescExample goodsDescEmp = new TbGoodsDescExample();
 		  com.pinyougou.pojo.TbGoodsDescExample.Criteria cri = goodsDescEmp.createCriteria();
 		  cri.andGoodsIdEqualTo(Long.parseLong(goodsId));
@@ -337,6 +344,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  TbGoodsDesc tbGoodsDesc = goodsDescList.get(0);
 		  tbGoodsDesc.setGoodsId(Long.parseLong(goodsId));
 		  tbGoodsDesc.setItemImages(itemImages);
+		  tbGoodsDesc.setIntroduction(introduce);
 		  goodsMapper.updateByPrimaryKey(tbGoods);
 		  tbGoodsDescMapper.updateByPrimaryKey(tbGoodsDesc);
 	}

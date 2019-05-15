@@ -139,27 +139,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     		$scope.speList=$scope.tempSpeList;
     	}
     }
-    //设置规格ids
-    $scope.setSpeIds = function($event){
-    	var speId = $event.target.value;
-    	// 复选框选中
-		if($event.target.checked){
-			// 向数组中添加元素
-			$scope.entity.speIds.push(speId);
-		}else{
-			// 从数组中移除
-			var idx = $scope.entity.speIds.indexOf(speId);
-			$scope.entity.speIds.splice(idx,1);
-		}
-    }
-    //初始化规格数据
-    $scope.initSpe = function(){
-    	var categoryId=$scope.entity.categoryId;
-   	    $http.get('../specification/findSpeOpByCatId.do?categoryId='+categoryId).success(function(response){
-   	    	$scope.speList = response.data;
-   	    	$scope.entity.speIds=[];
-    	});
-    }
     
     $scope.uploadFile = function()
     {

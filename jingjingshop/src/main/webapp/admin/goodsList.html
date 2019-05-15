@@ -80,6 +80,7 @@
 									      <th class="sorting">打折价</th>
 									      <th class="sorting">是否上架</th>
 									      <th class="sorting">是否启用规格</th>
+									      <th class="sorting">型号</th>
 									      <th class="sorting">商品图片</th>
 					                      <th class="text-center">操作</th>
 			                          </tr>
@@ -96,6 +97,7 @@
 				                          <td>{{entity.reducedPrice}}</td>
 				                          <td>{{entity.isMarketable}}</td>
 				                          <td>{{entity.isEnableSpec}}</td>
+				                          <td>{{entity.goodsType}}</td>
 				                          <td><img alt="{{entity.goodsName}}" src="{{entity.smallPic}}" height="50" width="100"></td>
 		                                  <td class="text-center">                                          
 		                                 	  <button type="button" ng-click="findById(entity.goodsId)" data-toggle="modal" data-target="#addModal" class="btn bg-olive btn-xs" >修改</button>                  
@@ -145,7 +147,7 @@
 		      	<tr>
 		      		<td>类别</td>
 		      		<td>
-		      		     <select ng-model="entity.categoryId" class="btn btn-default"   ng-init="initCategoryList();" ng-change="initSpe();">
+		      		     <select ng-model="entity.categoryId" class="btn btn-default"   ng-init="initCategoryList();">
 		      		       <option >-----------请选择----------</option> 
 	                       <option ng-repeat="category in categoryList" value="{{category.id}}" >{{category.name}}</option> 
 	                     </select>
@@ -176,10 +178,8 @@
 		      	</tr>
 		      	<tr>
 		      	    <td>型号</td>
-		      		<td ng-init="entity.speIds=[]">
-		      		    <span ng-repeat="spe in speList">
-		      			   <input type="checkbox"  ng-click="setSpeIds($event)" value="{{spe.speOpId}}">{{spe.speOpName}}</input>
-		      			</span>
+		      		<td>
+		      		   <input type="text" ng-model="entity.goodsType" class="form-control" placeholder="商品型号" >
 					</td>
 		      	</tr>
 		      	<tr>
@@ -203,6 +203,12 @@
 				                   		上传
 				   </button>
 				   </td>
+		      	</tr>
+		      	<tr>
+		      	   <td>商品详情介绍</td>
+		      	   <td>
+		      	       <textarea ng-model="entity.introduce" rows="5" cols="5"></textarea>
+		      	   </td>    
 		      	</tr>		      	
 			 </table>				
 		</div>
