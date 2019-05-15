@@ -57,9 +57,9 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	//批量删除 
 	$scope.dele=function(){			
 		//获取选中的复选框			
-		goodsService.dele( $scope.selectIds ).success(
+		goodsService.dele($scope.selectIds).success(
 			function(response){
-				if(response.flag){
+				if(response.code==200){
 					$scope.reloadList();//刷新列表
 					$scope.selectIds = [];
 				}						

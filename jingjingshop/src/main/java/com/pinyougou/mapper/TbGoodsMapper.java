@@ -32,4 +32,6 @@ public interface TbGoodsMapper {
     int updateByPrimaryKey(TbGoods record);
     
     List<Map<String,Object>> searchGoodList(Map<String,String> searchMap);
+
+	List<Map<String, Object>> searchGoodsByName(@Param("searchGoodsName")String searchGoodsName);
 }

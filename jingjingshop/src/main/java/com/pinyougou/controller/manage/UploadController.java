@@ -3,8 +3,6 @@ package com.pinyougou.controller.manage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -65,7 +63,6 @@ public class UploadController {
 				  return new ApiResult(201, "请上传文件！", "");
 			  }else{
 					 for(int i=0;i<itemImages.length;i++){
-					   String dateDir = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
 					   String savePath = request.getSession().getServletContext().getRealPath("/")+"/itemImagesUpload";
 			           String originalFilename = itemImages[i].getOriginalFilename();
 			           String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -88,9 +85,9 @@ public class UploadController {
 					  in.close();
 					  out.close();
 					  if(i==itemImages.length-1){
-						  itemImagesStr += saveFile.getPath();
+						  itemImagesStr += "/itemImagesUpload/"+saveFileName;
 					  }else{
-						  itemImagesStr += saveFile.getPath()+",";
+						  itemImagesStr += "/itemImagesUpload/"+saveFileName+",";
 					  }
 				    }
 			   return new ApiResult(200, "文件上传成功！", itemImagesStr);

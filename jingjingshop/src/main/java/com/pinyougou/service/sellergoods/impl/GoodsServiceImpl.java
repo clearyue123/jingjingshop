@@ -170,12 +170,6 @@ public class GoodsServiceImpl implements GoodsService {
 		// 查询商品扩展表的信息
 		TbGoodsDesc tbGoodsDesc = goodsDescMapper.selectByPrimaryKey(id);
 		goods.setGoodsDesc(tbGoodsDesc);
-		// 查询SKU表的信息:
-		TbItemExample example = new TbItemExample();
-		com.pinyougou.pojo.TbItemExample.Criteria criteria = example.createCriteria();
-		criteria.andGoodsIdEqualTo(id);
-		List<TbItem> list = itemMapper.selectByExample(example);
-		goods.setItemList(list);
 		return goods;
 	}
 
@@ -184,7 +178,6 @@ public class GoodsServiceImpl implements GoodsService {
 	 */
 	public void delete(Long[] ids) {
 		for(Long id:ids){
-//			goodsMapper.deleteByPrimaryKey(id);
 			TbGoods tbGoods = goodsMapper.selectByPrimaryKey(id);
 			tbGoods.setIsDelete("1");
 			goodsMapper.updateByPrimaryKey(tbGoods);
@@ -347,5 +340,11 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoodsDesc.setIntroduction(introduce);
 		  goodsMapper.updateByPrimaryKey(tbGoods);
 		  tbGoodsDescMapper.updateByPrimaryKey(tbGoodsDesc);
+	}
+
+	@Override
+	public List<Map<String, Object>> searchGoodsByName(String searchGoodsName) {
+		List<Map<String, Object>> goodsList = goodsMapper.searchGoodsByName(searchGoodsName);
+		return goodsList;
 	}
 }

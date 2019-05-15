@@ -87,4 +87,11 @@ public interface GoodsService {
      * @return
      */
 	public Page<Map<String, Object>> search(Map<String, String> searchMap, int page, int rows);
+
+    /**
+     * 小程序   商品名称 搜索商品
+     * @param searchGoodsName
+     * @return 
+     */
+	public List<Map<String, Object>> searchGoodsByName(String searchGoodsName);
 }

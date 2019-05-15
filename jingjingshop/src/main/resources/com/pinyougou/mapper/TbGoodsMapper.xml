@@ -403,8 +403,9 @@
 		LEFT JOIN tb_goods_desc t4 on t4.goods_id = t1.id
 		LEFT JOIN tb_item_cat t5 on t5.id = t1.category3_id
 		<where>
+		      t1.is_delete = '0'
 			<if test="goodsName !=null">
-			   t1.goods_name like CONCAT('%',#{goodsName},'%')
+			   and t1.goods_name like CONCAT('%',#{goodsName},'%')
 			</if>
 			<if test="brandName !=null">
 			   and t2.`name` like CONCAT('%',#{brandName},'%')
@@ -416,5 +417,52 @@
 			   and t5.`name` like CONCAT('%',#{categoryName},'%')
 			</if>
 		</where> 
+    </select>
+    
+    <select id="searchGoodsByName" parameterType="String" resultType="java.util.Map">
+          SELECT
+			t.id,
+			t.goods_name goodsName,
+			t.seller_id sellerId,
+			(
+				SELECT
+					t1.`name`
+				FROM
+					tb_seller t1
+				WHERE
+					t1.seller_id = t.seller_id
+			) sellerName,
+			t.brand_id brandId,
+			(
+				SELECT
+					t2.`name`
+				FROM
+					tb_brand t2
+				WHERE
+					t2.id = t.brand_id
+			) brandName,
+			t.category3_id categoryId,
+			(
+				SELECT
+					t3.`name`
+				FROM
+					tb_item_cat t3
+				WHERE
+					t3.id = t.category3_id
+			) categoryName,
+			t.price,
+			t.reduced_price reducedPrice,
+			t.small_pic smallPic
+		FROM
+			tb_goods t
+	    <where>
+	        t1.is_delete = '0'
+	        <if test="searchGoodsName != null">
+	         and t.goods_name LIKE CONCAT(
+				'%',
+				#{searchGoodsName},'%')
+	        </if>
+	    </where>
+			
     </select>
 </mapper>

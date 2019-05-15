@@ -1,2 +1,2 @@
 // 定义模块:
-var app = angular.module("pinyougou",['ngFileUpload']);
+var app = angular.module("pinyougou",[]);

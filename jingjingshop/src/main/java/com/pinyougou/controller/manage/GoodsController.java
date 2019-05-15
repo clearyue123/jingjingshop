@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.pagehelper.Page;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbGoods;
+import com.pinyougou.pojo.TbGoodsDesc;
 import com.pinyougou.pojo.group.Goods;
 import com.pinyougou.service.sellergoods.GoodsService;
 
@@ -22,9 +23,7 @@ import entity.Result;
 
 /**
  * controller
- * 
  * @author yue
- *
  */
 @RestController
 @RequestMapping("/goods")
@@ -89,8 +88,7 @@ public class GoodsController {
 	}
 
 	/**
-	 * 获取实体
-	 * 
+	 * 商品管理 后台 商品id查商品
 	 * @param id
 	 * @return
 	 */
@@ -106,6 +104,9 @@ public class GoodsController {
 		String isEnableSpec = tbGoods.getIsEnableSpec();
 		String isMarketable = tbGoods.getIsMarketable();
 		String goodsName = tbGoods.getGoodsName();
+		TbGoodsDesc goodsDesc = goods.getGoodsDesc();
+		String itemImages = goodsDesc.getItemImages();
+		String introduce = goodsDesc.getIntroduction();
 		Map<String,Object> data = new HashMap<>();
 		data.put("goodsId", id);
 		data.put("brandId", brandId);
@@ -116,23 +117,25 @@ public class GoodsController {
 		data.put("isEnableSpec", isEnableSpec);
 		data.put("isMarketable", isMarketable);
 		data.put("goodsName", goodsName);
+		data.put("itemImages", itemImages);
+		data.put("introduce", introduce);
 		return data;
 	}
 
 	/**
-	 * 批量删除
+	 * 后台 批量删除
 	 * 
 	 * @param ids
 	 * @return
 	 */
 	@RequestMapping("/delete")
-	public Result delete(final Long[] ids) {
+	public Object delete(final Long[] ids) {
 		try {
 			goodsService.delete(ids);
-			return new Result(true, "删除成功");
+			return new ApiResult(200, "删除成功","");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "删除失败");
+			return new ApiResult(201, "删除失败","");
 		}
 	}
 
@@ -181,6 +184,17 @@ public class GoodsController {
 		return new ApiResult(200, "查询成功", goods);
 	}
 	
+	
+	@RequestMapping("/searchByGoodsName")
+	public ApiResult searchByGoodsName(@RequestParam(value="searchGoodsName",required=false)String searchGoodsName){
+		try{
+			List<Map<String,Object>> goodList = goodsService.searchGoodsByName(searchGoodsName);
+			return new ApiResult(200, "查询成功！", goodList);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
     /**
      * 后台商品管理  查询分页
      * @param searchMap 查询条件map
@@ -202,4 +216,5 @@ public class GoodsController {
 		}
 	}
 
+	
 }
