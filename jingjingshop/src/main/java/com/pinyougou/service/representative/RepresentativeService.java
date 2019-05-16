@@ -41,6 +41,20 @@ public interface RepresentativeService {
      */
     public  String findByRePoints(String  rid);
 
+    public  TbCard FindCard(String cid);
+
+
+    public int DiscountByPoint(String rid);
+
+    public int dicountInnerReDoc(HashMap map);
+
+    public int CountByServerDayRequest();
+
+    public  TbPointRequest CheckFindOne(String prid);
+
+    public  TbCard FindCardByCid(String cid);
+
+
     public int SubmitPointRequest(TbPointRequest tbPointRequest);
 
     public int EditPointRequest(TbPointRequest tbPointRequest);

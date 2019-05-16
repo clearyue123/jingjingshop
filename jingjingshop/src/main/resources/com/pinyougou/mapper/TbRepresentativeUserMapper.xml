@@ -65,6 +65,9 @@
             <if test="points_all!=null">
                 points_all=#{points_all}
             </if>
+            <if test="script!=null">
+                script=#{script}
+            </if>
         </set>
         WHERE  rid=#{rid}
     </update>
@@ -74,12 +77,23 @@
 
 <!--&lt;!&ndash;新增銀行卡&ndash;&gt;-->
     <insert id="AddCard"  parameterType="java.util.Map">
-       INSERT  INTO  tb_card (cid,cpoint,cname,cphone,crid)  VALUE(UUID(),#{card.cpoint},#{crad.cname},#{crad.cphone},#{crad.crid})
+       INSERT  INTO  tb_card (cid,cpoint,cname,cphone,crid)  VALUE(UUID(),#{cpoint},#{cname},#{cphone},#{crid})
     </insert>
 
 
+<!--判断银行卡是否重复-->
+<select  id="FindCardByCid"   resultType="com.pinyougou.pojo.TbCard"  parameterType="java.lang.String">
+    SELECT *  FROM  tb_card  WHERE   crid=#{cid}
+</select>
 
-<!--&lt;!&ndash;编辑银行卡&ndash;&gt;-->
+
+    <!--查询银行卡-->
+    <select  id="FindCard"   resultType="com.pinyougou.pojo.TbCard"  parameterType="java.lang.String">
+    SELECT *  FROM  tb_card  WHERE   cid=#{cid}
+</select>
+
+
+    <!--&lt;!&ndash;编辑银行卡&ndash;&gt;-->
     <update id="EditCard"  parameterType="com.pinyougou.pojo.TbCard">
         UPDATE tb_card
         <set>
@@ -91,6 +105,9 @@
             </if>
             <if test="cphone!=null">
                 cphone=#{cphone}
+            </if>
+            <if test="script!=null">
+                script=#{script}
             </if>
         </set>
         WHERE  cid=#{cid}
@@ -140,6 +157,10 @@ WHERE  r.rid=#{rid}
     </insert>
 
 
+    <select id="dicountInnerReDoc"  parameterType="java.util.Map"  resultType="java.lang.Integer">
+          SELECT  COUNT(*)  FROM  tb_redoc   WHERE     rid=#{rid}  AND  did=#{did}
+    </select>
+
 <!--积分兑换-->
 
 
@@ -156,6 +177,11 @@ WHERE  r.rid=#{rid}
 </insert>
 
 
+<!--   判断是否重复请求积分-->
+    <select id="DiscountByPoint"  resultType="java.lang.Integer"  parameterType="java.lang.String">
+        SELECT  COUNT(*)  FROM  tb_pointrequest   WHERE   DATEDIFF(NOW(),createDate) &lt;  7  AND   rid=#{rid}
+</select>
+
 <!--进行兑换积分审核-->
 <update id="EditPointRequest"  parameterType="com.pinyougou.pojo.TbPointRequest">
     update  tb_pointrequest
@@ -169,6 +195,7 @@ WHERE  r.rid=#{rid}
         <if test="caction!=null">
             caction=#{caction}
         </if>
+
     </set>
     where  prid=#{prid}
 </update>
@@ -177,13 +204,23 @@ WHERE  r.rid=#{rid}
 
 <!--   七日内可兑换 -->
     <select  id="ServerDayPoint"  parameterType="java.lang.String"  resultType="com.pinyougou.pojo.TbPointRequest">
-        SELECT *  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate) >7 WHERE   prid=#{prid}
+        SELECT *  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate) &lt; 7 AND   prid=#{prid}
     </select>
 
 
+<!--    判断七日内是否有数据-->
+<select  id="CountByServerDayRequest"  resultType="java.lang.Integer">
+      SELECT COUNT(*)  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate)  &lt; 7
+</select>
+
+<!--判断是否有该请求的数据-->
+<select id="CheckFindOne"  resultType="com.pinyougou.pojo.TbPointRequest"   parameterType="java.lang.String">
+      SELECT *  FROM  tb_pointrequest  where  prid=#{prid}
+</select>
+
 <!--新增积分记录表-->
     <insert  id="addPointList"  parameterType="com.pinyougou.pojo.TbPointList"  >
-         INSERT  INTO tb_pointlist (plid,pdate,rid,POINT)  VALUE(UUID(),#{pdate},#{rid}.#{POINT})
+         INSERT  INTO tb_pointlist (plid,pdate,rid,point)  VALUE(UUID(),#{pdate},#{rid},#{point})
     </insert>
 
 

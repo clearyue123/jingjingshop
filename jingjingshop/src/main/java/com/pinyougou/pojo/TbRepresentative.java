@@ -1,7 +1,7 @@
 package com.pinyougou.pojo;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -109,6 +109,11 @@ public class TbRepresentative {
 	}
 
 	public TbRepresentative() {
+    }
+
+    public TbRepresentative(String rid, String script) {
+        this.rid = rid;
+        this.script = script;
     }
 
     public TbRepresentative(String rid, Integer points, Integer points_all, Date createDate) {

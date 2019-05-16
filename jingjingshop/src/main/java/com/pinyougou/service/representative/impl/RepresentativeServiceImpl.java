@@ -82,6 +82,36 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     }
 
     @Override
+    public TbCard FindCard(String cid) {
+        return tbRepresentativeUserMapper.FindCard(cid);
+    }
+
+    @Override
+    public int DiscountByPoint(String rid) {
+        return tbRepresentativeUserMapper.DiscountByPoint(rid);
+    }
+
+    @Override
+    public int dicountInnerReDoc(HashMap map) {
+        return tbRepresentativeUserMapper.dicountInnerReDoc(map);
+    }
+
+    @Override
+    public int CountByServerDayRequest() {
+        return tbRepresentativeUserMapper.CountByServerDayRequest();
+    }
+
+    @Override
+    public TbPointRequest CheckFindOne(String prid) {
+        return tbRepresentativeUserMapper.CheckFindOne(prid);
+    }
+
+    @Override
+    public TbCard FindCardByCid(String cid) {
+        return tbRepresentativeUserMapper.FindCardByCid(cid);
+    }
+
+    @Override
     public int SubmitPointRequest(TbPointRequest tbPointRequest) {
         return tbRepresentativeUserMapper.SubmitPointRequest(tbPointRequest);
     }

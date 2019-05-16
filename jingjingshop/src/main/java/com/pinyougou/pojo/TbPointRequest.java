@@ -146,6 +146,7 @@ public class TbPointRequest {
         this.uid = uid;
     }
 
+
     public Date getCreateDate() {
         return createDate;
     }

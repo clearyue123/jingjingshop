@@ -39,6 +39,18 @@ public  int  addInnerReDoc(TbReDoc tbReDoc);
  */
 public  String findByRePoints(String  rid);
 
+public int DiscountByPoint(String rid);
+
+public int CountByServerDayRequest();
+
+public  TbPointRequest CheckFindOne(String prid);
+
+public  TbCard FindCardByCid(String cid);
+
+ public  TbCard FindCard(String cid);
+
+ public int dicountInnerReDoc(HashMap map);
+
 public int SubmitPointRequest(TbPointRequest tbPointRequest);
 
 public int EditPointRequest(TbPointRequest tbPointRequest);

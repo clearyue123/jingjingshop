@@ -3,6 +3,7 @@ package com.pinyougou.controller.representative;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.alibaba.fastjson.util.Base64;
 import com.pinyougou.pojo.*;
 import org.jboss.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.service.representative.RepresentativeService;
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -34,6 +36,26 @@ public class RepresentativeController {
 
 
     /**
+     * 编辑script
+     */
+
+    @RequestMapping("/editscript")
+    public ApiResult editscript(@RequestParam(required = false, value = "rid") String rid,
+                                @RequestParam(required = false, value = "script") String script
+    ) {
+        try {
+            TbRepresentative tbRepresentative = new TbRepresentative(rid, script);
+            representativeService.Editrepresentative(tbRepresentative);
+            return new ApiResult(200, "编辑成功", "编辑成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResult(00006, "操作失败", "字段超出范围或者格式不正确");
+        }
+
+    }
+
+
+    /**
      * 新增代表关联医生
      *
      * @param rid
@@ -43,9 +65,18 @@ public class RepresentativeController {
     public ApiResult addInnerReDoc(@RequestParam(required = false, value = "rid") String rid,
                                    @RequestParam(required = false, value = "did") String did) {
         try {
-            TbReDoc tbReDoc = new TbReDoc(rid, did);
-            representativeService.addInnerReDoc(tbReDoc);
-            return new ApiResult(200, "新增成功", "新增成功");
+            //判断是否数据重复添加
+            HashMap map = new HashMap();
+            map.put("rid", rid);
+            map.put("did", did);
+            int i = representativeService.dicountInnerReDoc(map);
+            //判断数据是否重复  此为不重复
+            if (i <= 0) {
+                TbReDoc tbReDoc = new TbReDoc(rid, did);
+                representativeService.addInnerReDoc(tbReDoc);
+                return new ApiResult(200, "新增成功", "新增成功");
+            }
+            return new ApiResult(00016, "操作失败", "关联关系不可重复添加");
         } catch (Exception e) {
             e.printStackTrace();
             return new ApiResult(00016, "操作失败", "字段超出范围或者格式不正确");
@@ -54,17 +85,16 @@ public class RepresentativeController {
     }
 
 
-
     /**
      * 编辑ticket和ticket_time
      */
 
     @RequestMapping("/editreticket")
     public ApiResult editreticket(@RequestParam(required = false, value = "rid") String rid,
-                            @RequestParam(required = false, value = "ticket") String ticket,
-                            @RequestParam(required = false, value = "ticket_time") String ticket_time) {
+                                  @RequestParam(required = false, value = "ticket") String ticket,
+                                  @RequestParam(required = false, value = "ticket_time") String ticket_time) {
         try {
-            TbRepresentative tbRepresentative = new TbRepresentative(rid, null,ticket, ticket_time);
+            TbRepresentative tbRepresentative = new TbRepresentative(rid, null, ticket, ticket_time);
             representativeService.Editrepresentative(tbRepresentative);
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {
@@ -84,20 +114,25 @@ public class RepresentativeController {
     public ApiResult SubmitPointRequest(@RequestParam(required = false, value = "rid") String rid,
                                         @RequestParam(required = false, value = "point") Integer point,
                                         @RequestParam(required = false, value = "prid") String prid
-                                     ) {
+    ) {
         try {
-            //获得到自己的积分数量
-                int byRePoints = representativeService.findByRePoints(rid)==null?0:Integer.parseInt(representativeService.findByRePoints(rid));
-            //判断兑取积分数是否超额  此为不超额
-            if (byRePoints >= point) {
-                //提交到积分请求表中
-                String caction="1";
-                TbPointRequest tbPoint= new TbPointRequest(prid,point,rid,caction);
-                representativeService.SubmitPointRequest(tbPoint);
-                return new ApiResult(200, "操作成功", "兑换请求发送成功");
-            } else {
-                return new ApiResult(00036, "操作失败", "兑取积分数已超额");
+            //判断在七日内是否重复提交申请  此为不重复提交申请
+            int discountPoint = representativeService.DiscountByPoint(rid);
+            if (discountPoint <= 0) {
+                //获得到自己的积分数量
+                int byRePoints = representativeService.findByRePoints(rid) == null ? 0 : Integer.parseInt(representativeService.findByRePoints(rid));
+                //判断兑取积分数是否超额  此为不超额
+                if (byRePoints >= point) {
+                    //提交到积分请求表中
+                    String caction = "1";
+                    TbPointRequest tbPoint = new TbPointRequest(prid, point, rid, caction);
+                    representativeService.SubmitPointRequest(tbPoint);
+                    return new ApiResult(200, "操作成功", "兑换请求发送成功");
+                } else {
+                    return new ApiResult(00036, "操作失败", "兑取积分数已超额");
+                }
             }
+            return new ApiResult(00036, "操作失败", "不可重复提交申请");
         } catch (Exception e) {
             e.printStackTrace();
             return new ApiResult(00046, "操作失败", "字段超出范围或者格式不正确");
@@ -114,47 +149,54 @@ public class RepresentativeController {
      */
     @RequestMapping("/checkPoint")
     public ApiResult checkPoint(@RequestParam(required = false, value = "rid") String rid,
-                                @RequestParam(required = false, value = "points") Integer points,
                                 @RequestParam(required = false, value = "prid") String prid,
                                 @RequestParam(required = false, value = "roleid") String roleid,
-                                @RequestParam(required = false, value = "createDate") Date createDate,
+//                                @RequestParam(required = false, value = "createDate") Date createDate,//请求的时间 util
                                 @RequestParam(required = false, value = "caction") String caction) {
         try {
             //判断登陆进来的是否是超级管理员   此为超级管理员
             String roleRid = representativeService.FindByRoleRid();
-            if(roleid.equals(roleRid)){
-            //判断是否是在七日内兑换  此为在七日内
-            TbPointRequest tbPointRequest = representativeService.ServerDayPoint(prid);
-            if (tbPointRequest != null) {
-                TbPointRequest tbPointRequest1 = new TbPointRequest(prid, points, rid, caction, createDate, roleid);
-                //提交到积分请求表中
-                int i = representativeService.SubmitPointRequest(tbPointRequest1);
-                if (i > 0) {
-                    //先进行兑换
-                    //获得到自己的积分数量
-                    int po = representativeService.findByRePoints(rid)==null?0:Integer.parseInt( representativeService.findByRePoints(rid));
-                    //在算出最后得到的积分
-                    po=po-points;
-                    HashMap map=new HashMap();
-                    map.put("rid",rid);
-                    map.put("points",points);
-                    //获得累计的积分
-                    int po_all=representativeService.FindPointsAllUpPoints(map);
-                    TbRepresentative tbRepresentative=new TbRepresentative(rid,po,po_all,null);
-                    int editrepresentative = representativeService.Editrepresentative(tbRepresentative);
-                    if(editrepresentative>0){
-                        //在提交到积分记录表中
-                        TbPointList tbPointList = new TbPointList(createDate, points, rid);
-                        representativeService.addPointList(tbPointList);
-                        return new ApiResult(200, "兑换成功", "兑换成功");
+            if (roleid.equals(roleRid)) {
+                //判断该数据是否存在申请请求表中   此为有数据
+                TbPointRequest findOne = representativeService.CheckFindOne(prid);
+                if (findOne != null) {
+                    //判断七日内是否有数据  此为有
+                    int i = representativeService.CountByServerDayRequest();
+                    if (i > 0) {
+                        //判断是否是在七日内兑换  此为在七日内
+                        TbPointRequest tbPointRequest = representativeService.ServerDayPoint(prid);
+                        if (tbPointRequest != null) {
+                            int points = findOne.getPoint();
+                            Date createDate = findOne.getCreateDate();
+                            TbPointRequest tbPointRequest1 = new TbPointRequest(findOne.getPrid(), points, findOne.getRid(), caction, createDate, roleid);
+                            //先进行兑换
+                            //获得到自己的积分数量
+                            int po = representativeService.findByRePoints(rid) == null ? 0 : Integer.parseInt(representativeService.findByRePoints(rid));
+                            //在算出最后得到的积分
+                            po = po - points;
+                            HashMap map = new HashMap();
+                            map.put("rid", rid);
+                            map.put("points", points);
+                            //获得累计的积分
+                            int po_all = representativeService.FindPointsAllUpPoints(map);
+                            TbRepresentative tbRepresentative = new TbRepresentative(rid, po, po_all, findOne.getCreateDate());
+                            //编辑到代表表中
+                            int editrepresentative = representativeService.Editrepresentative(tbRepresentative);
+                            if (editrepresentative > 0) {
+                                //在提交到积分记录表中
+                                TbPointList tbPointList = new TbPointList(createDate, points, rid);
+                                representativeService.addPointList(tbPointList);
+                                return new ApiResult(200, "兑换成功", "兑换成功");
+                            }
+                            return new ApiResult(200, "兑换失败", "兑换的字段格式或范围不正确");
+                        } else {
+                            return new ApiResult(00056, "操作失败", "兑取积分已超过七日");
+                        }
                     }
-                    return new ApiResult(200, "兑换失败", "未成功进行兑换");
+                    return new ApiResult(00056, "操作失败", "在七日内未有兑换请求");
                 }
-                return new ApiResult(200, "兑换失败", "未提交到积分记录表中，但在积分请求表已改动");
+                return new ApiResult(00056, "操作失败", "未有该兑换请求的数据");
             } else {
-                return new ApiResult(00056, "操作失败", "兑取积分已超过七日");
-            }
-            }else{
                 return new ApiResult(00066, "操作失败", "该用户角色不是超级管理员");
             }
         } catch (Exception e) {
@@ -235,6 +277,25 @@ public class RepresentativeController {
     }
 
     /**
+     * 查詢銀行卡
+     */
+    @RequestMapping("/findcard")
+    public ApiResult findcard( @RequestParam(required = false, value = "cid") String cid) {
+        try {
+            //因为银行卡只能去新增一次相同的所以判断是否重复
+            TbCard card = representativeService.FindCard(cid);
+            String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
+            mycard="**** **** ****"+mycard.substring(mycard.length()-4);
+            card.setCpoint(mycard);
+            return new ApiResult(200, "查询成功", card);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResult(00007, "操作失败", "字段超出范围或者格式不正确");
+        }
+    }
+
+
+    /**
      * 新增銀行卡
      */
 
@@ -244,18 +305,24 @@ public class RepresentativeController {
                              @RequestParam(required = false, value = "cphone") String cphone,
                              @RequestParam(required = false, value = "crid") String crid) {
         try {
-            HashMap map = new HashMap();
-            //银行卡加密
-            map.put("cpoint", new BASE64Encoder().encodeBuffer(cpoint.getBytes()));
-            map.put("cname", cname);
-            map.put("cphone", cphone);
-            map.put("crid", crid);
-            representativeService.AddCard(map);
-            return new ApiResult(200, "新增成功", "新增成功");
+            //因为银行卡只能去新增一次相同的所以判断是否重复
+            TbCard card = representativeService.FindCardByCid(crid);
+            if (card == null) {
+                HashMap map = new HashMap();
+                //银行卡加密
+                map.put("cpoint", new BASE64Encoder().encodeBuffer(cpoint.getBytes()));
+                map.put("cname", cname);
+                map.put("cphone", cphone);
+                map.put("crid", crid);
+                representativeService.AddCard(map);
+                return new ApiResult(200, "新增成功", "新增成功");
+            }
+            return new ApiResult(200, "新增失败", "不可重复添加");
         } catch (Exception e) {
             e.printStackTrace();
+            return new ApiResult(00007, "操作失败", "字段超出范围或者格式不正确");
         }
-        return new ApiResult(00007, "操作失败", "字段超出范围或者格式不正确");
+
     }
 
     /**
