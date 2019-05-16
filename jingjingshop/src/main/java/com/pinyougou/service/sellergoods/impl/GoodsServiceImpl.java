@@ -191,7 +191,7 @@ public class GoodsServiceImpl implements GoodsService {
 		TbGoodsExample example=new TbGoodsExample();
 		Criteria criteria = example.createCriteria();
 		
-		criteria.andIsDeleteIsNull();
+		criteria.andIsDeleteEqualTo("0");
 		
 		if(goods!=null){			
 		    if(goods.getSellerId()!=null && goods.getSellerId().length()>0){
