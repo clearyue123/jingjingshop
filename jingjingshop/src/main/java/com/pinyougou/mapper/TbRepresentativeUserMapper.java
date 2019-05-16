@@ -1,8 +1,6 @@
 package com.pinyougou.mapper;
 
-import com.pinyougou.pojo.TbCard;
-import com.pinyougou.pojo.TbDoc;
-import com.pinyougou.pojo.TbRepresentative;
+import com.pinyougou.pojo.*;
 
 import java.util.HashMap;
 
@@ -32,5 +30,28 @@ public TbRepresentative selectByUnionId(TbRepresentative user);
 public int add(TbRepresentative user);
 
 public int updateInfo(TbRepresentative user);
+
+
+public  int  addInnerReDoc(TbReDoc tbReDoc);
+
+/**
+ * 积分兑换
+ */
+public  String findByRePoints(String  rid);
+
+public int SubmitPointRequest(TbPointRequest tbPointRequest);
+
+public int EditPointRequest(TbPointRequest tbPointRequest);
+
+ public  TbPointRequest ServerDayPoint(String  prid);
+
+ public  int addPointList(TbPointList tbPointList);
+
+ public  TbPointList  FindByPontList(String rid);
+
+public String FindByRoleRid();
+
+public  int FindPointsAllUpPoints(HashMap  map);
+
 
 }

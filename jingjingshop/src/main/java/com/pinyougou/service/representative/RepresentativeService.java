@@ -3,9 +3,7 @@ package com.pinyougou.service.representative;
 
 import java.util.HashMap;
 
-import com.pinyougou.pojo.TbCard;
-import com.pinyougou.pojo.TbDoc;
-import com.pinyougou.pojo.TbRepresentative;
+import com.pinyougou.pojo.*;
 
 /**
  * 代表层接口
@@ -36,4 +34,24 @@ public interface RepresentativeService {
 
 
 
+    public  int  addInnerReDoc(TbReDoc tbReDoc);
+
+    /**
+     * 积分兑换
+     */
+    public  String findByRePoints(String  rid);
+
+    public int SubmitPointRequest(TbPointRequest tbPointRequest);
+
+    public int EditPointRequest(TbPointRequest tbPointRequest);
+
+    public  TbPointRequest ServerDayPoint(String  prid);
+
+    public  int addPointList(TbPointList tbPointList);
+
+    public  TbPointList  FindByPontList(String rid);
+
+    public String FindByRoleRid();
+
+    public  int FindPointsAllUpPoints(HashMap  map);
 }

@@ -45,6 +45,11 @@ public class TbReDoc {
     public TbReDoc() {
     }
 
+    public TbReDoc(String rid, String did) {
+        this.rid = rid;
+        this.did = did;
+    }
+
     public TbReDoc(String rdid, String rid, String did, String script, Date createDate) {
         this.rdid = rdid;
         this.rid = rid;

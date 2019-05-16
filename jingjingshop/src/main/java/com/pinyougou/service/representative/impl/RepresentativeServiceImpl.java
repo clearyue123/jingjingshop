@@ -2,13 +2,11 @@ package com.pinyougou.service.representative.impl;
 
 import java.util.HashMap;
 
+import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pinyougou.mapper.TbRepresentativeUserMapper;
-import com.pinyougou.pojo.TbCard;
-import com.pinyougou.pojo.TbDoc;
-import com.pinyougou.pojo.TbRepresentative;
 import com.pinyougou.service.representative.RepresentativeService;
 
 
@@ -72,5 +70,52 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 	public int updateInfo(TbRepresentative user) {
 		return tbRepresentativeUserMapper.updateInfo(user);
 	}
-	
+
+    @Override
+    public int addInnerReDoc(TbReDoc tbReDoc) {
+        return tbRepresentativeUserMapper.addInnerReDoc(tbReDoc);
+    }
+
+    @Override
+    public String findByRePoints(String rid) {
+        return tbRepresentativeUserMapper.findByRePoints(rid);
+    }
+
+    @Override
+    public int SubmitPointRequest(TbPointRequest tbPointRequest) {
+        return tbRepresentativeUserMapper.SubmitPointRequest(tbPointRequest);
+    }
+
+    @Override
+    public int EditPointRequest(TbPointRequest tbPointRequest) {
+        return tbRepresentativeUserMapper.EditPointRequest(tbPointRequest);
+    }
+
+
+    @Override
+    public TbPointRequest ServerDayPoint(String prid) {
+        return tbRepresentativeUserMapper.ServerDayPoint(prid);
+    }
+
+    @Override
+    public int addPointList(TbPointList tbPointList) {
+        return tbRepresentativeUserMapper.addPointList(tbPointList);
+    }
+
+    @Override
+    public TbPointList FindByPontList(String rid) {
+        return tbRepresentativeUserMapper.FindByPontList(rid);
+    }
+
+
+    @Override
+    public String FindByRoleRid() {
+        return tbRepresentativeUserMapper.FindByRoleRid();
+    }
+
+    @Override
+    public int FindPointsAllUpPoints(HashMap map) {
+        return tbRepresentativeUserMapper.FindPointsAllUpPoints(map);
+    }
+
 }

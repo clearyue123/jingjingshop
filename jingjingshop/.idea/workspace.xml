@@ -7,8 +7,191 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fc81eee-7fd3-43cf-af49-3f58d0b9c91b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbRepresentativeUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbRepresentativeUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbReDoc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbReDoc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbRepresentative.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbRepresentative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/RepresentativeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/RepresentativeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/impl/RepresentativeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/impl/RepresentativeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/SqlMapConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/SqlMapConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/081746cd0c6821e88.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/089427ca7b9b24f94.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/08d9328d7f64b86ab.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/09273e606352795be.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/09449f1f431ff7d87.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/095f6dcbc79f0d450.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/09e7d15dc7d6ba168.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/0acf92fef07716229.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/1855784a19b3cf512.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/18ee7c3bd8919c06e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/1a2fe7f7199ef3baa.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/1a494f71c65905951.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/283c8ef10de410998.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/29b55a3f486f59bd7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/2a86f97655e342c67.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/2b36d8160dd08f2e0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/2b476ccae5645a87b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/3810a7102dbc4518e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/3840ccc032d2567de.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/384d9f0be22fcfb15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/386d9da3252e14a26.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/38ebd3af2f38e5ba4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/38fc7082ae7c22778.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/3959711db0a39a4da.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/39f65f0b9c072c1e6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/3a3ad7a66fe1360d5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/3b9dde406a1d4445a.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/3baa26f9dc651af3c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/48a71461540d99f00.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/49a4a3b22d4e315a4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/4a5b64b65a381db27.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/4ab4eb97e1020a31a.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/4b08e7d24c2e2561a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/4b3219eca027073df.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/4bac2ab2888c42627.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/4bf901c30427f080e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/5844d323b7291cb1d.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/58472f8a206c2b0e8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/58571a2caa135ba1d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/58fffbca163635421.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/59deeae44bd88ac57.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/59e5e94ad282ce7a9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/5a7c9fa53089b5c6b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/5a9986f4365a8fda3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/5ab5e49ec562ec762.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/5b6fe987368591171.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/692235fd8bbc68167.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/69ef660c99e6b6721.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/6b07d067246fb54c0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/6bacb0d4c34778480.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/780adc671f6ff2e68.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/784d13647ca768831.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/78c30cc5f5957ae23.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/7a3b759ae79f51fb4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/7a6dc1ba483fbd442.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/7a7af95fb4df81ff9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/7b069fa0270ade5e8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/7b71c1b12d52469f2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/88379a752fcbf556a.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/88c2ae4aba58450eb.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/88cc12d529b76d263.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/88d70476249de00b7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/8989cc969015999e2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/8aa71c62c024062d5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/8b940320d39953fa0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/8ba5d8dddf6959240.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/990e3926056c9f7e9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/9a3de9a4aecaa568b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/9aa8002e754ceb621.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/9ab2bb3f41e8e4e7c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/9b0474989877488c5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/9b98e62d8a5c83dd4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a80b95ec70d1b0097.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a8296670559d339f5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a8307a780ddf38341.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a8af73c75ea99ebcf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a8ea8054afff0c18b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a90f91aec9ad424bd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a99a1390c2df0ba66.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/a9b18b500fdc079c2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/aa416c9ba7602e481.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/aa82d7b125792ed89.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/ab37202f86781fb24.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/ab6123c39737af482.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/abffd0d0ede089893.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/b9001bc997eaa840b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/b92de7e46ae969cd3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/b93dbb2221e5c87b3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/b96d804ac19a9e313.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/ba836c6688466b02c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/bb26e66249247d25e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/c9362f0505758f4cd.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/c9d9de369ad2eaa4b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/cab2290104ec5b50d.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/cadcc1835f96ddbfe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/cb439c52dca012d95.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/cb8556b9ce3e8fe74.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/cbe4f87d47a68ea61.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/cbf82c34b4181e754.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/d867f84a59ecd36c2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/d8d69fe7d5293e280.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/d9148934fa641093e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/d9c84bd2954639596.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/da2f7a37f85707961.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/dadc692b3b0189f8e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/dae1b2f7ee9483313.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/daf953281fb7b2fa2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/dbdd411f3e12ad424.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/e85b003e2869271e5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/e8a7511390711b6e4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/e95e6ae1fbea28382.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/eb383c57319871e11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/eb513eb6961ce8cf5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/f86a7f12c44b6421e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/f8a868a142d2185af.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/f8caee6b975707314.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/fa18e988887973ae4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/fa2b46d3c356f8ac3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/fa462f7f31d403cb8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/fa6cc23bc8267882e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/faa068caf43714b3f.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/itemImagesUpload/fad7e7989216d7402.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/09d2eb5403839bb08.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/0a6ecc5a6b417f788.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/1804413bced48b36a.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/1a5fc3aedd5167cc8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/1afef6e8830f202c3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/1b93085dadb501c1e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/288bb78e087880e30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/28927f259f5c18ddb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/29af727138772da79.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/38868bb8509307887.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/38d33e172f304d8ab.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/3911fc16f734c723f.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/3a1f2536493c5c2e5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/494d9af646b52b60e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/4a5b10ae4e88446a4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/4a63dc9ead3318855.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/4b1d7126b8bae7e5e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/5949b8150b7cca066.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/594baad4e36c009fb.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/68dc7982ab2211723.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/6ad29e4328ce8157e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/7954b21141dfc7940.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/79f3ec750da822639.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/7acfbe2979d0d7198.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/8bc35e4a60f25b890.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/8bd809c05becf9a1a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/9a69738e6e4fa466e.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/9bc4aa9f99a1ecbdf.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/a8a9d1cbf42cfb860.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/a90bf7d1b193bade1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/a93b7bfddd1ce8b10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/a96450e6b290c6a17.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/aa6b2dc156ab71695.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/b8b1662a3430c6cb1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/b90dc8c1f2fb717af.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/b9f143d1bcb53d67c.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/b9f22273fab4c0273.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/ba4e6c0766521dcad.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/bac62c9c88ef4de22.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/c94ee5337d78e8c3b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/c9726c204631d4cc2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/c989cfa631bcd512b.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/caa57a8787afaec1a.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/d8b7a6420ec6a7781.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/da101988a49042798.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/e836a2ee6a7df1603.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/e86d8e0c8ff0b85e1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/ea924c17af6a2eda0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/eb1b3a990d2f5e9f1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/eb4ee929b9aacc05c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/smallPicUpload/f9bbabc69a9327e8d.jpg" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,11 +206,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="41" selection-start-line="41" selection-end-line="41" />
+            <state relative-caret-position="163">
+              <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,25 +218,76 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            <state relative-caret-position="246">
+              <caret line="52" column="29" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbDoc.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+            <state relative-caret-position="372">
+              <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/RepresentativeService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="91">
+              <caret line="39" column="11" lean-forward="true" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/impl/RepresentativeServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="79" column="17" selection-start-line="79" selection-start-column="17" selection-end-line="79" selection-end-column="17" />
+              <folding>
+                <element signature="e#1818#1819#0" expanded="true" />
+                <element signature="e#1890#1891#0" expanded="true" />
+                <element signature="e#1949#1950#0" expanded="true" />
+                <element signature="e#2018#2019#0" expanded="true" />
+                <element signature="e#2558#2559#0" expanded="true" />
+                <element signature="e#2633#2634#0" expanded="true" />
+                <element signature="e#2953#2954#0" expanded="true" />
+                <element signature="e#3029#3030#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbRepresentativeUserMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="39" column="29" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Editrepresentative</find>
+      <find>SubmitPointRequest</find>
+      <find>findByRePoints</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -63,7 +297,19 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbUserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/user/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/SqlMapConfig.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointReAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointReCheck.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbRoleCheck.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbReDoc.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbRepresentative.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbRepresentativeUserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/RepresentativeService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/impl/RepresentativeServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java" />
       </list>
     </option>
   </component>
@@ -74,131 +320,7 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/jingjingshop.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/artifacts/jingjingshop_war.xml" />
-        <option value="$PROJECT_DIR$/.idea/artifacts/jingjingshop_war_exploded.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/compiler.xml" />
-        <option value="$PROJECT_DIR$/.idea/encodings.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__aopalliance_aopalliance_1_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_0_14.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_dubbo_2_5_6.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_28.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_baidu_unbiz_fluent_validator_1_0_6.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_3_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_6_5.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_6_5.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_6_5.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsqlparser_jsqlparser_0_9_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_pagehelper_pagehelper_4_0_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_sgroschupf_zkclient_0_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_github_wxpay_wxpay_sdk_0_0_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_fileupload_commons_fileupload_1_3_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__commons_net_commons_net_3_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_core_2_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_schema_2_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spi_2_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_spring_web_2_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger2_2_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_common_2_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_springfox_springfox_swagger_ui_2_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_annotations_1_5_13.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_swagger_models_1_5_13.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_mail_1_4_7.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_persistence_persistence_api_1_0_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jstl_1_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_servlet_api_2_5.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_1_1_0_Final.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__jline_jline_0_9_94.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_14.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_34.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_6_14.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ehcache_ehcache_2_10_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_ezmorph_ezmorph_1_0_6.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__net_sf_json_lib_json_lib_jdk15_2_4.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_activemq_activemq_core_5_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_activemq_kahadb_5_7_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_activemq_protobuf_activemq_protobuf_1_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_12.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_pool2_2_4_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_j2ee_management_1_1_spec_1_0_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_geronimo_specs_geronimo_jms_1_1_spec_1_1_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_4.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_core_1_3_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_quartz_1_3_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_spring_1_3_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_shiro_shiro_web_1_3_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_velocity_velocity_1_7.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_zookeeper_zookeeper_3_3_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_8_8.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_attoparser_attoparser_2_0_2_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_fusesource_hawtbuf_hawtbuf_1_9.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_fusesource_hawtdispatch_hawtdispatch_1_11.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_fusesource_hawtdispatch_hawtdispatch_transport_1_11.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_fusesource_mqtt_client_mqtt_client_1_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_validator_5_2_2_Final.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_jasypt_jasypt_1_9_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_2_1_Final.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_netty_netty_3_2_5_Final.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_1_0_Final.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_generator_mybatis_generator_core_1_3_5.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_2.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_ehcache_1_0_0.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_1_3_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_opensymphony_quartz_quartz_1_6_1.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_reflections_reflections_0_9_11.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_1_7_21.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_12.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_12.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_1_12_5_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_keyvalue_1_1_5_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_redis_1_7_5_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_1_2_0_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_metadata_1_2_0_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_4_1_3_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_4_1_3_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_4_1_3_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_1_3_0_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_session_spring_session_data_redis_1_3_0_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jms_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_messaging_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_oxm_4_2_8_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_4_3_7_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_3_0_3_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_thymeleaf_thymeleaf_spring4_3_0_3_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_unbescape_unbescape_1_1_4_RELEASE.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Maven__redis_clients_jedis_2_9_0.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="260" />
     <option name="y" value="20" />
     <option name="width" value="1400" />
@@ -210,7 +332,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,7 +355,45 @@
               <item name="jingjingshop" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jingjingshop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pinyougou" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jingjingshop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pinyougou" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jingjingshop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pinyougou" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="representative" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jingjingshop" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="pinyougou" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="representative" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
@@ -242,13 +401,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -257,6 +416,11 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pinyougou.pojo" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -336,10 +500,10 @@
     <configuration />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26332623" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26599148" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -348,7 +512,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.329718" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -409,23 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbRepresentativeUserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbDoc.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -433,10 +580,118 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/SqlMapConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointReCheck.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbRoleCheck.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbReDoc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="47" column="44" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="43" column="35" lean-forward="true" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+          <folding>
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#897#898#0" expanded="true" />
+            <element signature="e#937#938#0" expanded="true" />
+            <element signature="e#969#970#0" expanded="true" />
+            <element signature="e#999#1000#0" expanded="true" />
+            <element signature="e#1027#1028#0" expanded="true" />
+            <element signature="e#1067#1068#0" expanded="true" />
+            <element signature="e#1101#1102#0" expanded="true" />
+            <element signature="e#1134#1135#0" expanded="true" />
+            <element signature="e#1162#1163#0" expanded="true" />
+            <element signature="e#1205#1206#0" expanded="true" />
+            <element signature="e#1239#1240#0" expanded="true" />
+            <element signature="e#1269#1270#0" expanded="true" />
+            <element signature="e#1295#1296#0" expanded="true" />
+            <element signature="e#1333#1334#0" expanded="true" />
+            <element signature="e#1363#1364#0" expanded="true" />
+            <element signature="e#1393#1394#0" expanded="true" />
+            <element signature="e#1419#1420#0" expanded="true" />
+            <element signature="e#1457#1458#0" expanded="true" />
+            <element signature="e#1487#1488#0" expanded="true" />
+            <element signature="e#1517#1518#0" expanded="true" />
+            <element signature="e#1543#1544#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+            <element signature="e#1611#1612#0" expanded="true" />
+            <element signature="e#1646#1647#0" expanded="true" />
+            <element signature="e#1679#1680#0" expanded="true" />
+            <element signature="e#1729#1730#0" expanded="true" />
+            <element signature="e#1773#1774#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbRepresentativeUserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="39" column="29" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/RepresentativeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="39" column="11" lean-forward="true" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/service/representative/impl/RepresentativeServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="79" column="17" selection-start-line="79" selection-start-column="17" selection-end-line="79" selection-end-column="17" />
+          <folding>
+            <element signature="e#1818#1819#0" expanded="true" />
+            <element signature="e#1890#1891#0" expanded="true" />
+            <element signature="e#1949#1950#0" expanded="true" />
+            <element signature="e#2018#2019#0" expanded="true" />
+            <element signature="e#2558#2559#0" expanded="true" />
+            <element signature="e#2633#2634#0" expanded="true" />
+            <element signature="e#2953#2954#0" expanded="true" />
+            <element signature="e#3029#3030#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbRepresentative.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="28" column="7" lean-forward="true" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="372">
+          <caret line="151" lean-forward="true" selection-start-line="151" selection-end-line="151" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="52" column="29" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

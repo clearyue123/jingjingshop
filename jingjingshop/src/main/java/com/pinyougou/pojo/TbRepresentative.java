@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Set;
 
 /**
- * 代表权限表
+ * 代表表
  */
 public class TbRepresentative {
 
@@ -29,11 +29,11 @@ public class TbRepresentative {
     /**
      * 积分
      */
-    private  String   points;
+    private  Integer   points;
     /**
      * 最终累计积分
      */
-    private  String   points_all;
+    private  Integer   points_all;
     /**
      * 真实姓名
      */
@@ -60,9 +60,37 @@ public class TbRepresentative {
     
     private String unionId;
 
+    /**
+     * wx换取二维码ticket
+     */
+    private String ticket;
 
+    /**
+     * ticket保存时间
+     */
+    private String ticket_time;
+
+    /**
+     * 关联的医生表
+     */
     private Set<TbDoc>  tbDocs;
 
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
+
+    public String getTicket_time() {
+        return ticket_time;
+    }
+
+    public void setTicket_time(String ticket_time) {
+        this.ticket_time = ticket_time;
+    }
 
     public String getUnionId() {
 		return unionId;
@@ -83,12 +111,25 @@ public class TbRepresentative {
 	public TbRepresentative() {
     }
 
+    public TbRepresentative(String rid, Integer points, Integer points_all, Date createDate) {
+        this.rid = rid;
+        this.points = points;
+        this.points_all = points_all;
+        this.createDate = createDate;
+    }
+
     public TbRepresentative(String rid, String username, String phone) {
         this.rid = rid;
         this.phone = phone;
         this.username = username;
     }
 
+    public TbRepresentative(String rid, Date createDate, String ticket, String ticket_time) {
+        this.rid = rid;
+        this.createDate = createDate;
+        this.ticket = ticket;
+        this.ticket_time = ticket_time;
+    }
 
     public String getPhone() {
         return phone;
@@ -130,19 +171,19 @@ public class TbRepresentative {
         this.head_pic = head_pic;
     }
 
-    public String getPoints() {
+    public Integer getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(Integer points) {
         this.points = points;
     }
 
-    public String getPoints_all() {
+    public Integer getPoints_all() {
         return points_all;
     }
 
-    public void setPoints_all(String points_all) {
+    public void setPoints_all(Integer points_all) {
         this.points_all = points_all;
     }
 
