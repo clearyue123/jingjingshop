@@ -456,7 +456,7 @@
 		FROM
 			tb_goods t
 	    <where>
-	        t1.is_delete = '0'
+	        t.is_delete = '0'
 	        <if test="searchGoodsName != null">
 	         and t.goods_name LIKE CONCAT(
 				'%',
