@@ -15,9 +15,9 @@ import entity.PageResult;
 import entity.Result;
 
 /**
- * 品牌管理的控制层的类
- * @author yjj
- *
+ * @desc:品牌管理
+ * @author:yue
+ * @date:2019.5.16
  */
 @RestController
 @RequestMapping("/brand")

@@ -14,10 +14,11 @@ import com.pinyougou.service.sellergoods.GoodsDescService;
 
 import entity.PageResult;
 import entity.Result;
+
 /**
- * controller
- * @author Administrator
- *
+ * @desc:商品详情控制层
+ * @author:yue
+ * @date:2019.5.16
  */
 @RestController
 @RequestMapping("/goodsDesc")

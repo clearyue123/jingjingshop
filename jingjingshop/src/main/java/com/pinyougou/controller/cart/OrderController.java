@@ -359,6 +359,7 @@ public class OrderController {
 				    	tbOrderSpe.setSpeOpId(tbShopCartSpe.getSpeOpId());
 				    	orderSpeMapper.insert(tbOrderSpe);
 					}
+					cartService.delTbShopCart(cartId);
 				}
 				tbOrder.setItemNum(itemNum);
 				tbOrder.setPayment(payment);
@@ -420,13 +421,15 @@ public class OrderController {
 				tbOrderItem.setNum(Integer.parseInt(num));
 				tbOrderItem.setGoodsId(Long.parseLong(goodsId));
 			    tbOrderItem.setCartId(0L);
-			    for(int i=0;i<speIds.length;i++){
-			    	TbOrderSpe tbOrderSpe = new TbOrderSpe();
-			    	tbOrderSpe.setOrderId(orderId);
-			    	tbOrderSpe.setGoodsId(Long.parseLong(goodsId));
-			    	tbOrderSpe.setSpeId(Long.parseLong(speIds[i]));
-			    	tbOrderSpe.setSpeOpId(Long.parseLong(speOpIds[i]));
-			    	orderSpeMapper.insert(tbOrderSpe);
+			    if(speIds!=null&&speIds.length>0){
+			    	for(int i=0;i<speIds.length;i++){
+				    	TbOrderSpe tbOrderSpe = new TbOrderSpe();
+				    	tbOrderSpe.setOrderId(orderId);
+				    	tbOrderSpe.setGoodsId(Long.parseLong(goodsId));
+				    	tbOrderSpe.setSpeId(Long.parseLong(speIds[i]));
+				    	tbOrderSpe.setSpeOpId(Long.parseLong(speOpIds[i]));
+				    	orderSpeMapper.insert(tbOrderSpe);
+				    }	
 			    }
 			    orderItemMapper.insert(tbOrderItem);
 			    orderService.add(tbOrder);

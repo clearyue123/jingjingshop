@@ -22,8 +22,9 @@ import entity.PageResult;
 import entity.Result;
 
 /**
- * controller
- * @author yue
+ * @desc:商品管理控制层
+ * @author:yue
+ * @date:2019.5.16
  */
 @RestController
 @RequestMapping("/goods")
@@ -78,7 +79,6 @@ public class GoodsController {
 	@RequestMapping("/update")
 	public Object update(@RequestBody Map<String,String> goodsMap) {
 		try {
-			System.out.println(goodsMap);
 			goodsService.update(goodsMap);
 			return new ApiResult(200, "修改成功","");
 		} catch (Exception e) {

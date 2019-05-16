@@ -304,8 +304,8 @@ public class GoodsServiceImpl implements GoodsService {
 	 * 修改
 	 */
 	public void update(Map<String,String> goodsMap){
-		  TbGoods tbGoods = new TbGoods();
 		  String goodsId =(String)goodsMap.get("goodsId");
+		  TbGoods tbGoods = goodsMapper.selectByPrimaryKey(Long.parseLong(goodsId));
 		  String isMarketable = (String)goodsMap.get("isMarketable").toString();
 		  String isEnableSpec = (String)goodsMap.get("isEnableSpec").toString();
 		  String categoryId = (String)goodsMap.get("categoryId");
@@ -318,18 +318,18 @@ public class GoodsServiceImpl implements GoodsService {
 		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String introduce = (String)goodsMap.get("introduce");
-		  tbGoods.setId(Long.parseLong(goodsId));
-		  tbGoods.setBrandId(Long.parseLong(brandId));
+	      tbGoods.setBrandId(Long.parseLong(brandId));
 		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
 		  tbGoods.setSellerId(sellerId);
 		  tbGoods.setGoodsName(goodsName);
 		  tbGoods.setIsEnableSpec(isEnableSpec);
 		  tbGoods.setIsMarketable(isMarketable);
-		  tbGoods.setIsDelete("0");
 		  tbGoods.setPrice(new BigDecimal(price));
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
-		  tbGoods.setSmallPic(smallPic);
 		  tbGoods.setType(goodsType);
+		  if(smallPic.trim().length()>0){
+			  tbGoods.setSmallPic(smallPic);
+		  }
 		  TbGoodsDescExample goodsDescEmp = new TbGoodsDescExample();
 		  com.pinyougou.pojo.TbGoodsDescExample.Criteria cri = goodsDescEmp.createCriteria();
 		  cri.andGoodsIdEqualTo(Long.parseLong(goodsId));
