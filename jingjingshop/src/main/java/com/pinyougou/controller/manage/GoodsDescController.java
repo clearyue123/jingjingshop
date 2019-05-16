@@ -138,8 +138,11 @@ public class GoodsDescController {
 	public ApiResult getGoodsDescDetails(@RequestParam(required=true,value="goodsId")String goodsId){
 		try{
 			Map<String,Object> data = goodsDescService.showGoodsDetail(Long.parseLong(goodsId));
+			String itemImages = (String)data.get("itemImages");
+			String[] itemImageStrs = itemImages.split(",");
 			List<Map<String, Object>> speData = goodsDescService.findSpeListByGoodsId(Long.parseLong(goodsId));
 			data.put("speData", speData);
+			data.put("itemImages", itemImageStrs);
 			return new ApiResult(200,"获取成功",data);
 		}catch(Exception e){
 			e.printStackTrace();
