@@ -285,7 +285,7 @@ public class RepresentativeController {
             //因为银行卡只能去新增一次相同的所以判断是否重复
             TbCard card = representativeService.FindCard(cid);
             String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
-            mycard="**** **** ****"+mycard.substring(mycard.length()-4);
+            mycard="************"+mycard.substring(mycard.length()-4);
             card.setCpoint(mycard);
             return new ApiResult(200, "查询成功", card);
         } catch (Exception e) {
@@ -325,6 +325,7 @@ public class RepresentativeController {
 
     }
 
+
     /**
      * 编辑银行卡
      */
@@ -335,6 +336,8 @@ public class RepresentativeController {
                               @RequestParam(required = false, value = "cphone") String cphone,
                               @RequestParam(required = false, value = "cid") String cid) {
         try {
+            //银行卡加密
+            cpoint=new BASE64Encoder().encodeBuffer(cpoint.getBytes());
             TbCard card = new TbCard(cid, cpoint, cname, cphone);
             representativeService.EditCard(card);
             return new ApiResult(200, "编辑成功", "编辑成功");
@@ -343,6 +346,7 @@ public class RepresentativeController {
         }
         return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
     }
+
 
     /**
      * 根据代表查询医生信息
