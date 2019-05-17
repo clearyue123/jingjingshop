@@ -1,11 +1,13 @@
 package com.pinyougou.service.evaluate.impl;
 
-import com.pinyougou.mapper.TbOrderEvaluateMapper;
-import com.pinyougou.service.evaluate.EvaluateService;
+import java.util.Date;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import com.pinyougou.mapper.TbOrderEvaluateMapper;
+import com.pinyougou.service.evaluate.EvaluateService;
 
 @Service
 public class EvaluateServiceImpl implements EvaluateService {
@@ -21,6 +23,8 @@ public class EvaluateServiceImpl implements EvaluateService {
             for(int i=0;i<goodsIds.length;i++){
                 paramMap.put("goodsId",goodsIds[i]);
                 paramMap.put("goodsEvaluateMsg",goodsEvaluateMsgs[i]);
+                paramMap.put("evaluateDate", new Date());
+                paramMap.put("isDeleted", "0");
                 evaluateMapper.insertEvaluate(paramMap);
             }
         }

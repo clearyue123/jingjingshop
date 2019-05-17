@@ -299,7 +299,9 @@
                goods_evaluate_score,
                seller_evaluate_score,
                ship_speed_score,
-               ship_service_score
+               ship_service_score,
+               evaluate_date,
+               is_deleted
             )
         values
             (#{id},
@@ -310,7 +312,9 @@
              #{goodsEvaluateScore},
              #{sellerEvaluateScore},
              #{shipSpeedScore},
-             #{shipServiceScore}
+             #{shipServiceScore},
+             #{evaluateDate},
+             #{isDeleted}
             )
     </insert>
 
