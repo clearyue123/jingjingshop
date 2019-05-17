@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pinyougou.mapper.TbOrderEvaluateMapper" >
+
+    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbOrderEvaluate" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="BIGINT" />
+        <result column="order_id" property="orderId" jdbcType="BIGINT" />
+        <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
+        <result column="goods_evaluate_msg" property="goodsEvaluateMsg" jdbcType="VARCHAR" />
+        <result column="goods_evaluate_score" property="goodsEvaluateScore" jdbcType="REAL" />
+        <result column="seller_evaluate_score" property="sellerEvaluateScore" jdbcType="REAL" />
+        <result column="ship_speed_score" property="shipSpeedScore" jdbcType="REAL" />
+        <result column="ship_service_score" property="shipServiceScore" jdbcType="REAL" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, user_id, order_id, goods_id, goods_evaluate_msg, goods_evaluate_score, seller_evaluate_score, 
+        ship_speed_score, ship_service_score
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbOrderEvaluateExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_order_evaluate
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_order_evaluate
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from tb_order_evaluate
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbOrderEvaluateExample" >
+        delete from tb_order_evaluate
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.pinyougou.pojo.TbOrderEvaluate" >
+        insert into tb_order_evaluate (id, user_id, order_id, 
+            goods_id, goods_evaluate_msg, goods_evaluate_score, 
+            seller_evaluate_score, ship_speed_score, ship_service_score
+            )
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+            #{goodsId,jdbcType=BIGINT}, #{goodsEvaluateMsg,jdbcType=VARCHAR}, #{goodsEvaluateScore,jdbcType=REAL}, 
+            #{sellerEvaluateScore,jdbcType=REAL}, #{shipSpeedScore,jdbcType=REAL}, #{shipServiceScore,jdbcType=REAL}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbOrderEvaluate" >
+        insert into tb_order_evaluate
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="orderId != null" >
+                order_id,
+            </if>
+            <if test="goodsId != null" >
+                goods_id,
+            </if>
+            <if test="goodsEvaluateMsg != null" >
+                goods_evaluate_msg,
+            </if>
+            <if test="goodsEvaluateScore != null" >
+                goods_evaluate_score,
+            </if>
+            <if test="sellerEvaluateScore != null" >
+                seller_evaluate_score,
+            </if>
+            <if test="shipSpeedScore != null" >
+                ship_speed_score,
+            </if>
+            <if test="shipServiceScore != null" >
+                ship_service_score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsId != null" >
+                #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsEvaluateMsg != null" >
+                #{goodsEvaluateMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsEvaluateScore != null" >
+                #{goodsEvaluateScore,jdbcType=REAL},
+            </if>
+            <if test="sellerEvaluateScore != null" >
+                #{sellerEvaluateScore,jdbcType=REAL},
+            </if>
+            <if test="shipSpeedScore != null" >
+                #{shipSpeedScore,jdbcType=REAL},
+            </if>
+            <if test="shipServiceScore != null" >
+                #{shipServiceScore,jdbcType=REAL},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.pinyougou.pojo.TbOrderEvaluateExample" resultType="java.lang.Integer" >
+        select count(*) from tb_order_evaluate
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_order_evaluate
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.userId != null" >
+                user_id = #{record.userId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orderId != null" >
+                order_id = #{record.orderId,jdbcType=BIGINT},
+            </if>
+            <if test="record.goodsId != null" >
+                goods_id = #{record.goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="record.goodsEvaluateMsg != null" >
+                goods_evaluate_msg = #{record.goodsEvaluateMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.goodsEvaluateScore != null" >
+                goods_evaluate_score = #{record.goodsEvaluateScore,jdbcType=REAL},
+            </if>
+            <if test="record.sellerEvaluateScore != null" >
+                seller_evaluate_score = #{record.sellerEvaluateScore,jdbcType=REAL},
+            </if>
+            <if test="record.shipSpeedScore != null" >
+                ship_speed_score = #{record.shipSpeedScore,jdbcType=REAL},
+            </if>
+            <if test="record.shipServiceScore != null" >
+                ship_service_score = #{record.shipServiceScore,jdbcType=REAL},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_order_evaluate
+        set id = #{record.id,jdbcType=BIGINT},
+            user_id = #{record.userId,jdbcType=BIGINT},
+            order_id = #{record.orderId,jdbcType=BIGINT},
+            goods_id = #{record.goodsId,jdbcType=BIGINT},
+            goods_evaluate_msg = #{record.goodsEvaluateMsg,jdbcType=VARCHAR},
+            goods_evaluate_score = #{record.goodsEvaluateScore,jdbcType=REAL},
+            seller_evaluate_score = #{record.sellerEvaluateScore,jdbcType=REAL},
+            ship_speed_score = #{record.shipSpeedScore,jdbcType=REAL},
+            ship_service_score = #{record.shipServiceScore,jdbcType=REAL}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbOrderEvaluate" >
+        update tb_order_evaluate
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null" >
+                order_id = #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsId != null" >
+                goods_id = #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsEvaluateMsg != null" >
+                goods_evaluate_msg = #{goodsEvaluateMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsEvaluateScore != null" >
+                goods_evaluate_score = #{goodsEvaluateScore,jdbcType=REAL},
+            </if>
+            <if test="sellerEvaluateScore != null" >
+                seller_evaluate_score = #{sellerEvaluateScore,jdbcType=REAL},
+            </if>
+            <if test="shipSpeedScore != null" >
+                ship_speed_score = #{shipSpeedScore,jdbcType=REAL},
+            </if>
+            <if test="shipServiceScore != null" >
+                ship_service_score = #{shipServiceScore,jdbcType=REAL},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbOrderEvaluate" >
+        update tb_order_evaluate
+        set user_id = #{userId,jdbcType=BIGINT},
+            order_id = #{orderId,jdbcType=BIGINT},
+            goods_id = #{goodsId,jdbcType=BIGINT},
+            goods_evaluate_msg = #{goodsEvaluateMsg,jdbcType=VARCHAR},
+            goods_evaluate_score = #{goodsEvaluateScore,jdbcType=REAL},
+            seller_evaluate_score = #{sellerEvaluateScore,jdbcType=REAL},
+            ship_speed_score = #{shipSpeedScore,jdbcType=REAL},
+            ship_service_score = #{shipServiceScore,jdbcType=REAL}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <insert id="insertEvaluate" parameterType="java.util.Map" >
+        insert into tb_order_evaluate
+              (id,
+               user_id,
+               order_id,
+               goods_id,
+               goods_evaluate_msg,
+               goods_evaluate_score,
+               seller_evaluate_score,
+               ship_speed_score,
+               ship_service_score
+            )
+        values
+            (#{id},
+             #{userId},
+             #{orderId},
+             #{goodsId},
+             #{goodsEvaluateMsg},
+             #{goodsEvaluateScore},
+             #{sellerEvaluateScore},
+             #{shipSpeedScore},
+             #{shipServiceScore}
+            )
+    </insert>
+
+</mapper>
