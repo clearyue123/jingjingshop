@@ -195,7 +195,7 @@ public class DoctorController {
 	public ApiResult FindByPontList(@RequestParam(required = false, value = "did") String did
 	) {
 		try {
-			TbPointList tbPointList = doctorService.FindByPontList(did);
+			List<TbPointList> tbPointList = doctorService.FindByPontList(did);
 			if (tbPointList != null) {
 				return new ApiResult(200, "查询成功", tbPointList);
 			} else {
@@ -217,10 +217,10 @@ public class DoctorController {
 	 * 查询銀行卡
 	 */
 	@RequestMapping("/findcard")
-	public ApiResult findcard( @RequestParam(required = false, value = "cid") String cid) {
+	public ApiResult findcard( @RequestParam(required = false, value = "cdid") String cdid) {
 		try {
 			//查询银行卡信息
-			TbCard card = doctorService.FindCard(cid);
+			TbCard card = doctorService.FindCard(cdid);
 			if(card!=null){
 				String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
 				mycard="************"+mycard.substring(mycard.length()-4);

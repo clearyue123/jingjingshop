@@ -304,13 +304,13 @@ public class RepresentativeController {
     }
 
     /**
-     * 查詢銀行卡
+     * 查询銀行卡
      */
     @RequestMapping("/findcard")
-    public ApiResult findcard( @RequestParam(required = false, value = "cid") String cid) {
+    public ApiResult findcard( @RequestParam(required = false, value = "crid") String crid) {
         try {
             //因为银行卡只能去新增一次相同的所以判断是否重复
-            TbCard card = representativeService.FindCard(cid);
+            TbCard card = representativeService.FindCard(crid);
             if(card!=null){
                 String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
                 mycard="************"+mycard.substring(mycard.length()-4);

@@ -65,7 +65,7 @@ public interface DoctorService {
 
 	public  int addPointList(TbPointList tbPointList);
 
-	public  TbPointList  FindByPontList(String rid);
+	public   List<TbPointList>  FindByPontList(String rid);
 
 	public String FindByRoleRid();
 

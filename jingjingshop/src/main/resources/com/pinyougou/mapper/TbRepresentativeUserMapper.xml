@@ -91,7 +91,7 @@
 
     <!--查询银行卡-->
     <select  id="FindCard"   resultType="com.pinyougou.pojo.TbCard"  parameterType="java.lang.String">
-    SELECT *  FROM  tb_card  WHERE   crid=#{cid}
+    SELECT *  FROM  tb_card  WHERE   crid=#{crid}
 </select>
 
 
@@ -227,7 +227,7 @@ WHERE  r.rid=#{rid}
 
 
 <!--    查询积分记录-->
-    <select id="FindByPontList"  parameterType="java.lang.String"  resultType="java.util.List">
+    <select id="FindByPontList"  parameterType="java.lang.String"  resultType="com.pinyougou.pojo.TbPointList">
          SELECT  *  FROM  tb_pointlist  WHERE  rid=#{rid}
     </select>
 
