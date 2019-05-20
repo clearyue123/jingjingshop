@@ -61,6 +61,9 @@ public class DoctorController {
 	) {
 		try {
 			String s = doctorService.FindPointRequestByPrid(did);
+            if(s!=null){
+                return new ApiResult(200, "获取成功", s);
+            }
 			return new ApiResult(200, "获取成功", s);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,8 +155,8 @@ public class DoctorController {
 	 */
 	@RequestMapping("/SubmitPointRequest")
 	public ApiResult SubmitPointRequest(@RequestParam(required = false, value = "did") String did,
-										@RequestParam(required = false, value = "point") Integer point,
-										@RequestParam(required = false, value = "prid") String prid
+										@RequestParam(required = false, value = "point") Integer point
+
 	) {
 		try {
 			//判断在七日内是否重复提交申请  此为不重复提交申请
@@ -165,7 +168,7 @@ public class DoctorController {
 				if (byRePoints >= point) {
 					//提交到积分请求表中
 					String caction = "1";
-					TbPointRequest tbPoint = new TbPointRequest(prid, point, did,null, caction);
+					TbPointRequest tbPoint = new TbPointRequest( point, did,null, caction);
 					doctorService.SubmitPointRequest(tbPoint);
 					return new ApiResult(200, "操作成功", "兑换请求发送成功");
 				} else {
@@ -377,11 +380,11 @@ public class DoctorController {
 	public ApiResult EditCard(@RequestParam(required = false, value = "cpoint") String cpoint,
 			@RequestParam(required = false, value = "cname") String cname,
 			@RequestParam(required = false, value = "cphone") String cphone,
-							  @RequestParam(required = false, value = "cid") String cid) {
+							  @RequestParam(required = false, value = "cdid") String cdid) {
 		try {
 			cpoint=new BASE64Encoder().encodeBuffer(cpoint.getBytes());
 			TbCard card = new TbCard();
-			card.setCid(cid);
+			card.setCdid(cdid);
 			card.setCpoint(cpoint);
 			card.setCphone(cphone);
 			card.setCname(cname);

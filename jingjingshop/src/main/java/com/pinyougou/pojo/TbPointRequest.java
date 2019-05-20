@@ -53,8 +53,7 @@ public class TbPointRequest {
         this.caction=caction;
     }
 
-    public TbPointRequest(String prid, Integer point, String did, String uid, String caction) {
-        this.prid = prid;
+    public TbPointRequest(Integer point, String did, String uid, String caction) {
         this.point = point;
         this.did = did;
         this.uid = uid;

@@ -46,7 +46,10 @@ public class RepresentativeController {
     ) {
         try {
             String s = representativeService.FindPointRequestByPrid(rid);
-            return new ApiResult(200, "获取成功", s);
+            if(s!=null){
+                return new ApiResult(200, "获取成功", s);
+            }
+            return new ApiResult(200, "获取成功", "该代表无请求的标号");
         } catch (Exception e) {
             e.printStackTrace();
             return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
@@ -133,8 +136,8 @@ public class RepresentativeController {
      */
     @RequestMapping("/SubmitPointRequest")
     public ApiResult SubmitPointRequest(@RequestParam(required = false, value = "rid") String rid,
-                                        @RequestParam(required = false, value = "point") Integer point,
-                                        @RequestParam(required = false, value = "prid") String prid
+                                        @RequestParam(required = false, value = "point") Integer point
+//                                        @RequestParam(required = false, value = "prid") String prid
     ) {
         try {
             //判断在七日内是否重复提交申请  此为不重复提交申请
@@ -146,7 +149,7 @@ public class RepresentativeController {
                 if (byRePoints >= point) {
                     //提交到积分请求表中
                     String caction = "1";
-                    TbPointRequest tbPoint = new TbPointRequest(prid, point, rid, caction);
+                    TbPointRequest tbPoint = new TbPointRequest(null, point, rid, caction);
                     representativeService.SubmitPointRequest(tbPoint);
                     return new ApiResult(200, "操作成功", "兑换请求发送成功");
                 } else {
@@ -364,11 +367,11 @@ public class RepresentativeController {
     public ApiResult EditCard(@RequestParam(required = false, value = "cpoint") String cpoint,
                               @RequestParam(required = false, value = "cname") String cname,
                               @RequestParam(required = false, value = "cphone") String cphone,
-                              @RequestParam(required = false, value = "cid") String cid) {
+                              @RequestParam(required = false, value = "crid") String crid) {
         try {
             //银行卡加密
             cpoint=new BASE64Encoder().encodeBuffer(cpoint.getBytes());
-            TbCard card = new TbCard(cid, cpoint, cname, cphone);
+            TbCard card = new TbCard(crid, cpoint, cname, cphone);
             representativeService.EditCard(card);
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {

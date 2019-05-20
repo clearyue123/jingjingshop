@@ -7,11 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fc81eee-7fd3-43cf-af49-3f58d0b9c91b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/doctor/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/doctor/DoctorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbDocUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbDocUserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/DoctorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/DoctorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/impl/DoctorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/impl/DoctorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocUserMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml" afterDir="false" />
     </list>
@@ -31,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/doctor/DoctorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="547">
-              <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
+            <state relative-caret-position="122">
+              <caret line="158" lean-forward="true" selection-start-line="158" selection-end-line="158" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,34 +41,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbDocUserMapper.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbCard.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="422">
+              <caret line="149" column="31" lean-forward="true" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="347">
+              <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocUserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="62" column="25" lean-forward="true" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/DoctorService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/impl/DoctorServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="142" column="13" lean-forward="true" selection-start-line="142" selection-start-column="13" selection-end-line="142" selection-end-column="13" />
-              <folding>
-                <element signature="e#643#644#0" expanded="true" />
-                <element signature="e#703#704#0" expanded="true" />
-                <element signature="e#3381#3382#0" expanded="true" />
-                <element signature="e#3430#3431#0" expanded="true" />
-              </folding>
+              <caret line="183" column="34" selection-start-line="183" selection-start-column="16" selection-end-line="183" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -84,9 +99,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rid</find>
-      <find>findByRePoints</find>
-      <find>SubmitPointRequest</find>
       <find>FindReDoc</find>
       <find>script</find>
       <find>FindDocUser</find>
@@ -106,7 +118,6 @@
       <find>SELECT   points FROM  tb_representative</find>
       <find>DiscountByPoint</find>
       <find>判断是否重复请求积分</find>
-      <find>prid</find>
       <find>获取申请请求表的prid</find>
       <find>FindPointRequestByPrid</find>
       <find>银行卡</find>
@@ -114,6 +125,10 @@
       <find>查询积分记录</find>
       <find>积分</find>
       <find>FindByPontList</find>
+      <find>编辑银行卡</find>
+      <find>SubmitPointRequest</find>
+      <find>prid</find>
+      <find>findprid</find>
     </findStrings>
     <replaceStrings>
       <replace>TbDoc tbDoc</replace>
@@ -141,15 +156,16 @@
         <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbDocUser.java" />
         <option value="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbRepresentative.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocUserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/doctor/DoctorController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbDocUserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/DoctorService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/service/doctor/impl/DoctorServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocUserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbCard.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/doctor/DoctorController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java" />
       </list>
     </option>
   </component>
@@ -172,6 +188,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -212,7 +230,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="pinyougou" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
@@ -221,19 +239,8 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="pinyougou" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="doctor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jingjingshop" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="pinyougou" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="doctor" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="representative" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jingjingshop" type="b2602c69:ProjectViewProjectNode" />
@@ -251,8 +258,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -364,7 +369,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27132195" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2739872" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -602,13 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-500">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbDocUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -625,44 +623,6 @@
             <element signature="e#1552#1553#0" expanded="true" />
             <element signature="e#1582#1583#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="23" selection-end-line="58" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="228" column="14" selection-start-line="228" selection-start-column="7" selection-end-line="228" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocUserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="235" column="30" selection-start-line="235" selection-start-column="16" selection-end-line="235" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="257" column="9" lean-forward="true" selection-start-line="247" selection-start-column="6" selection-end-line="257" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbDocUserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="62" column="25" lean-forward="true" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -686,10 +646,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/mapper/TbDocUserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="62" column="25" lean-forward="true" selection-start-line="62" selection-start-column="7" selection-end-line="62" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbRepresentativeUserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/com/pinyougou/mapper/TbDocUserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="183" column="34" selection-start-line="183" selection-start-column="16" selection-end-line="183" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/pojo/TbPointRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/representative/RepresentativeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="149" column="31" lean-forward="true" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pinyougou/controller/doctor/DoctorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
+        <state relative-caret-position="122">
+          <caret line="158" lean-forward="true" selection-start-line="158" selection-end-line="158" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -40,8 +40,8 @@ public class TbCard {
     public TbCard() {
     }
 
-    public TbCard(String cid, String cpoint, String cname, String cphone) {
-        this.cid = cid;
+    public TbCard(String crid, String cpoint, String cname, String cphone) {
+        this.crid = crid;
         this.cpoint = cpoint;
         this.cname = cname;
         this.cphone = cphone;
