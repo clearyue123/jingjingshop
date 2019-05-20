@@ -1,5 +1,6 @@
 package com.pinyougou.controller.cart;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.mapper.TbGoodsMapper;
+import com.pinyougou.mapper.TbIndexMessageMapper;
 import com.pinyougou.mapper.TbOrderItemMapper;
 import com.pinyougou.mapper.TbOrderSpeMapper;
 import com.pinyougou.mapper.TbShopCartSpeMapper;
+import com.pinyougou.mapper.TbUserMapper;
 import com.pinyougou.pojo.TbAddress;
 import com.pinyougou.pojo.TbGoods;
+import com.pinyougou.pojo.TbIndexMessage;
 import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbOrderItem;
 import com.pinyougou.pojo.TbOrderSpe;
@@ -26,6 +30,7 @@ import com.pinyougou.pojo.TbShopCart;
 import com.pinyougou.pojo.TbShopCartSpe;
 import com.pinyougou.pojo.TbShopCartSpeExample;
 import com.pinyougou.pojo.TbShopCartSpeExample.Criteria;
+import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.cart.CartService;
 import com.pinyougou.service.order.OrderService;
 import com.pinyougou.service.user.AddressService;
@@ -56,6 +61,10 @@ public class OrderController {
 	private TbShopCartSpeMapper cartSpeMapper;
     @Autowired
     private TbGoodsMapper goodsMapper;
+    @Autowired
+    private TbIndexMessageMapper indexMsgMapper;
+    @Autowired
+    private TbUserMapper userMapper;
 	//设置id生成器
 	private IdWorker idWorker = new IdWorker();
 	/**
@@ -253,10 +262,20 @@ public class OrderController {
 	          @RequestParam(required=true,value="orderId")String orderId,
 	          @RequestParam(required=true,value="operateFlag")String operateFlag){
 		try{
+			TbUser tbUser = userMapper.selectByPrimaryKey(Long.parseLong(userId));
+			String userName = tbUser.getName();
 			if("0".equals(operateFlag)){//取消订单
 				orderService.delOrderById(Long.parseLong(userId));
 				return new ApiResult(200, "已取消订单","");
 			}else if("1".equals(operateFlag)){//提醒发货
+				TbIndexMessage indexMsg = new TbIndexMessage();
+				indexMsg.setType("1");
+				String msg = "提醒发货：用户"+userName+"提醒您对订单"+orderId+"及时发货."
+				              +new SimpleDateFormat("yyyy-MM-dd E a HH:mm:ss").format(new Date());
+				indexMsg.setContent(msg);
+				indexMsg.setCreateDate(new Date());
+				indexMsg.setIsDelete("0");
+				indexMsgMapper.insert(indexMsg);
 				return new ApiResult(200, "已提醒发货","");
 			}else{//已收货
 				Map<String,Object> paramMap = new HashMap<>();
