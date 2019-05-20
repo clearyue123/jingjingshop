@@ -36,6 +36,26 @@ public class RepresentativeController {
      */
 
 
+
+    /**
+     * 获取积分请求表的prid
+     */
+
+    @RequestMapping("/findprid")
+    public ApiResult editscript(@RequestParam(required = false, value = "rid") String rid
+    ) {
+        try {
+            String s = representativeService.FindPointRequestByPrid(rid);
+            return new ApiResult(200, "获取成功", s);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
+        }
+
+    }
+
+
+
     /**
      * 编辑script
      */
