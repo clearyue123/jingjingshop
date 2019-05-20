@@ -1,6 +1,10 @@
 package com.pinyougou.controller.manage;
 
 import com.pinyougou.common.ApiResult;
+import com.pinyougou.mapper.TbOrderEvaluateMapper;
+import com.pinyougou.pojo.TbOrderEvaluate;
+import com.pinyougou.pojo.TbOrderEvaluateExample;
+import com.pinyougou.pojo.TbOrderEvaluateExample.Criteria;
 import com.pinyougou.service.evaluate.EvaluateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +27,8 @@ public class EvaluateController {
 
     @Autowired
     private EvaluateService evaluateService;
+    @Autowired
+    private TbOrderEvaluateMapper evaluaterMapper;
 
     /**
      * 商品发表评论
@@ -61,5 +68,28 @@ public class EvaluateController {
             e.printStackTrace();
             return new ApiResult(201,"评论失败","");
         }
+    }
+    
+    /**
+     * 评论列表
+     * @param goodsId 商品id
+     * @return
+     */
+    @RequestMapping("/evaluateList")
+    public Object evaluateList(@RequestParam(value="goodsId",required=true)String goodsId){
+    	try{
+    		TbOrderEvaluateExample evalusateExample = new TbOrderEvaluateExample();
+    		Criteria cri = evalusateExample.createCriteria();
+    		cri.andGoodsIdEqualTo(Long.parseLong(goodsId));
+    		List<TbOrderEvaluate> evaluateList = evaluaterMapper.selectByExample(evalusateExample);
+    		Integer totalCount = evaluaterMapper.countByExample(evalusateExample);
+    		Map<String,Object> data = new HashMap<String,Object>();
+    		data.put("evaluateList", evaluateList);
+    		data.put("totalCount", totalCount);
+    		return new ApiResult(200, "商品评价列表查询成功！",data);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return new ApiResult(201, "商品评价列表查询失败！","");
+    	}
     }
 }

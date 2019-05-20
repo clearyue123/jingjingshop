@@ -15,7 +15,6 @@ import com.pinyougou.pojo.TbUserExample.Criteria;
 import com.pinyougou.service.user.UserService;
 
 import entity.PageResult;
-import util.TimeUtils;
 
 /**
  * 服务实现层
@@ -97,17 +96,8 @@ public class UserServiceImpl implements UserService {
             if (user.getUsername() != null && user.getUsername().length() > 0) {
                 criteria.andUsernameLike("%" + user.getUsername() + "%");
             }
-            if (user.getPassword() != null && user.getPassword().length() > 0) {
-                criteria.andPasswordLike("%" + user.getPassword() + "%");
-            }
             if (user.getPhone() != null && user.getPhone().length() > 0) {
                 criteria.andPhoneLike("%" + user.getPhone() + "%");
-            }
-            if (user.getEmail() != null && user.getEmail().length() > 0) {
-                criteria.andEmailLike("%" + user.getEmail() + "%");
-            }
-            if (user.getSourceType() != null && user.getSourceType().length() > 0) {
-                criteria.andSourceTypeLike("%" + user.getSourceType() + "%");
             }
             if (user.getNickName() != null && user.getNickName().length() > 0) {
                 criteria.andNickNameLike("%" + user.getNickName() + "%");
@@ -115,27 +105,16 @@ public class UserServiceImpl implements UserService {
             if (user.getName() != null && user.getName().length() > 0) {
                 criteria.andNameLike("%" + user.getName() + "%");
             }
-            if (user.getStatus() != null && user.getStatus().length() > 0) {
-                criteria.andStatusLike("%" + user.getStatus() + "%");
-            }
-            if (user.getHeadPic() != null && user.getHeadPic().length() > 0) {
-                criteria.andHeadPicLike("%" + user.getHeadPic() + "%");
-            }
             if (user.getWxCode()!= null && user.getWxCode().length() > 0) {
                 criteria.andWxCodeLike("%" + user.getWxCode() + "%");
             }
-            if (user.getIsMobileCheck() != null && user.getIsMobileCheck().length() > 0) {
-                criteria.andIsMobileCheckLike("%" + user.getIsMobileCheck() + "%");
-            }
-            if (user.getIsEmailCheck() != null && user.getIsEmailCheck().length() > 0) {
-                criteria.andIsEmailCheckLike("%" + user.getIsEmailCheck() + "%");
-            }
-            if (user.getSex() != null && user.getSex().length() > 0) {
-                criteria.andSexLike("%" + user.getSex() + "%");
-            }
-
         }
         List<TbUser> userList = userMapper.selectByExample(example);
+        for(int i=0;i<userList.size();i++){
+        	TbUser userModel = userList.get(i);
+        	String sex = userModel.getSex()==null?"1":userModel.getSex();
+        	userModel.setSex(sex.equals("1")?"男":"女");
+        }
         PageInfo<TbUser> page = new PageInfo<>(userList);
         return new PageResult(page.getTotal(), page.getList());
     }

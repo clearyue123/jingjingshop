@@ -31,11 +31,6 @@ public class UserController {
      * @param user
      * @return
      */
-    /**
-     * 修改
-     * @param user
-     * @return
-     */
     @RequestMapping("/userupdate")
     public ApiResult userupdate(@RequestParam(required = false, value = "id" ) Long id,
                                 @RequestParam(required = false, value = "username" ) String  username,

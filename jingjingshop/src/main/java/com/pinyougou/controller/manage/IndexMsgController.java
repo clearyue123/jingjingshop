@@ -14,6 +14,11 @@ import com.pinyougou.pojo.TbIndexMessage;
 import com.pinyougou.pojo.TbIndexMessageExample;
 import com.pinyougou.pojo.TbIndexMessageExample.Criteria;
 
+/**
+ * @desc:后台消息管理
+ * @author:yue
+ * @date:2019.5.20
+ */
 @RestController
 @RequestMapping("/indexMsg")
 public class IndexMsgController {
