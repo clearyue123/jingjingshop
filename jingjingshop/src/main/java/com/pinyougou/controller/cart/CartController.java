@@ -19,8 +19,9 @@ import com.pinyougou.service.cart.CartService;
 import util.IdWorker;
 
 /**
- * 购物车 控制层
- * @author yue
+ * @desc:购物车 控制层
+ * @author:yue
+ * @date:2019.5.20
  */
 @RestController
 @RequestMapping("/cart")

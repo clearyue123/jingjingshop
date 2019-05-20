@@ -1,8 +1,6 @@
 package com.pinyougou.controller.cart;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +18,9 @@ import com.pinyougou.service.user.AddressService;
 import entity.PageResult;
 import entity.Result;
 /**
- * controller
- * @author yue
- *
+ * @desc:地址管理
+ * @author:yue
+ * @date:2019.5.20
  */
 @RestController
 @RequestMapping("/address")
@@ -155,30 +153,34 @@ public class AddressController {
 			          @RequestParam(required = false,value = "alias")String alias,
 			          @RequestParam(required=false,value="notes")String notes){
 		try {
-			TbAddress tbAddress = new TbAddress();
-			tbAddress.setUserId(userId);
-			tbAddress.setProvinceId(provinceId);
-			tbAddress.setCityId(cityId);
-			tbAddress.setTownId(townId);
-			tbAddress.setMobile(mobile);
-			tbAddress.setAddress(address);
-			tbAddress.setContact(contact);
-			tbAddress.setAlias(alias);
-			tbAddress.setIsDefault("1");//是否默认地址 1:是 0:否
-			tbAddress.setNotes(notes);
-			TbAddressExample addressExample = new TbAddressExample();
-			Criteria criteria = addressExample.createCriteria();
-			criteria.andUserIdEqualTo(userId);
-			List<TbAddress> adddList = addressMapper.selectByExample(addressExample);
-			if(adddList!=null&&adddList.size()!=0){
-				tbAddress.setId(adddList.get(0).getId());
-				tbAddress.setCreateDate(adddList.get(0).getCreateDate());
-				addressMapper.updateByPrimaryKey(tbAddress);
-				return new ApiResult(200, "地址修改成功", "");
+			if("undefined".equals(address)){
+				return new ApiResult(201, "请输入正确格式地址！", "");
 			}else{
-				tbAddress.setCreateDate(new Date());
-				addressService.add(tbAddress);
-				return new ApiResult(200, "地址新增成功", "");
+				TbAddress tbAddress = new TbAddress();
+				tbAddress.setUserId(userId);
+				tbAddress.setProvinceId(provinceId);
+				tbAddress.setCityId(cityId);
+				tbAddress.setTownId(townId);
+				tbAddress.setMobile(mobile);
+				tbAddress.setAddress(address);
+				tbAddress.setContact(contact);
+				tbAddress.setAlias(alias);
+				tbAddress.setIsDefault("1");//是否默认地址 1:是 0:否
+				tbAddress.setNotes(notes);
+				TbAddressExample addressExample = new TbAddressExample();
+				Criteria criteria = addressExample.createCriteria();
+				criteria.andUserIdEqualTo(userId);
+				List<TbAddress> adddList = addressMapper.selectByExample(addressExample);
+				if(adddList!=null&&adddList.size()!=0){
+					tbAddress.setId(adddList.get(0).getId());
+					tbAddress.setCreateDate(adddList.get(0).getCreateDate());
+					addressMapper.updateByPrimaryKey(tbAddress);
+					return new ApiResult(200, "地址修改成功", "");
+				}else{
+					tbAddress.setCreateDate(new Date());
+					addressService.add(tbAddress);
+					return new ApiResult(200, "地址新增成功", "");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

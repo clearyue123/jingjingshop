@@ -314,7 +314,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  String sellerId = (String)goodsMap.get("sellerId");
 		  String price = (String)goodsMap.get("price");
 		  String reducedPrice = (String)goodsMap.get("reducedPrice");
-		  String smallPic = (String)goodsMap.get("smallPic");
+		  String smallPic = (String)goodsMap.get("smallPic")==null?"":(String)goodsMap.get("smallPic");
 		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String introduce = (String)goodsMap.get("introduce");
