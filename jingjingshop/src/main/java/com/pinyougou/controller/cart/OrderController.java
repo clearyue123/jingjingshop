@@ -39,9 +39,9 @@ import entity.PageResult;
 import entity.Result;
 import util.IdWorker;
 /**
- * controller
+ * @desc:订单控制层
  * @author yue
- *
+ * @date:2019.5.20
  */
 @RestController
 @RequestMapping("/order")
@@ -258,20 +258,19 @@ public class OrderController {
 	@RequestMapping("/oprateOrder")
 	public Object oprateOrder(
 			  @RequestParam(required=true,value="userId")String userId,
-	          @RequestParam(required=false,value="userType")String userType,
 	          @RequestParam(required=true,value="orderId")String orderId,
 	          @RequestParam(required=true,value="operateFlag")String operateFlag){
 		try{
 			TbUser tbUser = userMapper.selectByPrimaryKey(Long.parseLong(userId));
 			String userName = tbUser.getName();
 			if("0".equals(operateFlag)){//取消订单
-				orderService.delOrderById(Long.parseLong(userId));
+				orderService.delOrderById(Long.parseLong(orderId));
 				return new ApiResult(200, "已取消订单","");
 			}else if("1".equals(operateFlag)){//提醒发货
 				TbIndexMessage indexMsg = new TbIndexMessage();
 				indexMsg.setType("1");
 				String msg = "提醒发货：用户"+userName+"提醒您对订单"+orderId+"及时发货."
-				              +new SimpleDateFormat("yyyy-MM-dd E a HH:mm:ss").format(new Date());
+				              +new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 				indexMsg.setContent(msg);
 				indexMsg.setCreateDate(new Date());
 				indexMsg.setIsDelete("0");
