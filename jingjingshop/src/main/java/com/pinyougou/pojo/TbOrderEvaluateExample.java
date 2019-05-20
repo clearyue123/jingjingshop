@@ -1,6 +1,8 @@
 package com.pinyougou.pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class TbOrderEvaluateExample {
@@ -68,7 +70,7 @@ public class TbOrderEvaluateExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-05-17
+     * @date 2019-05-20
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -109,6 +111,32 @@ public class TbOrderEvaluateExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -660,6 +688,196 @@ public class TbOrderEvaluateExample {
             addCriterion("ship_service_score not between", value1, value2, "shipServiceScore");
             return (Criteria) this;
         }
+
+        public Criteria andEvaluateDateIsNull() {
+            addCriterion("evaluate_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateIsNotNull() {
+            addCriterion("evaluate_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateEqualTo(Date value) {
+            addCriterionForJDBCDate("evaluate_date =", value, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("evaluate_date <>", value, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("evaluate_date >", value, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("evaluate_date >=", value, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateLessThan(Date value) {
+            addCriterionForJDBCDate("evaluate_date <", value, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("evaluate_date <=", value, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateIn(List<Date> values) {
+            addCriterionForJDBCDate("evaluate_date in", values, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("evaluate_date not in", values, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("evaluate_date between", value1, value2, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andEvaluateDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("evaluate_date not between", value1, value2, "evaluateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIsNull() {
+            addCriterion("is_deleted is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIsNotNull() {
+            addCriterion("is_deleted is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedEqualTo(String value) {
+            addCriterion("is_deleted =", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotEqualTo(String value) {
+            addCriterion("is_deleted <>", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedGreaterThan(String value) {
+            addCriterion("is_deleted >", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedGreaterThanOrEqualTo(String value) {
+            addCriterion("is_deleted >=", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedLessThan(String value) {
+            addCriterion("is_deleted <", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedLessThanOrEqualTo(String value) {
+            addCriterion("is_deleted <=", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedLike(String value) {
+            addCriterion("is_deleted like", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotLike(String value) {
+            addCriterion("is_deleted not like", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIn(List<String> values) {
+            addCriterion("is_deleted in", values, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotIn(List<String> values) {
+            addCriterion("is_deleted not in", values, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedBetween(String value1, String value2) {
+            addCriterion("is_deleted between", value1, value2, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotBetween(String value1, String value2) {
+            addCriterion("is_deleted not between", value1, value2, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreIsNull() {
+            addCriterion("goods_package_score is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreIsNotNull() {
+            addCriterion("goods_package_score is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreEqualTo(Float value) {
+            addCriterion("goods_package_score =", value, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreNotEqualTo(Float value) {
+            addCriterion("goods_package_score <>", value, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreGreaterThan(Float value) {
+            addCriterion("goods_package_score >", value, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreGreaterThanOrEqualTo(Float value) {
+            addCriterion("goods_package_score >=", value, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreLessThan(Float value) {
+            addCriterion("goods_package_score <", value, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreLessThanOrEqualTo(Float value) {
+            addCriterion("goods_package_score <=", value, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreIn(List<Float> values) {
+            addCriterion("goods_package_score in", values, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreNotIn(List<Float> values) {
+            addCriterion("goods_package_score not in", values, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreBetween(Float value1, Float value2) {
+            addCriterion("goods_package_score between", value1, value2, "goodsPackageScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsPackageScoreNotBetween(Float value1, Float value2) {
+            addCriterion("goods_package_score not between", value1, value2, "goodsPackageScore");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -674,7 +892,7 @@ public class TbOrderEvaluateExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-05-17
+     * @date 2019-05-20
      */
     public static class Criterion {
         private String condition;

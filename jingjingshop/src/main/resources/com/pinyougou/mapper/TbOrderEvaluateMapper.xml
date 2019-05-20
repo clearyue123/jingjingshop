@@ -12,6 +12,9 @@
         <result column="seller_evaluate_score" property="sellerEvaluateScore" jdbcType="REAL" />
         <result column="ship_speed_score" property="shipSpeedScore" jdbcType="REAL" />
         <result column="ship_service_score" property="shipServiceScore" jdbcType="REAL" />
+        <result column="evaluate_date" property="evaluateDate" jdbcType="DATE" />
+        <result column="is_deleted" property="isDeleted" jdbcType="VARCHAR" />
+        <result column="goods_package_score" property="goodsPackageScore" jdbcType="REAL" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -76,7 +79,7 @@
 
     <sql id="Base_Column_List" >
         id, user_id, order_id, goods_id, goods_evaluate_msg, goods_evaluate_score, seller_evaluate_score, 
-        ship_speed_score, ship_service_score
+        ship_speed_score, ship_service_score, evaluate_date, is_deleted, goods_package_score
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbOrderEvaluateExample" >
@@ -116,11 +119,13 @@
     <insert id="insert" parameterType="com.pinyougou.pojo.TbOrderEvaluate" >
         insert into tb_order_evaluate (id, user_id, order_id, 
             goods_id, goods_evaluate_msg, goods_evaluate_score, 
-            seller_evaluate_score, ship_speed_score, ship_service_score
+            seller_evaluate_score, ship_speed_score, ship_service_score, 
+            evaluate_date, is_deleted, goods_package_score
             )
         values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
             #{goodsId,jdbcType=BIGINT}, #{goodsEvaluateMsg,jdbcType=VARCHAR}, #{goodsEvaluateScore,jdbcType=REAL}, 
-            #{sellerEvaluateScore,jdbcType=REAL}, #{shipSpeedScore,jdbcType=REAL}, #{shipServiceScore,jdbcType=REAL}
+            #{sellerEvaluateScore,jdbcType=REAL}, #{shipSpeedScore,jdbcType=REAL}, #{shipServiceScore,jdbcType=REAL}, 
+            #{evaluateDate,jdbcType=DATE}, #{isDeleted,jdbcType=VARCHAR}, #{goodsPackageScore,jdbcType=REAL}
             )
     </insert>
 
@@ -154,6 +159,15 @@
             <if test="shipServiceScore != null" >
                 ship_service_score,
             </if>
+            <if test="evaluateDate != null" >
+                evaluate_date,
+            </if>
+            <if test="isDeleted != null" >
+                is_deleted,
+            </if>
+            <if test="goodsPackageScore != null" >
+                goods_package_score,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -182,6 +196,15 @@
             </if>
             <if test="shipServiceScore != null" >
                 #{shipServiceScore,jdbcType=REAL},
+            </if>
+            <if test="evaluateDate != null" >
+                #{evaluateDate,jdbcType=DATE},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPackageScore != null" >
+                #{goodsPackageScore,jdbcType=REAL},
             </if>
         </trim>
     </insert>
@@ -223,6 +246,15 @@
             <if test="record.shipServiceScore != null" >
                 ship_service_score = #{record.shipServiceScore,jdbcType=REAL},
             </if>
+            <if test="record.evaluateDate != null" >
+                evaluate_date = #{record.evaluateDate,jdbcType=DATE},
+            </if>
+            <if test="record.isDeleted != null" >
+                is_deleted = #{record.isDeleted,jdbcType=VARCHAR},
+            </if>
+            <if test="record.goodsPackageScore != null" >
+                goods_package_score = #{record.goodsPackageScore,jdbcType=REAL},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -239,7 +271,10 @@
             goods_evaluate_score = #{record.goodsEvaluateScore,jdbcType=REAL},
             seller_evaluate_score = #{record.sellerEvaluateScore,jdbcType=REAL},
             ship_speed_score = #{record.shipSpeedScore,jdbcType=REAL},
-            ship_service_score = #{record.shipServiceScore,jdbcType=REAL}
+            ship_service_score = #{record.shipServiceScore,jdbcType=REAL},
+            evaluate_date = #{record.evaluateDate,jdbcType=DATE},
+            is_deleted = #{record.isDeleted,jdbcType=VARCHAR},
+            goods_package_score = #{record.goodsPackageScore,jdbcType=REAL}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -272,6 +307,15 @@
             <if test="shipServiceScore != null" >
                 ship_service_score = #{shipServiceScore,jdbcType=REAL},
             </if>
+            <if test="evaluateDate != null" >
+                evaluate_date = #{evaluateDate,jdbcType=DATE},
+            </if>
+            <if test="isDeleted != null" >
+                is_deleted = #{isDeleted,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPackageScore != null" >
+                goods_package_score = #{goodsPackageScore,jdbcType=REAL},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -285,11 +329,14 @@
             goods_evaluate_score = #{goodsEvaluateScore,jdbcType=REAL},
             seller_evaluate_score = #{sellerEvaluateScore,jdbcType=REAL},
             ship_speed_score = #{shipSpeedScore,jdbcType=REAL},
-            ship_service_score = #{shipServiceScore,jdbcType=REAL}
+            ship_service_score = #{shipServiceScore,jdbcType=REAL},
+            evaluate_date = #{evaluateDate,jdbcType=DATE},
+            is_deleted = #{isDeleted,jdbcType=VARCHAR},
+            goods_package_score = #{goodsPackageScore,jdbcType=REAL}
         where id = #{id,jdbcType=BIGINT}
     </update>
-
-    <insert id="insertEvaluate" parameterType="java.util.Map" >
+    
+     <insert id="insertEvaluate" parameterType="java.util.Map" >
         insert into tb_order_evaluate
               (id,
                user_id,
@@ -298,6 +345,7 @@
                goods_evaluate_msg,
                goods_evaluate_score,
                seller_evaluate_score,
+               goods_package_score,
                ship_speed_score,
                ship_service_score,
                evaluate_date,
@@ -311,11 +359,11 @@
              #{goodsEvaluateMsg},
              #{goodsEvaluateScore},
              #{sellerEvaluateScore},
+             #{goodsPackageScore},
              #{shipSpeedScore},
              #{shipServiceScore},
              #{evaluateDate},
              #{isDeleted}
             )
     </insert>
-
 </mapper>

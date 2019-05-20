@@ -18,10 +18,12 @@ public class EvaluateServiceImpl implements EvaluateService {
     @Override
     public void add(Map<String, Object> paramMap) {
         String[] goodsIds = (String[])paramMap.get("goodsIds");
+        String[] goodsEvaluateScores = (String[])paramMap.get("goodsEvaluateScores");
         String[] goodsEvaluateMsgs = (String[])paramMap.get("goodsEvaluateMsgs");
         if(goodsIds!=null&&goodsIds.length>0){
             for(int i=0;i<goodsIds.length;i++){
                 paramMap.put("goodsId",goodsIds[i]);
+                paramMap.put("goodsEvaluateScore",goodsEvaluateScores[i]);
                 paramMap.put("goodsEvaluateMsg",goodsEvaluateMsgs[i]);
                 paramMap.put("evaluateDate", new Date());
                 paramMap.put("isDeleted", "0");

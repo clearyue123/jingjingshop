@@ -1,11 +1,12 @@
 package com.pinyougou.mapper;
 
-import com.pinyougou.pojo.TbOrderEvaluate;
-import com.pinyougou.pojo.TbOrderEvaluateExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.pinyougou.pojo.TbOrderEvaluate;
+import com.pinyougou.pojo.TbOrderEvaluateExample;
 
 public interface TbOrderEvaluateMapper {
     int countByExample(TbOrderEvaluateExample example);
@@ -29,6 +30,6 @@ public interface TbOrderEvaluateMapper {
     int updateByPrimaryKeySelective(TbOrderEvaluate record);
 
     int updateByPrimaryKey(TbOrderEvaluate record);
-
+    
     int insertEvaluate(Map<String,Object> paramMap);
 }

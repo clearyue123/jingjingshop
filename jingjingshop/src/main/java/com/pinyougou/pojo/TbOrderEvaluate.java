@@ -1,11 +1,13 @@
 package com.pinyougou.pojo;
 
+import java.util.Date;
+
 /**
  * 
  * 
  * @author wcyong
  * 
- * @date 2019-05-17
+ * @date 2019-05-20
  */
 public class TbOrderEvaluate {
     /**
@@ -52,6 +54,21 @@ public class TbOrderEvaluate {
      * 物流评价打分
      */
     private Float shipServiceScore;
+
+    /**
+     * 评论时间
+     */
+    private Date evaluateDate;
+
+    /**
+     * 逻辑删除 1:已删除 0:未删除
+     */
+    private String isDeleted;
+
+    /**
+     * 商品包装打分
+     */
+    private Float goodsPackageScore;
 
     public Long getId() {
         return id;
@@ -123,5 +140,29 @@ public class TbOrderEvaluate {
 
     public void setShipServiceScore(Float shipServiceScore) {
         this.shipServiceScore = shipServiceScore;
+    }
+
+    public Date getEvaluateDate() {
+        return evaluateDate;
+    }
+
+    public void setEvaluateDate(Date evaluateDate) {
+        this.evaluateDate = evaluateDate;
+    }
+
+    public String getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(String isDeleted) {
+        this.isDeleted = isDeleted == null ? null : isDeleted.trim();
+    }
+
+    public Float getGoodsPackageScore() {
+        return goodsPackageScore;
+    }
+
+    public void setGoodsPackageScore(Float goodsPackageScore) {
+        this.goodsPackageScore = goodsPackageScore;
     }
 }

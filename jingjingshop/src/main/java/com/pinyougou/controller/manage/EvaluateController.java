@@ -35,8 +35,9 @@ public class EvaluateController {
      * @param userId 用户ID
      * @param orderId 订单ID
      * @param goodsIds 商品id数组
+     * @param goodsEvaluateScores 商品打分数组
      * @param goodsEvaluateMsgs 商品评论数组
-     * @param goodsEvaluateScore 商品美观打分
+     * @param goodsPackageScore 商品包装满意度打分
      * @param sellerEvaluateScore 店铺服务打分
      * @param shipSpeedScore 物流速度打分
      * @param shipServiceScore 物流服务打分
@@ -46,8 +47,9 @@ public class EvaluateController {
     public Object submitEvaluate(@RequestParam(value = "userId",required = true)String userId,
                                  @RequestParam(value = "orderId",required = true)String orderId,
                                  @RequestParam(value = "goodsIds",required = true)String[] goodsIds,
+                                 @RequestParam(value="goodsEvaluateScores",required = true)String[] goodsEvaluateScores,
                                  @RequestParam(value = "goodsEvaluateMsgs",required = true)String[] goodsEvaluateMsgs,
-                                 @RequestParam(value = "goodsEvaluateScore",required = true)String goodsEvaluateScore,
+                                 @RequestParam(value = "goodsPackageScore",required = true)String goodsPackageScore,
                                  @RequestParam(value = "sellerEvaluateScore",required = true)String sellerEvaluateScore,
                                  @RequestParam(value = "shipSpeedScore",required = true)String shipSpeedScore,
                                  @RequestParam(value = "shipServiceScore",required = true)String shipServiceScore
@@ -57,8 +59,9 @@ public class EvaluateController {
             paramMap.put("userId",userId);
             paramMap.put("orderId",orderId);
             paramMap.put("goodsIds",goodsIds);
+            paramMap.put("goodsEvaluateScores",goodsEvaluateScores);
             paramMap.put("goodsEvaluateMsgs",goodsEvaluateMsgs);
-            paramMap.put("goodsEvaluateScore",goodsEvaluateScore);
+            paramMap.put("goodsPackageScore",goodsPackageScore);
             paramMap.put("sellerEvaluateScore",sellerEvaluateScore);
             paramMap.put("shipSpeedScore",shipSpeedScore);
             paramMap.put("shipServiceScore",shipServiceScore);
