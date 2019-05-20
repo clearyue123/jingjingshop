@@ -50,9 +50,31 @@ public class DoctorController {
 	 * 2019-5-17 更新
 	 */
 
+
+
+	/**
+	 * 获取积分请求表的prid
+	 */
+
+	@RequestMapping("/findprid")
+	public ApiResult editscript(@RequestParam(required = false, value = "did") String did
+	) {
+		try {
+			String s = doctorService.FindPointRequestByPrid(did);
+			return new ApiResult(200, "获取成功", s);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
+		}
+
+	}
+
+
+
 	/**
 	 * 编辑script
 	 */
+
 
 	@RequestMapping("/editscript")
 	public ApiResult editscript(@RequestParam(required = false, value = "did") String did,
@@ -86,10 +108,9 @@ public class DoctorController {
 			map.put("uid", uid);
 			map.put("did", did);
 			int i = doctorService.dicountInnerDocUser(map);
-			System.out.println("-----------"+i);
 			//判断数据是否重复  此为不重复
 			if (i <= 0) {
-				TbDocUser tbDoc = new TbDocUser(uid, did);
+				TbDocUser tbDoc = new TbDocUser(did, uid);
 				doctorService.addInnerDocUser(tbDoc);
 				return new ApiResult(200, "新增成功", "新增成功");
 			}
@@ -144,7 +165,7 @@ public class DoctorController {
 				if (byRePoints >= point) {
 					//提交到积分请求表中
 					String caction = "1";
-					TbPointRequest tbPoint = new TbPointRequest(prid, point, did, caction);
+					TbPointRequest tbPoint = new TbPointRequest(prid, point, did,null, caction);
 					doctorService.SubmitPointRequest(tbPoint);
 					return new ApiResult(200, "操作成功", "兑换请求发送成功");
 				} else {
@@ -161,6 +182,9 @@ public class DoctorController {
 
 
 
+
+
+
 	/**
 	 * 查询积分记录表
 	 *
@@ -171,7 +195,7 @@ public class DoctorController {
 	public ApiResult FindByPontList(@RequestParam(required = false, value = "did") String did
 	) {
 		try {
-			TbPointList tbPointList = doctorService.FindByPontList(did);
+			List<TbPointList> tbPointList = doctorService.FindByPontList(did);
 			if (tbPointList != null) {
 				return new ApiResult(200, "查询成功", tbPointList);
 			} else {
@@ -185,13 +209,17 @@ public class DoctorController {
 	}
 
 
+
+
+
+
 	/**
-	 * 查詢銀行卡
+	 * 查询銀行卡
 	 */
 	@RequestMapping("/findcard")
 	public ApiResult findcard( @RequestParam(required = false, value = "cdid") String cdid) {
 		try {
-			//因为银行卡只能去新增一次相同的所以判断是否重复
+			//查询银行卡信息
 			TbCard card = doctorService.FindCard(cdid);
 			if(card!=null){
 				String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
@@ -311,6 +339,8 @@ public class DoctorController {
 	}
 
 
+
+
 	/**
 	 * 新增銀行卡
 	 */
@@ -320,19 +350,25 @@ public class DoctorController {
 			@RequestParam(required = false, value = "cphone") String cphone,
 			@RequestParam(required = false, value = "cdid") String cdid) {
 		try {
-			cpoint=new BASE64Encoder().encodeBuffer(cpoint.getBytes());
-			TbCard card = new TbCard();
-			card.setCdid(cdid);
-			card.setCphone(cphone);
-			card.setCname(cname);
-			card.setCpoint(cpoint);
-			cardService.addCard(card);
-			return new ApiResult(200, "新增成功", "新增成功");
+			//因为银行卡只能去新增一次相同的所以判断是否重复
+			TbCard card = doctorService.FindCardByCid(cdid);
+			if (card == null) {
+				HashMap map = new HashMap();
+				//银行卡加密
+				map.put("cpoint", new BASE64Encoder().encodeBuffer(cpoint.getBytes()));
+				map.put("cname", cname);
+				map.put("cphone", cphone);
+				map.put("cdid", cdid);
+				doctorService.AddCard(map);
+				return new ApiResult(200, "新增成功", "新增成功");
+			}
+			return new ApiResult(200, "新增失败", "不可重复添加");
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
 		}
-		return new ApiResult(00007, "操作失败", "字段超出范围或者格式不正确");
 	}
+
 
 	/**
 	 * 编辑银行卡
@@ -341,11 +377,11 @@ public class DoctorController {
 	public ApiResult EditCard(@RequestParam(required = false, value = "cpoint") String cpoint,
 			@RequestParam(required = false, value = "cname") String cname,
 			@RequestParam(required = false, value = "cphone") String cphone,
-			@RequestParam(required = false, value = "cdid") String cdid) {
+							  @RequestParam(required = false, value = "cid") String cid) {
 		try {
 			cpoint=new BASE64Encoder().encodeBuffer(cpoint.getBytes());
 			TbCard card = new TbCard();
-			card.setCdid(cdid);
+			card.setCid(cid);
 			card.setCpoint(cpoint);
 			card.setCphone(cphone);
 			card.setCname(cname);
@@ -407,43 +443,43 @@ public class DoctorController {
 	}
 
 
-
-
-
-	/**
-	 * 患者商品订单
-	 */
-
-	@RequestMapping("/getPatientOrder")
-	public ApiResult getPatientOrder(@RequestParam(required = false, value = "uid") String uid) {
-		try {
-			// TbPatient result = orderService.selectListByuid(uid);
-			return new ApiResult(200, "查询成功", null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
-	}
-
-
-
-	/**
-	 * 发送聊天
-	 */
-
-	@RequestMapping("/sendMessageByDoc")
-	public ApiResult sendMessageByDoc(@RequestParam(required = false, value = "did") String did,
-			@RequestParam(required = false, value = "message") String message,
-			@RequestParam(required = false, value = "uid") String uid) {
-		try {
-			// TbPatient result = orderService.selectListByuid(uid);
-			return new ApiResult(200, "查询成功", null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
-	}
-
+//
+//
+//
+//	/**
+//	 * 患者商品订单
+//	 */
+//
+//	@RequestMapping("/getPatientOrder")
+//	public ApiResult getPatientOrder(@RequestParam(required = false, value = "uid") String uid) {
+//		try {
+//			// TbPatient result = orderService.selectListByuid(uid);
+//			return new ApiResult(200, "查询成功", null);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
+//	}
+//
+//
+//
+//	/**
+//	 * 发送聊天
+//	 */
+//
+//	@RequestMapping("/sendMessageByDoc")
+//	public ApiResult sendMessageByDoc(@RequestParam(required = false, value = "did") String did,
+//			@RequestParam(required = false, value = "message") String message,
+//			@RequestParam(required = false, value = "uid") String uid) {
+//		try {
+//			// TbPatient result = orderService.selectListByuid(uid);
+//			return new ApiResult(200, "查询成功", null);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
+//	}
+//
 
 	/**
 	 * 查询所有用户
@@ -466,17 +502,19 @@ public class DoctorController {
 	 * @return
 	 */
 
-	@RequestMapping("/PatientBindDoc")
-	public ApiResult PatientBindDoc(@RequestParam(required = true, value = "did") String did,
-			@RequestParam(required = true, value = "uid") Long uid) {
-		TbUser user = new TbUser();
-		user.setId(uid);
-		user.setDid(did);
-		int a = uesrService.BindDid(user);
-		if (a == 1) {
-			return new ApiResult(200, "操作成功", "");
-		}
-		return new ApiResult(201, "操作失败", "请确定用户id是否存在");
-	}
+
+
+//	@RequestMapping("/PatientBindDoc")
+//	public ApiResult PatientBindDoc(@RequestParam(required = true, value = "did") String did,
+//			@RequestParam(required = true, value = "uid") Long uid) {
+//		TbUser user = new TbUser();
+//		user.setId(uid);
+//		user.setDid(did);
+//		int a = uesrService.BindDid(user);
+//		if (a == 1) {
+//			return new ApiResult(200, "操作成功", "");
+//		}
+//		return new ApiResult(201, "操作失败", "请确定用户id是否存在");
+//	}
 
 }

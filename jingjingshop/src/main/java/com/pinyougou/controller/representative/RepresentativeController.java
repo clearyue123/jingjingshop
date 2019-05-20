@@ -36,6 +36,26 @@ public class RepresentativeController {
      */
 
 
+
+    /**
+     * 获取积分请求表的prid
+     */
+
+    @RequestMapping("/findprid")
+    public ApiResult editscript(@RequestParam(required = false, value = "rid") String rid
+    ) {
+        try {
+            String s = representativeService.FindPointRequestByPrid(rid);
+            return new ApiResult(200, "获取成功", s);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
+        }
+
+    }
+
+
+
     /**
      * 编辑script
      */
@@ -284,13 +304,13 @@ public class RepresentativeController {
     }
 
     /**
-     * 查詢銀行卡
+     * 查询銀行卡
      */
     @RequestMapping("/findcard")
-    public ApiResult findcard( @RequestParam(required = false, value = "cid") String cid) {
+    public ApiResult findcard( @RequestParam(required = false, value = "crid") String crid) {
         try {
             //因为银行卡只能去新增一次相同的所以判断是否重复
-            TbCard card = representativeService.FindCard(cid);
+            TbCard card = representativeService.FindCard(crid);
             if(card!=null){
                 String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
                 mycard="************"+mycard.substring(mycard.length()-4);

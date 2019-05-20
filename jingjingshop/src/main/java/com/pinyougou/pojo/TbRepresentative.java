@@ -111,6 +111,11 @@ public class TbRepresentative {
 	public TbRepresentative() {
     }
 
+
+    public TbRepresentative(String rid) {
+        this.rid = rid;
+    }
+
     public TbRepresentative(String rid, String script) {
         this.rid = rid;
         this.script = script;

@@ -71,15 +71,21 @@ public class TbUser extends TbBase implements Serializable {
     private Integer points_all;
 
 
+//    private  String  head_pic;
+
+
+
     /**
      * 外联用户表
      *
      * @return
      */
-    private TbRepresentative tbRepresentative;
+//    private TbRepresentative tbRepresentative;
 
 
     private TbDoc tbDocs;
+
+
 
 
     public TbDoc getTbDocs() {
@@ -106,13 +112,6 @@ public class TbUser extends TbBase implements Serializable {
         this.did = did;
     }
 
-    public TbRepresentative getTbRepresentative() {
-        return tbRepresentative;
-    }
-
-    public void setTbRepresentative(TbRepresentative tbRepresentative) {
-        this.tbRepresentative = tbRepresentative;
-    }
 
 
     public Integer getPoints_all() {

@@ -14,6 +14,8 @@
         <result column="phone" property="phone"></result>
         <result column="points_all" property="points_all"></result>
         <result column="username" property="username"></result>
+        <result column="office" property="office"></result>
+        <result column="his" property="his"></result>
         <result column="script" property="script"></result>
         <result column="createDate" property="createDate"></result>
         <result column="open_id" property="openId"></result>
@@ -23,7 +25,13 @@
         <collection column="id" property="user" ofType="com.pinyougou.pojo.TbUser">
             <id column="id" property="id"></id>
             <result column="name" property="name"></result>
-            <result column="head_pic" property="head_pic"></result>
+            <result column="phone" property="phone"></result>
+            <result column="headPic" property="headPic"></result>
+            <result column="wxCode" property="wxCode"></result>
+            <result column="open_id" property="openId"></result>
+            <result column="union_id" property="unionId"></result>
+            <result column="ticket" property="ticket"></result>
+            <result column="ticket_time" property="ticket_time"></result>
             <result column="points" property="points"></result>
             <result column="points_all" property="points_all"></result>
             <result column="username" property="username"></result>
@@ -94,7 +102,7 @@
 
     <!--查询银行卡-->
     <select id="FindCard" resultType="com.pinyougou.pojo.TbCard" parameterType="java.lang.String">
-    SELECT *  FROM  tb_card  WHERE   cdid=#{cid}
+    SELECT *  FROM  tb_card  WHERE   cdid=#{cdid}
 </select>
 
 
@@ -166,9 +174,9 @@ WHERE  d.did=#{did}
     <!--积分兑换-->
 
 
-    <!--查询代表的可兑换积分-->
+    <!--查询医生的可兑换积分-->
     <select id="findByRePoints" parameterType="java.lang.String" resultType="java.lang.String">
-      SELECT   points FROM  tb_representative  WHERE   did=#{did}
+      SELECT   points FROM  tb_doc  WHERE   did=#{did}
 </select>
 
 
@@ -180,7 +188,7 @@ WHERE  d.did=#{did}
 
     <!--   判断是否重复请求积分-->
     <select id="DiscountByPoint" resultType="java.lang.Integer" parameterType="java.lang.String">
-        SELECT  COUNT(*)  FROM  tb_pointrequest   WHERE   DATEDIFF(NOW(),createDate) &lt;  7  AND   did=#{did}
+        SELECT  COUNT(*)  FROM  tb_pointrequest   WHERE   DATEDIFF(NOW(),createDate) &lt;  7  AND   did=#{did}  AND  caction="1"
 </select>
 
     <!--进行兑换积分审核-->
@@ -240,6 +248,8 @@ WHERE  d.did=#{did}
     <select id="FindPointsAllUpPoints" parameterType="java.util.Map" resultType="java.lang.Integer">
           SELECT  CASE WHEN points_all+#{points} IS NULL THEN 0 ELSE points_all+#{points} END points_all FROM  tb_representative WHERE   rid=#{rid}
     </select>
+
+
 
 
     <!--    获取申请请求表的prid-->

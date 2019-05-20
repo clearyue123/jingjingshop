@@ -136,7 +136,7 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public TbPointList FindByPontList(String rid) {
+	public  List<TbPointList> FindByPontList(String rid) {
 		return tbDocUserMapper.FindByPontList(rid);
 	}
 
