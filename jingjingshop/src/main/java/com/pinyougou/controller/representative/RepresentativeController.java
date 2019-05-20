@@ -2,6 +2,7 @@ package com.pinyougou.controller.representative;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import com.alibaba.fastjson.util.Base64;
 import com.pinyougou.pojo.*;
@@ -49,7 +50,7 @@ public class RepresentativeController {
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00006, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -76,10 +77,10 @@ public class RepresentativeController {
                 representativeService.addInnerReDoc(tbReDoc);
                 return new ApiResult(200, "新增成功", "新增成功");
             }
-            return new ApiResult(00016, "操作失败", "关联关系不可重复添加");
+            return new ApiResult(201, "操作失败", "关联关系不可重复添加");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00016, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -99,7 +100,7 @@ public class RepresentativeController {
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00006, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -129,13 +130,13 @@ public class RepresentativeController {
                     representativeService.SubmitPointRequest(tbPoint);
                     return new ApiResult(200, "操作成功", "兑换请求发送成功");
                 } else {
-                    return new ApiResult(00036, "操作失败", "兑取积分数已超额");
+                    return new ApiResult(201, "操作失败", "兑取积分数已超额");
                 }
             }
-            return new ApiResult(00036, "操作失败", "不可重复提交申请");
+            return new ApiResult(201, "操作失败", "不可重复提交申请");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00046, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -186,22 +187,28 @@ public class RepresentativeController {
                                 //在提交到积分记录表中
                                 TbPointList tbPointList = new TbPointList(createDate, points, rid);
                                 representativeService.addPointList(tbPointList);
+                                //编辑申请请求表的caction的状态为 已通过
+                                HashMap maps=new HashMap();
+                                caction="0";
+                                maps.put("caction",caction);
+                                maps.put("prid",prid);
+                                representativeService.editByPointRequestCaction(maps);
                                 return new ApiResult(200, "兑换成功", "兑换成功");
                             }
-                            return new ApiResult(200, "兑换失败", "兑换的字段格式或范围不正确");
+                            return new ApiResult(201, "兑换失败", "兑换的字段格式或范围不正确");
                         } else {
-                            return new ApiResult(00056, "操作失败", "兑取积分已超过七日");
+                            return new ApiResult(201, "操作失败", "兑取积分已超过七日");
                         }
                     }
-                    return new ApiResult(00056, "操作失败", "在七日内未有兑换请求");
+                    return new ApiResult(201, "操作失败", "在七日内未有兑换请求");
                 }
-                return new ApiResult(00056, "操作失败", "未有该兑换请求的数据");
+                return new ApiResult(201, "操作失败", "未有该兑换请求的数据");
             } else {
-                return new ApiResult(00066, "操作失败", "该用户角色不是超级管理员");
+                return new ApiResult(201, "操作失败", "该用户角色不是超级管理员");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00076, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -219,7 +226,7 @@ public class RepresentativeController {
     public ApiResult FindByPontList(@RequestParam(required = false, value = "rid") String rid
     ) {
         try {
-            TbPointList tbPointList = representativeService.FindByPontList(rid);
+            List<TbPointList> tbPointList = representativeService.FindByPontList(rid);
             if (tbPointList != null) {
                 return new ApiResult(200, "查询成功", tbPointList);
             } else {
@@ -227,7 +234,7 @@ public class RepresentativeController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00016, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -252,7 +259,7 @@ public class RepresentativeController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00005, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -271,7 +278,7 @@ public class RepresentativeController {
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00006, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -284,13 +291,16 @@ public class RepresentativeController {
         try {
             //因为银行卡只能去新增一次相同的所以判断是否重复
             TbCard card = representativeService.FindCard(cid);
-            String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
-            mycard="************"+mycard.substring(mycard.length()-4);
-            card.setCpoint(mycard);
-            return new ApiResult(200, "查询成功", card);
+            if(card!=null){
+                String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
+                mycard="************"+mycard.substring(mycard.length()-4);
+                card.setCpoint(mycard);
+                return new ApiResult(200, "查询成功", card);
+            }
+            return new ApiResult(200, "查询成功", "没有此银行卡信息");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00007, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
     }
 
@@ -320,7 +330,7 @@ public class RepresentativeController {
             return new ApiResult(200, "新增失败", "不可重复添加");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(00007, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }
@@ -344,7 +354,7 @@ public class RepresentativeController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
+        return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
     }
 
 
@@ -362,7 +372,7 @@ public class RepresentativeController {
             return new ApiResult(200, "获取成功", "该代表未关联医生");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(9, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
 
@@ -378,9 +388,9 @@ public class RepresentativeController {
         if (i > 0) {
             return new ApiResult(200, "获取成功", i);
         } else if (i == 0) {
-            return new ApiResult(11, "获取成功", "该代表没有绑定的医生");
+            return new ApiResult(200, "获取成功", "该代表没有绑定的医生");
         }
-        return new ApiResult(10, "操作失败", "字段超出范围或者格式不正确");
+        return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
     }
 
     /**
@@ -397,7 +407,7 @@ public class RepresentativeController {
             return new ApiResult(200, "获取成功", "未查询到此医生信息");
         } catch (Exception e) {
             e.printStackTrace();
-            return new ApiResult(11, "操作失败", "字段超出范围或者格式不正确");
+            return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
 
     }

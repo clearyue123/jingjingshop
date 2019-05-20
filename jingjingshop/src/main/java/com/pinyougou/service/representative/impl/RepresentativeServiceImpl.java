@@ -1,6 +1,7 @@
 package com.pinyougou.service.representative.impl;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,7 +134,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     }
 
     @Override
-    public TbPointList FindByPontList(String rid) {
+    public List<TbPointList> FindByPontList(String rid) {
         return tbRepresentativeUserMapper.FindByPontList(rid);
     }
 
@@ -146,6 +147,16 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     @Override
     public int FindPointsAllUpPoints(HashMap map) {
         return tbRepresentativeUserMapper.FindPointsAllUpPoints(map);
+    }
+
+    @Override
+    public int editByPointRequestCaction(HashMap map) {
+        return tbRepresentativeUserMapper.editByPointRequestCaction(map);
+    }
+
+    @Override
+    public String FindPointRequestByPrid(String rid) {
+        return tbRepresentativeUserMapper.FindPointRequestByPrid(rid);
     }
 
 }

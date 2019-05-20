@@ -2,6 +2,7 @@ package com.pinyougou.service.representative;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.pinyougou.pojo.*;
 
@@ -63,9 +64,16 @@ public interface RepresentativeService {
 
     public  int addPointList(TbPointList tbPointList);
 
-    public  TbPointList  FindByPontList(String rid);
+    public List<TbPointList> FindByPontList(String rid);
 
     public String FindByRoleRid();
 
     public  int FindPointsAllUpPoints(HashMap  map);
+
+
+    public int editByPointRequestCaction(HashMap map);
+
+    public  String  FindPointRequestByPrid(String rid);
+
+
 }

@@ -1,196 +1,247 @@
 package com.pinyougou.pojo;
 
 import java.sql.Date;
+import java.util.Set;
 
 /**
  * 医生权限表
  */
 public class TbDoc {
 
-	/**
-	 * 医生权限表主鍵
-	 */
-	private String did;
+    /**
+     * 医生权限表主鍵
+     */
+    private String did;
 
-	/**
-	 * 昵称
-	 */
-	private String name;
+    /**
+     * 昵称
+     */
+    private String name;
 
-	/**
-	 * 头像
-	 */
-	private String head_pic;
+    /**
+     * 头像
+     */
+    private String head_pic;
 
-	private String phone;
+    private String phone;
 
-	/**
-	 * 积分
-	 */
-	private String points;
-	/**
-	 * 最终累计积分
-	 */
-	private String points_all;
-	/**
-	 * 真实姓名
-	 */
-	private String username;
+    /**
+     * 积分
+     */
+    private String points;
+    /**
+     * 最终累计积分
+     */
+    private String points_all;
+    /**
+     * 真实姓名
+     */
+    private String username;
 
-	/**
-	 * 科室
-	 */
+    /**
+     * 科室
+     */
 
-	private String office;
+    private String office;
 
-	private String openId;
-	/**
-	 * 医院
-	 */
-	private String his;
+    private String openId;
+    /**
+     * 医院
+     */
+    private String his;
 
-	/**
-	 * 备注
-	 */
-	private String script;
+    /**
+     * 备注
+     */
+    private String script;
 
-	/**
-	 * 创建时间
-	 */
-	private Date createDate;
-	
-	private String unionId;
+    /**
+     * 创建时间
+     */
+    private Date createDate;
 
-	public String getUnionId() {
-		return unionId;
-	}
+    private String unionId;
 
-	public void setUnionId(String unionId) {
-		this.unionId = unionId;
-	}
 
-	public String getOpenId() {
-		return openId;
-	}
+    /**
+     * wx换取二维码ticket
+     */
+    private String ticket;
 
-	public void setOpenId(String openId) {
-		this.openId = openId;
-	}
+    /**
+     * ticket保存时间
+     */
+    private String ticket_time;
 
-	public String getPhone() {
-		return phone;
-	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    private Set<TbUser> user;
 
-	private TbRepresentative tbRepresentative;
 
-	public TbDoc() {
-	}
+    public TbDoc(String did, String script) {
+        this.did = did;
+        this.script = script;
+    }
 
-	public String getHis() {
-		return his;
-	}
+    public TbDoc(String did, String ticket, String ticket_time) {
+        this.did = did;
+        this.ticket = ticket;
+        this.ticket_time = ticket_time;
+    }
 
-	public void setHis(String his) {
-		this.his = his;
-	}
+    public Set<TbUser> getUser() {
+        return user;
+    }
 
-	public String getOffice() {
-		return office;
-	}
+    public void setUser(Set<TbUser> user) {
+        this.user = user;
+    }
 
-	public void setOffice(String office) {
-		this.office = office;
-	}
+    public String getTicket() {
+        return ticket;
+    }
 
-	public TbRepresentative getTbRepresentative() {
-		return tbRepresentative;
-	}
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
 
-	public TbDoc(String did, String username, String phone, String his, String office, String script) {
-		this.did = did;
-		this.phone = phone;
-		this.his = his;
-		this.office = office;
-		this.script = script;
-		this.username = username;
-	}
+    public String getTicket_time() {
+        return ticket_time;
+    }
 
-	public void setTbRepresentative(TbRepresentative tbRepresentative) {
-		this.tbRepresentative = tbRepresentative;
-	}
+    public void setTicket_time(String ticket_time) {
+        this.ticket_time = ticket_time;
+    }
 
-	public String getDid() {
-		return did;
-	}
+    public String getUnionId() {
+        return unionId;
+    }
 
-	public void setDid(String did) {
-		this.did = did;
-	}
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getOpenId() {
+        return openId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 
-	public String getPoints() {
-		return points;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setPoints(String points) {
-		this.points = points;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    private TbRepresentative tbRepresentative;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public TbDoc() {
+    }
 
-	public String getScript() {
-		return script;
-	}
+    public String getHis() {
+        return his;
+    }
 
-	public void setScript(String script) {
-		this.script = script;
-	}
+    public void setHis(String his) {
+        this.his = his;
+    }
 
-	public Date getCreateDate() {
-		return createDate;
-	}
+    public String getOffice() {
+        return office;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public void setOffice(String office) {
+        this.office = office;
+    }
 
-	public String getHead_pic() {
-		return head_pic;
-	}
+    public TbRepresentative getTbRepresentative() {
+        return tbRepresentative;
+    }
 
-	public void setHead_pic(String head_pic) {
-		this.head_pic = head_pic;
-	}
+    public TbDoc(String did, String username, String phone, String his, String office, String script) {
+        this.did = did;
+        this.phone = phone;
+        this.his = his;
+        this.office = office;
+        this.script = script;
+        this.username = username;
+    }
 
-	public String getPoints_all() {
-		return points_all;
-	}
+    public void setTbRepresentative(TbRepresentative tbRepresentative) {
+        this.tbRepresentative = tbRepresentative;
+    }
 
-	public void setPoints_all(String points_all) {
-		this.points_all = points_all;
-	}
+    public String getDid() {
+        return did;
+    }
 
-	@Override
-	public String toString() {
-		return "TbRepresentative{" + "did='" + did + '\'' + ", name='" + name + '\'' + ", head_pic='" + head_pic + '\''
-				+ ", points='" + points + '\'' + ", points_all='" + points_all + '\'' + ", username='" + username + '\''
-				+ ", script='" + script + '\'' + ", createDate=" + createDate + '}';
-	}
+    public void setDid(String did) {
+        this.did = did;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getHead_pic() {
+        return head_pic;
+    }
+
+    public void setHead_pic(String head_pic) {
+        this.head_pic = head_pic;
+    }
+
+    public String getPoints_all() {
+        return points_all;
+    }
+
+    public void setPoints_all(String points_all) {
+        this.points_all = points_all;
+    }
+
+    @Override
+    public String toString() {
+        return "TbRepresentative{" + "did='" + did + '\'' + ", name='" + name + '\'' + ", head_pic='" + head_pic + '\''
+                + ", points='" + points + '\'' + ", points_all='" + points_all + '\'' + ", username='" + username + '\''
+                + ", script='" + script + '\'' + ", createDate=" + createDate + '}';
+    }
 }

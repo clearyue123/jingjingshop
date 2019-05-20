@@ -3,7 +3,7 @@ package com.pinyougou.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TbUser  extends  TbBase implements Serializable{
+public class TbUser extends TbBase implements Serializable {
     private Long id;
 
     private String username;
@@ -41,17 +41,16 @@ public class TbUser  extends  TbBase implements Serializable{
     private Integer userLevel;
 
 
-
     private Integer experienceValue;
 
     private String birthday;
 
     private Date lastLoginTime;
-    
+
     private String openId;
 
-    private  String  wx_code;
-    
+    private String wx_code;
+
     private String unionId;
 
     /**
@@ -69,38 +68,45 @@ public class TbUser  extends  TbBase implements Serializable{
      * 累计积分
      */
 
-    private  Integer  points_all;
+    private Integer points_all;
 
 
     /**
      * 外联用户表
+     *
      * @return
      */
-    private TbRepresentative  tbRepresentative;
+    private TbRepresentative tbRepresentative;
 
 
+    private TbDoc tbDocs;
 
 
+    public TbDoc getTbDocs() {
+        return tbDocs;
+    }
 
-
+    public void setTbDocs(TbDoc tbDocs) {
+        this.tbDocs = tbDocs;
+    }
 
     public String getUnionId() {
-		return unionId;
-	}
+        return unionId;
+    }
 
-	public void setUnionId(String unionId) {
-		this.unionId = unionId;
-	}
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
 
-	public String getDid() {
-		return did;
-	}
+    public String getDid() {
+        return did;
+    }
 
-	public void setDid(String did) {
-		this.did = did;
-	}
+    public void setDid(String did) {
+        this.did = did;
+    }
 
-	public TbRepresentative getTbRepresentative() {
+    public TbRepresentative getTbRepresentative() {
         return tbRepresentative;
     }
 
@@ -126,22 +132,22 @@ public class TbUser  extends  TbBase implements Serializable{
     }
 
     public String getOpenId() {
-		return openId;
-	}
+        return openId;
+    }
 
-	public void setOpenId(String openId) {
-		this.openId = openId;
-	}
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 
     public String getHeadPic() {
-		return headPic;
-	}
+        return headPic;
+    }
 
-	public void setHeadPic(String headPic) {
-		this.headPic = headPic;
-	}
+    public void setHeadPic(String headPic) {
+        this.headPic = headPic;
+    }
 
-	public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -230,14 +236,14 @@ public class TbUser  extends  TbBase implements Serializable{
     }
 
     public String getWxCode() {
-		return wxCode;
-	}
+        return wxCode;
+    }
 
-	public void setWxCode(String wxCode) {
-		this.wxCode = wxCode;
-	}
+    public void setWxCode(String wxCode) {
+        this.wxCode = wxCode;
+    }
 
-	public Long getAccountBalance() {
+    public Long getAccountBalance() {
         return accountBalance;
     }
 

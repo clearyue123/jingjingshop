@@ -3,6 +3,7 @@ package com.pinyougou.mapper;
 import com.pinyougou.pojo.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 代表层mapper连接  根据mapper的sql的id定义
@@ -59,11 +60,17 @@ public int EditPointRequest(TbPointRequest tbPointRequest);
 
  public  int addPointList(TbPointList tbPointList);
 
- public  TbPointList  FindByPontList(String rid);
+ public List<TbPointList> FindByPontList(String rid);
 
 public String FindByRoleRid();
 
 public  int FindPointsAllUpPoints(HashMap  map);
+
+public int editByPointRequestCaction(HashMap map);
+
+public  String  FindPointRequestByPrid(String rid);
+
+
 
 
 }

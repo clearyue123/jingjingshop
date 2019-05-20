@@ -18,6 +18,8 @@
             <result  column="createDate"  property="createDate"></result>
             <result  column="open_id"  property="openId"></result>
             <result  column="union_id"  property="unionId"></result>
+            <result  column="ticket"  property="ticket"></result>
+            <result  column="ticket_time"  property="ticket_time"></result>
         <collection    column="did"  property="tbDocs"  ofType="com.pinyougou.pojo.TbDoc">
             <id column="did"  property="did"></id>
             <result  column="name"  property="name"></result>
@@ -63,10 +65,10 @@
                 points=#{points},
             </if>
             <if test="points_all!=null">
-                points_all=#{points_all}
+                points_all=#{points_all},
             </if>
             <if test="script!=null">
-                script=#{script}
+                script=#{script},
             </if>
         </set>
         WHERE  rid=#{rid}
@@ -89,7 +91,7 @@
 
     <!--查询银行卡-->
     <select  id="FindCard"   resultType="com.pinyougou.pojo.TbCard"  parameterType="java.lang.String">
-    SELECT *  FROM  tb_card  WHERE   cid=#{cid}
+    SELECT *  FROM  tb_card  WHERE   crid=#{cid}
 </select>
 
 
@@ -106,9 +108,9 @@
             <if test="cphone!=null">
                 cphone=#{cphone}
             </if>
-            <if test="script!=null">
-                script=#{script}
-            </if>
+<!--            <if test="script!=null">-->
+<!--                script=#{script}-->
+<!--            </if>-->
         </set>
         WHERE  cid=#{cid}
     </update>
@@ -179,7 +181,7 @@ WHERE  r.rid=#{rid}
 
 <!--   判断是否重复请求积分-->
     <select id="DiscountByPoint"  resultType="java.lang.Integer"  parameterType="java.lang.String">
-        SELECT  COUNT(*)  FROM  tb_pointrequest   WHERE   DATEDIFF(NOW(),createDate) &lt;  7  AND   rid=#{rid}
+        SELECT  COUNT(*)  FROM  tb_pointrequest   WHERE   DATEDIFF(NOW(),createDate) &lt;  7  AND   rid=#{rid}   AND  caction="1"
 </select>
 
 <!--进行兑换积分审核-->
@@ -204,13 +206,13 @@ WHERE  r.rid=#{rid}
 
 <!--   七日内可兑换 -->
     <select  id="ServerDayPoint"  parameterType="java.lang.String"  resultType="com.pinyougou.pojo.TbPointRequest">
-        SELECT *  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate) &lt; 7 AND   prid=#{prid}
+        SELECT *  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate) &lt; 7 AND   prid=#{prid}  AND  caction="1"
     </select>
 
 
 <!--    判断七日内是否有数据-->
 <select  id="CountByServerDayRequest"  resultType="java.lang.Integer">
-      SELECT COUNT(*)  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate)  &lt; 7
+      SELECT COUNT(*)  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate)  &lt; 7  AND  caction="1"
 </select>
 
 <!--判断是否有该请求的数据-->
@@ -225,9 +227,28 @@ WHERE  r.rid=#{rid}
 
 
 <!--    查询积分记录-->
-    <select id="FindByPontList"  parameterType="java.lang.String"  resultType="com.pinyougou.pojo.TbPointList">
+    <select id="FindByPontList"  parameterType="java.lang.String"  resultType="java.util.List">
          SELECT  *  FROM  tb_pointlist  WHERE  rid=#{rid}
     </select>
+
+
+<!--    获取申请请求表的prid-->
+    <select id="FindPointRequestByPrid" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT  prid  FROM tb_pointrequest  WHERE  caction="1"  AND DATEDIFF(NOW(),createdate) &lt; 7 AND  rid=#{rid}
+    </select>
+
+
+
+<!--    编辑请求表的已经通过审核的caction-->
+    <update id="editByPointRequestCaction"   parameterType="java.util.Map">
+        update  tb_pointrequest
+        <set>
+            <if test="caction!=null">
+                caction=#{caction}
+            </if>
+        </set>
+        where  prid=#{prid}
+    </update>
 
 
 <!--查询超级管理员的rid-->
