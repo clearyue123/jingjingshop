@@ -1,7 +1,8 @@
 package com.pinyougou.service.evaluate;
 
-import java.util.List;
 import java.util.Map;
+
+import com.github.pagehelper.Page;
 
 /**
  * @desc:商品评论服务层
@@ -21,6 +22,6 @@ public interface EvaluateService {
      * @param parseLong
      * @return
      */
-	List<Map<String, Object>> selectEvaluateList(long goodsId);
+	Page<Map<String, Object>> selectEvaluateList(long goodsId,Integer pageNum,Integer pageSize);
     
 }

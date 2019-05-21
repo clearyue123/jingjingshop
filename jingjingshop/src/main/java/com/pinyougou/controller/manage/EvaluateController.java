@@ -76,12 +76,10 @@ public class EvaluateController {
      */
     @RequestMapping("/evaluateList")
     public Object evaluateList(@RequestParam(value="goodsId",required=true)String goodsId,
-    		@RequestParam(value="page",required=true,defaultValue = "1")Integer pageNum,
-    		@RequestParam(value="size",required=true,defaultValue = "10")Integer pageSize){
+    		@RequestParam(value="pageNum",required=true)Integer pageNum,
+    		@RequestParam(value="pageSize",required=true)Integer pageSize){
     	try{
-    		PageHelper.startPage(pageNum, pageSize);
-    		List<Map<String,Object>> evalMapList = evaluateService.selectEvaluateList(Long.parseLong(goodsId));
-    		Page<Map<String,Object>> page = (Page<Map<String,Object>>)evalMapList;
+    		Page<Map<String,Object>> page = evaluateService.selectEvaluateList(Long.parseLong(goodsId), pageSize, pageSize);
     		return new ApiResult(200, "商品评价列表查询成功！",page);
     	}catch(Exception e){
     		e.printStackTrace();

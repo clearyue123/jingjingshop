@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbOrderEvaluateMapper;
 import com.pinyougou.service.evaluate.EvaluateService;
 
@@ -34,10 +36,12 @@ public class EvaluateServiceImpl implements EvaluateService {
     }
 
 	@Override
-	public List<Map<String, Object>> selectEvaluateList(long goodsId) {
+	public Page<Map<String, Object>> selectEvaluateList(long goodsId,Integer pageNum,Integer pageSize) {
 		try{
+			PageHelper.startPage(pageNum, pageSize);
 			List<Map<String,Object>> evaluateMapList = evaluateMapper.selectEvaluateList(goodsId);
-			return evaluateMapList;
+			Page<Map<String,Object>> page = (Page<Map<String,Object>>)evaluateMapList;
+			return page;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
