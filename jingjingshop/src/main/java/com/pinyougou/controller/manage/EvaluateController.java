@@ -79,8 +79,12 @@ public class EvaluateController {
     		@RequestParam(value="pageNum",required=true)Integer pageNum,
     		@RequestParam(value="pageSize",required=true)Integer pageSize){
     	try{
-    		Page<Map<String,Object>> page = evaluateService.selectEvaluateList(Long.parseLong(goodsId), pageSize, pageSize);
-    		return new ApiResult(200, "商品评价列表查询成功！",page);
+    		System.out.println(goodsId);
+    		Page<Map<String,Object>> page = evaluateService.selectEvaluateList(Long.parseLong(goodsId), pageNum, pageSize);
+    		Map<String,Object> data = new HashMap<>();
+    		data.put("total",page.getTotal());
+    		data.put("mapList",page.getResult());
+    		return new ApiResult(200, "商品评价列表查询成功！",data);
     	}catch(Exception e){
     		e.printStackTrace();
     		return new ApiResult(201, "商品评价列表查询失败！","");
