@@ -366,4 +366,26 @@
              #{isDeleted}
             )
     </insert>
+    
+    <select id="selectEvaluateList" parameterType="long" resultType="java.util.Map">
+            SELECT
+				t.user_id userId,
+				t.order_id orderId,
+				t.goods_id goodsId,
+				t.goods_evaluate_msg goodsEvaluateMsg,
+				t.goods_evaluate_score goodsEvaluateScore,
+				t.seller_evaluate_score sellerEvaluateScore,
+				t.ship_service_score shipServiceScore,
+				t.ship_speed_score shipSpeedScore,
+				t.goods_package_score goodsPackageScore,
+				t.evaluate_date evaluateDate,
+				t1.username,
+				t1.head_pic headPic
+			FROM
+				tb_order_evaluate t
+			LEFT JOIN tb_user t1 ON t.user_id = t1.id
+			WHERE
+				t.goods_id = #{goodsId}
+			AND t.is_deleted = '0'
+    </select>
 </mapper>

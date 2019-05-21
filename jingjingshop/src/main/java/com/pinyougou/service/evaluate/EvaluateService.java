@@ -1,5 +1,6 @@
 package com.pinyougou.service.evaluate;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,5 +15,12 @@ public interface EvaluateService {
      * @param paramMap
      */
     void add(Map<String,Object> paramMap);
+
+    /**
+     * 评论列表查询
+     * @param parseLong
+     * @return
+     */
+	List<Map<String, Object>> selectEvaluateList(long goodsId);
     
 }

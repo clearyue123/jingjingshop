@@ -1,6 +1,7 @@
 package com.pinyougou.service.evaluate.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,15 @@ public class EvaluateServiceImpl implements EvaluateService {
             }
         }
     }
+
+	@Override
+	public List<Map<String, Object>> selectEvaluateList(long goodsId) {
+		try{
+			List<Map<String,Object>> evaluateMapList = evaluateMapper.selectEvaluateList(goodsId);
+			return evaluateMapList;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

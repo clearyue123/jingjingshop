@@ -1,10 +1,8 @@
 package com.pinyougou.controller.manage;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.pinyougou.common.ApiResult;
-import com.pinyougou.mapper.TbOrderEvaluateMapper;
-import com.pinyougou.pojo.TbOrderEvaluate;
-import com.pinyougou.pojo.TbOrderEvaluateExample;
-import com.pinyougou.pojo.TbOrderEvaluateExample.Criteria;
 import com.pinyougou.service.evaluate.EvaluateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +25,6 @@ public class EvaluateController {
 
     @Autowired
     private EvaluateService evaluateService;
-    @Autowired
-    private TbOrderEvaluateMapper evaluaterMapper;
 
     /**
      * 商品发表评论
@@ -79,17 +75,14 @@ public class EvaluateController {
      * @return
      */
     @RequestMapping("/evaluateList")
-    public Object evaluateList(@RequestParam(value="goodsId",required=true)String goodsId){
+    public Object evaluateList(@RequestParam(value="goodsId",required=true)String goodsId,
+    		@RequestParam(value="page",required=true,defaultValue = "1")Integer pageNum,
+    		@RequestParam(value="size",required=true,defaultValue = "10")Integer pageSize){
     	try{
-    		TbOrderEvaluateExample evalusateExample = new TbOrderEvaluateExample();
-    		Criteria cri = evalusateExample.createCriteria();
-    		cri.andGoodsIdEqualTo(Long.parseLong(goodsId));
-    		List<TbOrderEvaluate> evaluateList = evaluaterMapper.selectByExample(evalusateExample);
-    		Integer totalCount = evaluaterMapper.countByExample(evalusateExample);
-    		Map<String,Object> data = new HashMap<String,Object>();
-    		data.put("evaluateList", evaluateList);
-    		data.put("totalCount", totalCount);
-    		return new ApiResult(200, "商品评价列表查询成功！",data);
+    		PageHelper.startPage(pageNum, pageSize);
+    		List<Map<String,Object>> evalMapList = evaluateService.selectEvaluateList(Long.parseLong(goodsId));
+    		Page<Map<String,Object>> page = (Page<Map<String,Object>>)evalMapList;
+    		return new ApiResult(200, "商品评价列表查询成功！",page);
     	}catch(Exception e){
     		e.printStackTrace();
     		return new ApiResult(201, "商品评价列表查询失败！","");

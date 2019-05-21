@@ -32,4 +32,6 @@ public interface TbOrderEvaluateMapper {
     int updateByPrimaryKey(TbOrderEvaluate record);
     
     int insertEvaluate(Map<String,Object> paramMap);
+
+	List<Map<String, Object>> selectEvaluateList(long goodsId);
 }
