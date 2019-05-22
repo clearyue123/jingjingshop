@@ -45,4 +45,6 @@ public interface TbDocMapper {
 
 	TbDoc selectByUnionId(TbDoc user);
 
+	List<Map<String, Object>> selectPurchaseRecord(long patientId);
+
 }

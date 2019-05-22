@@ -223,6 +223,12 @@ public class DoctorServiceImpl  implements DoctorService {
 		return listDoctor;
 	}
 
+	@Override
+	public List<Map<String, Object>> selectPurchaseRecord(long patientId) {
+		List<Map<String, Object>> recordList = tbDocMapper.selectPurchaseRecord(patientId);
+		return recordList;
+	}
+
 
 
 }

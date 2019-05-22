@@ -4,13 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
+import com.pinyougou.pojo.TbCard;
+import com.pinyougou.pojo.TbDoc;
+import com.pinyougou.pojo.TbDocUser;
+import com.pinyougou.pojo.TbPointList;
+import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.card.CardService;
 import com.pinyougou.service.doctor.DoctorService;
 import com.pinyougou.service.user.UserService;
@@ -406,5 +411,23 @@ public class DoctorController {
 		List<Map<String,Object>> data = doctorService.selectList();
 		return new ApiResult(200, "查询成功", data);
 	}
-
+	
+	/**
+	 * 查看患者购买记录
+	 * @param patientId
+	 * @return
+	 */
+	@RequestMapping("/selectPurchaseRecord")
+	public ApiResult selectPurchaseRecord(@RequestParam(value="patientId",required=true)String patientId){
+		try{
+			Map<String,Object> data = new HashMap<String,Object>();
+			List<Map<String,Object>> recordMapList = doctorService.selectPurchaseRecord(Long.parseLong(patientId));
+			data.put("recordMapList", recordMapList);
+			return new ApiResult(200, "success", data);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "error", null);
+		}
+	}
+   
 }
