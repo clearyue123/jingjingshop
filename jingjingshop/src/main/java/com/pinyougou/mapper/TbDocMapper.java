@@ -1,13 +1,14 @@
 package com.pinyougou.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.pinyougou.pojo.TbDoc;
 import com.pinyougou.pojo.TbDocExample;
-import com.pinyougou.pojo.TbRepresentative;
 
 import entity.PageResult;
-
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TbDocMapper {
     int countByExample(TbDocExample example);
@@ -40,7 +41,7 @@ public interface TbDocMapper {
 
 	int updateInfo(TbDoc user);
 
-	List<TbDoc> selectList();
+	List<Map<String,Object>> selectList();
 
 	TbDoc selectByUnionId(TbDoc user);
 

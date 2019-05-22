@@ -12,9 +12,11 @@ import com.pinyougou.service.user.UserService;
 public class TestService {
 
 	public static void main(String[] args) {
-		ApplicationContext app = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
-		EvaluateService evaluateService = (EvaluateService)app.getBean("evaluateServiceImpl");
-		Page<Map<String, Object>> page = evaluateService.selectEvaluateList(16842536960L, 1, 10);
-		System.out.println(page);
+//		ApplicationContext app = new ClassPathXmlApplicationContext("classpath:spring/applicationContext-*.xml");
+//		EvaluateService evaluateService = (EvaluateService)app.getBean("evaluateServiceImpl");
+//		Page<Map<String, Object>> page = evaluateService.selectEvaluateList(16842536960L, 1, 10);
+//		System.out.println(page);
+		double ceil = Math.ceil(101/4.0);
+		System.out.println(ceil);
 	}
 }

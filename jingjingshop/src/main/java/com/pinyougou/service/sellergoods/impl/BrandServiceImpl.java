@@ -84,7 +84,7 @@ public class BrandServiceImpl implements BrandService {
 		return new PageResult(page.getTotal(),page.getResult());
 	}
 
-	public List<Map> selectOptionList() {
+	public List<Map<String,Object>> selectOptionList() {
 		return brandMapper.selectOptionList();
 	}
 

@@ -47,5 +47,5 @@ public interface BrandService {
 	 */
 	public void delete(Long[] ids);
 	
-	public List<Map> selectOptionList();
+	public List<Map<String,Object>> selectOptionList();
 }

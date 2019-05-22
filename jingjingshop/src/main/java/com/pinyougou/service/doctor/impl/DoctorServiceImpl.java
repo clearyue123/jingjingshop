@@ -2,13 +2,19 @@ package com.pinyougou.service.doctor.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.pinyougou.mapper.TbDocUserMapper;
-import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pinyougou.mapper.TbDocMapper;
+import com.pinyougou.mapper.TbDocUserMapper;
+import com.pinyougou.pojo.TbCard;
+import com.pinyougou.pojo.TbDoc;
+import com.pinyougou.pojo.TbDocUser;
+import com.pinyougou.pojo.TbPointList;
+import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.doctor.DoctorService;
 
 import entity.PageResult;
@@ -197,8 +203,24 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public List<TbDoc> selectList() {
-		return tbDocMapper.selectList();
+	public List<Map<String,Object>> selectList() {
+		List<Map<String,Object>> listDoctor = tbDocMapper.selectList();
+		int total = listDoctor.size();
+		Double quarter = Math.ceil(total/4.0);
+		for(int i=0;i<total;i++){
+			Map<String,Object> doctorMap = listDoctor.get(i);
+			Double rowNum = (Double)doctorMap.get("rowNum");
+			if(rowNum<=quarter&&rowNum>1){
+				doctorMap.put("doctorLevel", "A");
+			}else if(rowNum<=quarter*2&&rowNum>quarter){
+				doctorMap.put("doctorLevel", "B");
+			}else if(rowNum<=quarter*3&&rowNum>quarter*2){
+				doctorMap.put("doctorLevel", "C");
+			}else{
+				doctorMap.put("doctorLevel", "D");
+			}
+		}
+		return listDoctor;
 	}
 
 

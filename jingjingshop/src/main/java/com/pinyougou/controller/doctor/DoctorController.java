@@ -2,6 +2,7 @@ package com.pinyougou.controller.doctor;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.service.card.CardService;
 import com.pinyougou.service.doctor.DoctorService;
-import com.pinyougou.service.order.OrderService;
-import com.pinyougou.service.patient.PatientService;
 import com.pinyougou.service.user.UserService;
 
 import entity.PageResult;
@@ -27,8 +26,6 @@ import sun.misc.BASE64Encoder;
 @RequestMapping("/doctor")
 public class DoctorController {
 
-	@Autowired
-	private PatientService patientService;
 
 
 	@Autowired
@@ -38,24 +35,13 @@ public class DoctorController {
 	private CardService cardService;
 
 	@Autowired
-	private OrderService orderService;
-
-	@Autowired
 	private UserService uesrService;
 
-
-	
-
-	/**
-	 * 2019-5-17 更新
-	 */
-
-
-
-	/**
-	 * 获取积分请求表的prid
-	 */
-
+    /**
+     * 获取积分请求表的prid
+     * @param did
+     * @return
+     */
 	@RequestMapping("/findprid")
 	public ApiResult editscript(@RequestParam(required = false, value = "did") String did
 	) {
@@ -72,13 +58,12 @@ public class DoctorController {
 
 	}
 
-
-
-	/**
-	 * 编辑script
-	 */
-
-
+    /**
+     * 编辑script
+     * @param did
+     * @param script
+     * @return
+     */
 	@RequestMapping("/editscript")
 	public ApiResult editscript(@RequestParam(required = false, value = "did") String did,
 								@RequestParam(required = false, value = "script") String script
@@ -93,7 +78,6 @@ public class DoctorController {
 		}
 
 	}
-
 
 
 	/**
@@ -128,8 +112,11 @@ public class DoctorController {
 
 	/**
 	 * 编辑ticket和ticket_time
+	 * @param did
+	 * @param ticket
+	 * @param ticket_time
+	 * @return
 	 */
-
 	@RequestMapping("/editreticket")
 	public ApiResult editreticket(@RequestParam(required = false, value = "did") String did,
 								  @RequestParam(required = false, value = "ticket") String ticket,
@@ -145,8 +132,6 @@ public class DoctorController {
 
 	}
 
-
-
 	/**
 	 * 提交兑换积分的申请
 	 *
@@ -156,7 +141,6 @@ public class DoctorController {
 	@RequestMapping("/SubmitPointRequest")
 	public ApiResult SubmitPointRequest(@RequestParam(required = false, value = "did") String did,
 										@RequestParam(required = false, value = "point") Integer point
-
 	) {
 		try {
 			//判断在七日内是否重复提交申请  此为不重复提交申请
@@ -183,11 +167,6 @@ public class DoctorController {
 
 	}
 
-
-
-
-
-
 	/**
 	 * 查询积分记录表
 	 *
@@ -210,11 +189,6 @@ public class DoctorController {
 		}
 
 	}
-
-
-
-
-
 
 	/**
 	 * 查询銀行卡
@@ -264,7 +238,6 @@ public class DoctorController {
 	/**
 	 * 根据代表关联的医生信息的数量
 	 */
-
 	@RequestMapping("/findinnercount")
 	public ApiResult FindReDocInnerCount(String did) {
 		int i = doctorService.FindDocUserInnerCount(did);
@@ -281,7 +254,6 @@ public class DoctorController {
 	/**
 	 * 查询患者信息
 	 */
-
 	@RequestMapping("/finduser")
 	public ApiResult findAllByIdDoc(String did) {
 		try {
@@ -296,12 +268,6 @@ public class DoctorController {
 		}
 
 	}
-
-
-/**
- * 操作  2019-5-17  更新于此
- */
-
 
 	/**
 	 * 查询个人信息
@@ -396,24 +362,13 @@ public class DoctorController {
 		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
 	}
 
-
-
-
-
-
-	/**
-	 * 2019-5-17  更新结束
-	 */
-
-
-
-
-
-
 	/**
 	 * 患者列表
+	 * @param did
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
 	 */
-
 	@RequestMapping("/getPatientList")
 	public ApiResult getPatientList(@RequestParam(required = false, value = "did") String did,
 			@RequestParam(required = false, value = "pageNum", defaultValue = "1") int pageNum,
@@ -427,13 +382,9 @@ public class DoctorController {
 		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
 	}
 
-
-
-
 	/**
 	 * 患者详情
 	 */
-
 	@RequestMapping("/getPatientDetail")
 	public ApiResult getPatientDetail(Long uid) {
 		try {
@@ -445,45 +396,6 @@ public class DoctorController {
 		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
 	}
 
-
-//
-//
-//
-//	/**
-//	 * 患者商品订单
-//	 */
-//
-//	@RequestMapping("/getPatientOrder")
-//	public ApiResult getPatientOrder(@RequestParam(required = false, value = "uid") String uid) {
-//		try {
-//			// TbPatient result = orderService.selectListByuid(uid);
-//			return new ApiResult(200, "查询成功", null);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
-//	}
-//
-//
-//
-//	/**
-//	 * 发送聊天
-//	 */
-//
-//	@RequestMapping("/sendMessageByDoc")
-//	public ApiResult sendMessageByDoc(@RequestParam(required = false, value = "did") String did,
-//			@RequestParam(required = false, value = "message") String message,
-//			@RequestParam(required = false, value = "uid") String uid) {
-//		try {
-//			// TbPatient result = orderService.selectListByuid(uid);
-//			return new ApiResult(200, "查询成功", null);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
-//	}
-//
-
 	/**
 	 * 查询所有用户
 	 * 
@@ -491,33 +403,8 @@ public class DoctorController {
 	 */
 	@RequestMapping("/selectList")
 	public ApiResult selectList() {
-		List<TbDoc> result = doctorService.selectList();
-		return new ApiResult(200, "查询成功", result);
+		List<Map<String,Object>> data = doctorService.selectList();
+		return new ApiResult(200, "查询成功", data);
 	}
-
-	/**
-	 * 用户绑定医生
-	 * 
-	 * @param did
-	 *            医生id
-	 * @param uid
-	 *            用户id
-	 * @return
-	 */
-
-
-
-//	@RequestMapping("/PatientBindDoc")
-//	public ApiResult PatientBindDoc(@RequestParam(required = true, value = "did") String did,
-//			@RequestParam(required = true, value = "uid") Long uid) {
-//		TbUser user = new TbUser();
-//		user.setId(uid);
-//		user.setDid(did);
-//		int a = uesrService.BindDid(user);
-//		if (a == 1) {
-//			return new ApiResult(200, "操作成功", "");
-//		}
-//		return new ApiResult(201, "操作失败", "请确定用户id是否存在");
-//	}
 
 }

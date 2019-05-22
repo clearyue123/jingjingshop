@@ -2,6 +2,7 @@ package com.pinyougou.service.doctor;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.pojo.*;
 
@@ -90,9 +91,11 @@ public interface DoctorService {
 	TbDoc selectById(String did);
 
 	int updateInfo(TbDoc user);
-
-	List<TbDoc> selectList();
-
-
+    
+	/**
+	 * 医生列表
+	 * @return
+	 */
+	List<Map<String,Object>> selectList();
 
 }

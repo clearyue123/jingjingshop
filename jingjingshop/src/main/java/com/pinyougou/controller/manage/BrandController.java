@@ -31,15 +31,10 @@ public class BrandController {
 		return brandService.findAll();
 	}
 	
-/*	@RequestMapping("/findByPage")
-	public PageResult findByPage(int page,int rows){
-		return brandService.findByPage(page, rows);
-	}*/
 	@RequestMapping("/save")
 	public Result save(@RequestBody TbBrand brand){
 		try{
 			brandService.save(brand);
-			
 			return new Result(true,"保存成功!");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -56,7 +51,6 @@ public class BrandController {
 	public Result update(@RequestBody TbBrand brand){
 		try{
 			brandService.update(brand);
-			
 			return new Result(true,"修改成功!");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -68,7 +62,6 @@ public class BrandController {
 	public Result delete(Long[] ids){
 		try{
 			brandService.delete(ids);
-			
 			return new Result(true,"删除成功!");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -78,13 +71,12 @@ public class BrandController {
 	
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbBrand brand,int page,int rows){
-		System.out.println(brand);
 		return brandService.findByPage(brand, page, rows);
 	}
 	
 	
 	@RequestMapping("/selectOptionList")
-	public List<Map> selectOptionList(){
+	public List<Map<String,Object>> selectOptionList(){
 		return brandService.selectOptionList();
 	}
 	

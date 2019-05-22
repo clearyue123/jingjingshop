@@ -365,10 +365,16 @@
   	where did = #{did,jdbcType=VARCHAR}
   </update>
   
-  <select id="selectList" resultMap="BaseResultMap">
-  	select 
-  	<include refid="Base_Column_List"></include>
-  	from tb_doc
+  <select id="selectList" resultType="java.util.Map">
+	  	SELECT
+			@rowNum :=@rowNum + 1 AS rowNum,
+			t.*
+		FROM
+			tb_doc t,
+		  (SELECT @rowNum:=0) b
+		ORDER BY
+			t.points_all
+		DESC
   </select>
   
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String">
