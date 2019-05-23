@@ -18,6 +18,7 @@ import com.pinyougou.mapper.TbGoodsMapper;
 import com.pinyougou.mapper.TbIndexMessageMapper;
 import com.pinyougou.mapper.TbOrderItemMapper;
 import com.pinyougou.mapper.TbOrderSpeMapper;
+import com.pinyougou.mapper.TbShopCartMapper;
 import com.pinyougou.mapper.TbShopCartSpeMapper;
 import com.pinyougou.mapper.TbUserMapper;
 import com.pinyougou.pojo.TbAddress;
@@ -65,6 +66,8 @@ public class OrderController {
     private TbIndexMessageMapper indexMsgMapper;
     @Autowired
     private TbUserMapper userMapper;
+    @Autowired
+    private TbShopCartMapper shopCartMapper;
 	//设置id生成器
 	private IdWorker idWorker = new IdWorker();
 	/**
@@ -336,7 +339,6 @@ public class OrderController {
 				TbAddress addr = addressList.get(0);
 				TbOrder tbOrder = new TbOrder();
 				TbOrderItem tbOrderItem = new TbOrderItem();
-				List<TbShopCart> shopCartList = cartService.findShopCartByUId(userId);
 				//设置orderId
 				long orderId = idWorker.nextId();
 				tbOrder.setOrderId(orderId);
@@ -351,10 +353,13 @@ public class OrderController {
 				tbOrder.setPostFee("0.0");
 				Integer itemNum = 0;
 				BigDecimal payment = new BigDecimal(0);
-				for(int i=0;i<shopCartList.size();i++){
-					TbShopCart tbShopCart = shopCartList.get(i);
+				for(int i=0;i<cartIds.length;i++){
+					String cartId = cartIds[i];
+					TbShopCart tbShopCart = shopCartMapper.selectByPrimaryKey(Long.parseLong(cartId));
+					if(tbShopCart==null){
+						return new ApiResult(201, "参数错误，购物车商品不存在！", "");
+					}
 					Long goodsId = tbShopCart.getGoodsId();
-					Long cartId = tbShopCart.getCartId();
 					Integer num = tbShopCart.getNum();
 					TbGoods tbGoods = goodsMapper.selectByPrimaryKey(goodsId);
 		        	BigDecimal reducedPrice = tbGoods.getReducedPrice();
@@ -363,11 +368,11 @@ public class OrderController {
 					tbOrderItem.setOrderId(orderId);
 					tbOrderItem.setGoodsId(goodsId);
 					tbOrderItem.setNum(num);
-					tbOrderItem.setCartId(cartId);
+					tbOrderItem.setCartId(Long.parseLong(cartId));
 					orderItemMapper.insert(tbOrderItem);
 					TbShopCartSpeExample cartSpeExample = new TbShopCartSpeExample();
 					Criteria cri = cartSpeExample.createCriteria();
-					cri.andCartIdEqualTo(cartId);
+					cri.andCartIdEqualTo(Long.parseLong(cartId));
 					List<TbShopCartSpe> cartSpeList = cartSpeMapper.selectByExample(cartSpeExample);
 					for (TbShopCartSpe tbShopCartSpe : cartSpeList) {
 						TbOrderSpe tbOrderSpe = new TbOrderSpe();
@@ -377,7 +382,7 @@ public class OrderController {
 				    	tbOrderSpe.setSpeOpId(tbShopCartSpe.getSpeOpId());
 				    	orderSpeMapper.insert(tbOrderSpe);
 					}
-					cartService.delTbShopCart(cartId);
+					cartService.delTbShopCart(Long.parseLong(cartId));
 				}
 				tbOrder.setItemNum(itemNum);
 				tbOrder.setPayment(payment);

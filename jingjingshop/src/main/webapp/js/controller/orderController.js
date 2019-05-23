@@ -15,28 +15,13 @@ app.controller("orderController",function($scope,$controller,$http,orderService)
 	}
 	
 	$scope.update = function(){
-		alert("update ...");
 		orderService.update($scope.entity);
 	}
 
 	$scope.findById = function(id){
-		alert(id);
 		orderService.findById(id).success(function(response){
 			$scope.entity = response;
 		});
 	}
-	
-	$scope.engineer = {
-            name: "Dani",
-            currentActivity: "Fixing bugs"
-        };
-     
-    $scope.activities =
-        [
-            "Writing code",
-            "Testing code",
-            "Fixing bugs",
-            "Dancing"
-        ];
 	
 });

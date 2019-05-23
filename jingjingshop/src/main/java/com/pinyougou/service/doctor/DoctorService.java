@@ -4,7 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.pinyougou.pojo.*;
+import com.pinyougou.pojo.TbCard;
+import com.pinyougou.pojo.TbDoc;
+import com.pinyougou.pojo.TbDocUser;
+import com.pinyougou.pojo.TbPointList;
+import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbUser;
 
 import entity.PageResult;
 
@@ -13,12 +18,9 @@ import entity.PageResult;
  */
 public interface DoctorService {
 
-
-
 	public int editByPointRequestCaction(HashMap map);
 
 	public  String  FindPointRequestByPrid(String rid);
-
 
 	public TbDoc  findAllByIdTbDoc(String rid);
 
@@ -35,9 +37,6 @@ public interface DoctorService {
 	public TbDoc  findAllByIdDoc(String did);
 
 	public TbDoc selectByUnionId(TbDoc user);
-
-
-
 
 	public  int  addInnerDocUser(TbDocUser tbDocUser);
 
@@ -72,11 +71,7 @@ public interface DoctorService {
 
 	public  int FindPointsAllUpPoints(HashMap map);
 
-
 	public  TbUser findAllByIdUser(String id);
-
-
-//	新增
 
 	TbDoc selectByPrimaryKey(String did);
 
