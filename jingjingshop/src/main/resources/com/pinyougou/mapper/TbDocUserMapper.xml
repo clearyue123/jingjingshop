@@ -4,7 +4,23 @@
 
 <mapper namespace="com.pinyougou.mapper.TbDocUserMapper">
 
-
+     <insert id="insert" parameterType="java.util.Map" >
+       INSERT INTO tb_docuser (
+								id,
+								did,
+								uid,
+								script,
+								create_date
+							)
+					VALUES
+							(
+							  #{id}, 
+							  #{doctorId}, 
+							  #{patientId}, 
+							  #{script}, 
+							  #{createDate})
+    </insert>
+    
     <!--&lt;!&ndash;设置一对多  其中column为数据库的字段&ndash;&gt;-->
     <resultMap id="FindDocUser" type="com.pinyougou.pojo.TbDoc">
         <id column="did" property="did"></id>

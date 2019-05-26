@@ -1,5 +1,6 @@
 package com.pinyougou.service.doctor.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -227,6 +228,14 @@ public class DoctorServiceImpl  implements DoctorService {
 	public List<Map<String, Object>> selectPurchaseRecord(long patientId) {
 		List<Map<String, Object>> recordList = tbDocMapper.selectPurchaseRecord(patientId);
 		return recordList;
+	}
+
+	@Override
+	public Integer doctorRelatePatient(Map<String, Object> docUserParamMap) {
+		docUserParamMap.put("createDate", new Date());
+		docUserParamMap.put("script", "");
+		Integer insertNum = tbDocUserMapper.insert(docUserParamMap);
+		return insertNum;
 	}
 
 

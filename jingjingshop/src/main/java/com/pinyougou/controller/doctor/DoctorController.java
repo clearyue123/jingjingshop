@@ -429,5 +429,29 @@ public class DoctorController {
 			return new ApiResult(201, "error", null);
 		}
 	}
-   
+    
+	/**
+	 * 医生关联患者
+	 * @param doctorId 医生ID
+	 * @param patientId 患者ID
+	 * @return
+	 */
+	@RequestMapping("/doctorRelatePatient")
+	public ApiResult doctorRelatePatient(@RequestParam(value="doctorId",required=true)String doctorId,
+			                             @RequestParam(value="patientId",required=true)String patientId){
+		try{
+			Map<String,Object> docUserParamMap = new HashMap<>();
+			docUserParamMap.put("doctorId", doctorId);
+			docUserParamMap.put("patientId", patientId);
+			Integer i = doctorService.doctorRelatePatient(docUserParamMap);
+			if(i>0){
+				return new ApiResult(200, "医生关联患者成功！","");
+			}else{
+				return new ApiResult(201, "医生关联患者失败！","");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "患者以关联过，请勿重复关联！","");
+		}
+	}
 }

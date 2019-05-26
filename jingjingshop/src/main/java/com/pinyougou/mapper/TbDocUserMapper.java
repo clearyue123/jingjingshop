@@ -1,16 +1,20 @@
 package com.pinyougou.mapper;
 
-import com.pinyougou.pojo.*;
-
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.pinyougou.pojo.TbCard;
+import com.pinyougou.pojo.TbDoc;
+import com.pinyougou.pojo.TbDocUser;
+import com.pinyougou.pojo.TbPointList;
+import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbUser;
 
 /**
  * 代表层mapper连接  根据mapper的sql的id定义
  */
 public interface TbDocUserMapper {
-
-
 
  public TbDoc  findAllByIdTbDoc(String rid);
 
@@ -74,5 +78,12 @@ public interface TbDocUserMapper {
 
 
  public  TbUser findAllByIdUser(String id);
+ 
+ /**
+  * 医生关联患者
+  * @param record
+  * @return
+  */
+ int insert(Map<String,Object> docUserParamMap);
 
 }

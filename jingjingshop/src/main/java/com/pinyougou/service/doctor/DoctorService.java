@@ -98,5 +98,11 @@ public interface DoctorService {
      * @return
      */
 	List<Map<String, Object>> selectPurchaseRecord(long parseLong);
+    
+	/**
+     * 医生关联患者 
+     * @param docUserParamMap
+     */
+	Integer doctorRelatePatient(Map<String, Object> docUserParamMap);
 
 }
