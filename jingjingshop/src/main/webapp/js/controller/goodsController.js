@@ -191,6 +191,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 			if(response.code==200){
 				// 获得url
 				$scope.entity.itemImages =  response.data;
+				$scope.itemImageObjArray = $scope.entity.itemImages.split(",");
 				alert(response.message);
 			}else{
 				alert(response.message);

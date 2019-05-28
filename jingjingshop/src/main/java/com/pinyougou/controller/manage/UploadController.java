@@ -57,7 +57,6 @@ public class UploadController {
 	@RequestMapping(value="/uploadItemImages",method = RequestMethod.POST)
 	public ApiResult uploadItemImages(@RequestParam("itemImage")MultipartFile[] itemImages,HttpServletRequest request){
 		try {
-			  System.out.println(itemImages.length);
 			  String itemImagesStr = "";
 			  if(itemImages==null||itemImages.length==0){
 				  return new ApiResult(201, "请上传文件！", "");

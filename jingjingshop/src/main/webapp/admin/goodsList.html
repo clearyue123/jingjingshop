@@ -81,7 +81,7 @@
 									      <th class="sorting">品牌名</th>
 									      <th class="sorting">店铺</th>
 									      <th class="sorting">商城价</th>
-									      <th class="sorting">打折价</th>
+									      <th class="sorting">成交价</th>
 									      <th class="sorting">是否上架</th>
 									      <th class="sorting">是否启用规格</th>
 									      <th class="sorting">型号</th>
@@ -198,6 +198,11 @@
 				   </td>
 		      	</tr>
 		      	<tr>
+		      	   <td>商品列表小图片预览</td>
+		      	   <td><img src="{{entity.smallPic}}" height="50" width="100">
+		      	   </td>
+		      	</tr>
+		      	<tr>
 		      	   <td>商品详情轮播图片上传</td>
 		      	   <td>
 		      	       <input type="file" id="itemImages" ngf-select ng-model="entity.itemImages" multiple="multiple" ngf-pattern="'image/*" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"/>
@@ -208,6 +213,14 @@
 				   </button>
 				   </td>
 		      	</tr>
+		      	<tr>
+		      	   <td>商品详情轮播图片预览</td>
+		      	   <td >
+		      	        <span ng-repeat="imgModel in itemImageObjArray"><img src="{{imgModel}}" height="50" width="100"></span>
+		      	   </td>
+		      	</tr>
+		      	</tr>
+		      	
 		      	<tr>
 		      	   <td>商品详情介绍</td>
 		      	   <td>
