@@ -104,8 +104,9 @@ public class GoodsController {
 		String isEnableSpec = tbGoods.getIsEnableSpec();
 		String isMarketable = tbGoods.getIsMarketable();
 		String goodsName = tbGoods.getGoodsName();
+		String smallPic = tbGoods.getSmallPic();
 		TbGoodsDesc goodsDesc = goods.getGoodsDesc();
-		String itemImages = goodsDesc.getItemImages();
+		String[] itemImages = goodsDesc.getItemImages().split(",");
 		String introduce = goodsDesc.getIntroduction();
 		Map<String,Object> data = new HashMap<>();
 		data.put("goodsId", id);
@@ -117,6 +118,7 @@ public class GoodsController {
 		data.put("isEnableSpec", isEnableSpec);
 		data.put("isMarketable", isMarketable);
 		data.put("goodsName", goodsName);
+		data.put("smallPic", smallPic);
 		data.put("itemImages", itemImages);
 		data.put("introduce", introduce);
 		return data;

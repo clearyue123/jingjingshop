@@ -36,17 +36,12 @@
 </head>
 
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="searchEntity={};search()">
-  <!-- .box-body -->
-                
                     <div class="box-header with-border">
                         <h3 class="box-title">商品列表</h3>
                     </div>
-
                     <div class="box-body">
-
                         <!-- 数据表格 -->
                         <div class="table-box">
-
                             <!--工具栏-->
                             <div class="pull-left">
                                 <div class="form-group form-inline">
@@ -66,8 +61,7 @@
 									<button class="btn btn-default" ng-click="search()">查询</button>                                    
                                 </div>
                             </div>
-                            <!--工具栏/-->
-
+                              <!--工具栏/-->
 			                  <!--数据列表-->
 			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
 			                      <thead>
@@ -216,7 +210,7 @@
 		      	<tr>
 		      	   <td>商品详情轮播图片预览</td>
 		      	   <td >
-		      	        <span ng-repeat="imgModel in itemImageObjArray"><img src="{{imgModel}}" height="50" width="100"></span>
+		      	        <span ng-repeat="imgModel in entity.itemImages"><img src="{{imgModel}}" height="50" width="100"></span>
 		      	   </td>
 		      	</tr>
 		      	</tr>

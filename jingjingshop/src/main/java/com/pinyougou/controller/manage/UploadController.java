@@ -47,7 +47,8 @@ public class UploadController {
 			   }
 			  in.close();
 			  out.close();
-			return new ApiResult(200, "文件上传成功！", "/smallPicUpload/"+saveFileName);
+			String smallPicPath = "/smallPicUpload/"+saveFileName;
+			return new ApiResult(200, "文件上传成功！", smallPicPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ApiResult(201, "文件上传失败！", "");
@@ -89,7 +90,8 @@ public class UploadController {
 						  itemImagesStr += "/itemImagesUpload/"+saveFileName+",";
 					  }
 				    }
-			   return new ApiResult(200, "文件上传成功！", itemImagesStr);
+			   String[] itemImgPathArray = itemImagesStr.split(",");
+			   return new ApiResult(200, "文件上传成功！",itemImgPathArray);
 			  }
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -275,7 +275,12 @@ public class GoodsServiceImpl implements GoodsService {
 		  String price = (String)goodsMap.get("price");
 		  String reducedPrice = (String)goodsMap.get("reducedPrice");
 		  String smallPic = (String)goodsMap.get("smallPic");
-		  String itemImages = (String)goodsMap.get("itemImages");
+		  List itemImages = (List)goodsMap.get("itemImages");
+		  String itemImagesStr = "";
+		  for(int i=0;i<itemImages.size()-1;i++){
+			  itemImagesStr += itemImages.get(i)+",";
+		  }
+		  itemImagesStr += itemImages.get(itemImages.size()-1);
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String introduce = (String)goodsMap.get("introduce");
 		  tbGoods.setId(goodsId);
@@ -291,7 +296,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setSmallPic(smallPic);
 		  tbGoods.setType(goodsType);
 		  goodsDesc.setGoodsId(goodsId);
-		  goodsDesc.setItemImages(itemImages);
+		  goodsDesc.setItemImages(itemImagesStr);
 		  goodsDesc.setIntroduction(introduce);
 		  goodsMapper.insert(tbGoods);
 		  tbGoodsDescMapper.insert(goodsDesc);
