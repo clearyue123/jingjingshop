@@ -128,8 +128,8 @@
             )
         values (#{id,jdbcType=BIGINT}, #{sellerId,jdbcType=VARCHAR}, #{isMarketable,jdbcType=VARCHAR}, 
             #{brandId,jdbcType=BIGINT}, #{category1Id,jdbcType=BIGINT}, #{category2Id,jdbcType=BIGINT}, 
-            #{category3Id,jdbcType=BIGINT}, #{smallPic,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-            #{isEnableSpec,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, #{reducedPrice,jdbcType=DECIMAL}, 
+            #{category3Id,jdbcType=BIGINT}, #{smallPic,jdbcType=VARCHAR}, #{price}, 
+            #{isEnableSpec,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, #{reducedPrice}, 
             #{goodsName,jdbcType=VARCHAR}, #{totalNum,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}
             )
     </insert>
