@@ -70,11 +70,8 @@ public class WXPayController {
 
 	        String prestr = MyPayUtils.createLinkString(packageParams); // 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串 
 	        
-	        System.out.println("prestr:"+prestr);
 	        //MD5运算生成签名，这里是第一次签名，用于调用统一下单接口
 	        String mysign = MyPayUtils.sign(prestr, MyWXPayConfig.KEY, "utf-8").toUpperCase();
-	       // String mysign = MyWXPayConfig.KEY.toUpperCase();
-	        System.out.println("生成签名:"+mysign); 
 	       
 	        //拼接统一下单接口使用的xml数据，要将上一步生成的签名一起拼接进去
 	       String xml = "<xml>"  
