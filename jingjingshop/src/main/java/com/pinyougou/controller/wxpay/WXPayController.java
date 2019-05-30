@@ -1,5 +1,6 @@
 package com.pinyougou.controller.wxpay;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +56,10 @@ public class WXPayController {
 			//商品名称
 			String body = "商品测试";
 			//订单金额
-			String payment = (String)orderDetailMap.get("payment");
+			BigDecimal payment = (BigDecimal)orderDetailMap.get("payment");
+			Double totalFree = payment.doubleValue();
+	        
+	        Long round = Math.round(totalFree*100);
 			//组装参数，用户生成统一下单接口的签名
 			Map<String, String> packageParams = new HashMap<String, String>();
 			packageParams.put("appid", MyWXPayConfig.APPID);
@@ -65,17 +69,16 @@ public class WXPayController {
 			packageParams.put("notify_url", MyWXPayConfig.NOTIFYURL);//支付成功后的回调地址
 			packageParams.put("out_trade_no", orderId);//商户订单号
 			packageParams.put("openid", openId);
-			packageParams.put("total_fee", "1");//支付金额，这边需要转成字符串类型，否则后面的签名会失败
+			packageParams.put("total_fee",round.toString());//支付金额，这边需要转成字符串类型，否则后面的签名会失败
 			packageParams.put("trade_type", MyWXPayConfig.TRADETYPE);//支付方式
 			packageParams.put("spbill_create_ip", spbill_create_ip);
 
 	        String prestr = MyPayUtils.createLinkString(packageParams); // 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串 
 	        
 	        //MD5运算生成签名，这里是第一次签名，用于调用统一下单接口
-	        String mysign = MyPayUtils.sign(prestr, MyWXPayConfig.KEY, "utf-8").toUpperCase();
-	       
+	        String mysign = MyPayUtils.sign(prestr, MyWXPayConfig.KEY, "utf-8").toUpperCase();  
 	        //拼接统一下单接口使用的xml数据，要将上一步生成的签名一起拼接进去
-	       String xml = "<xml>"  
+	        String xml = "<xml>"  
 	                + "<appid><![CDATA[" + MyWXPayConfig.APPID + "]]></appid>" 
                     + "<body><![CDATA[" + body + "]]></body>" 
                     + "<mch_id><![CDATA[" + MyWXPayConfig.MCHID + "]]></mch_id>" 
@@ -85,13 +88,11 @@ public class WXPayController {
                     + "<out_trade_no><![CDATA[" + orderId + "]]></out_trade_no>" 
                     + "<spbill_create_ip><![CDATA[" + spbill_create_ip + "]]></spbill_create_ip>" 
                     + "<sign><![CDATA[" + mysign + "]]></sign>"
-                    + "<total_fee><![CDATA[" + payment + "]]></total_fee>"
+                    + "<total_fee><![CDATA[" + round.toString() + "]]></total_fee>"
                     + "<trade_type><![CDATA[" + MyWXPayConfig.TRADETYPE + "]]></trade_type>" 
                     + "</xml>";
-	        
 	        //调用统一下单接口，并接受返回的结果
 	        String result = MyPayUtils.httpRequest(MyWXPayConfig.PAYURL, "POST", xml);
-	        
 	        // 将解析结果存储在HashMap中   
 	        Map<String, String> map = MyPayUtils.doXMLParse(result);
 	        
