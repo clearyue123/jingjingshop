@@ -42,7 +42,7 @@ public class UserLoginController {
 				user.setOpenId(wxcode);
 				TbUser result = userService.firstInfo(user);
 				if (result != null) {
-					if(TextUtils.isBlank(result.getName())){
+					if(TextUtils.isBlank(result.getNickName())){
 						return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result);
 					}
 					return new ApiResult(200, "登录成功", result);

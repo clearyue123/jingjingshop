@@ -387,7 +387,7 @@ public class OrderController {
 				tbOrder.setItemNum(itemNum);
 				tbOrder.setPayment(payment);
 				orderService.add(tbOrder);
-				return new ApiResult(200, "订单创建成功", null);
+				return new ApiResult(200, "订单创建成功", orderId);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -456,7 +456,7 @@ public class OrderController {
 			    }
 			    orderItemMapper.insert(tbOrderItem);
 			    orderService.add(tbOrder);
-				return new ApiResult(200, "订单创建成功", null);
+				return new ApiResult(200, "订单创建成功", orderId);
 	        }
 		}catch(Exception e){
 			e.printStackTrace();
