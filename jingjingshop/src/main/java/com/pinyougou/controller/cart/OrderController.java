@@ -267,8 +267,11 @@ public class OrderController {
 			TbUser tbUser = userMapper.selectByPrimaryKey(Long.parseLong(userId));
 			String userName = tbUser.getName();
 			if("0".equals(operateFlag)){//取消订单
-				orderService.delOrderById(Long.parseLong(orderId));
-				return new ApiResult(200, "已取消订单","");
+				Map<String,Object> paramMap = new HashMap<>();
+				paramMap.put("ORDERID", orderId);
+				paramMap.put("STATUS", "6");//交易关闭
+				orderService.updateStatusById(paramMap);
+				return new ApiResult(200, "交易关闭","");
 			}else if("1".equals(operateFlag)){//提醒发货
 				TbIndexMessage indexMsg = new TbIndexMessage();
 				indexMsg.setType("1");
