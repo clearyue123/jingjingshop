@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
 	public TbUser firstInfo(TbUser user) {
-		return userMapper.selectByUnionId(user);
+		return userMapper.selectByOpenId(user);
 	}
 	
 	 /**

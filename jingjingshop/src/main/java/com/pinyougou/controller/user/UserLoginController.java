@@ -38,10 +38,8 @@ public class UserLoginController {
 				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
 			} else {
 				wxcode = jsonObject.getString("openid");
-				String unionid = jsonObject.getString("unionid");
 				TbUser user = new TbUser();
 				user.setOpenId(wxcode);
-				user.setUnionId(unionid);
 				TbUser result = userService.firstInfo(user);
 				if (result != null) {
 					if(TextUtils.isBlank(result.getName())){

@@ -517,6 +517,14 @@
 		#{unionId,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="selectByOpenId" parameterType="com.pinyougou.pojo.TbUser"
+		resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from tb_user where open_id =
+		#{openId,jdbcType=VARCHAR}
+	</select>
+	
 	
 	<select id="selectListByDid" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
