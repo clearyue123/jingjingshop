@@ -54,6 +54,8 @@ public class WXPayController {
 			String spbill_create_ip = IpUtils.getIpAddr(request);
 			//商品名称
 			String body = "商品测试";
+			//订单金额
+			String payment = (String)orderDetailMap.get("payment");
 			//组装参数，用户生成统一下单接口的签名
 			Map<String, String> packageParams = new HashMap<String, String>();
 			packageParams.put("appid", MyWXPayConfig.APPID);
@@ -83,7 +85,7 @@ public class WXPayController {
                     + "<out_trade_no><![CDATA[" + orderId + "]]></out_trade_no>" 
                     + "<spbill_create_ip><![CDATA[" + spbill_create_ip + "]]></spbill_create_ip>" 
                     + "<sign><![CDATA[" + mysign + "]]></sign>"
-                    + "<total_fee><![CDATA[" + "1" + "]]></total_fee>"
+                    + "<total_fee><![CDATA[" + payment + "]]></total_fee>"
                     + "<trade_type><![CDATA[" + MyWXPayConfig.TRADETYPE + "]]></trade_type>" 
                     + "</xml>";
 	        
@@ -107,6 +109,11 @@ public class WXPayController {
 	            //再次签名，这个签名用于小程序端调用wx.requesetPayment方法
 	            String paySign = MyPayUtils.sign(stringSignTemp, MyWXPayConfig.KEY, "utf-8").toUpperCase();
 	            response.put("paySign", paySign);
+	            
+	            Map<String,Object> orderStatusMap = new HashMap<>();
+	            orderStatusMap.put("ORDERID", orderId);
+	            orderStatusMap.put("STATUS", "2");//已付款
+				orderService.updateStatusById(orderStatusMap);
 	        }
 	        response.put("appid", MyWXPayConfig.APPID);
 	        return response;
