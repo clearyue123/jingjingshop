@@ -105,6 +105,7 @@ public class GoodsController {
 		String isMarketable = tbGoods.getIsMarketable();
 		String goodsName = tbGoods.getGoodsName();
 		String smallPic = tbGoods.getSmallPic();
+		String goodsType = tbGoods.getType();
 		TbGoodsDesc goodsDesc = goods.getGoodsDesc();
 		String[] itemImages = goodsDesc.getItemImages().split(",");
 		String introduce = goodsDesc.getIntroduction();
@@ -121,6 +122,7 @@ public class GoodsController {
 		data.put("smallPic", smallPic);
 		data.put("itemImages", itemImages);
 		data.put("introduce", introduce);
+		data.put("goodsType",goodsType);
 		return data;
 	}
 
