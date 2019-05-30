@@ -282,6 +282,12 @@ public class OrderController {
 				indexMsg.setIsDelete("0");
 				indexMsgMapper.insert(indexMsg);
 				return new ApiResult(200, "已提醒发货","");
+			}else if("2".equals(operateFlag)){//已付款
+				 Map<String,Object> orderStatusMap = new HashMap<>();
+		         orderStatusMap.put("ORDERID", orderId);
+		         orderStatusMap.put("STATUS", "2");//已付款
+			     orderService.updateStatusById(orderStatusMap);
+			     return new ApiResult(200, "已付款","");
 			}else{//已收货
 				Map<String,Object> paramMap = new HashMap<>();
 				paramMap.put("ORDERID", orderId);

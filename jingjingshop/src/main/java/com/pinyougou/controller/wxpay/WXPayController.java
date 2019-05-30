@@ -110,11 +110,6 @@ public class WXPayController {
 	            //再次签名，这个签名用于小程序端调用wx.requesetPayment方法
 	            String paySign = MyPayUtils.sign(stringSignTemp, MyWXPayConfig.KEY, "utf-8").toUpperCase();
 	            response.put("paySign", paySign);
-	            
-	            Map<String,Object> orderStatusMap = new HashMap<>();
-	            orderStatusMap.put("ORDERID", orderId);
-	            orderStatusMap.put("STATUS", "2");//已付款
-				orderService.updateStatusById(orderStatusMap);
 	        }
 	        response.put("appid", MyWXPayConfig.APPID);
 	        return response;
