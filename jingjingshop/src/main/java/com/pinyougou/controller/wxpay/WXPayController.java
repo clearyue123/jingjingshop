@@ -52,7 +52,6 @@ public class WXPayController {
 			String nonce_str = MyStringUtils.getRandomStringByLength(32);
 			//获取客户端IP地址
 			String spbill_create_ip = IpUtils.getIpAddr(request);
-			System.out.println("spbill_create_ip:"+spbill_create_ip);
 			//商品名称
 			String body = "商品测试";
 			//组装参数，用户生成统一下单接口的签名
