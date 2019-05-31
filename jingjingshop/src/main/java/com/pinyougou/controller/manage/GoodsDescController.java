@@ -140,10 +140,17 @@ public class GoodsDescController {
 		try{
 			Map<String,Object> data = goodsDescService.showGoodsDetail(Long.parseLong(goodsId));
 			String itemImages = (String)data.get("itemImages");
-			String[] itemImageStrs = itemImages.split(",");
+			String introduceImgs = (String)data.get("introduceImgs");
+			if(itemImages!=null&&itemImages.trim().length()>0){
+				String[] itemImageStrs = itemImages.split(",");
+				data.put("itemImages", itemImageStrs);
+			}
+			if(introduceImgs!=null&&introduceImgs.trim().length()>0){
+				String[] introduceImgsStrs = introduceImgs.split(",");
+				data.put("introduceImgs", introduceImgsStrs);
+			}
 			List<Map<String, Object>> speData = goodsDescService.findSpeListByGoodsId(Long.parseLong(goodsId));
 			data.put("speData", speData);
-			data.put("itemImages", itemImageStrs);
 			return new ApiResult(200,"获取成功",data);
 		}catch(Exception e){
 			e.printStackTrace();

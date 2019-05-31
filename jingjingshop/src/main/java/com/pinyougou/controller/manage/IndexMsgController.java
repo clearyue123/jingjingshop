@@ -30,6 +30,7 @@ public class IndexMsgController {
 	public Object showMsgList(){
 		try{
 			TbIndexMessageExample example = new TbIndexMessageExample();
+			example.setOrderByClause("create_date DESC");
 			Criteria cri = example.createCriteria();
 			cri.andIsDeleteEqualTo("0");
 			List<TbIndexMessage> msgList = msgMapper.selectByExample(example);

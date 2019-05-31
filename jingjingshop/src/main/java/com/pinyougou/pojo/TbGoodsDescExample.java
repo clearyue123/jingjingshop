@@ -63,6 +63,13 @@ public class TbGoodsDescExample {
         distinct = false;
     }
 
+    /**
+     * 
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-31
+     */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
 
@@ -583,6 +590,76 @@ public class TbGoodsDescExample {
             addCriterion("sale_service not between", value1, value2, "saleService");
             return (Criteria) this;
         }
+
+        public Criteria andIntroduceimgsIsNull() {
+            addCriterion("introduceImgs is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsIsNotNull() {
+            addCriterion("introduceImgs is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsEqualTo(String value) {
+            addCriterion("introduceImgs =", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsNotEqualTo(String value) {
+            addCriterion("introduceImgs <>", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsGreaterThan(String value) {
+            addCriterion("introduceImgs >", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsGreaterThanOrEqualTo(String value) {
+            addCriterion("introduceImgs >=", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsLessThan(String value) {
+            addCriterion("introduceImgs <", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsLessThanOrEqualTo(String value) {
+            addCriterion("introduceImgs <=", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsLike(String value) {
+            addCriterion("introduceImgs like", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsNotLike(String value) {
+            addCriterion("introduceImgs not like", value, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsIn(List<String> values) {
+            addCriterion("introduceImgs in", values, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsNotIn(List<String> values) {
+            addCriterion("introduceImgs not in", values, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsBetween(String value1, String value2) {
+            addCriterion("introduceImgs between", value1, value2, "introduceimgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIntroduceimgsNotBetween(String value1, String value2) {
+            addCriterion("introduceImgs not between", value1, value2, "introduceimgs");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -592,6 +669,13 @@ public class TbGoodsDescExample {
         }
     }
 
+    /**
+     * 
+     * 
+     * @author wcyong
+     * 
+     * @date 2019-05-31
+     */
     public static class Criterion {
         private String condition;
 

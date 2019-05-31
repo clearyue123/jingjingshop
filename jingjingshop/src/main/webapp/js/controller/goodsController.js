@@ -26,7 +26,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	$scope.findOne=function(id){				
 		goodsService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
 			}
 		);				
 	}
@@ -162,7 +162,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	$scope.uploadFile().success(function(response){
     		if(response.code==200){
 				// 获得url
-				$scope.entity.smallPic=  response.data;
+				$scope.entity.smallPic=response.data;
 				alert(response.message);
 			}else{
 				alert(response.message);
@@ -190,7 +190,38 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	$scope.uploadFiles().success(function(response){
 			if(response.code==200){
 				// 获得url
-				$scope.entity.itemImages =  response.data;
+				$scope.itemImages =  response.data;
+				$scope.entity.itemImages = $scope.itemImages.join(",");
+				alert(response.message);
+			}else{
+				alert(response.message);
+			}
+		});
+    }
+    
+    $scope.uploadFiles1 = function(){
+		// 向后台传递数据:
+		var formData = new FormData();
+		var itemImages = document.querySelector('input[id=itemIntroduceImages]').files;
+		// 向formData中添加数据:
+		 for (var i=0; i<itemImages.length; i++) {
+			 formData.append("itemImage", itemImages[i]);
+         }
+		return $http({
+			method:'post',
+			url:'../upload/uploadItemImages.do',
+			data:formData,
+			headers:{'Content-Type': undefined} ,// Content-Type : text/html  text/plain
+			transformRequest: angular.identity
+		});
+	}
+    //上传图文介绍图片数组
+    $scope.uploadIntroduceImages = function(){
+    	$scope.uploadFiles1().success(function(response){
+			if(response.code==200){
+				// 获得url
+				$scope.introduceImages =  response.data;
+				$scope.entity.introduceImages = $scope.introduceImages.join(",");
 				alert(response.message);
 			}else{
 				alert(response.message);
@@ -201,6 +232,8 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     $scope.findById = function(goodsId){
     	goodsService.findOne(goodsId).success(function(response){
     		$scope.entity = response;
+			$scope.itemImages = $scope.entity.itemImages.split(",");
+			$scope.introduceImages = $scope.entity.introduceImgs.split(",");
     	});
     }
 });	

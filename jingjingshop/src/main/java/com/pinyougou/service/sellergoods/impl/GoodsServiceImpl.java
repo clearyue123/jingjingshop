@@ -36,8 +36,7 @@ import util.IdWorker;
 
 /**
  * 服务实现层
- * @author Administrator
- *
+ * @author yue
  */
 @Service
 @Transactional
@@ -261,7 +260,7 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public void add(Map<String, Object> goodsMap) {
+	public void add(Map<String, String> goodsMap) {
 	  try{	
 		  TbGoods tbGoods = new TbGoods();
 		  TbGoodsDesc goodsDesc = new TbGoodsDesc();
@@ -275,14 +274,10 @@ public class GoodsServiceImpl implements GoodsService {
 		  String price = (String)goodsMap.get("price");
 		  String reducedPrice = (String)goodsMap.get("reducedPrice");
 		  String smallPic = (String)goodsMap.get("smallPic");
-		  List itemImages = (List)goodsMap.get("itemImages");
-		  String itemImagesStr = "";
-		  for(int i=0;i<itemImages.size()-1;i++){
-			  itemImagesStr += itemImages.get(i)+",";
-		  }
-		  itemImagesStr += itemImages.get(itemImages.size()-1);
+		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String introduce = (String)goodsMap.get("introduce");
+		  String introduceImages = (String)goodsMap.get("introduceImages");
 		  tbGoods.setId(goodsId);
 		  tbGoods.setBrandId(Long.parseLong(brandId));
 		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
@@ -296,8 +291,9 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setSmallPic(smallPic);
 		  tbGoods.setType(goodsType);
 		  goodsDesc.setGoodsId(goodsId);
-		  goodsDesc.setItemImages(itemImagesStr);
+		  goodsDesc.setItemImages(itemImages);
 		  goodsDesc.setIntroduction(introduce);
+		  goodsDesc.setIntroduceimgs(introduceImages);
 		  goodsMapper.insert(tbGoods);
 		  tbGoodsDescMapper.insert(goodsDesc);
 	  }catch(Exception e){

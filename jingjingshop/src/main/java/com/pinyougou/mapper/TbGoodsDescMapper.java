@@ -9,7 +9,7 @@ import com.pinyougou.pojo.TbGoodsDesc;
 import com.pinyougou.pojo.TbGoodsDescExample;
 
 public interface TbGoodsDescMapper {
-    int countByExample(TbGoodsDescExample example);
+	int countByExample(TbGoodsDescExample example);
 
     int deleteByExample(TbGoodsDescExample example);
 

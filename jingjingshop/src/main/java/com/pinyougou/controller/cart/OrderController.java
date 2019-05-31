@@ -251,7 +251,8 @@ public class OrderController {
 	 * operateFlag 
 	 *   0:取消订单
 	 *   1:提醒发货
-	 *   2:已收货
+	 *   2:待收货
+	 *   3:已收货
 	 * @param userId 用户id
 	 * @param userType 用户类型
 	 * @param orderId 订单id
@@ -281,19 +282,23 @@ public class OrderController {
 				indexMsg.setCreateDate(new Date());
 				indexMsg.setIsDelete("0");
 				indexMsgMapper.insert(indexMsg);
+				Map<String,Object> orderStatusMap = new HashMap<>();
+		        orderStatusMap.put("ORDERID", orderId);
+		        orderStatusMap.put("STATUS", "4");//待发货
+			    orderService.updateStatusById(orderStatusMap);
 				return new ApiResult(200, "已提醒发货","");
-			}else if("2".equals(operateFlag)){//已付款
+			}else if("2".equals(operateFlag)){//待发货
 				 Map<String,Object> orderStatusMap = new HashMap<>();
 		         orderStatusMap.put("ORDERID", orderId);
-		         orderStatusMap.put("STATUS", "2");//已付款
+		         orderStatusMap.put("STATUS", "3");//待发货
 			     orderService.updateStatusById(orderStatusMap);
-			     return new ApiResult(200, "已付款","");
+			return new ApiResult(200, "已付款","");
 			}else{//已收货
 				Map<String,Object> paramMap = new HashMap<>();
 				paramMap.put("ORDERID", orderId);
-				paramMap.put("STATUS", "5");//交易成功
+				paramMap.put("STATUS", "7");//待评价
 				orderService.updateStatusById(paramMap);
-				return new ApiResult(200, "已收货","");
+				return new ApiResult(200, "已收货，待评价","");
 			}	
 		}catch(Exception e){
 			e.printStackTrace();

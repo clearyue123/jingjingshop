@@ -60,7 +60,7 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Object add(@RequestBody Map<String,Object> goodsMap) {
+	public Object add(@RequestBody Map<String,String> goodsMap) {
 		try {
 			goodsService.add(goodsMap);
 			return new ApiResult(200, "增加成功","");
@@ -107,7 +107,8 @@ public class GoodsController {
 		String smallPic = tbGoods.getSmallPic();
 		String goodsType = tbGoods.getType();
 		TbGoodsDesc goodsDesc = goods.getGoodsDesc();
-		String[] itemImages = goodsDesc.getItemImages().split(",");
+		String itemImages = goodsDesc.getItemImages();
+		String introduceImgs = goodsDesc.getIntroduceimgs();
 		String introduce = goodsDesc.getIntroduction();
 		Map<String,Object> data = new HashMap<>();
 		data.put("goodsId", id);
@@ -123,6 +124,7 @@ public class GoodsController {
 		data.put("itemImages", itemImages);
 		data.put("introduce", introduce);
 		data.put("goodsType",goodsType);
+		data.put("introduceImgs",introduceImgs);
 		return data;
 	}
 

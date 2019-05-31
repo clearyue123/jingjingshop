@@ -111,7 +111,7 @@
 						<tm-pagination conf="paginationConf"></tm-pagination>
                      </div>
                     <!-- /.box-body -->
-   <!-- 新增窗口 -->
+   <!-- 编辑窗口 -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" >
 	<div class="modal-content">
@@ -210,15 +210,31 @@
 		      	<tr>
 		      	   <td>商品详情轮播图片预览</td>
 		      	   <td >
-		      	        <span ng-repeat="imgModel in entity.itemImages"><img src="{{imgModel}}" height="50" width="100"></span>
+		      	        <span ng-repeat="imgModel in itemImages"><img src="{{imgModel}}" height="50" width="100"></span>
 		      	   </td>
 		      	</tr>
 		      	</tr>
-		      	
 		      	<tr>
-		      	   <td>商品详情介绍</td>
+		      	   <td>商品介绍图片上传</td>
 		      	   <td>
-		      	       <textarea id="kindEditorDemo" ng-model="entity.introduce"  rows="5" cols="50"></textarea>
+		      	       <input type="file" id="itemIntroduceImages" ngf-select ng-model="entity.introduceImages" multiple="multiple" ngf-pattern="'image/*" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"/>
+		      	   </td> 
+		      	   <td>  
+		      	   <button class="btn btn-primary" type="button" ng-click="uploadIntroduceImages()">
+				                   		上传
+				   </button>
+				   </td>
+		      	</tr>
+		      	<tr>
+		      	   <td>商品介绍图片预览</td>
+		      	   <td >
+		      	        <span ng-repeat="imgModel in introduceImages"><img src="{{imgModel}}" height="50" width="100"></span>
+		      	   </td> 
+		      	</tr>
+		      	<tr>
+		      	   <td>商品参数</td>
+		      	   <td>
+		      	       <textarea ng-model="entity.introduce"  rows="5" cols="50"></textarea>
 		      	   </td>    
 		      	</tr>		      	
 			 </table>				

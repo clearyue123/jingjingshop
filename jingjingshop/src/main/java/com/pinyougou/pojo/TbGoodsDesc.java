@@ -1,21 +1,49 @@
 package com.pinyougou.pojo;
 
-import java.io.Serializable;
-
-public class TbGoodsDesc implements Serializable{
+/**
+ * @author clearyue
+ * @date 2019-05-31
+ */
+public class TbGoodsDesc {
+    /**
+     * SPU_ID
+     */
     private Long goodsId;
 
+    /**
+     * 描述
+     */
     private String introduction;
 
+    /**
+     * 商品x详情介绍图片
+     */
     private String specificationItems;
 
+    /**
+     * 自定义属性（参数结果）
+     */
     private String customAttributeItems;
 
+    /**
+     * 小程序商品详情图片
+     */
     private String itemImages;
 
+    /**
+     * 包装列表
+     */
     private String packageList;
 
+    /**
+     * 售后服务
+     */
     private String saleService;
+
+    /**
+     * 商品图文介绍图片数组
+     */
+    private String introduceimgs;
 
     public Long getGoodsId() {
         return goodsId;
@@ -71,5 +99,13 @@ public class TbGoodsDesc implements Serializable{
 
     public void setSaleService(String saleService) {
         this.saleService = saleService == null ? null : saleService.trim();
+    }
+
+    public String getIntroduceimgs() {
+        return introduceimgs;
+    }
+
+    public void setIntroduceimgs(String introduceimgs) {
+        this.introduceimgs = introduceimgs == null ? null : introduceimgs.trim();
     }
 }
