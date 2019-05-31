@@ -319,6 +319,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String introduce = (String)goodsMap.get("introduce");
+		  String introduceImages = (String)goodsMap.get("introduceImages");
 	      tbGoods.setBrandId(Long.parseLong(brandId));
 		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
 		  tbGoods.setSellerId(sellerId);
@@ -339,6 +340,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoodsDesc.setGoodsId(Long.parseLong(goodsId));
 		  tbGoodsDesc.setItemImages(itemImages);
 		  tbGoodsDesc.setIntroduction(introduce);
+		  tbGoodsDesc.setIntroduceimgs(introduceImages);
 		  goodsMapper.updateByPrimaryKey(tbGoods);
 		  tbGoodsDescMapper.updateByPrimaryKey(tbGoodsDesc);
 	}
