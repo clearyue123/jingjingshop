@@ -35,7 +35,7 @@
     
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="searchEntity={};search()">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="goodsController" ng-init="searchEntity={};search();">
                     <div class="box-header with-border">
                         <h3 class="box-title">商品列表</h3>
                     </div>
@@ -63,7 +63,7 @@
                             </div>
                               <!--工具栏/-->
 			                  <!--数据列表-->
-			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable" ng-init="itemImages={};introduceImages={}">
 			                      <thead>
 			                          <tr>
 			                              <th class="" style="padding-right:0px">
@@ -98,7 +98,7 @@
 				                          <td>{{entity.goodsType}}</td>
 				                          <td><img alt="{{entity.goodsName}}" src="{{entity.smallPic}}" height="50" width="100"></td>
 		                                  <td class="text-center">                                          
-		                                 	  <button type="button" ng-click="findById(entity.goodsId)" data-toggle="modal" data-target="#addModal" class="btn bg-olive btn-xs" >修改</button>                  
+		                                 	  <button type="button" ng-click="findById(entity.goodsId);"  data-toggle="modal" data-target="#addModal" class="btn bg-olive btn-xs" >修改</button>                  
 		                                 	  <!-- <button type="button" data-target="#addModal" class="btn bg-olive btn-xs" >详情</button>  -->                 
 		                                  </td>
 			                          </tr>
@@ -225,12 +225,12 @@
 				   </button>
 				   </td>
 		      	</tr>
-		      	<tr>
+		      	<!-- <tr>
 		      	   <td>商品介绍图片预览</td>
 		      	   <td >
 		      	        <span ng-repeat="imgModel in introduceImages"><img src="{{imgModel}}" height="50" width="100"></span>
 		      	   </td> 
-		      	</tr>
+		      	</tr> -->
 		      	<tr>
 		      	   <td>商品参数</td>
 		      	   <td>
