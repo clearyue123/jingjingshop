@@ -1,5 +1,6 @@
 package com.pinyougou.controller.patient;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +54,16 @@ public class PatientLoginController {
 			List<TbPatient> patientModel = patientMapper.selectByExample(patientExample);
 			if(patientModel!=null&&patientModel.size()>0&&patientModel.get(0)!=null){
 				TbPatient patient = patientModel.get(0);
-				return new ApiResult(200, "患者登陆成功", patient);
+				return new ApiResult(200, "登陆成功,请绑定微信昵称和头像!", patient);
 			}else{
-				return new ApiResult(201, "登陆失败，请先绑定微信昵称和头像！", "");
+				TbPatient tbPatient = new TbPatient();
+				tbPatient.setUnionId(unionId);
+				tbPatient.setOpenId(openId);
+				tbPatient.setCreateDate(new Date());
+				tbPatient.setDeleteFlag(0);
+				patientMapper.insert(tbPatient);
+				TbPatient patient = patientMapper.selectByExample(patientExample).get(0);
+				return new ApiResult(200, "登陆成功，请绑定微信昵称和头像！", patient);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
