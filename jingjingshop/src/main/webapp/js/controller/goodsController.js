@@ -233,7 +233,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	goodsService.findOne(goodsId).success(function(response){
     		$scope.entity = response;
 			$scope.itemImages = $scope.entity.itemImages.split(",");
-			//$scope.introduceImages = $scope.entity.introduceImgs.split(",");
+			$scope.introduceImages = $scope.entity.introduceImgs.split(",");
     	});
     }
 });	

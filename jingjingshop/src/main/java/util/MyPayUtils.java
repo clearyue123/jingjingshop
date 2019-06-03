@@ -176,7 +176,6 @@ public class MyPayUtils {
         try {   
             result=java.net.URLEncoder.encode(source, "UTF-8");   
         } catch (UnsupportedEncodingException e) {   
-            // TODO Auto-generated catch block   
             e.printStackTrace();   
         }   
         return result;   

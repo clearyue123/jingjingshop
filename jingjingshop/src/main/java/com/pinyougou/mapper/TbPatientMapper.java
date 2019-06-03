@@ -22,7 +22,7 @@ public interface TbPatientMapper {
 
     List<TbPatient> selectByExample(TbPatientExample example);
 
-    TbPatient selectByPrimaryKey(Integer pid);
+    TbPatient selectByPrimaryKey(Long pid);
 
     int updateByExampleSelective(@Param("record") TbPatient record, @Param("example") TbPatientExample example);
 

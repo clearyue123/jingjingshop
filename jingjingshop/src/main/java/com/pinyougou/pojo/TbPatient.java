@@ -2,40 +2,61 @@ package com.pinyougou.pojo;
 
 import java.util.Date;
 
+/**
+ * @date 2019-06-03
+ */
 public class TbPatient {
-    private Integer pid;
+    /**
+     * 患者主键
+     */
+    private Long pid;
 
+    /**
+     * 医生id
+     */
     private String did;
 
-    private String name;
-    
     private String openId;
 
+    /**
+     * 患者微信名
+     */
+    private String name;
+
+    /**
+     * 患者头像
+     */
     private String headPic;
 
+    /**
+     * 疾病名称
+     */
     private Integer illness;
 
+    /**
+     * 手机号
+     */
     private String phone;
 
-    private Date createdate;
+    private Date createDate;
 
+    /**
+     * 是否删除
+     */
     private Integer deleteFlag;
 
+    /**
+     * 删除时间
+     */
     private Date deleteTime;
 
-    public String getOpenId() {
-		return openId;
-	}
+    private String unionId;
 
-	public void setOpenId(String openId) {
-		this.openId = openId;
-	}
-
-	public Integer getPid() {
+    public Long getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(Long pid) {
         this.pid = pid;
     }
 
@@ -45,6 +66,14 @@ public class TbPatient {
 
     public void setDid(String did) {
         this.did = did == null ? null : did.trim();
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId == null ? null : openId.trim();
     }
 
     public String getName() {
@@ -79,12 +108,12 @@ public class TbPatient {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Integer getDeleteFlag() {
@@ -101,5 +130,13 @@ public class TbPatient {
 
     public void setDeleteTime(Date deleteTime) {
         this.deleteTime = deleteTime;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId == null ? null : unionId.trim();
     }
 }

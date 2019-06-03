@@ -14,7 +14,7 @@ public interface PatientService {
 
 	int add(TbPatient user);
 
-	TbPatient selectById(Integer pid);
+	TbPatient selectById(Long pid);
 
 	int updateInfo(TbPatient user);
 

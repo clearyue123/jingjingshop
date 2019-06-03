@@ -247,12 +247,13 @@ public class OrderController {
 	}
 	
 	/**
-	 * 小程序接口 
+	 * 小程序接口  /oprateOrder
 	 * operateFlag 
 	 *   0:取消订单
 	 *   1:提醒发货
 	 *   2:待收货
 	 *   3:已收货
+	 *   4.再次购买
 	 * @param userId 用户id
 	 * @param userType 用户类型
 	 * @param orderId 订单id
@@ -293,12 +294,18 @@ public class OrderController {
 		         orderStatusMap.put("STATUS", "3");//待发货
 			     orderService.updateStatusById(orderStatusMap);
 			return new ApiResult(200, "已付款","");
-			}else{//已收货
+			}else if("3".equals(operateFlag)){//已收货
 				Map<String,Object> paramMap = new HashMap<>();
 				paramMap.put("ORDERID", orderId);
 				paramMap.put("STATUS", "7");//待评价
 				orderService.updateStatusById(paramMap);
 				return new ApiResult(200, "已收货，待评价","");
+			}else{
+				Map<String,Object> paramMap = new HashMap<>();
+				paramMap.put("ORDERID", orderId);
+				paramMap.put("STATUS", "1");//重新生成订单
+				orderService.updateStatusById(paramMap);
+				return new ApiResult(200, "已重新生成订单！","");
 			}	
 		}catch(Exception e){
 			e.printStackTrace();

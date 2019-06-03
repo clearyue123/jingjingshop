@@ -40,7 +40,7 @@ public class PatientServiceImpl implements PatientService{
 	}
 
 	@Override
-	public TbPatient selectById(Integer pid) {
+	public TbPatient selectById(Long pid) {
 		return patientMapper.selectByPrimaryKey(pid);
 	}
 

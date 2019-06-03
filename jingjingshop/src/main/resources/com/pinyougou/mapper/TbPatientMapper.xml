@@ -1,300 +1,323 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pinyougou.mapper.TbPatientMapper" >
-  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbPatient" >
-    <id column="pid" property="pid" jdbcType="INTEGER" />
-    <result column="did" property="did" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="open_id" property="openId" jdbcType="VARCHAR" />
-    <result column="head_pic" property="headPic" jdbcType="VARCHAR" />
-    <result column="illness" property="illness" jdbcType="INTEGER" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
-    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
-    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+
+    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbPatient" >
+        <id column="pid" property="pid" jdbcType="BIGINT" />
+        <result column="did" property="did" jdbcType="VARCHAR" />
+        <result column="open_id" property="openId" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="head_pic" property="headPic" jdbcType="VARCHAR" />
+        <result column="illness" property="illness" jdbcType="INTEGER" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+        <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+        <result column="unionid" property="unionid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        pid, did, open_id, name, head_pic, illness, phone, create_date, delete_flag, delete_time, 
+        unionid
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbPatientExample" >
+        select
+        <if test="distinct" >
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    pid, did, name, head_pic, illness, phone, createDate, delete_flag, delete_time
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbPatientExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_patient
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tb_patient
-    where pid = #{pid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tb_patient
-    where pid = #{pid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbPatientExample" >
-    delete from tb_patient
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.pinyougou.pojo.TbPatient" >
-    <selectKey resultType="java.lang.Integer" keyProperty="pid" order="BEFORE" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into tb_patient (pid, did, name, 
-      head_pic, illness, phone, 
-      createDate, delete_flag, delete_time
-      )
-    values (#{pid,jdbcType=INTEGER}, #{did,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{headPic,jdbcType=VARCHAR}, #{illness,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
-      #{createdate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, #{deleteTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbPatient" >
-    <selectKey resultType="java.lang.Integer" keyProperty="pid" order="BEFORE" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into tb_patient
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      pid,
-      <if test="did != null" >
-        did,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="headPic != null" >
-        head_pic,
-      </if>
-      <if test="illness != null" >
-        illness,
-      </if>
-      <if test="phone != null" >
-        phone,
-      </if>
-      <if test="createdate != null" >
-        createDate,
-      </if>
-      <if test="deleteFlag != null" >
-        delete_flag,
-      </if>
-      <if test="deleteTime != null" >
-        delete_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      #{pid,jdbcType=INTEGER},
-      <if test="did != null" >
-        #{did,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="headPic != null" >
-        #{headPic,jdbcType=VARCHAR},
-      </if>
-      <if test="illness != null" >
-        #{illness,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleteFlag != null" >
-        #{deleteFlag,jdbcType=INTEGER},
-      </if>
-      <if test="deleteTime != null" >
-        #{deleteTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.pinyougou.pojo.TbPatientExample" resultType="java.lang.Integer" >
-    select count(*) from tb_patient
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update tb_patient
-    <set >
-      <if test="record.pid != null" >
-        pid = #{record.pid,jdbcType=INTEGER},
-      </if>
-      <if test="record.did != null" >
-        did = #{record.did,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.headPic != null" >
-        head_pic = #{record.headPic,jdbcType=VARCHAR},
-      </if>
-      <if test="record.illness != null" >
-        illness = #{record.illness,jdbcType=INTEGER},
-      </if>
-      <if test="record.phone != null" >
-        phone = #{record.phone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdate != null" >
-        createDate = #{record.createdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.deleteFlag != null" >
-        delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
-      </if>
-      <if test="record.deleteTime != null" >
-        delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update tb_patient
-    set pid = #{record.pid,jdbcType=INTEGER},
-      did = #{record.did,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      head_pic = #{record.headPic,jdbcType=VARCHAR},
-      illness = #{record.illness,jdbcType=INTEGER},
-      phone = #{record.phone,jdbcType=VARCHAR},
-      createDate = #{record.createdate,jdbcType=TIMESTAMP},
-      delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
-      delete_time = #{record.deleteTime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbPatient" >
-    update tb_patient
-    <set >
-      <if test="did != null" >
-        did = #{did,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="headPic != null" >
-        head_pic = #{headPic,jdbcType=VARCHAR},
-      </if>
-      <if test="illness != null" >
-        illness = #{illness,jdbcType=INTEGER},
-      </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleteFlag != null" >
-        delete_flag = #{deleteFlag,jdbcType=INTEGER},
-      </if>
-      <if test="deleteTime != null" >
-        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where pid = #{pid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbPatient" >
-    update tb_patient
-    set did = #{did,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      head_pic = #{headPic,jdbcType=VARCHAR},
-      illness = #{illness,jdbcType=INTEGER},
-      phone = #{phone,jdbcType=VARCHAR},
-      createDate = #{createdate,jdbcType=TIMESTAMP},
-      delete_flag = #{deleteFlag,jdbcType=INTEGER},
-      delete_time = #{deleteTime,jdbcType=TIMESTAMP}
-    where pid = #{pid,jdbcType=INTEGER}
-  </update>
-  
-  <sql id="sql_join">
-  
-  </sql>
-  
-  <select id="selectListByDid" parameterType="java.lang.String" resultMap="BaseResultMap">
-  	select * from tb_patient tb
-  	where tb.delete_flag = 0
-  	and tb.did = #{did,jdbcType=VARCHAR}
-  </select>
-  
-  <select id="selectListByPid" parameterType="java.lang.String" resultMap="BaseResultMap">
-  	select * from tb_patient tb
-  	where tb.delete_flag = 0
-  	and tb.pid = #{pid,jdbcType=VARCHAR}
-  </select>
-  
-  <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
-  	select * from tb_patient tb
-  	where tb.delete_flag = 0
-  	and tb.open_id = #{openId,jdbcType=VARCHAR}
-  </select>
+        <include refid="Base_Column_List" />
+        from tb_patient
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_patient
+        where pid = #{pid,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from tb_patient
+        where pid = #{pid,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbPatientExample" >
+        delete from tb_patient
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.pinyougou.pojo.TbPatient" >
+        insert into tb_patient (pid, did, open_id, 
+            name, head_pic, illness, 
+            phone, create_date, delete_flag, 
+            delete_time, unionid)
+        values (#{pid,jdbcType=BIGINT}, #{did,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
+            #{name,jdbcType=VARCHAR}, #{headPic,jdbcType=VARCHAR}, #{illness,jdbcType=INTEGER}, 
+            #{phone,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, 
+            #{deleteTime,jdbcType=TIMESTAMP}, #{unionid,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbPatient" >
+        insert into tb_patient
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="pid != null" >
+                pid,
+            </if>
+            <if test="did != null" >
+                did,
+            </if>
+            <if test="openId != null" >
+                open_id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="headPic != null" >
+                head_pic,
+            </if>
+            <if test="illness != null" >
+                illness,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+            <if test="deleteTime != null" >
+                delete_time,
+            </if>
+            <if test="unionid != null" >
+                unionid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="pid != null" >
+                #{pid,jdbcType=BIGINT},
+            </if>
+            <if test="did != null" >
+                #{did,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null" >
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="headPic != null" >
+                #{headPic,jdbcType=VARCHAR},
+            </if>
+            <if test="illness != null" >
+                #{illness,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteTime != null" >
+                #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unionid != null" >
+                #{unionid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.pinyougou.pojo.TbPatientExample" resultType="java.lang.Integer" >
+        select count(*) from tb_patient
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_patient
+        <set >
+            <if test="record.pid != null" >
+                pid = #{record.pid,jdbcType=BIGINT},
+            </if>
+            <if test="record.did != null" >
+                did = #{record.did,jdbcType=VARCHAR},
+            </if>
+            <if test="record.openId != null" >
+                open_id = #{record.openId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null" >
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.headPic != null" >
+                head_pic = #{record.headPic,jdbcType=VARCHAR},
+            </if>
+            <if test="record.illness != null" >
+                illness = #{record.illness,jdbcType=INTEGER},
+            </if>
+            <if test="record.phone != null" >
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createDate != null" >
+                create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteTime != null" >
+                delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.unionid != null" >
+                unionid = #{record.unionid,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_patient
+        set pid = #{record.pid,jdbcType=BIGINT},
+            did = #{record.did,jdbcType=VARCHAR},
+            open_id = #{record.openId,jdbcType=VARCHAR},
+            name = #{record.name,jdbcType=VARCHAR},
+            head_pic = #{record.headPic,jdbcType=VARCHAR},
+            illness = #{record.illness,jdbcType=INTEGER},
+            phone = #{record.phone,jdbcType=VARCHAR},
+            create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            delete_flag = #{record.deleteFlag,jdbcType=INTEGER},
+            delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
+            unionid = #{record.unionid,jdbcType=INTEGER}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbPatient" >
+        update tb_patient
+        <set >
+            <if test="did != null" >
+                did = #{did,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null" >
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="headPic != null" >
+                head_pic = #{headPic,jdbcType=VARCHAR},
+            </if>
+            <if test="illness != null" >
+                illness = #{illness,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+            <if test="deleteTime != null" >
+                delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unionid != null" >
+                unionid = #{unionid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where pid = #{pid,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbPatient" >
+        update tb_patient
+        set did = #{did,jdbcType=VARCHAR},
+            open_id = #{openId,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+            head_pic = #{headPic,jdbcType=VARCHAR},
+            illness = #{illness,jdbcType=INTEGER},
+            phone = #{phone,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+            unionid = #{unionid,jdbcType=INTEGER}
+        where pid = #{pid,jdbcType=BIGINT}
+    </update>
+    
+    
 </mapper>
