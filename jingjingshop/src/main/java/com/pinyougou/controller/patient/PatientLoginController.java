@@ -52,13 +52,14 @@ public class PatientLoginController {
 			cri.andUnionIdEqualTo(unionId);
 			List<TbPatient> patientModel = patientMapper.selectByExample(patientExample);
 			if(patientModel!=null&&patientModel.size()>0&&patientModel.get(0)!=null){
-				return new ApiResult(200, "患者登陆成功", "");
+				TbPatient patient = patientModel.get(0);
+				return new ApiResult(200, "患者登陆成功", patient);
 			}else{
 				return new ApiResult(201, "登陆失败，请先绑定微信昵称和头像！", "");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ApiResult(201, "患者登陆失败", "");
+			return new ApiResult(201, "患者登陆失败,参数异常", "");
 		}
 	}
 	
