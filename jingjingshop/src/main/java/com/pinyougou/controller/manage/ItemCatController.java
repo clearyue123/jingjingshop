@@ -6,15 +6,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbItemCat;
 import com.pinyougou.service.sellergoods.ItemCatService;
 
 import entity.PageResult;
 import entity.Result;
+
 /**
- * controller
- * @author Administrator
- *
+ * @author:yue
+ * @date:2019.6.4
+ * @desc:商品分类控制层
  */
 @RestController
 @RequestMapping("/itemCat")
@@ -50,6 +52,7 @@ public class ItemCatController {
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbItemCat itemCat){
 		try {
+			itemCat.setTypeId(35L);
 			itemCatService.add(itemCat);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -80,8 +83,14 @@ public class ItemCatController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbItemCat findOne(Long id){
-		return itemCatService.findOne(id);		
+	public ApiResult findOne(Long id){
+		try{
+			TbItemCat data = itemCatService.findOne(id);		
+			return new ApiResult(200, "SUCCESS", data);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "ERROR", "");
+		}
 	}
 	
 	/**
@@ -100,7 +109,7 @@ public class ItemCatController {
 		}
 	}
 	
-		/**
+	/**
 	 * 查询+分页
 	 * @param brand
 	 * @param page

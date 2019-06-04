@@ -31,26 +31,6 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 		);				
 	}
 	
-	//保存 
-	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
-			serviceObject=itemCatService.update( $scope.entity ); //修改  
-		}else{
-			serviceObject=itemCatService.add( $scope.entity  );//增加 
-		}				
-		serviceObject.success(
-			function(response){
-				if(response.flag){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
-				}else{
-					alert(response.message);
-				}
-			}		
-		);				
-	}
-	
 	 
 	//批量删除 
 	$scope.dele=function(){			
@@ -92,7 +72,6 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	}
 	
 	$scope.selectList = function(p_entity){
-		
 		if($scope.grade == 1){
 			$scope.entity_1 = null;
 			$scope.entity_2 = null;
@@ -104,18 +83,54 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 		if($scope.grade == 3){
 			$scope.entity_2 = p_entity;
 		}
-		
 		$scope.findByParentId(p_entity.id);
 	}
 	
+	//新增类别
+	$scope.addCategory = function(){
+		if($scope.grade == 1){
+			$scope.categoryEntity.parentId=0;
+		}
+		if($scope.grade == 2){
+			$scope.categoryEntity.parentId=$scope.entity_1.id;
+		}
+		if($scope.grade == 3){
+			$scope.categoryEntity.parentId=$scope.entity_2.id;
+		}
+		
+		var serviceObject;//服务层对象  				
+		if($scope.categoryEntity.id!=null){//如果有ID
+			serviceObject=itemCatService.update( $scope.categoryEntity ); //修改  
+		}else{
+			serviceObject=itemCatService.add( $scope.categoryEntity  );//增加 
+		}				
+		serviceObject.success(
+			function(response){
+				if(response.flag){
+					//重新查询 
+					if($scope.grade == 1){
+						$scope.selectList({id:0});
+					}
+					if($scope.grade == 2){
+						$scope.selectList($scope.entity_1);
+					}
+					if($scope.grade == 3){
+						$scope.selectList($scope.entity_2);
+					}
+				}else{
+					alert(response.message);
+				}
+			}		
+		);		
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	//修改类别
+	$scope.findOne = function(categoryId){
+		itemCatService.findOne(categoryId).success(function(response){
+			if(response.code==200){
+				$scope.categoryEntity = response.data;
+			}
+		});
+	}
     
 });	
