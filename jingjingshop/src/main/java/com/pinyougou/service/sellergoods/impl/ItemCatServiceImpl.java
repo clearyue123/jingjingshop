@@ -99,6 +99,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 		Criteria criteria = example.createCriteria();
 		// 设置条件:
 		criteria.andParentIdEqualTo(parentId);
+		criteria.andIsDeleteEqualTo("0");
 		// 条件查询
 		
 		//将模板ID放入缓存（以商品分类名称作为key）	

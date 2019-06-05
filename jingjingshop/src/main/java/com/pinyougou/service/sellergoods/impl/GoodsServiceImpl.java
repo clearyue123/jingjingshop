@@ -267,7 +267,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  long goodsId = idWorker.nextId();
 		  String isMarketable = (String)goodsMap.get("isMarketable")==null?"1":(String)goodsMap.get("isMarketable");
 		  String isEnableSpec = (String)goodsMap.get("isEnableSpec")==null?"1":(String)goodsMap.get("isEnableSpec");
-		  String categoryId = (String)goodsMap.get("categoryId");
+		  String categoryId1 = (String)goodsMap.get("categoryId1");
+		  String categoryId2 = (String)goodsMap.get("categoryId2");
 		  String goodsName = (String)goodsMap.get("goodsName");
 		  String brandId = (String)goodsMap.get("brandId");
 		  String sellerId = (String)goodsMap.get("sellerId");
@@ -280,7 +281,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  String introduceImages = (String)goodsMap.get("introduceImages");
 		  tbGoods.setId(goodsId);
 		  tbGoods.setBrandId(Long.parseLong(brandId));
-		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
+		  tbGoods.setCategory1Id(Long.parseLong(categoryId1));
+		  tbGoods.setCategory2Id(Long.parseLong(categoryId2));
 		  tbGoods.setSellerId(sellerId);
 		  tbGoods.setGoodsName(goodsName);
 		  tbGoods.setIsEnableSpec(isEnableSpec);
@@ -309,7 +311,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  TbGoods tbGoods = goodsMapper.selectByPrimaryKey(Long.parseLong(goodsId));
 		  String isMarketable = (String)goodsMap.get("isMarketable").toString();
 		  String isEnableSpec = (String)goodsMap.get("isEnableSpec").toString();
-		  String categoryId = (String)goodsMap.get("categoryId");
+		  String categoryId1 = (String)goodsMap.get("categoryId1");
+		  String categoryId2 = (String)goodsMap.get("categoryId2");
 		  String goodsName = (String)goodsMap.get("goodsName");
 		  String brandId = (String)goodsMap.get("brandId");
 		  String sellerId = (String)goodsMap.get("sellerId");
@@ -321,7 +324,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  String introduce = (String)goodsMap.get("introduce");
 		  String introduceImages = (String)goodsMap.get("introduceImages");
 	      tbGoods.setBrandId(Long.parseLong(brandId));
-		  tbGoods.setCategory3Id(Long.parseLong(categoryId));
+		  tbGoods.setCategory1Id(Long.parseLong(categoryId1));
+		  tbGoods.setCategory2Id(Long.parseLong(categoryId2));
 		  tbGoods.setSellerId(sellerId);
 		  tbGoods.setGoodsName(goodsName);
 		  tbGoods.setIsEnableSpec(isEnableSpec);

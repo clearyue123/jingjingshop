@@ -100,13 +100,13 @@ public class ItemCatController {
 	 * @return
 	 */
 	@RequestMapping("/delete")
-	public Result delete(Long [] ids){
+	public ApiResult delete(Long [] ids){
 		try {
 			itemCatService.delete(ids);
-			return new Result(true, "删除成功"); 
+			return new ApiResult(200, "删除成功",""); 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "删除失败");
+			return new ApiResult(201, "删除失败","");
 		}
 	}
 	

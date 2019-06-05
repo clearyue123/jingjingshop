@@ -47,6 +47,8 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 						//重新查询 
 						alert(response.message);
 			        	$scope.reloadList();//重新加载
+			        	$scope.categoryChildList=null;
+			        	$scope.categoryParentList=null;
 					}else{
 						alert(response.message);
 					}
@@ -119,10 +121,17 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	    	$scope.sellerList=response;
 	    });
 	}
-	//类别列表
-    $scope.initCategoryList = function(){
+	//父类ID
+    $scope.initCategory1List = function(){
     	$http.get("../itemCat/findAll.do").success(function(response){
-	    	$scope.categoryList=response;
+	    	$scope.categoryParentList=response;
+	    });
+    }
+    //二级子类ID
+    $scope.initCategory2List = function(){
+    	var parentId = $scope.entity.categoryId1;
+    	$http.get("../itemCat/findByParentId.do?parentId="+parentId).success(function(response){
+	    	$scope.categoryChildList=response;
 	    });
     }
     //设置是否上架 默认1:上架

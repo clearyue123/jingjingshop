@@ -142,15 +142,24 @@
 	                       <option ng-repeat="seller in sellerList" value="{{seller.sellerId}}">{{seller.name}}</option> 
 	                     </select>
 		      		</td>
+		      	</tr>
 		      	<tr>
-		      		<td>类别</td>
+		      		<td>父类目</td>
 		      		<td>
-		      		     <select ng-model="entity.categoryId" class="btn btn-default"   ng-init="initCategoryList();">
+		      		     <select ng-model="entity.categoryId1" class="btn btn-default"   ng-init="initCategory1List();"  ng-change="initCategory2List();">
 		      		       <option >-----------请选择----------</option> 
-	                       <option ng-repeat="category in categoryList" value="{{category.id}}" >{{category.name}}</option> 
+	                       <option ng-repeat="category in categoryParentList" value="{{category.id}}">{{category.name}}</option> 
 	                     </select>
 		      		</td>
 		      	</tr>
+		      	<tr>
+		      		<td>子类目</td>
+		      		<td>
+		      		     <select ng-model="entity.categoryId2" class="btn btn-default">
+		      		       <option >-----------请选择----------</option> 
+	                       <option ng-repeat="category in categoryChildList" value="{{category.id}}" >{{category.name}}</option> 
+	                     </select>
+		      		</td>
 		      	</tr>
 		      	<tr>
 		      		<td>商城价</td>

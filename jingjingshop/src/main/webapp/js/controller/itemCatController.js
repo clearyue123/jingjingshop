@@ -33,13 +33,24 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	
 	 
 	//批量删除 
-	$scope.dele=function(){			
+	$scope.dele=function(){	
+		alert("111");
 		//获取选中的复选框			
 		itemCatService.dele( $scope.selectIds ).success(
 			function(response){
-				if(response.flag){
-					$scope.reloadList();//刷新列表
+				if(response.code==200){
 					$scope.selectIds = [];
+					alert(response.message);
+					//刷新列表
+					if($scope.grade == 1){
+						$scope.selectList({id:0});
+					}
+					if($scope.grade == 2){
+						$scope.selectList($scope.entity_1);
+					}
+					if($scope.grade == 3){
+						$scope.selectList($scope.entity_2);
+					}
 				}						
 			}		
 		);				
@@ -117,6 +128,7 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 					if($scope.grade == 3){
 						$scope.selectList($scope.entity_2);
 					}
+					$scope.categoryEntity = null;
 				}else{
 					alert(response.message);
 				}
