@@ -26,7 +26,6 @@
 
 <body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="itemCatController" ng-init="findByParentId(0)">
   <!-- .box-body -->
-                
                     <div class="box-header with-border">
                         <h3 class="box-title">商品分类管理     
                        	</h3>
@@ -112,7 +111,7 @@
 				<tr>
 		      		<td>上级商品分类</td>
 		      		<td>
-		      		   {{entity_1.name}} >>  {{entity_2.name}}
+		      		   <font size="2" color="blue">{{entity_1.name}}</font> >>  <font size="2" color="blue">{{entity_2.name}}</font>
 		      		</td>
 		      	</tr>
 		      	<tr>

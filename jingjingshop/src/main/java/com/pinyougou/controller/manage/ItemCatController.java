@@ -53,6 +53,7 @@ public class ItemCatController {
 	public Result add(@RequestBody TbItemCat itemCat){
 		try {
 			itemCat.setTypeId(35L);
+			itemCat.setIsDelete("0");
 			itemCatService.add(itemCat);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
