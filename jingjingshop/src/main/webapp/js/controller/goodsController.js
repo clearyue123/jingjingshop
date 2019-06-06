@@ -47,8 +47,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 						//重新查询 
 						alert(response.message);
 			        	$scope.reloadList();//重新加载
-			        	$scope.categoryChildList=null;
-			        	$scope.categoryParentList=null;
 					}else{
 						alert(response.message);
 					}
@@ -121,19 +119,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	    	$scope.sellerList=response;
 	    });
 	}
-	//父类ID
-    $scope.initCategory1List = function(){
-    	$http.get("../itemCat/findAll.do").success(function(response){
-	    	$scope.categoryParentList=response;
-	    });
-    }
-    //二级子类ID
-    $scope.initCategory2List = function(){
-    	var parentId = $scope.entity.categoryId1;
-    	$http.get("../itemCat/findByParentId.do?parentId="+parentId).success(function(response){
-	    	$scope.categoryChildList=response;
-	    });
-    }
     //设置是否上架 默认1:上架
     $scope.setIsMarketable = function(val){
     	$scope.entity.isMarketable=val
@@ -153,9 +138,10 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     {
 		// 向后台传递数据:
 		var formData = new FormData();
-		var smallPic = document.querySelector('input[id=smallPic]').files[0];
+		var uploadFile = document.querySelector('input[id=smallPic]').files[0];
+		alert(uploadFile.name);
 		// 向formData中添加数据:
-		formData.append("smallPic",smallPic);
+		formData.append("uploadFile",uploadFile);
 		
 		return $http({
 			method:'post',
@@ -170,8 +156,39 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	// 调用uploadService的方法完成文件的上传
     	$scope.uploadFile().success(function(response){
     		if(response.code==200){
+    			alert(response.data);
 				// 获得url
 				$scope.entity.smallPic=response.data;
+				alert(response.message);
+			}else{
+				alert(response.message);
+			}
+		});
+    }
+    
+    $scope.uploadFile1 = function()
+    {
+		// 向后台传递数据:
+		var formData = new FormData();
+		var uploadFile = document.querySelector('input[id=itemVideo]').files[0];
+		// 向formData中添加数据:
+		formData.append("uploadFile",uploadFile);
+		
+		return $http({
+			method:'post',
+			url:'../upload/uploadFile.do',
+			data:formData,
+			headers:{'Content-Type':undefined} ,// Content-Type : text/html  text/plain
+			transformRequest: angular.identity
+		});
+	}
+   //视频上传
+    $scope.uploadItemVideo = function(){
+    	$scope.uploadFile1().success(function(response){
+    		if(response.code==200){
+    			alert(response.data);
+				// 获得url
+				$scope.entity.itemVideo = response.data;
 				alert(response.message);
 			}else{
 				alert(response.message);
@@ -243,6 +260,37 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     		$scope.entity = response;
 			$scope.itemImages = $scope.entity.itemImages.split(",");
 			$scope.introduceImages = $scope.entity.introduceImgs.split(",");
+			$scope.initChildList();
     	});
     }
+    
+    //一级分类初始
+    $scope.initCategory1List = function(){
+    	$http.get("../itemCat/findAll.do").success(function(response){
+	    	$scope.categoryParentList=response;
+	    });
+    }
+    $scope.initCategory2List = function(){
+    	if($scope.entity.categoryId1==null){
+        	$scope.categoryChildList=null;
+        }else{
+        	var parentId = $scope.entity.categoryId1;
+        	$http.get("../itemCat/findByParentId.do?parentId="+parentId).success(function(response){
+        		$scope.categoryChildList=response;
+    	    });
+        }	
+    }
+    //二级分类初始
+    $scope.initChildList = function(){
+    	if($scope.entity.categoryId1==null){
+        	$scope.categoryChildList=null;
+        }else{
+        	var parentId = $scope.entity.categoryId1;
+        	$http.get("../itemCat/findByParentId.do?parentId="+parentId).success(function(response){
+        		$scope.categoryChildList=response;
+        		$scope.childCategoryId = $scope.entity.categoryId2;
+    	    });
+        }	
+    }
+    
 });	

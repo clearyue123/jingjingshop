@@ -275,6 +275,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  String price = (String)goodsMap.get("price");
 		  String reducedPrice = (String)goodsMap.get("reducedPrice");
 		  String smallPic = (String)goodsMap.get("smallPic");
+		  String itemVideo = (String)goodsMap.get("itemVideo");
 		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String introduce = (String)goodsMap.get("introduce");
@@ -293,6 +294,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setSmallPic(smallPic);
 		  tbGoods.setType(goodsType);
 		  goodsDesc.setGoodsId(goodsId);
+		  goodsDesc.setItemVideoPath(itemVideo);
 		  goodsDesc.setItemImages(itemImages);
 		  goodsDesc.setIntroduction(introduce);
 		  goodsDesc.setIntroduceimgs(introduceImages);
@@ -323,7 +325,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String introduce = (String)goodsMap.get("introduce");
 		  String introduceImages = (String)goodsMap.get("introduceImages");
-	      tbGoods.setBrandId(Long.parseLong(brandId));
+		  String itemVideo = (String)goodsMap.get("itemVideo");
+		  tbGoods.setBrandId(Long.parseLong(brandId));
 		  tbGoods.setCategory1Id(Long.parseLong(categoryId1));
 		  tbGoods.setCategory2Id(Long.parseLong(categoryId2));
 		  tbGoods.setSellerId(sellerId);
@@ -344,7 +347,10 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoodsDesc.setGoodsId(Long.parseLong(goodsId));
 		  tbGoodsDesc.setItemImages(itemImages);
 		  tbGoodsDesc.setIntroduction(introduce);
-		  tbGoodsDesc.setIntroduceimgs(introduceImages);
+		  tbGoodsDesc.setItemVideoPath(itemVideo);
+		  if(introduceImages!=null){
+			  tbGoodsDesc.setIntroduceimgs(introduceImages);
+		  }
 		  goodsMapper.updateByPrimaryKey(tbGoods);
 		  tbGoodsDescMapper.updateByPrimaryKey(tbGoodsDesc);
 	}

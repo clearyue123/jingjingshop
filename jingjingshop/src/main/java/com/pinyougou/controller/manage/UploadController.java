@@ -24,21 +24,29 @@ public class UploadController {
 	
 	
 	@RequestMapping(value={"/uploadFile"})
-	public ApiResult uploadFile(MultipartFile smallPic,HttpServletRequest request){
+	public ApiResult uploadFile(MultipartFile uploadFile,HttpServletRequest request){
 		try {  
-			   if(smallPic==null){
+			   if(uploadFile==null){
 				   return new ApiResult(201,"请上传文件","");
 			   }
-			   String savePath = request.getSession().getServletContext().getRealPath("/")+"/smallPicUpload";
-	           String originalFilename = smallPic.getOriginalFilename();
-	           String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+			   String originalFilename = uploadFile.getOriginalFilename();
+			   String ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+			   String uploadPath;
+			   if(FileUtils.isImgFile(ext)){
+				   uploadPath = "/smallPicUpload";
+			   }else if(FileUtils.isVideoFile(ext)){
+				   uploadPath = "/itemVideoUpload";
+			   }else{
+				   uploadPath = "/fileUpload";
+			   }
+			   String savePath = request.getSession().getServletContext().getRealPath("/")+uploadPath;
 	           String saveFileName = UUIDUtils.getRandomImgName()+ext;
 	           File filePath = new File(savePath);
 			   if (!filePath.exists() && !filePath.isDirectory()) {
 			      filePath.mkdir();
 			    }
 			  File saveFile = new File(savePath,saveFileName);
-			  InputStream in = smallPic.getInputStream();
+			  InputStream in = uploadFile.getInputStream();
 			  FileOutputStream out = new FileOutputStream(saveFile);
 			  byte buffer[] = new byte[1024];
 			  int len = 0;
@@ -47,8 +55,8 @@ public class UploadController {
 			   }
 			  in.close();
 			  out.close();
-			String smallPicPath = "/smallPicUpload/"+saveFileName;
-			return new ApiResult(200, "文件上传成功！", smallPicPath);
+			String responseFilePath = uploadPath+"/"+saveFileName;
+			return new ApiResult(200, "文件上传成功！", responseFilePath);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ApiResult(201, "文件上传失败！", "");

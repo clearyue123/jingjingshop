@@ -2,7 +2,7 @@ package com.pinyougou.pojo;
 
 /**
  * @author clearyue
- * @date 2019-05-31
+ * @date 2019-06-06
  */
 public class TbGoodsDesc {
     /**
@@ -44,6 +44,11 @@ public class TbGoodsDesc {
      * 商品图文介绍图片数组
      */
     private String introduceimgs;
+
+    /**
+     * 商品详情视频文件上传
+     */
+    private String itemVideoPath;
 
     public Long getGoodsId() {
         return goodsId;
@@ -107,5 +112,13 @@ public class TbGoodsDesc {
 
     public void setIntroduceimgs(String introduceimgs) {
         this.introduceimgs = introduceimgs == null ? null : introduceimgs.trim();
+    }
+
+    public String getItemVideoPath() {
+        return itemVideoPath;
+    }
+
+    public void setItemVideoPath(String itemVideoPath) {
+        this.itemVideoPath = itemVideoPath == null ? null : itemVideoPath.trim();
     }
 }

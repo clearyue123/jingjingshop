@@ -10,6 +10,7 @@
         <result column="package_list" property="packageList" jdbcType="VARCHAR" />
         <result column="sale_service" property="saleService" jdbcType="VARCHAR" />
         <result column="introduceImgs" property="introduceimgs" jdbcType="VARCHAR" />
+        <result column="item_video_path" property="itemVideoPath" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -74,7 +75,7 @@
 
     <sql id="Base_Column_List" >
         goods_id, introduction, specification_items, custom_attribute_items, item_images, 
-        package_list, sale_service, introduceImgs
+        package_list, sale_service, introduceImgs, item_video_path
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbGoodsDescExample" >
@@ -114,10 +115,12 @@
     <insert id="insert" parameterType="com.pinyougou.pojo.TbGoodsDesc" >
         insert into tb_goods_desc (goods_id, introduction, specification_items, 
             custom_attribute_items, item_images, package_list, 
-            sale_service, introduceImgs)
+            sale_service, introduceImgs, item_video_path
+            )
         values (#{goodsId,jdbcType=BIGINT}, #{introduction,jdbcType=VARCHAR}, #{specificationItems,jdbcType=VARCHAR}, 
             #{customAttributeItems,jdbcType=VARCHAR}, #{itemImages,jdbcType=VARCHAR}, #{packageList,jdbcType=VARCHAR}, 
-            #{saleService,jdbcType=VARCHAR}, #{introduceimgs,jdbcType=VARCHAR})
+            #{saleService,jdbcType=VARCHAR}, #{introduceimgs,jdbcType=VARCHAR}, #{itemVideoPath,jdbcType=VARCHAR}
+            )
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbGoodsDesc" >
@@ -147,6 +150,9 @@
             <if test="introduceimgs != null" >
                 introduceImgs,
             </if>
+            <if test="itemVideoPath != null" >
+                item_video_path,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="goodsId != null" >
@@ -172,6 +178,9 @@
             </if>
             <if test="introduceimgs != null" >
                 #{introduceimgs,jdbcType=VARCHAR},
+            </if>
+            <if test="itemVideoPath != null" >
+                #{itemVideoPath,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -210,6 +219,9 @@
             <if test="record.introduceimgs != null" >
                 introduceImgs = #{record.introduceimgs,jdbcType=VARCHAR},
             </if>
+            <if test="record.itemVideoPath != null" >
+                item_video_path = #{record.itemVideoPath,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -225,7 +237,8 @@
             item_images = #{record.itemImages,jdbcType=VARCHAR},
             package_list = #{record.packageList,jdbcType=VARCHAR},
             sale_service = #{record.saleService,jdbcType=VARCHAR},
-            introduceImgs = #{record.introduceimgs,jdbcType=VARCHAR}
+            introduceImgs = #{record.introduceimgs,jdbcType=VARCHAR},
+            item_video_path = #{record.itemVideoPath,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -255,6 +268,9 @@
             <if test="introduceimgs != null" >
                 introduceImgs = #{introduceimgs,jdbcType=VARCHAR},
             </if>
+            <if test="itemVideoPath != null" >
+                item_video_path = #{itemVideoPath,jdbcType=VARCHAR},
+            </if>
         </set>
         where goods_id = #{goodsId,jdbcType=BIGINT}
     </update>
@@ -267,7 +283,8 @@
             item_images = #{itemImages,jdbcType=VARCHAR},
             package_list = #{packageList,jdbcType=VARCHAR},
             sale_service = #{saleService,jdbcType=VARCHAR},
-            introduceImgs = #{introduceimgs,jdbcType=VARCHAR}
+            introduceImgs = #{introduceimgs,jdbcType=VARCHAR},
+            item_video_path = #{itemVideoPath,jdbcType=VARCHAR}
         where goods_id = #{goodsId,jdbcType=BIGINT}
     </update>
   
@@ -303,7 +320,8 @@
 			t2.item_images itemImages,
 			t2.introduction,
 			t2.goods_id goodsId,
-			t2.introduceImgs
+			t2.introduceImgs,
+			t2.item_video_path itemVideoPath
 		FROM
 			tb_goods t1
 		LEFT JOIN tb_goods_desc t2 ON t1.id = t2.goods_id

@@ -68,7 +68,7 @@ public class TbGoodsDescExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-05-31
+     * @date 2019-06-06
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -660,6 +660,76 @@ public class TbGoodsDescExample {
             addCriterion("introduceImgs not between", value1, value2, "introduceimgs");
             return (Criteria) this;
         }
+
+        public Criteria andItemVideoPathIsNull() {
+            addCriterion("item_video_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathIsNotNull() {
+            addCriterion("item_video_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathEqualTo(String value) {
+            addCriterion("item_video_path =", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathNotEqualTo(String value) {
+            addCriterion("item_video_path <>", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathGreaterThan(String value) {
+            addCriterion("item_video_path >", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathGreaterThanOrEqualTo(String value) {
+            addCriterion("item_video_path >=", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathLessThan(String value) {
+            addCriterion("item_video_path <", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathLessThanOrEqualTo(String value) {
+            addCriterion("item_video_path <=", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathLike(String value) {
+            addCriterion("item_video_path like", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathNotLike(String value) {
+            addCriterion("item_video_path not like", value, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathIn(List<String> values) {
+            addCriterion("item_video_path in", values, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathNotIn(List<String> values) {
+            addCriterion("item_video_path not in", values, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathBetween(String value1, String value2) {
+            addCriterion("item_video_path between", value1, value2, "itemVideoPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andItemVideoPathNotBetween(String value1, String value2) {
+            addCriterion("item_video_path not between", value1, value2, "itemVideoPath");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -674,7 +744,7 @@ public class TbGoodsDescExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-05-31
+     * @date 2019-06-06
      */
     public static class Criterion {
         private String condition;

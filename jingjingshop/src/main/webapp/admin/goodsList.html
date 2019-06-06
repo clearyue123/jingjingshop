@@ -71,7 +71,8 @@
 			                              </th> 
 										  <th class="sorting_asc">商品ID</th>
 									      <th class="sorting">商品名</th>
-									      <th class="sorting">类名</th>
+									      <th class="sorting">一级分类</th>
+									      <th class="sorting">二级分类</th>
 									      <th class="sorting">品牌名</th>
 									      <th class="sorting">店铺</th>
 									      <th class="sorting">商城价</th>
@@ -88,7 +89,8 @@
 			                              <td><input ng-click="updateSelection($event,entity.goodsId)" type="checkbox"></td>			                              
 				                          <td>{{entity.goodsId}}</td>
 				                          <td>{{entity.goodsName}}</td>
-				                          <td>{{entity.categoryName}}</td>
+				                          <td>{{entity.category1Name}}</td>
+				                          <td>{{entity.category2Name}}</td>
 				                          <td>{{entity.brandName}}</td>
 				                          <td>{{entity.sellerName}}</td>
 				                          <td>{{entity.price}}</td>
@@ -144,20 +146,20 @@
 		      		</td>
 		      	</tr>
 		      	<tr>
-		      		<td>父类目</td>
+		      		<td>一级分类</td>
 		      		<td>
 		      		     <select ng-model="entity.categoryId1" class="btn btn-default"   ng-init="initCategory1List();"  ng-change="initCategory2List();">
 		      		       <option >-----------请选择----------</option> 
-	                       <option ng-repeat="category in categoryParentList" value="{{category.id}}">{{category.name}}</option> 
+	                       <option ng-repeat="category in categoryParentList" value="{{category.id}}" >{{category.name}}</option> 
 	                     </select>
 		      		</td>
 		      	</tr>
 		      	<tr>
-		      		<td>子类目</td>
+		      		<td>二级分类</td>
 		      		<td>
 		      		     <select ng-model="entity.categoryId2" class="btn btn-default">
 		      		       <option >-----------请选择----------</option> 
-	                       <option ng-repeat="category in categoryChildList" value="{{category.id}}" >{{category.name}}</option> 
+	                       <option ng-repeat="category in categoryChildList" value="{{category.id}}" ng-selected="category.id == childCategoryId">{{category.name}}</option> 
 	                     </select>
 		      		</td>
 		      	</tr>
@@ -204,6 +206,17 @@
 		      	   <td>商品列表小图片预览</td>
 		      	   <td><img src="{{entity.smallPic}}" height="50" width="100">
 		      	   </td>
+		      	</tr>
+		      	<tr>
+		      	   <td>商品详情视频上传</td>
+		      	   <td>
+		      	       <input type="file" id="itemVideo" ng-model="entity.itemVideo" />
+		      	   </td>
+		      	   <td>
+		      	   <button class="btn btn-primary" type="button" ng-click="uploadItemVideo()">
+				                   		上传
+				   </button>
+				   </td>
 		      	</tr>
 		      	<tr>
 		      	   <td>商品详情轮播图片上传</td>

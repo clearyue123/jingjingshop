@@ -97,7 +97,8 @@ public class GoodsController {
 		Goods goods = goodsService.findOne(id);
 		TbGoods tbGoods = goods.getGoods();
 		Long brandId = tbGoods.getBrandId();
-		Long categoryId = tbGoods.getCategory3Id();
+		Long categoryId1 = tbGoods.getCategory1Id();
+		Long categoryId2 = tbGoods.getCategory2Id();
 		String sellerId = tbGoods.getSellerId();
 		BigDecimal price = tbGoods.getPrice();
 		BigDecimal reducedPrice = tbGoods.getReducedPrice();
@@ -113,7 +114,8 @@ public class GoodsController {
 		Map<String,Object> data = new HashMap<>();
 		data.put("goodsId", id);
 		data.put("brandId", brandId);
-		data.put("categoryId", categoryId);
+		data.put("categoryId1", categoryId1);
+		data.put("categoryId2", categoryId2);
 		data.put("sellerId", sellerId);
 		data.put("price", price);
 		data.put("reducedPrice", reducedPrice);
@@ -180,7 +182,7 @@ public class GoodsController {
 	}
 
 	/**
-	 * 小程序接口 根据id获取商品
+	 * 后台 根据id获取商品
 	 * @param id
 	 * @return
 	 */
