@@ -32,6 +32,7 @@ import com.pinyougou.pojo.group.Goods;
 import com.pinyougou.service.sellergoods.GoodsService;
 
 import entity.PageResult;
+import util.DateUtils;
 import util.IdWorker;
 
 /**
@@ -252,6 +253,8 @@ public class GoodsServiceImpl implements GoodsService {
 		for(Map<String,Object> targetMap:searchGoodList){
 			String isMarketable = ((String)targetMap.get("isMarketable")).equals("1")?"已上架":"未上架";
 			String isEnableSpec = ((String)targetMap.get("isEnableSpec")).equals("1")?"已启用":"未启用";
+			Date createDate = (Date)targetMap.get("createDate");
+			targetMap.put("createDate",DateUtils.getDateStrFromDate(createDate));
 			targetMap.put("isMarketable", isMarketable);
 			targetMap.put("isEnableSpec", isEnableSpec);
 		}
@@ -293,6 +296,8 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
 		  tbGoods.setSmallPic(smallPic);
 		  tbGoods.setType(goodsType);
+		  tbGoods.setTotalSaleNum(0L);
+		  tbGoods.setCreateDate(new Date());
 		  goodsDesc.setGoodsId(goodsId);
 		  goodsDesc.setItemVideoPath(itemVideo);
 		  goodsDesc.setItemImages(itemImages);

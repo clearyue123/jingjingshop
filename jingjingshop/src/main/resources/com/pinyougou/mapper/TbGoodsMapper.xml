@@ -412,7 +412,9 @@
 		    t4.item_images itemImages,
 		    (select t5.name from tb_item_cat t5 where t5.id = t1.category1_id)category1Name,
 		    (select t6.name from tb_item_cat t6 where t6.id = t1.category2_id)category2Name,
-		    t1.type goodsType
+		    t1.type goodsType,
+		    t1.create_date createDate,
+		    t1.total_sale_num totalSaleNum
 		from tb_goods t1
 		LEFT JOIN tb_brand t2 ON t1.brand_id = t2.id
 		LEFT JOIN tb_seller t3 ON t3.seller_id = t1.seller_id
