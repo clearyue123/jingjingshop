@@ -2,6 +2,7 @@ package com.pinyougou.pojo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TbGoodsExample {
@@ -69,7 +70,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-05-15
+     * @date 2019-06-10
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -952,63 +953,63 @@ public class TbGoodsExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumIsNull() {
-            addCriterion("total_num is null");
+        public Criteria andTotalSaleNumIsNull() {
+            addCriterion("total_sale_num is null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumIsNotNull() {
-            addCriterion("total_num is not null");
+        public Criteria andTotalSaleNumIsNotNull() {
+            addCriterion("total_sale_num is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumEqualTo(Long value) {
-            addCriterion("total_num =", value, "totalNum");
+        public Criteria andTotalSaleNumEqualTo(Long value) {
+            addCriterion("total_sale_num =", value, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumNotEqualTo(Long value) {
-            addCriterion("total_num <>", value, "totalNum");
+        public Criteria andTotalSaleNumNotEqualTo(Long value) {
+            addCriterion("total_sale_num <>", value, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumGreaterThan(Long value) {
-            addCriterion("total_num >", value, "totalNum");
+        public Criteria andTotalSaleNumGreaterThan(Long value) {
+            addCriterion("total_sale_num >", value, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumGreaterThanOrEqualTo(Long value) {
-            addCriterion("total_num >=", value, "totalNum");
+        public Criteria andTotalSaleNumGreaterThanOrEqualTo(Long value) {
+            addCriterion("total_sale_num >=", value, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumLessThan(Long value) {
-            addCriterion("total_num <", value, "totalNum");
+        public Criteria andTotalSaleNumLessThan(Long value) {
+            addCriterion("total_sale_num <", value, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumLessThanOrEqualTo(Long value) {
-            addCriterion("total_num <=", value, "totalNum");
+        public Criteria andTotalSaleNumLessThanOrEqualTo(Long value) {
+            addCriterion("total_sale_num <=", value, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumIn(List<Long> values) {
-            addCriterion("total_num in", values, "totalNum");
+        public Criteria andTotalSaleNumIn(List<Long> values) {
+            addCriterion("total_sale_num in", values, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumNotIn(List<Long> values) {
-            addCriterion("total_num not in", values, "totalNum");
+        public Criteria andTotalSaleNumNotIn(List<Long> values) {
+            addCriterion("total_sale_num not in", values, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumBetween(Long value1, Long value2) {
-            addCriterion("total_num between", value1, value2, "totalNum");
+        public Criteria andTotalSaleNumBetween(Long value1, Long value2) {
+            addCriterion("total_sale_num between", value1, value2, "totalSaleNum");
             return (Criteria) this;
         }
 
-        public Criteria andTotalNumNotBetween(Long value1, Long value2) {
-            addCriterion("total_num not between", value1, value2, "totalNum");
+        public Criteria andTotalSaleNumNotBetween(Long value1, Long value2) {
+            addCriterion("total_sale_num not between", value1, value2, "totalSaleNum");
             return (Criteria) this;
         }
 
@@ -1081,6 +1082,66 @@ public class TbGoodsExample {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
+
+        public Criteria andCreateDateIsNull() {
+            addCriterion("create_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateIsNotNull() {
+            addCriterion("create_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateEqualTo(Date value) {
+            addCriterion("create_date =", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateNotEqualTo(Date value) {
+            addCriterion("create_date <>", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateGreaterThan(Date value) {
+            addCriterion("create_date >", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_date >=", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateLessThan(Date value) {
+            addCriterion("create_date <", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateLessThanOrEqualTo(Date value) {
+            addCriterion("create_date <=", value, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateIn(List<Date> values) {
+            addCriterion("create_date in", values, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateNotIn(List<Date> values) {
+            addCriterion("create_date not in", values, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateBetween(Date value1, Date value2) {
+            addCriterion("create_date between", value1, value2, "createDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateDateNotBetween(Date value1, Date value2) {
+            addCriterion("create_date not between", value1, value2, "createDate");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1095,7 +1156,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-05-15
+     * @date 2019-06-10
      */
     public static class Criterion {
         private String condition;

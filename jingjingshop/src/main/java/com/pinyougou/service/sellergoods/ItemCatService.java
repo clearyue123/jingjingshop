@@ -1,5 +1,6 @@
 package com.pinyougou.service.sellergoods;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.pojo.TbItemCat;
 
@@ -65,4 +66,10 @@ public interface ItemCatService {
 	 * @return
 	 */
 	public List<TbItemCat> findByParentId(Long parentId);
+
+    /**
+     * 查询所有菜单目录
+     * @return
+     */
+	public List<Map<String,Object>> findAllCategory();
 }

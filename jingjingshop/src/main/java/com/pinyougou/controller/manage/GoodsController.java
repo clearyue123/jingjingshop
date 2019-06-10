@@ -170,12 +170,12 @@ public class GoodsController {
 	 */
 	@RequestMapping("/getGoodsList")
 	public ApiResult getGoodsList(
-			@RequestParam(required = false, value = "category3Id" ,defaultValue = "-1") Long category3Id,
+			@RequestParam(required = false, value = "category3Id" ,defaultValue = "-1") Long category2Id,
 			@RequestParam(required = false, value = "page" ,defaultValue = "1") int page,
 			@RequestParam(required = false, value = "rows" ,defaultValue = "10") int rows) {
 		TbGoods goods = new TbGoods();
-		if(category3Id != -1){
-			goods.setCategory3Id(category3Id);
+		if(category2Id != -1){
+			goods.setCategory2Id(category2Id);
 		}
 		PageResult result = goodsService.findPage(goods, page, rows);
 		return new ApiResult(200, "查询成功", result);
@@ -224,5 +224,40 @@ public class GoodsController {
 		}
 	}
 
-	
+	   /**
+	    * 小程序接口 
+	    * 商品列表菜单
+	    * @param category2Id 二级分类ID
+	    * @param orderByFlag 分类标记 （0.综合[默认值] 1.销量 2.新品 3.价格）
+	    * @param page 第n页(默认 1)
+	    * @param rows 每页条数(每页条数,默认 10)
+	    * @return
+	    */
+	   @RequestMapping("/findGoodsList")
+	   public ApiResult findGoodsList(
+			   @RequestParam(value="category2Id",required=false)String category2Id,
+			   @RequestParam(value="orderByFlag",required=false)String orderByFlag,
+			   @RequestParam(required = false, value = "page" ,defaultValue = "1") Integer page,
+			   @RequestParam(required = false, value = "rows" ,defaultValue = "10") Integer rows){
+		   try{
+			   String defaultOrderBy = "0";
+			   Map<String,Object> paramMap = new HashMap<String,Object>();
+			   if(category2Id!=null){
+				   paramMap.put("category2Id", category2Id); 
+			   }
+			   if(orderByFlag!=null){
+				   paramMap.put("orderByFlag", orderByFlag);
+			   }else{
+				   paramMap.put("orderByFlag", defaultOrderBy);
+			   }
+			   Page<Map<String,Object>> pageResult = goodsService.findGoodsList(paramMap,page,rows);
+			   Map<String,Object> data = new HashMap<>();
+			   data.put("total", pageResult.getTotal());
+			   data.put("goodList", pageResult.getResult());
+			   return new ApiResult(200, "商品列表查询成功！",data);
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return new ApiResult(201, "商品列表查询失败！","");
+		   }
+	   }
 }

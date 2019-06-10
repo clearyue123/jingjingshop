@@ -1,5 +1,6 @@
 package com.pinyougou.service.sellergoods.impl;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import entity.PageResult;
 
 /**
  * 服务实现层
- * @author Administrator
+ * @author yue
  *
  */
 @Service
@@ -108,6 +109,17 @@ public class ItemCatServiceImpl implements ItemCatService {
 		System.out.println("将模板ID放入缓存");
 		
 		return itemCatMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<Map<String,Object>> findAllCategory() {
+		List<Map<String,Object>> data = itemCatMapper.findCategory1List();
+		for(Map<String,Object> cat1Map:data){
+			Long parentId = (Long)cat1Map.get("category1Id");
+			List<Map<String, Object>> category2Map = itemCatMapper.findCategory2List(parentId);
+			cat1Map.put("category2Map", category2Map);
+		}
+		return data;
 	}
 	
 }

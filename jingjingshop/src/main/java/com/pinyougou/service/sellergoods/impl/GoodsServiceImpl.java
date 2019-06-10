@@ -360,4 +360,12 @@ public class GoodsServiceImpl implements GoodsService {
 		List<Map<String, Object>> goodsList = goodsMapper.searchGoodsByName(searchGoodsName);
 		return goodsList;
 	}
+
+	@Override
+	public Page<Map<String,Object>> findGoodsList(Map<String, Object> paramMap,Integer page,Integer rows) {
+		PageHelper.startPage(page, rows);
+		List<Map<String, Object>> data = goodsMapper.findGoodsList(paramMap);
+		Page<Map<String,Object>> pageResult = (Page<Map<String,Object>>)data;
+		return pageResult;
+	}
 }

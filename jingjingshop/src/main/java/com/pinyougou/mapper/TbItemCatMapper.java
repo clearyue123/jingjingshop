@@ -1,9 +1,12 @@
 package com.pinyougou.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.pinyougou.pojo.TbItemCat;
 import com.pinyougou.pojo.TbItemCatExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TbItemCatMapper {
     int countByExample(TbItemCatExample example);
@@ -27,4 +30,8 @@ public interface TbItemCatMapper {
     int updateByPrimaryKeySelective(TbItemCat record);
 
     int updateByPrimaryKey(TbItemCat record);
+    
+    List<Map<String,Object>> findCategory1List();
+    
+    List<Map<String,Object>> findCategory2List(Long parentId);
 }

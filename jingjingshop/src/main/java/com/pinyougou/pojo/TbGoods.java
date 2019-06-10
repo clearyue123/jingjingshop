@@ -2,10 +2,11 @@ package com.pinyougou.pojo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @author yue
- * @date 2019-05-15
+ * @date 2019-06-10
  */
 public class TbGoods implements Serializable{
     /**
@@ -74,14 +75,19 @@ public class TbGoods implements Serializable{
     private String goodsName;
 
     /**
-     * 商品总数
+     * 商品总销量
      */
-    private Long totalNum;
+    private Long totalSaleNum;
 
     /**
      * 类型
      */
     private String type;
+
+    /**
+     * 创建时间
+     */
+    private Date createDate;
 
     public Long getId() {
         return id;
@@ -187,12 +193,12 @@ public class TbGoods implements Serializable{
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public Long getTotalNum() {
-        return totalNum;
+    public Long getTotalSaleNum() {
+        return totalSaleNum;
     }
 
-    public void setTotalNum(Long totalNum) {
-        this.totalNum = totalNum;
+    public void setTotalSaleNum(Long totalSaleNum) {
+        this.totalSaleNum = totalSaleNum;
     }
 
     public String getType() {
@@ -201,5 +207,13 @@ public class TbGoods implements Serializable{
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

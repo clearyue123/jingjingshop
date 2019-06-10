@@ -94,4 +94,11 @@ public interface GoodsService {
      * @return 
      */
 	public List<Map<String, Object>> searchGoodsByName(String searchGoodsName);
+
+    /**
+     * 小程序 商品列表
+     * @param paramMap
+     * @return
+     */
+	public Page<Map<String,Object>> findGoodsList(Map<String, Object> paramMap,Integer page,Integer rows);
 }

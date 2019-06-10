@@ -1,9 +1,12 @@
 package com.pinyougou.controller.manage;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
@@ -122,8 +125,29 @@ public class ItemCatController {
 		return itemCatService.findPage(itemCat, page, rows);		
 	}
 	
+	/**
+	 * 查询 一级分类查二级分类
+	 * @param parentId
+	 * @return
+	 */
 	@RequestMapping("/findByParentId")
 	public List<TbItemCat> findByParentId(Long parentId){
 		return itemCatService.findByParentId(parentId);
+	}
+	
+	/**
+	 * 小程序接口 
+	 * 分类菜单
+	 * @return
+	 */
+	@RequestMapping("/findAllCategory")
+	public ApiResult findAllCategory(){
+		try{
+			List<Map<String,Object>> data = itemCatService.findAllCategory();
+			return  new ApiResult(200,"分类菜单查询成功", data);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "分类菜单查询失败","");
+		}
 	}
 }
