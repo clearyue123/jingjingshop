@@ -227,21 +227,28 @@ public class GoodsController {
 	   /**
 	    * 小程序接口 
 	    * 商品列表菜单
+	    * @param category1Id 一级分类ID
 	    * @param category2Id 二级分类ID
-	    * @param orderByFlag 分类标记 （0.综合[默认值] 1.销量 2.新品 3.价格）
+	    * @param orderByFlag 排序标记 （0.综合[默认值] 1.销量 2.新品 3.价格）
+	    * @param isDesc 升降序(默认 0.升序 1.降序)
 	    * @param page 第n页(默认 1)
 	    * @param rows 每页条数(每页条数,默认 10)
 	    * @return
 	    */
 	   @RequestMapping("/findGoodsList")
 	   public ApiResult findGoodsList(
+			   @RequestParam(value="category1Id",required=false)String category1Id,
 			   @RequestParam(value="category2Id",required=false)String category2Id,
 			   @RequestParam(value="orderByFlag",required=false)String orderByFlag,
+			   @RequestParam(value="isDesc",required=false)String isDesc,
 			   @RequestParam(required = false, value = "page" ,defaultValue = "1") Integer page,
 			   @RequestParam(required = false, value = "rows" ,defaultValue = "10") Integer rows){
 		   try{
 			   String defaultOrderBy = "0";
 			   Map<String,Object> paramMap = new HashMap<String,Object>();
+			   if(category1Id!=null){
+				   paramMap.put("category1Id", category1Id); 
+			   }
 			   if(category2Id!=null){
 				   paramMap.put("category2Id", category2Id); 
 			   }
@@ -249,6 +256,11 @@ public class GoodsController {
 				   paramMap.put("orderByFlag", orderByFlag);
 			   }else{
 				   paramMap.put("orderByFlag", defaultOrderBy);
+			   }
+			   if(isDesc!=null){
+				   paramMap.put("isDesc", isDesc);
+			   }else{
+				   paramMap.put("isDesc", "0");
 			   }
 			   Page<Map<String,Object>> pageResult = goodsService.findGoodsList(paramMap,page,rows);
 			   Map<String,Object> data = new HashMap<>();

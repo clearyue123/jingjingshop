@@ -456,15 +456,15 @@
 				WHERE
 					t2.id = t.brand_id
 			) brandName,
-			t.category3_id categoryId,
+			t.category2_id category2Id,
 			(
 				SELECT
 					t3.`name`
 				FROM
 					tb_item_cat t3
 				WHERE
-					t3.id = t.category3_id
-			) categoryName,
+					t3.id = t.category2_id
+			) category2Name,
 			t.price,
 			t.reduced_price reducedPrice,
 			t.small_pic smallPic
@@ -502,14 +502,14 @@
 				WHERE
 					t2.id = t.brand_id
 			) brandName,
-			t.category3_id categoryId,
+			t.category2_id categoryId,
 			(
 				SELECT
 					t3.`name`
 				FROM
 					tb_item_cat t3
 				WHERE
-					t3.id = t.category3_id
+					t3.id = t.category2_id
 			) categoryName,
 			t.price,
 			t.reduced_price reducedPrice,
@@ -520,18 +520,45 @@
 			tb_goods t
 	    <where>
 	        t.is_delete = '0'
+	        <if test="category1Id != null ">
+	            and t.category1_id = #{category1Id}
+	        </if>
 	        <if test="category2Id != null ">
 	            and t.category2_id = #{category2Id}
 	        </if>
 	    </where>
 	    <if test="orderByFlag == 1">
-	       order by t.total_sale_num desc
+	       order by t.total_sale_num
+	       <choose>
+			       <when test=" isDesc == 1">
+			          DESC
+			      </when>
+			     <otherwise>
+			          ASC
+			     </otherwise>
+			</choose>
 	    </if>
 	     <if test="orderByFlag == 2">
-	       order by t.create_date desc
+	       order by t.create_date
+	       <choose>
+			       <when test=" isDesc == 1">
+			          DESC
+			      </when>
+			     <otherwise>
+			          ASC
+			     </otherwise>
+			</choose>
 	    </if>
 	     <if test="orderByFlag == 3">
-	       order by t.reduced_price desc
+	       order by t.reduced_price 
+	       <choose>
+			       <when test=" isDesc == 1">
+			          DESC
+			      </when>
+			     <otherwise>
+			          ASC
+			     </otherwise>
+			</choose>
 	    </if>
     </select>
 </mapper>
