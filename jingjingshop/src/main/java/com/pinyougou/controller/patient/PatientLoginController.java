@@ -23,7 +23,6 @@ import util.TextUtils;
  * @author tian
  *
  */
-
 @RestController
 @RequestMapping("/patientLogin")
 public class PatientLoginController {
