@@ -15,8 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pinyougou.common.ApiResult;
 
+import util.FileUtils;
 import util.UUIDUtils;
 
+
+/**
+ * @desc:文件上传
+ * @author:yue
+ * @date:2019.6.10
+ */
 @Controller
 @RestController
 @RequestMapping("/upload")

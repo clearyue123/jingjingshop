@@ -1,4 +1,4 @@
-package com.pinyougou.controller.manage;
+package util;
 
 /**
  * @desc:文件工具类
