@@ -1,14 +1,17 @@
 package com.pinyougou.pojo;
 
-
 import java.util.Date;
 
 /**
- * 积分记录表
+ * 
+ * 
+ * @author wcyong
+ * 
+ * @date 2019-06-11
  */
 public class TbPointList {
     /**
-     * 积分记录表主键
+     * 提取记录表主键
      */
     private String plid;
 
@@ -16,44 +19,41 @@ public class TbPointList {
      * 提取时间
      */
     private Date pdate;
+
     /**
-     * 提取的积分数量
+     * 提取金额
      */
-    private  Integer  point;
+    private Integer point;
+
     /**
      * 代表编号
      */
-    private  String  rid;
+    private String rid;
+
     /**
      * 医生编号
      */
-    private  String  did;
+    private String did;
+
     /**
-     * 用户编号
+     * 患者编号
      */
-    private  String  uid;
-    /**
-     * 数据创建时间
-     */
+    private String uid;
+
     private Date createDate;
 
+    public TbPointList(Date createDate, int points, String rid) {
+    	this.createDate = createDate;
+    	this.point = points;
+    	this.rid = rid;
+	}
 
-    public TbPointList() {
-    }
-
-    public TbPointList( Date pdate, Integer point, String rid) {
-        this.pdate = pdate;
-        this.point = point;
-        this.rid = rid;
-    }
-
-
-    public String getPlid() {
+	public String getPlid() {
         return plid;
     }
 
     public void setPlid(String plid) {
-        this.plid = plid;
+        this.plid = plid == null ? null : plid.trim();
     }
 
     public Date getPdate() {
@@ -77,7 +77,7 @@ public class TbPointList {
     }
 
     public void setRid(String rid) {
-        this.rid = rid;
+        this.rid = rid == null ? null : rid.trim();
     }
 
     public String getDid() {
@@ -85,7 +85,7 @@ public class TbPointList {
     }
 
     public void setDid(String did) {
-        this.did = did;
+        this.did = did == null ? null : did.trim();
     }
 
     public String getUid() {
@@ -93,7 +93,7 @@ public class TbPointList {
     }
 
     public void setUid(String uid) {
-        this.uid = uid;
+        this.uid = uid == null ? null : uid.trim();
     }
 
     public Date getCreateDate() {
@@ -102,19 +102,5 @@ public class TbPointList {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-
-    @Override
-    public String toString() {
-        return "TbPointList{" +
-                "plid='" + plid + '\'' +
-                ", pdate=" + pdate +
-                ", point=" + point +
-                ", rid='" + rid + '\'' +
-                ", did='" + did + '\'' +
-                ", uid='" + uid + '\'' +
-                ", createDate=" + createDate +
-                '}';
     }
 }

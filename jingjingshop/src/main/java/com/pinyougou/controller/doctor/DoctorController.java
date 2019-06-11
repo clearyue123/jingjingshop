@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbCard;
-import com.pinyougou.pojo.TbDoc;
-import com.pinyougou.pojo.TbDocUser;
+import com.pinyougou.pojo.TbDoctor;
+import com.pinyougou.pojo.TbDoctorUser;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
 import com.pinyougou.pojo.TbUser;
@@ -23,6 +23,7 @@ import com.pinyougou.service.user.UserService;
 import entity.PageResult;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+import util.TextUtils;
 
 /**
  * 医生管理
@@ -30,8 +31,6 @@ import sun.misc.BASE64Encoder;
 @RestController
 @RequestMapping("/doctor")
 public class DoctorController {
-
-
 
 	@Autowired
 	private DoctorService doctorService;
@@ -51,7 +50,7 @@ public class DoctorController {
 	public ApiResult editscript(@RequestParam(required = false, value = "did") String did
 	) {
 		try {
-			String s = doctorService.FindPointRequestByPrid(did);
+			String s = doctorService.FindPointRequestByPrid(Long.parseLong(did));
             if(s!=null){
                 return new ApiResult(200, "获取成功", s);
             }
@@ -70,18 +69,22 @@ public class DoctorController {
      * @return
      */
 	@RequestMapping("/editscript")
-	public ApiResult editscript(@RequestParam(required = false, value = "did") String did,
+	public ApiResult editscript(@RequestParam(required = true, value = "did") String did,
 								@RequestParam(required = false, value = "script") String script
 	) {
 		try {
-			TbDoc tbDoc = new TbDoc(did, script);
-			doctorService.EditTbDoc(tbDoc);
-			return new ApiResult(200, "编辑成功", "编辑成功");
+			TbDoctor tbDoc = doctorService.findAllByIdDoc(Long.parseLong(did));
+			if(tbDoc!=null){
+				tbDoc.setScript(script);
+				doctorService.EditTbDoc(tbDoc);
+				return new ApiResult(200, "编辑成功", "编辑成功");
+			}else{
+				return new ApiResult(201, "编辑失败，请确认医生是否存在！", "编辑成功");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
+			return new ApiResult(201, "操作失败", "");
 		}
-
 	}
 
 
@@ -102,7 +105,7 @@ public class DoctorController {
 			int i = doctorService.dicountInnerDocUser(map);
 			//判断数据是否重复  此为不重复
 			if (i <= 0) {
-				TbDocUser tbDoc = new TbDocUser(did, uid);
+				TbDoctorUser tbDoc = new TbDoctorUser(Long.parseLong(did), Long.parseLong(uid));
 				doctorService.addInnerDocUser(tbDoc);
 				return new ApiResult(200, "新增成功", "新增成功");
 			}
@@ -127,9 +130,15 @@ public class DoctorController {
 								  @RequestParam(required = false, value = "ticket") String ticket,
 								  @RequestParam(required = false, value = "ticket_time") String ticket_time) {
 		try {
-			TbDoc tbDoc = new TbDoc(did, ticket, ticket_time);
-			doctorService.EditTbDoc(tbDoc);
-			return new ApiResult(200, "编辑成功", "编辑成功");
+			TbDoctor tbDoc = doctorService.findAllByIdDoc(Long.parseLong(did));
+			if(tbDoc!=null){
+				tbDoc.setTicket(ticket);
+				tbDoc.setTicketTime(ticket_time);
+				doctorService.EditTbDoc(tbDoc);
+				return new ApiResult(200, "编辑成功", "编辑成功");
+			}else{
+				return new ApiResult(201, "编辑失败", "");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
@@ -148,16 +157,17 @@ public class DoctorController {
 										@RequestParam(required = false, value = "point") Integer point
 	) {
 		try {
+			Long doctorId = Long.parseLong(did);
 			//判断在七日内是否重复提交申请  此为不重复提交申请
-			int discountPoint = doctorService.DiscountByPoint(did);
+			int discountPoint = doctorService.DiscountByPoint(doctorId);
 			if (discountPoint <= 0) {
 				//获得到自己的积分数量
-				int byRePoints = doctorService.findByRePoints(did) == null ? 0 : Integer.parseInt(doctorService.findByRePoints(did));
+				int byRePoints = doctorService.findByRePoints(doctorId) == null ? 0 : Integer.parseInt(doctorService.findByRePoints(doctorId));
 				//判断兑取积分数是否超额  此为不超额
 				if (byRePoints >= point) {
 					//提交到积分请求表中
 					String caction = "1";
-					TbPointRequest tbPoint = new TbPointRequest( point, did,null, caction);
+					TbPointRequest tbPoint = new TbPointRequest( point, Long.parseLong(did), caction);
 					doctorService.SubmitPointRequest(tbPoint);
 					return new ApiResult(200, "操作成功", "兑换请求发送成功");
 				} else {
@@ -182,7 +192,8 @@ public class DoctorController {
 	public ApiResult FindByPontList(@RequestParam(required = false, value = "did") String did
 	) {
 		try {
-			List<TbPointList> tbPointList = doctorService.FindByPontList(did);
+			Long doctorId = Long.parseLong(did);
+			List<TbPointList> tbPointList = doctorService.FindByPontList(doctorId);
 			if (tbPointList != null) {
 				return new ApiResult(200, "查询成功", tbPointList);
 			} else {
@@ -202,6 +213,7 @@ public class DoctorController {
 	public ApiResult findcard( @RequestParam(required = false, value = "cdid") String cdid) {
 		try {
 			//查询银行卡信息
+			
 			TbCard card = doctorService.FindCard(cdid);
 			if(card!=null){
 				String mycard=new String(new BASE64Decoder().decodeBuffer(card.getCpoint()));
@@ -224,9 +236,10 @@ public class DoctorController {
 	 */
 
 	@RequestMapping("/findinner")
-	public ApiResult FindReDocInner(String did) {
+	public ApiResult FindReDocInner(@RequestParam(required = true, value = "did") String did) {
 		try {
-			TbDoc re = doctorService.FindDocUserInner(did);
+			Long doctorId = Long.parseLong(did);
+			TbDoctor re = doctorService.FindDocUserInner(doctorId);
 			if (re != null) {
 				return new ApiResult(200, "获取成功", re);
 			}
@@ -245,7 +258,8 @@ public class DoctorController {
 	 */
 	@RequestMapping("/findinnercount")
 	public ApiResult FindReDocInnerCount(String did) {
-		int i = doctorService.FindDocUserInnerCount(did);
+		Long doctorId = Long.parseLong(did);
+		int i = doctorService.FindDocUserInnerCount(doctorId);
 		if (i > 0) {
 			return new ApiResult(200, "获取成功", i);
 		} else if (i == 0) {
@@ -262,7 +276,8 @@ public class DoctorController {
 	@RequestMapping("/finduser")
 	public ApiResult findAllByIdDoc(String did) {
 		try {
-			TbUser allByIdUser = doctorService.findAllByIdUser(did);
+			Long doctorId = Long.parseLong(did);
+			TbUser allByIdUser = doctorService.findAllByIdUser(doctorId);
 			if (allByIdUser != null) {
 				return new ApiResult(200, "获取成功", allByIdUser);
 			}
@@ -280,11 +295,16 @@ public class DoctorController {
 	@RequestMapping("/findbyid")
 	public ApiResult FindByIdRe(String did) {
 		try{
-			TbDoc re = doctorService.selectByPrimaryKey(did);
-			if (re != null) {
-				return new ApiResult(200, "获取成功", re);
+			TbDoctor re = null;
+			if(did!=null&&did.trim().length()>0){
+				Long doctorId = Long.parseLong(did);
+				re = doctorService.selectByPrimaryKey(doctorId);
 			}
-			return new ApiResult(200, "操作成功", "用户信息不存在");
+			if (re != null) {
+				return new ApiResult(200, "查询成功！", re);
+			}else{
+				return new ApiResult(201, "查询失败！", "用户信息不存在");
+			}
 		}catch (Exception e){
 			e.printStackTrace();
 			return new ApiResult(201, "操作失败", "字段格式错误或者范围超出");
@@ -296,20 +316,35 @@ public class DoctorController {
 	 * 编辑个人信息
 	 */
 	@RequestMapping("/editre")
-	public ApiResult EditRe(@RequestParam(required = false, value = "did") String did,
+	public ApiResult EditRe(@RequestParam(required = true, value = "did") String did,
 			@RequestParam(required = false, value = "username") String username,
 			@RequestParam(required = false, value = "phone") String phone,
 			@RequestParam(required = false, value = "hospital") String hospital,
 			@RequestParam(required = false, value = "office") String office,
 			@RequestParam(required = false, value = "script") String script) {
 		try {
-			TbDoc doc = new TbDoc(did, username, phone, hospital, office, script);
+			TbDoctor doc = doctorService.selectById(Long.parseLong(did));
+			if(!TextUtils.isBlank(username)){
+				doc.setUsername(username);
+			}
+			if(!TextUtils.isBlank(phone)){
+				doc.setPhone(phone);
+			}
+			if(!TextUtils.isBlank(hospital)){
+				doc.setHospital(hospital);
+			}
+			if(!TextUtils.isBlank(office)){
+				doc.setOffice(office);
+			}
+			if(!TextUtils.isBlank(script)){
+				doc.setScript(script);
+			}
 			doctorService.updateByPrimaryKey(doc);
-			return new ApiResult(200, "编辑成功", "编辑成功");
+			return new ApiResult(200, "医生信息修改成功", "");
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ApiResult(201, "医生信息修改失败", "");
 		}
-		return new ApiResult(00006, "操作失败", "字段超出范围或者格式不正确");
 	}
 
 
@@ -322,7 +357,7 @@ public class DoctorController {
 	public ApiResult AddCard(@RequestParam(required = false, value = "cpoint") String cpoint,
 			@RequestParam(required = false, value = "cname") String cname,
 			@RequestParam(required = false, value = "cphone") String cphone,
-			@RequestParam(required = false, value = "cdid") String cdid) {
+			@RequestParam(required = true, value = "cdid") String cdid) {
 		try {
 			//因为银行卡只能去新增一次相同的所以判断是否重复
 			TbCard card = doctorService.FindCardByCid(cdid);
@@ -332,7 +367,7 @@ public class DoctorController {
 				map.put("cpoint", new BASE64Encoder().encodeBuffer(cpoint.getBytes()));
 				map.put("cname", cname);
 				map.put("cphone", cphone);
-				map.put("cdid", cdid);
+				map.put("cdid", Long.parseLong(cdid));
 				doctorService.AddCard(map);
 				return new ApiResult(200, "新增成功", "新增成功");
 			}
@@ -375,16 +410,25 @@ public class DoctorController {
 	 * @return
 	 */
 	@RequestMapping("/getPatientList")
-	public ApiResult getPatientList(@RequestParam(required = false, value = "did") String did,
+	public ApiResult getPatientList(@RequestParam(required = true, value = "did") String did,
 			@RequestParam(required = false, value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(required = false, value = "pageSize", defaultValue = "10") int pageSize) {
 		try {
-			PageResult result = uesrService.selectListByDid(pageNum, pageSize, did);
-			return new ApiResult(200, "查询成功", result);
+			Long doctorId;
+			if(did!=null&&did.trim().length()>0){
+				doctorId=Long.parseLong(did);
+				Map<String,Object> data = new HashMap<String,Object>();
+				PageResult result = uesrService.selectListByDid(pageNum, pageSize, doctorId);
+				data.put("total", result.getTotal());
+				data.put("patientList", result.getRows());
+				return new ApiResult(200, "查询成功", result);
+			}else{
+				return new ApiResult(201, "查询失败，请确认医生id是否存在！", "");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
 		}
-		return new ApiResult(8, "操作失败", "字段超出范围或者格式不正确");
 	}
 
 	/**

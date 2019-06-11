@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.pinyougou.pojo.TbCard;
-import com.pinyougou.pojo.TbDoc;
-import com.pinyougou.pojo.TbDocUser;
+import com.pinyougou.pojo.TbDoctor;
+import com.pinyougou.pojo.TbDoctorUser;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
 import com.pinyougou.pojo.TbUser;
@@ -20,36 +20,36 @@ public interface DoctorService {
 
 	public int editByPointRequestCaction(HashMap map);
 
-	public  String  FindPointRequestByPrid(String rid);
+	public  String  FindPointRequestByPrid(Long rid);
 
-	public TbDoc  findAllByIdTbDoc(String rid);
+	public  TbDoctor findAllByIdTbDoc(Long rid);
 
-	public   int EditTbDoc(TbDoc tbDoc);
+	public   int EditTbDoc(TbDoctor tbDoc);
 
 	public  int AddCard(HashMap map);
 
 	public  int EditCard(TbCard card);
 
-	public  TbDoc FindDocUserInner(String rid);
+	public  TbDoctor FindDocUserInner(Long rid);
 
-	public int FindDocUserInnerCount(String rid);
+	public int FindDocUserInnerCount(Long rid);
 
-	public TbDoc  findAllByIdDoc(String did);
+	public TbDoctor  findAllByIdDoc(Long did);
 
-	public TbDoc selectByUnionId(TbDoc user);
+	public TbDoctor selectByUnionId(TbDoctor user);
 
-	public  int  addInnerDocUser(TbDocUser tbDocUser);
+	public  int  addInnerDocUser(TbDoctorUser tbDocUser);
 
 	/**
 	 * 积分兑换
 	 */
-	public  String findByRePoints(String rid);
+	public  String findByRePoints(Long rid);
 
-	public int DiscountByPoint(String rid);
+	public int DiscountByPoint(Long rid);
 
 	public int CountByServerDayRequest();
 
-	public  TbPointRequest CheckFindOne(String prid);
+	public  TbPointRequest CheckFindOne(Long prid);
 
 	public  TbCard FindCardByCid(String cid);
 
@@ -61,31 +61,31 @@ public interface DoctorService {
 
 	public int EditPointRequest(TbPointRequest tbPointRequest);
 
-	public  TbPointRequest ServerDayPoint(String prid);
+	public  TbPointRequest ServerDayPoint(Long prid);
 
 	public  int addPointList(TbPointList tbPointList);
 
-	public   List<TbPointList>  FindByPontList(String rid);
+	public   List<TbPointList>  FindByPontList(Long rid);
 
 	public String FindByRoleRid();
 
 	public  int FindPointsAllUpPoints(HashMap map);
 
-	public  TbUser findAllByIdUser(String id);
+	public  TbUser findAllByIdUser(Long id);
 
-	TbDoc selectByPrimaryKey(String did);
+	TbDoctor selectByPrimaryKey(Long did);
 
-	int updateByPrimaryKey(TbDoc doc);
+	int updateByPrimaryKey(TbDoctor doc);
 
-	PageResult selectPatientList(String pid);
+	PageResult selectPatientList(Long pid);
 
-	TbDoc firstInfo(TbDoc user);
+	TbDoctor firstInfo(TbDoctor user);
 
-	int add(TbDoc user);
+	int add(TbDoctor user);
 
-	TbDoc selectById(String did);
+	TbDoctor selectById(Long did);
 
-	int updateInfo(TbDoc user);
+	int updateInfo(TbDoctor user);
     
 	/**
 	 * 医生列表

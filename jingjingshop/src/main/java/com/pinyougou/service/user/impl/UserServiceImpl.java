@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService {
 	 /**
      * 按分页查询
      */
-    public PageResult selectListByDid(int pageNum, int pageSize,String did) {
+    public PageResult selectListByDid(int pageNum, int pageSize,Long did) {
         PageHelper.startPage(pageNum, pageSize);
         Page<TbUser> page = (Page<TbUser>) userMapper.selectListByDid(did);
         return new PageResult(page.getTotal(), page.getResult());

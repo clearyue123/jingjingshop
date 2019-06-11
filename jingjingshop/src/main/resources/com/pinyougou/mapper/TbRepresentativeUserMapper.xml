@@ -6,30 +6,30 @@
 
 
 <!--&lt;!&ndash;设置一对多  其中column为数据库的字段&ndash;&gt;-->
-    <resultMap id="FindReDoc" type="com.pinyougou.pojo.TbRepresentative">
+    <resultMap id="FindReDoc" type="com.pinyougou.pojo.TbRepresent">
             <id  column="rid"  property="rid"></id>
             <result  column="name"  property="name"></result>
-            <result  column="head_pic"  property="head_pic"></result>
+            <result  column="head_pic"  property="headPic"></result>
             <result  column="points"  property="points"></result>
             <result  column="phone"  property="phone"></result>
-            <result  column="points_all"  property="points_all"></result>
+            <result  column="points_all"  property="pointsAll"></result>
             <result  column="username"  property="username"></result>
             <result  column="script"  property="script"></result>
-            <result  column="createDate"  property="createDate"></result>
+            <result  column="create_date"  property="createDate"></result>
             <result  column="open_id"  property="openId"></result>
             <result  column="union_id"  property="unionId"></result>
             <result  column="ticket"  property="ticket"></result>
-            <result  column="ticket_time"  property="ticket_time"></result>
-        <collection    column="did"  property="tbDocs"  ofType="com.pinyougou.pojo.TbDoc">
+            <result  column="ticket_time"  property="ticketTime"></result>
+        <collection    column="did"  property="tbDocs"  ofType="com.pinyougou.pojo.TbDoctor">
             <id column="did"  property="did"></id>
             <result  column="name"  property="name"></result>
-            <result  column="head_pic"  property="head_pic"></result>
+            <result  column="head_pic"  property="headPic"></result>
             <result  column="points"  property="points"></result>
-            <result  column="points_all"  property="points_all"></result>
+            <result  column="points_all"  property="pointsAll"></result>
             <result  column="username"  property="username"></result>
-            <result  column="his"  property="his"></result>
+            <result  column="hospital"  property="hospital"></result>
             <result  column="script"  property="script"></result>
-            <result  column="createDate"  property="createDate"></result>
+            <result  column="create_date"  property="createDate"></result>
         </collection>
     </resultMap>
 
@@ -38,16 +38,16 @@
 
 
 <!--    &lt;!&ndash;查询个人信息&ndash;&gt;-->
-    <select id="findAllByIdRepresentative" parameterType="java.lang.String" resultType="com.pinyougou.pojo.TbRepresentative">
-            SELECT   *  FROM  tb_representative  WHERE  rid=#{rid}
+    <select id="findAllByIdRepresentative" parameterType="java.lang.Long" resultType="com.pinyougou.pojo.TbRepresent">
+            SELECT   *  FROM  tb_represent WHERE  rid=#{rid}
     </select>
 
 
 
 
 <!--    &lt;!&ndash;编辑个人信息&ndash;&gt;-->
-    <update id="Editrepresentative"  parameterType="com.pinyougou.pojo.TbRepresentative">
-        UPDATE  tb_representative
+    <update id="Editrepresentative"  parameterType="com.pinyougou.pojo.TbRepresent">
+        UPDATE  tb_represent
         <set>
             <if  test="username!=null">
                 username=#{username},
@@ -58,14 +58,14 @@
             <if test="ticket!=null">
                 ticket=#{ticket},
             </if>
-            <if test="ticket_time!=null">
-                ticket_time=#{ticket_time},
+            <if test="ticketTime!=null">
+                ticket_time=#{ticketTime},
             </if>
             <if test="points!=null">
                 points=#{points},
             </if>
-            <if test="points_all!=null">
-                points_all=#{points_all},
+            <if test="pointsAll!=null">
+                points_all=#{pointsAll},
             </if>
             <if test="script!=null">
                 script=#{script},
@@ -115,35 +115,23 @@
         WHERE  crid=#{crid}
     </update>
 
-
-
-<!--    <sql  id="innersql">-->
-<!--        r.points,r.points_all,d.name,d.createDate,d.his,d.points-->
-<!--    </sql>-->
-
-
 <!-- &lt;!&ndash;根据代表查询医生信息&ndash;&gt;-->
-<select id="FindReDocInner"   parameterType="java.lang.String"  resultMap="FindReDoc">
-SELECT * FROM tb_doc   d
-INNER  JOIN   tb_redoc  rd
+<select id="FindReDocInner"   parameterType="java.lang.Long"  resultMap="FindReDoc">
+SELECT * FROM tb_doctor   d
+INNER  JOIN   tb_represent_doctor  rd
 ON rd.did=d.did
-INNER  JOIN    tb_representative r
+INNER  JOIN    tb_represent r
 ON rd.rid=r.rid
 WHERE  r.rid=#{rid}
 </select>
 
-
-
-
-
-
 <!--    &lt;!&ndash;根据代表查询医生信息 count&ndash;&gt;-->
-    <select id="FindReDocInnerCount"   parameterType="java.lang.String"  resultType="java.lang.Integer">
- SELECT COUNT(*) FROM tb_doc   d
-INNER  JOIN   tb_redoc  rd
+    <select id="FindReDocInnerCount"   parameterType="java.lang.Long"  resultType="java.lang.Integer">
+ SELECT COUNT(*) FROM tb_doctor   d
+INNER  JOIN   tb_represent_doctor  rd
 ON
 rd.did=d.did
-INNER  JOIN    tb_representative r
+INNER  JOIN    tb_doctor r
 ON rd.rid=r.rid
 WHERE  r.rid=#{rid}
 </select>
@@ -154,39 +142,39 @@ WHERE  r.rid=#{rid}
 
 
     <!--新增代表关联医生-->
-    <insert  id="addInnerReDoc"  parameterType="com.pinyougou.pojo.TbReDoc"  >
-         INSERT INTO  tb_redoc(rdid,rid,did)VALUE(UUID(),#{rid},#{did})
+    <insert  id="addInnerReDoc"  parameterType="com.pinyougou.pojo.TbRepresentDoctor"  >
+         INSERT INTO  tb_represent_doctor(rdid,rid,did)VALUE(UUID(),#{rid},#{did})
     </insert>
 
 
     <select id="dicountInnerReDoc"  parameterType="java.util.Map"  resultType="java.lang.Integer">
-          SELECT  COUNT(*)  FROM  tb_redoc   WHERE     rid=#{rid}  AND  did=#{did}
+          SELECT  COUNT(*)  FROM  tb_represent_doctor   WHERE     rid=#{rid}  AND  did=#{did}
     </select>
 
 <!--积分兑换-->
 
 
 <!--查询代表的可兑换积分-->
-<select id="findByRePoints"  parameterType="java.lang.String"  resultType="java.lang.String">
-      SELECT   points FROM  tb_representative  WHERE   rid=#{rid}
+<select id="findByRePoints"  parameterType="java.lang.Long"  resultType="java.lang.String">
+      SELECT   points FROM  tb_represent  WHERE   rid=#{rid}
 </select>
 
 
 
 <!--提交兑换积分请求-->
 <insert id="SubmitPointRequest" parameterType="com.pinyougou.pojo.TbPointRequest">
-     INSERT INTO  tb_pointrequest (prid,point,rid,caction) VALUE(UUID(),#{point},#{rid},#{caction})
+     INSERT INTO  tb_point_request (prid,point,rid,caction) VALUE(UUID(),#{point},#{rid},#{caction})
 </insert>
 
 
 <!--   判断是否重复请求积分-->
-    <select id="DiscountByPoint"  resultType="java.lang.Integer"  parameterType="java.lang.String">
-        SELECT  COUNT(*)  FROM  tb_pointrequest   WHERE   DATEDIFF(NOW(),createDate) &lt;  7  AND   rid=#{rid}   AND  caction="1"
+    <select id="DiscountByPoint"  resultType="java.lang.Integer"  parameterType="java.lang.Long">
+        SELECT  COUNT(*)  FROM  tb_pointre_quest   WHERE   DATEDIFF(NOW(),create_date) &lt;  7  AND   rid=#{rid}   AND  caction="1"
 </select>
 
 <!--进行兑换积分审核-->
 <update id="EditPointRequest"  parameterType="com.pinyougou.pojo.TbPointRequest">
-    update  tb_pointrequest
+    update  tb_point_request
     <set>
         <if test="roleid!=null">
             roleid=#{roleid}
@@ -206,42 +194,40 @@ WHERE  r.rid=#{rid}
 
 <!--   七日内可兑换 -->
     <select  id="ServerDayPoint"  parameterType="java.lang.String"  resultType="com.pinyougou.pojo.TbPointRequest">
-        SELECT *  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate) &lt; 7 AND   prid=#{prid}  AND  caction="1"
+        SELECT *  FROM  tb_point_request  WHERE  DATEDIFF(NOW(),create_date) &lt; 7 AND   prid=#{prid}  AND  caction="1"
     </select>
 
 
 <!--    判断七日内是否有数据-->
 <select  id="CountByServerDayRequest"  resultType="java.lang.Integer">
-      SELECT COUNT(*)  FROM  tb_pointrequest  WHERE  DATEDIFF(NOW(),createdate)  &lt; 7  AND  caction="1"
+      SELECT COUNT(*)  FROM  tb_point_request  WHERE  DATEDIFF(NOW(),create_date)  &lt; 7  AND  caction="1"
 </select>
 
 <!--判断是否有该请求的数据-->
 <select id="CheckFindOne"  resultType="com.pinyougou.pojo.TbPointRequest"   parameterType="java.lang.String">
-      SELECT *  FROM  tb_pointrequest  where  prid=#{prid}
+      SELECT *  FROM  tb_point_request  where  prid=#{prid}
 </select>
 
 <!--新增积分记录表-->
     <insert  id="addPointList"  parameterType="com.pinyougou.pojo.TbPointList"  >
-         INSERT  INTO tb_pointlist (plid,pdate,rid,point)  VALUE(UUID(),#{pdate},#{rid},#{point})
+         INSERT  INTO tb_point_list (plid,pdate,rid,point)  VALUE(UUID(),#{pdate},#{rid},#{point})
     </insert>
 
 
 <!--    查询积分记录-->
-    <select id="FindByPontList"  parameterType="java.lang.String"  resultType="com.pinyougou.pojo.TbPointList">
-         SELECT  *  FROM  tb_pointlist  WHERE  rid=#{rid}
+    <select id="FindByPontList"  parameterType="java.lang.Long"  resultType="com.pinyougou.pojo.TbPointList">
+         SELECT  *  FROM  tb_point_list  WHERE  rid=#{rid}
     </select>
 
 
 <!--    获取申请请求表的prid-->
-    <select id="FindPointRequestByPrid" parameterType="java.lang.String" resultType="java.lang.String">
-        SELECT  prid  FROM tb_pointrequest  WHERE  caction="1"  AND DATEDIFF(NOW(),createdate) &lt; 7 AND  rid=#{rid}
+    <select id="FindPointRequestByPrid" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT  prid  FROM tb_point_request  WHERE  caction="1"  AND DATEDIFF(NOW(),create_date) &lt; 7 AND  rid=#{rid}
     </select>
-
-
 
 <!--    编辑请求表的已经通过审核的caction-->
     <update id="editByPointRequestCaction"   parameterType="java.util.Map">
-        update  tb_pointrequest
+        update  tb_point_request
         <set>
             <if test="caction!=null">
                 caction=#{caction}
@@ -250,59 +236,39 @@ WHERE  r.rid=#{rid}
         where  prid=#{prid}
     </update>
 
-
 <!--查询超级管理员的rid-->
     <select  id="FindByRoleRid"  resultType="java.lang.String">
          SELECT  rid  FROM    tb_role  WHERE   rname="超级管理员"
     </select>
 
-
 <!--    计算出积分累计总数在  兑换积分时的差值-->
     <select id="FindPointsAllUpPoints" parameterType="java.util.Map"  resultType="java.lang.Integer">
-          SELECT  CASE WHEN points_all+#{points} IS NULL THEN 0 ELSE points_all+#{points} END points_all FROM  tb_representative WHERE   rid=#{rid}
+          SELECT  CASE WHEN points_all+#{points} IS NULL THEN 0 ELSE points_all+#{points} END points_all FROM  tb_represent WHERE   rid=#{rid}
     </select>
-
-
-<!--2019-5-15 更新于此-->
-
-
 
 <!--    &lt;!&ndash;查询医生个人信息&ndash;&gt;-->
-    <select id="findAllByIdDoc" parameterType="java.lang.String" resultType="com.pinyougou.pojo.TbDoc">
-            SELECT   *  FROM  tb_doc  WHERE  did=#{did}
+    <select id="findAllByIdDoc" parameterType="java.lang.String" resultType="com.pinyougou.pojo.TbDoctor">
+            SELECT   *  FROM  tb_doctor  WHERE  did=#{did}
     </select>
 
-
-
-
-
 <sql id="Base_Column_List" >
-    rid, name, head_pic, points, phone, points_all, username, script, createDate
+    rid, name, head_pic, points, phone, points_all, username, script, create_date
   </sql>
 
-
-
-<select id="selectByUnionId" resultType="com.pinyougou.pojo.TbRepresentative" parameterType="com.pinyougou.pojo.TbRepresentative">
+<select id="selectByUnionId" resultType="com.pinyougou.pojo.TbRepresent" parameterType="com.pinyougou.pojo.TbRepresent">
   	select 
   	<include refid="Base_Column_List"></include>
-  	from tb_representative where union_id = #{unionId,jdbcType=VARCHAR}
+  	from tb_represent where union_id = #{unionId,jdbcType=VARCHAR}
   </select>
 
-
-
-
-  <insert id="add" parameterType="com.pinyougou.pojo.TbRepresentative">
-  	insert into tb_representative (rid,open_id,union_id) values (UUID(),#{openId,jdbcType=VARCHAR},#{unionId,jdbcType=VARCHAR})
+  <insert id="add" parameterType="com.pinyougou.pojo.TbRepresent">
+  	insert into tb_represent (rid,open_id,union_id) values (UUID(),#{openId,jdbcType=VARCHAR},#{unionId,jdbcType=VARCHAR})
   </insert>
-
-
-
-
   
-  <update id="updateInfo" parameterType="com.pinyougou.pojo.TbRepresentative">
-  	update tb_representative set 
+  <update id="updateInfo" parameterType="com.pinyougou.pojo.TbRepresent">
+  	update tb_represent set 
   	name = #{name,jdbcType = VARCHAR} ,
-  	head_pic = #{head_pic,jdbcType=VARCHAR}
+  	head_pic = #{headPic,jdbcType=VARCHAR}
   	where rid = #{rid,jdbcType=VARCHAR}
   </update>
   

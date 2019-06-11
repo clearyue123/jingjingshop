@@ -34,7 +34,7 @@ public interface TbUserMapper {
 
 	TbUser selectByUnionId(TbUser user);
 
-	List<TbUser> selectListByDid(String did);
+	List<TbUser> selectListByDid(Long did);
 
 	int BindDid(TbUser user);
 	

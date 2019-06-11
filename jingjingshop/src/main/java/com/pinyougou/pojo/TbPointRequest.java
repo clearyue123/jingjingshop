@@ -1,124 +1,87 @@
 package com.pinyougou.pojo;
 
-
 import java.util.Date;
 
 /**
- * 积分请求表
+ * 
+ * @date 2019-06-11
  */
 public class TbPointRequest {
     /**
-     * 积分请求表主键
+     * 积分请求兑换表主键
      */
-    private String prid;
+    private Long prid;
 
+    /**
+     * 提取积分数量
+     */
+    private Integer point;
 
-    /**
-     * 提取的积分数量
-     */
-    private  Integer  point;
-    /**
-     * 代表编号
-     */
-    private  String  rid;
-    /**
-     * 医生编号
-     */
-    private  String  did;
     /**
      * 用户编号
      */
-    private  String  uid;
+    private Long uid;
+
     /**
-     * 数据创建时间
+     * 代表编号
+     */
+    private Long rid;
+
+    /**
+     * 医生编号
+     */
+    private Long did;
+
+    /**
+     * 请求时间
      */
     private Date createDate;
 
+    /**
+     * 审核状态(0 通过 1不通过)
+     */
+    private String caction;
 
-    private  String  caction;
-
-
+    /**
+     * 审核时间
+     */
     private Date cactioncreateDate;
 
-    private String  roleid;
+    /**
+     * 审核角色
+     */
+    private String roleId;
 
+    public TbPointRequest(Long prid, Integer point, Long rid, String caction) {
+    	this.prid = prid;
+    	this.point = point;
+    	this.rid = rid;
+    	this.caction = caction;
+	}
 
-    public TbPointRequest() {
-    }
+	public TbPointRequest(Long prid, int points, Long rid, String caction, Date createDate, String roleid) {
+		this.prid = prid;
+    	this.point = points;
+    	this.rid = rid;
+    	this.caction = caction;
+    	this.createDate = createDate;
+    	this.roleId = roleid;
+	}
 
-    public TbPointRequest(String prid, Integer point, String rid,String caction) {
-        this.prid = prid;
-        this.point = point;
-        this.rid = rid;
-        this.caction=caction;
-    }
+	
+	
+	public TbPointRequest(Integer point, Long did, String caction) {
+		this.point = point;
+		this.did = did;
+		this.caction = caction;
+	}
 
-    public TbPointRequest(Integer point, String did, String uid, String caction) {
-        this.point = point;
-        this.did = did;
-        this.uid = uid;
-        this.caction = caction;
-    }
-
-    public TbPointRequest(String prid, Integer point, String rid, String did, Date createDate) {
-        this.prid = prid;
-        this.point = point;
-        this.rid = rid;
-        this.did = did;
-        this.createDate = createDate;
-    }
-
-    public TbPointRequest(String prid, Integer point, String rid, String caction, Date createDate, String roleid) {
-        this.prid = prid;
-        this.point = point;
-        this.rid = rid;
-        this.caction = caction;
-        this.createDate = createDate;
-        this.roleid = roleid;
-    }
-
-    public TbPointRequest(String prid, Integer point, String rid, String did, String uid, Date createDate, String caction, Date cactioncreateDate, String roleid) {
-        this.prid = prid;
-        this.point = point;
-        this.rid = rid;
-        this.did = did;
-        this.uid = uid;
-        this.createDate = createDate;
-        this.caction = caction;
-        this.cactioncreateDate = cactioncreateDate;
-        this.roleid = roleid;
-    }
-
-    public String getPrid() {
+	public Long getPrid() {
         return prid;
     }
 
-    public void setPrid(String prid) {
+    public void setPrid(Long prid) {
         this.prid = prid;
-    }
-
-    public String getCaction() {
-        return caction;
-    }
-
-    public void setCaction(String caction) {
-        this.caction = caction;
-    }
-
-    public Date getCactioncreateDate() {
-        return cactioncreateDate;
-    }
-
-    public void setCactioncreateDate(Date cactioncreateDate) {
-        this.cactioncreateDate = cactioncreateDate;
-    }
-
-    public String getRoleid() {
-        return roleid;
-    }
-
-    public void setRoleid(String roleid) {
-        this.roleid = roleid;
     }
 
     public Integer getPoint() {
@@ -129,30 +92,29 @@ public class TbPointRequest {
         this.point = point;
     }
 
-    public String getRid() {
-        return rid;
-    }
-
-    public void setRid(String rid) {
-        this.rid = rid;
-    }
-
-    public String getDid() {
-        return did;
-    }
-
-    public void setDid(String did) {
-        this.did = did;
-    }
-
-    public String getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(Long uid) {
         this.uid = uid;
     }
 
+    public Long getRid() {
+        return rid;
+    }
+
+    public void setRid(Long rid) {
+        this.rid = rid;
+    }
+
+    public Long getDid() {
+        return did;
+    }
+
+    public void setDid(Long did) {
+        this.did = did;
+    }
 
     public Date getCreateDate() {
         return createDate;
@@ -162,15 +124,27 @@ public class TbPointRequest {
         this.createDate = createDate;
     }
 
+    public String getCaction() {
+        return caction;
+    }
 
-    @Override
-    public String toString() {
-        return "TbPointList{" +
-                ", point=" + point +
-                ", rid='" + rid + '\'' +
-                ", did='" + did + '\'' +
-                ", uid='" + uid + '\'' +
-                ", createDate=" + createDate +
-                '}';
+    public void setCaction(String caction) {
+        this.caction = caction == null ? null : caction.trim();
+    }
+
+    public Date getCactioncreateDate() {
+        return cactioncreateDate;
+    }
+
+    public void setCactioncreateDate(Date cactioncreateDate) {
+        this.cactioncreateDate = cactioncreateDate;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
     }
 }

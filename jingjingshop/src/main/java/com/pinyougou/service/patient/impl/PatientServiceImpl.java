@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pinyougou.mapper.TbPatientMapper;
-import com.pinyougou.pojo.TbDoc;
 import com.pinyougou.pojo.TbPatient;
 import com.pinyougou.service.patient.PatientService;
 

@@ -293,7 +293,7 @@ public class OrderController {
 		         orderStatusMap.put("ORDERID", orderId);
 		         orderStatusMap.put("STATUS", "3");//待发货
 			     orderService.updateStatusById(orderStatusMap);
-			return new ApiResult(200, "已付款","");
+			     return new ApiResult(200, "已付款","");
 			}else if("3".equals(operateFlag)){//已收货
 				Map<String,Object> paramMap = new HashMap<>();
 				paramMap.put("ORDERID", orderId);

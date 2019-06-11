@@ -20,12 +20,12 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 
 
 
-    public TbRepresentative findAllByIdRepresentative(String rid) {
+    public TbRepresent findAllByIdRepresentative(Long rid) {
         return tbRepresentativeUserMapper.findAllByIdRepresentative(rid);
     }
 
 
-    public int Editrepresentative(TbRepresentative tbRepresentative) {
+    public int Editrepresentative(TbRepresent tbRepresentative) {
         return tbRepresentativeUserMapper.Editrepresentative(tbRepresentative);
     }
 
@@ -40,45 +40,45 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     }
 
 
-    public TbRepresentative FindReDocInner(String rid) {
+    public TbRepresent FindReDocInner(Long rid) {
         return tbRepresentativeUserMapper.FindReDocInner(rid);
     }
 
 
-    public int FindReDocInnerCount(String rid) {
+    public int FindReDocInnerCount(Long rid) {
         return tbRepresentativeUserMapper.FindReDocInnerCount(rid);
     }
 
 
-    public TbDoc findAllByIdDoc(String did) {
+    public TbDoctor findAllByIdDoc(Long did) {
         return tbRepresentativeUserMapper.findAllByIdDoc(did);
     }
 
 
 	@Override
-	public TbRepresentative firstInfo(TbRepresentative user) {
+	public TbRepresent firstInfo(TbRepresent user) {
 		return tbRepresentativeUserMapper.selectByUnionId(user);
 	}
 
 
 	@Override
-	public int add(TbRepresentative user) {
+	public int add(TbRepresent user) {
 		return tbRepresentativeUserMapper.add(user);
 	}
 
 
 	@Override
-	public int updateInfo(TbRepresentative user) {
+	public int updateInfo(TbRepresent user) {
 		return tbRepresentativeUserMapper.updateInfo(user);
 	}
 
     @Override
-    public int addInnerReDoc(TbReDoc tbReDoc) {
+    public int addInnerReDoc(TbRepresentDoctor tbReDoc) {
         return tbRepresentativeUserMapper.addInnerReDoc(tbReDoc);
     }
 
     @Override
-    public String findByRePoints(String rid) {
+    public String findByRePoints(Long rid) {
         return tbRepresentativeUserMapper.findByRePoints(rid);
     }
 
@@ -88,7 +88,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     }
 
     @Override
-    public int DiscountByPoint(String rid) {
+    public int DiscountByPoint(Long rid) {
         return tbRepresentativeUserMapper.DiscountByPoint(rid);
     }
 
@@ -103,7 +103,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     }
 
     @Override
-    public TbPointRequest CheckFindOne(String prid) {
+    public TbPointRequest CheckFindOne(Long prid) {
         return tbRepresentativeUserMapper.CheckFindOne(prid);
     }
 
@@ -124,7 +124,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 
 
     @Override
-    public TbPointRequest ServerDayPoint(String prid) {
+    public TbPointRequest ServerDayPoint(Long prid) {
         return tbRepresentativeUserMapper.ServerDayPoint(prid);
     }
 
@@ -134,7 +134,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     }
 
     @Override
-    public List<TbPointList> FindByPontList(String rid) {
+    public List<TbPointList> FindByPontList(Long rid) {
         return tbRepresentativeUserMapper.FindByPontList(rid);
     }
 
@@ -155,7 +155,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     }
 
     @Override
-    public String FindPointRequestByPrid(String rid) {
+    public String FindPointRequestByPrid(Long rid) {
         return tbRepresentativeUserMapper.FindPointRequestByPrid(rid);
     }
 

@@ -1,6 +1,5 @@
 package com.pinyougou.mapper;
 
-import com.pinyougou.pojo.TbDoc;
 import com.pinyougou.pojo.TbPatient;
 import com.pinyougou.pojo.TbPatientExample;
 

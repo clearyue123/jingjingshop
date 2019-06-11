@@ -8,11 +8,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pinyougou.mapper.TbDocMapper;
-import com.pinyougou.mapper.TbDocUserMapper;
+import com.pinyougou.mapper.TbDoctorMapper;
+import com.pinyougou.mapper.TbDoctorUserMapper;
 import com.pinyougou.pojo.TbCard;
-import com.pinyougou.pojo.TbDoc;
-import com.pinyougou.pojo.TbDocUser;
+import com.pinyougou.pojo.TbDoctor;
+import com.pinyougou.pojo.TbDoctorUser;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
 import com.pinyougou.pojo.TbUser;
@@ -26,10 +26,10 @@ public class DoctorServiceImpl  implements DoctorService {
 
 
     @Autowired
-    private TbDocMapper  tbDocMapper;
+    private TbDoctorMapper  tbDocMapper;
 
 	@Autowired
-	private TbDocUserMapper  tbDocUserMapper;
+	private TbDoctorUserMapper  tbDocUserMapper;
 
 
 	@Override
@@ -38,17 +38,17 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public String FindPointRequestByPrid(String rid) {
+	public String FindPointRequestByPrid(Long rid) {
 		return tbDocUserMapper.FindPointRequestByPrid(rid);
 	}
 
 	@Override
-	public TbDoc findAllByIdTbDoc(String rid) {
+	public TbDoctor findAllByIdTbDoc(Long rid) {
 		return tbDocUserMapper.findAllByIdTbDoc(rid);
 	}
 
 	@Override
-	public int EditTbDoc(TbDoc tbDoc) {
+	public int EditTbDoc(TbDoctor tbDoc) {
 		return tbDocUserMapper.EditTbDoc(tbDoc);
 	}
 
@@ -63,37 +63,37 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public TbDoc FindDocUserInner(String rid) {
+	public TbDoctor FindDocUserInner(Long rid) {
 		return tbDocUserMapper.FindDocUserInner(rid);
 	}
 
 	@Override
-	public int FindDocUserInnerCount(String rid) {
+	public int FindDocUserInnerCount(Long rid) {
 		return tbDocUserMapper.FindDocUserInnerCount(rid);
 	}
 
 	@Override
-	public TbDoc findAllByIdDoc(String did) {
+	public TbDoctor findAllByIdDoc(Long did) {
 		return tbDocUserMapper.findAllByIdDoc(did);
 	}
 
 	@Override
-	public TbDoc selectByUnionId(TbDoc user) {
+	public TbDoctor selectByUnionId(TbDoctor user) {
 		return tbDocUserMapper.selectByUnionId(user);
 	}
 
 	@Override
-	public int addInnerDocUser(TbDocUser tbDocUser) {
+	public int addInnerDocUser(TbDoctorUser tbDocUser) {
 		return tbDocUserMapper.addInnerDocUser(tbDocUser);
 	}
 
 	@Override
-	public String findByRePoints(String rid) {
+	public String findByRePoints(Long rid) {
 		return tbDocUserMapper.findByRePoints(rid);
 	}
 
 	@Override
-	public int DiscountByPoint(String rid) {
+	public int DiscountByPoint(Long rid) {
 		return tbDocUserMapper.DiscountByPoint(rid);
 	}
 
@@ -103,7 +103,7 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public TbPointRequest CheckFindOne(String prid) {
+	public TbPointRequest CheckFindOne(Long prid) {
 		return tbDocUserMapper.CheckFindOne(prid);
 	}
 
@@ -133,7 +133,7 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public TbPointRequest ServerDayPoint(String prid) {
+	public TbPointRequest ServerDayPoint(Long prid) {
 		return tbDocUserMapper.ServerDayPoint(prid);
 	}
 
@@ -143,7 +143,7 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public  List<TbPointList> FindByPontList(String rid) {
+	public  List<TbPointList> FindByPontList(Long rid) {
 		return tbDocUserMapper.FindByPontList(rid);
 	}
 
@@ -158,48 +158,42 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public TbUser findAllByIdUser(String id) {
+	public TbUser findAllByIdUser(Long id) {
 		return tbDocUserMapper.findAllByIdUser(id);
 	}
 
-
-//	新增的结束
-
-
-
-
 	@Override
-	public TbDoc selectByPrimaryKey(String did) {
+	public TbDoctor selectByPrimaryKey(Long did) {
 		return tbDocMapper.selectByPrimaryKey(did);
 	}
 
 	@Override
-	public int updateByPrimaryKey(TbDoc doc) {
+	public int updateByPrimaryKey(TbDoctor doc) {
 		return tbDocMapper.updateByPrimaryKey(doc);
 	}
 
 	@Override
-	public PageResult selectPatientList(String pid) {
+	public PageResult selectPatientList(Long pid) {
 		return tbDocMapper.updateByPrimaryKey(pid);
 	}
 
 	@Override
-	public TbDoc firstInfo(TbDoc user) {
+	public TbDoctor firstInfo(TbDoctor user) {
 		return tbDocMapper.selectByUnionId(user);
 	}
 
 	@Override
-	public int add(TbDoc user) {
+	public int add(TbDoctor user) {
 		return tbDocMapper.add(user);
 	}
 
 	@Override
-	public TbDoc selectById(String did) {
+	public TbDoctor selectById(Long did) {
 		return tbDocMapper.selectById(did);
 	}
 
 	@Override
-	public int updateInfo(TbDoc user) {
+	public int updateInfo(TbDoctor user) {
 		return tbDocMapper.updateInfo(user);
 	}
 
@@ -237,7 +231,6 @@ public class DoctorServiceImpl  implements DoctorService {
 		Integer insertNum = tbDocUserMapper.insert(docUserParamMap);
 		return insertNum;
 	}
-
 
 
 }

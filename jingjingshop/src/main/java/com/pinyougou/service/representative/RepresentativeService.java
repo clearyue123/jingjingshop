@@ -11,47 +11,45 @@ import com.pinyougou.pojo.*;
  */
 public interface RepresentativeService {
 
+    public TbRepresent findAllByIdRepresentative(Long  rid);
 
-
-    public TbRepresentative findAllByIdRepresentative(String  rid);
-
-    public   int Editrepresentative(TbRepresentative tbRepresentative);
+    public   int Editrepresentative(TbRepresent tbRepresent);
 
     public  int AddCard(HashMap map);
 
     public  int EditCard(TbCard card);
 
-    public  TbRepresentative FindReDocInner(String rid);
+    public  TbRepresent FindReDocInner(Long rid);
 
-    public int FindReDocInnerCount(String rid);
+    public int FindReDocInnerCount(Long rid);
 
-    public TbDoc findAllByIdDoc(String did);
+    public TbDoctor findAllByIdDoc(Long did);
 
-	public TbRepresentative firstInfo(TbRepresentative user);
+	public TbRepresent firstInfo(TbRepresent user);
 
-	public int add(TbRepresentative user);
+	public int add(TbRepresent user);
 
-	public int updateInfo(TbRepresentative user);
+	public int updateInfo(TbRepresent user);
 
 
 
-    public  int  addInnerReDoc(TbReDoc tbReDoc);
+    public  int  addInnerReDoc(TbRepresentDoctor tbReDoc);
 
     /**
      * 积分兑换
      */
-    public  String findByRePoints(String  rid);
+    public  String findByRePoints(Long  rid);
 
     public  TbCard FindCard(String cid);
 
 
-    public int DiscountByPoint(String rid);
+    public int DiscountByPoint(Long rid);
 
     public int dicountInnerReDoc(HashMap map);
 
     public int CountByServerDayRequest();
 
-    public  TbPointRequest CheckFindOne(String prid);
+    public  TbPointRequest CheckFindOne(Long prid);
 
     public  TbCard FindCardByCid(String cid);
 
@@ -60,11 +58,11 @@ public interface RepresentativeService {
 
     public int EditPointRequest(TbPointRequest tbPointRequest);
 
-    public  TbPointRequest ServerDayPoint(String  prid);
+    public  TbPointRequest ServerDayPoint(Long  prid);
 
     public  int addPointList(TbPointList tbPointList);
 
-    public List<TbPointList> FindByPontList(String rid);
+    public List<TbPointList> FindByPontList(Long rid);
 
     public String FindByRoleRid();
 
@@ -73,7 +71,7 @@ public interface RepresentativeService {
 
     public int editByPointRequestCaction(HashMap map);
 
-    public  String  FindPointRequestByPrid(String rid);
+    public  String  FindPointRequestByPrid(Long rid);
 
 
 }
