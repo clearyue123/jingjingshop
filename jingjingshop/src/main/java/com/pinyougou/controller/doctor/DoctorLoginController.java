@@ -35,6 +35,8 @@ public class DoctorLoginController {
 		if(unionid!=null&&unionid.trim().length()>0){
 			user.setUnionId(unionid);
 		}
+		user.setPoints(0);
+		user.setPointsAll(0);
 		TbDoctor result = doctorService.firstInfo(user);//union查
 		if (result != null) {
 			if(TextUtils.isBlank(result.getName())){

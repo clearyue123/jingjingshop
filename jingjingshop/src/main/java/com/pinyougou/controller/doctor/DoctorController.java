@@ -498,4 +498,23 @@ public class DoctorController {
 			return new ApiResult(201, "患者以关联过，请勿重复关联！","");
 		}
 	}
+	
+	@RequestMapping("/addFiftyPoints")
+	public ApiResult addFiftyPotints(@RequestParam(value="doctorId",required=true)String doctorId){
+		try{
+			TbDoctor doctor = doctorService.selectById(Long.parseLong(doctorId));
+			if(doctor==null){
+				return new ApiResult(201, "新增积分失败，该医生不存在!", "");
+			}else{
+				Integer addPoints = doctor.getPoints()==null?0:doctor.getPoints();
+				addPoints+=50;
+				doctor.setPoints(addPoints);
+				doctorService.updateByPrimaryKey(doctor);
+				return new ApiResult(200, "新增积分成功", "");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "新增积分失败", "");
+		}
+	}
 }

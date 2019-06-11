@@ -82,7 +82,12 @@ public interface DoctorService {
 	TbDoctor firstInfo(TbDoctor user);
 
 	int add(TbDoctor user);
-
+    
+	/**
+	 * id查医生
+	 * @param did
+	 * @return
+	 */
 	TbDoctor selectById(Long did);
 
 	int updateInfo(TbDoctor user);
