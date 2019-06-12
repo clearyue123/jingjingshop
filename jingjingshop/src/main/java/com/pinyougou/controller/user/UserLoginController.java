@@ -1,5 +1,7 @@
 package com.pinyougou.controller.user;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,6 +49,8 @@ public class UserLoginController {
 					}
 					return new ApiResult(200, "登录成功", result);
 				} else {
+					user.setCreated(new Date());
+					user.setIsDelete("0");
 					userService.add(user);
 					TbUser result1 = userService.firstInfo(user);
 					return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result1);

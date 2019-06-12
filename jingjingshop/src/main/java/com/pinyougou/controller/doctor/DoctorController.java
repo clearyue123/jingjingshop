@@ -139,7 +139,7 @@ public class DoctorController {
 			}else{
 				return new ApiResult(201, "编辑失败", "");
 			}
-		} catch (Exception e) {
+		} catch (Exception e) {      
 			e.printStackTrace();
 			return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
 		}

@@ -76,7 +76,7 @@
             <if test="ticket!=null">
                 ticket=#{ticket},
             </if>
-            <if test="ticket_time!=null">
+            <if test="ticketTime!=null">
                 ticket_time=#{ticketTime},
             </if>
             <if test="points!=null">
@@ -107,8 +107,8 @@
 
     <!--判断银行卡是否重复-->
     <select id="FindCardByCid" resultType="com.pinyougou.pojo.TbCard" parameterType="java.lang.String">
-    SELECT *  FROM  tb_card  WHERE   cdid=#{cdid}
-</select>
+       SELECT *  FROM  tb_card  WHERE   cdid=#{cdid}
+    </select>
 
 
     <!--查询银行卡-->

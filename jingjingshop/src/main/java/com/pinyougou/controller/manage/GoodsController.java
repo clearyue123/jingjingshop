@@ -246,10 +246,10 @@ public class GoodsController {
 		   try{
 			   String defaultOrderBy = "0";
 			   Map<String,Object> paramMap = new HashMap<String,Object>();
-			   if(category1Id!=null){
+			   if(category1Id!=null&&category1Id.trim().length()>0){
 				   paramMap.put("category1Id", category1Id); 
 			   }
-			   if(category2Id!=null){
+			   if(category2Id!=null&&category2Id.trim().length()>0){
 				   paramMap.put("category2Id", category2Id); 
 			   }
 			   if(orderByFlag!=null){

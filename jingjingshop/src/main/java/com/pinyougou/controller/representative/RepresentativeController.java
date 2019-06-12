@@ -72,7 +72,13 @@ public class RepresentativeController {
                                 @RequestParam(required = false, value = "script") String script
     ) {
         try {
-            TbRepresent tbRepresent = new TbRepresent(Long.parseLong(rid), script);
+            TbRepresent tbRepresent = new TbRepresent();
+            if(rid!=null&&rid.trim().length()>0){
+            	tbRepresent.setRid(Long.parseLong(rid));
+            }
+            if(script!=null&&script.trim().length()>0){
+            	tbRepresent.setScript(script);
+            }
             representativeService.Editrepresentative(tbRepresent);
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {
@@ -124,7 +130,16 @@ public class RepresentativeController {
                                   @RequestParam(required = false, value = "ticket") String ticket,
                                   @RequestParam(required = false, value = "ticket_time") String ticket_time) {
         try {
-            TbRepresent tbRepresent = new TbRepresent(Long.parseLong(rid), ticket, ticket_time);
+            TbRepresent tbRepresent = new TbRepresent();
+            if(rid!=null&&rid.trim().length()>0){
+            	tbRepresent.setRid(Long.parseLong(rid));
+            }
+            if(ticket!=null&&ticket.trim().length()>0){
+            	tbRepresent.setTicket(ticket);
+            }
+            if(ticket_time!=null&&ticket_time.trim().length()>0){
+            	tbRepresent.setTicketTime(ticket_time);
+            }
             representativeService.Editrepresentative(tbRepresent);
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {
@@ -302,8 +317,17 @@ public class RepresentativeController {
                             @RequestParam(required = false, value = "username") String username,
                             @RequestParam(required = false, value = "phone") String phone) {
         try {
-        	TbRepresent tbRepresentative = new TbRepresent(Long.parseLong(rid), username, phone);
-            representativeService.Editrepresentative(tbRepresentative);
+        	TbRepresent tbRepresent = new TbRepresent();
+        	if(rid!=null&&rid.trim().length()>0){
+        		tbRepresent.setRid(Long.parseLong(rid));
+        	}
+        	if(username!=null&&username.trim().length()>0){
+        		tbRepresent.setUsername(username);
+        	}
+        	if(phone!=null&&phone.trim().length()>0){
+        		tbRepresent.setPhone(phone);
+        	}
+            representativeService.Editrepresentative(tbRepresent);
             return new ApiResult(200, "编辑成功", "编辑成功");
         } catch (Exception e) {
             e.printStackTrace();
