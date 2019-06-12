@@ -46,7 +46,7 @@ public class RepresentativeController {
      */
 
     @RequestMapping("/findprid")
-    public ApiResult editscript(@RequestParam(required = false, value = "rid") String rid) {
+    public ApiResult findprid(@RequestParam(required = false, value = "rid") String rid) {
         try {
         	Long representId = Long.parseLong(rid);
             String s = representativeService.FindPointRequestByPrid(representId);

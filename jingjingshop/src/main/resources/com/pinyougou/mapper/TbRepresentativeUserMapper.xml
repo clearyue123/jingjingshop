@@ -38,7 +38,7 @@
 
 
 <!--    &lt;!&ndash;查询个人信息&ndash;&gt;-->
-    <select id="findAllByIdRepresentative" parameterType="java.lang.Long" resultType="com.pinyougou.pojo.TbRepresent">
+    <select id="findAllByIdRepresentative" parameterType="java.lang.Long" resultMap="FindReDoc">
             SELECT   *  FROM  tb_represent WHERE  rid=#{rid}
     </select>
 
@@ -131,7 +131,7 @@ WHERE  r.rid=#{rid}
 INNER  JOIN   tb_represent_doctor  rd
 ON
 rd.did=d.did
-INNER  JOIN    tb_doctor r
+INNER  JOIN    tb_represent r
 ON rd.rid=r.rid
 WHERE  r.rid=#{rid}
 </select>
@@ -193,7 +193,7 @@ WHERE  r.rid=#{rid}
 
 
 <!--   七日内可兑换 -->
-    <select  id="ServerDayPoint"  parameterType="java.lang.String"  resultType="com.pinyougou.pojo.TbPointRequest">
+    <select  id="ServerDayPoint"  parameterType="java.lang.Long"  resultType="com.pinyougou.pojo.TbPointRequest">
         SELECT *  FROM  tb_point_request  WHERE  DATEDIFF(NOW(),create_date) &lt; 7 AND   prid=#{prid}  AND  caction="1"
     </select>
 
@@ -247,7 +247,7 @@ WHERE  r.rid=#{rid}
     </select>
 
 <!--    &lt;!&ndash;查询医生个人信息&ndash;&gt;-->
-    <select id="findAllByIdDoc" parameterType="java.lang.String" resultType="com.pinyougou.pojo.TbDoctor">
+    <select id="findAllByIdDoc" parameterType="java.lang.Long" resultType="com.pinyougou.pojo.TbDoctor">
             SELECT   *  FROM  tb_doctor  WHERE  did=#{did}
     </select>
 
