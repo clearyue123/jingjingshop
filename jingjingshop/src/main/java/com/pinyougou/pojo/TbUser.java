@@ -3,9 +3,9 @@ package com.pinyougou.pojo;
 import java.util.Date;
 
 /**
- * 用户表
- * @author yue
- * @date 2019-06-10
+ * @author:yue
+ * @desc:用户信息实体
+ * @date:2019-06-14
  */
 public class TbUser {
     private Long id;
@@ -135,6 +135,11 @@ public class TbUser {
      * 删除时间
      */
     private Date deleteTime;
+
+    /**
+     * 患者备注
+     */
+    private String remarks;
 
     public Long getId() {
         return id;
@@ -358,5 +363,13 @@ public class TbUser {
 
     public void setDeleteTime(Date deleteTime) {
         this.deleteTime = deleteTime;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 }
