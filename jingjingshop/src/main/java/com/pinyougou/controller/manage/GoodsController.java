@@ -15,8 +15,10 @@ import com.github.pagehelper.Page;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbGoods;
 import com.pinyougou.pojo.TbGoodsDesc;
+import com.pinyougou.pojo.TbItemCat;
 import com.pinyougou.pojo.group.Goods;
 import com.pinyougou.service.sellergoods.GoodsService;
+import com.pinyougou.service.sellergoods.ItemCatService;
 
 import entity.PageResult;
 import entity.Result;
@@ -32,7 +34,8 @@ public class GoodsController {
 
 	@Autowired
 	private GoodsService goodsService;
-
+    @Autowired
+    private ItemCatService itemCatSerive;
 	/**
 	 * 返回全部列表
 	 * 
@@ -111,6 +114,7 @@ public class GoodsController {
 		String itemImages = goodsDesc.getItemImages();
 		String introduceImgs = goodsDesc.getIntroduceimgs();
 		String introduce = goodsDesc.getIntroduction();
+		String itemVideoPath = goodsDesc.getItemVideoPath();
 		Map<String,Object> data = new HashMap<>();
 		data.put("goodsId", id);
 		data.put("brandId", brandId);
@@ -127,6 +131,11 @@ public class GoodsController {
 		data.put("introduce", introduce);
 		data.put("goodsType",goodsType);
 		data.put("introduceImgs",introduceImgs);
+		data.put("itemVideo", itemVideoPath);
+		List<TbItemCat> childCategoryList = itemCatSerive.findByParentId(categoryId1);
+		if(childCategoryList!=null&&childCategoryList.size()>0){
+			data.put("childCategoryList", childCategoryList);
+		}
 		return data;
 	}
 

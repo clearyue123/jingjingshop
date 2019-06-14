@@ -27,6 +27,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 		goodsService.findOne(id).success(
 			function(response){
 				$scope.entity= response;
+				alert($scope.entity);
 			}
 		);				
 	}
@@ -72,7 +73,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	//搜索
 	$scope.search=function(){
 		var page = $scope.paginationConf.currentPage;
-		var rows = $scope.paginationConf.itemsPerPage
+		var rows = $scope.paginationConf.itemsPerPage;
 		goodsService.search(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.list;	
@@ -139,7 +140,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 		// 向后台传递数据:
 		var formData = new FormData();
 		var uploadFile = document.querySelector('input[id=smallPic]').files[0];
-		alert(uploadFile.name);
 		// 向formData中添加数据:
 		formData.append("uploadFile",uploadFile);
 		
@@ -156,7 +156,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	// 调用uploadService的方法完成文件的上传
     	$scope.uploadFile().success(function(response){
     		if(response.code==200){
-    			alert(response.data);
 				// 获得url
 				$scope.entity.smallPic=response.data;
 				alert(response.message);
@@ -258,9 +257,10 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     $scope.findById = function(goodsId){
     	goodsService.findOne(goodsId).success(function(response){
     		$scope.entity = response;
+    		$scope.categoryChildList=response.childCategoryList;
+			$scope.childCategoryId = $scope.entity.categoryId2;
 			$scope.itemImages = $scope.entity.itemImages.split(",");
 			$scope.introduceImages = $scope.entity.introduceImgs.split(",");
-			$scope.initChildList();
     	});
     }
     
@@ -270,6 +270,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	    	$scope.categoryParentList=response;
 	    });
     }
+    
     $scope.initCategory2List = function(){
     	if($scope.entity.categoryId1==null){
         	$scope.categoryChildList=null;
@@ -280,17 +281,6 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     	    });
         }	
     }
-    //二级分类初始
-    $scope.initChildList = function(){
-    	if($scope.entity.categoryId1==null){
-        	$scope.categoryChildList=null;
-        }else{
-        	var parentId = $scope.entity.categoryId1;
-        	$http.get("../itemCat/findByParentId.do?parentId="+parentId).success(function(response){
-        		$scope.categoryChildList=response;
-        		$scope.childCategoryId = $scope.entity.categoryId2;
-    	    });
-        }	
-    }
+
     
 });	

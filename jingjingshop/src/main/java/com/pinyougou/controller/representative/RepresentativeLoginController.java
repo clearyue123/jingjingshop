@@ -5,13 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbRepresent;
 import com.pinyougou.service.representative.RepresentativeService;
 
-import util.HttpUtils;
 import util.TextUtils;
 
 
@@ -24,7 +21,6 @@ public class RepresentativeLoginController {
 	
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
 	public ApiResult wxlogin(String openid, String unionid) {
-		// String unionid = jsonObject.getString("unionid");
 		TbRepresent user = new TbRepresent();
 		user.setOpenId(openid);
 		user.setUnionId(unionid);
@@ -43,7 +39,6 @@ public class RepresentativeLoginController {
 	
 	/**
 	 * 绑定微信信息
-	 * 
 	 * @param id
 	 * @param wxname
 	 * @param headimg
