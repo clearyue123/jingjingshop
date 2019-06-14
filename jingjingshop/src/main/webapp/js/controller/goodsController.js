@@ -256,7 +256,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     //通过商品id查商品数据
     $scope.findById = function(goodsId){
     	goodsService.findOne(goodsId).success(function(response){
-    		$scope.entity = response;
+    		$scope.entity = response.entityData;
     		$scope.categoryChildList=response.childCategoryList;
 			$scope.childCategoryId = $scope.entity.categoryId2;
 			$scope.itemImages = $scope.entity.itemImages.split(",");

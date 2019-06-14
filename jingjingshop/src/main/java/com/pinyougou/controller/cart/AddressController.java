@@ -153,7 +153,7 @@ public class AddressController {
 			          @RequestParam(required = false,value = "alias")String alias,
 			          @RequestParam(required=false,value="notes")String notes){
 		try {
-			if("undefined".equals(address)){
+			if(address==null||"undefined".equals(address)||address.trim().length()==0){
 				return new ApiResult(201, "请输入正确格式地址！", "");
 			}else{
 				TbAddress tbAddress = new TbAddress();
