@@ -70,7 +70,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-10
+     * @date 2019-06-14
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1142,6 +1142,76 @@ public class TbGoodsExample {
             addCriterion("create_date not between", value1, value2, "createDate");
             return (Criteria) this;
         }
+
+        public Criteria andGoodsCodeIsNull() {
+            addCriterion("goods_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeIsNotNull() {
+            addCriterion("goods_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeEqualTo(String value) {
+            addCriterion("goods_code =", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeNotEqualTo(String value) {
+            addCriterion("goods_code <>", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeGreaterThan(String value) {
+            addCriterion("goods_code >", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("goods_code >=", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeLessThan(String value) {
+            addCriterion("goods_code <", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeLessThanOrEqualTo(String value) {
+            addCriterion("goods_code <=", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeLike(String value) {
+            addCriterion("goods_code like", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeNotLike(String value) {
+            addCriterion("goods_code not like", value, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeIn(List<String> values) {
+            addCriterion("goods_code in", values, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeNotIn(List<String> values) {
+            addCriterion("goods_code not in", values, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeBetween(String value1, String value2) {
+            addCriterion("goods_code between", value1, value2, "goodsCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGoodsCodeNotBetween(String value1, String value2) {
+            addCriterion("goods_code not between", value1, value2, "goodsCode");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1156,7 +1226,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-10
+     * @date 2019-06-14
      */
     public static class Criterion {
         private String condition;

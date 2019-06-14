@@ -5,10 +5,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author yue
- * @date 2019-06-10
+ * @author:yue
+ * @desc:商品实体
+ * @date:2019-06-14
  */
-public class TbGoods implements Serializable{
+public class TbGoods implements Serializable {
     /**
      * 主键
      */
@@ -80,7 +81,7 @@ public class TbGoods implements Serializable{
     private Long totalSaleNum;
 
     /**
-     * 类型
+     * 商品类型
      */
     private String type;
 
@@ -88,6 +89,11 @@ public class TbGoods implements Serializable{
      * 创建时间
      */
     private Date createDate;
+
+    /**
+     * 商品编码
+     */
+    private String goodsCode;
 
     public Long getId() {
         return id;
@@ -215,5 +221,13 @@ public class TbGoods implements Serializable{
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public String getGoodsCode() {
+        return goodsCode;
+    }
+
+    public void setGoodsCode(String goodsCode) {
+        this.goodsCode = goodsCode == null ? null : goodsCode.trim();
     }
 }

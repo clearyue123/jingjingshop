@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pinyougou.mapper.TbGoodsMapper" >
-    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbGoods" >
+   
+   <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbGoods" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
         <result column="is_marketable" property="isMarketable" jdbcType="VARCHAR" />
@@ -18,6 +19,7 @@
         <result column="total_sale_num" property="totalSaleNum" jdbcType="DECIMAL" />
         <result column="type" property="type" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="goods_code" property="goodsCode" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -83,7 +85,7 @@
     <sql id="Base_Column_List" >
         id, seller_id, is_marketable, brand_id, category1_id, category2_id, category3_id, 
         small_pic, price, is_enable_spec, is_delete, reduced_price, goods_name, total_sale_num, 
-        type, create_date
+        type, create_date, goods_code
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbGoodsExample" >
@@ -126,13 +128,13 @@
             category3_id, small_pic, price, 
             is_enable_spec, is_delete, reduced_price, 
             goods_name, total_sale_num, type, 
-            create_date)
+            create_date, goods_code)
         values (#{id,jdbcType=BIGINT}, #{sellerId,jdbcType=VARCHAR}, #{isMarketable,jdbcType=VARCHAR}, 
             #{brandId,jdbcType=BIGINT}, #{category1Id,jdbcType=BIGINT}, #{category2Id,jdbcType=BIGINT}, 
             #{category3Id,jdbcType=BIGINT}, #{smallPic,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
             #{isEnableSpec,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, #{reducedPrice,jdbcType=DECIMAL}, 
             #{goodsName,jdbcType=VARCHAR}, #{totalSaleNum,jdbcType=DECIMAL}, #{type,jdbcType=VARCHAR}, 
-            #{createDate,jdbcType=TIMESTAMP})
+            #{createDate,jdbcType=TIMESTAMP}, #{goodsCode,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbGoods" >
@@ -186,6 +188,9 @@
             <if test="createDate != null" >
                 create_date,
             </if>
+            <if test="goodsCode != null" >
+                goods_code,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -235,6 +240,9 @@
             </if>
             <if test="createDate != null" >
                 #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="goodsCode != null" >
+                #{goodsCode,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -297,6 +305,9 @@
             <if test="record.createDate != null" >
                 create_date = #{record.createDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="record.goodsCode != null" >
+                goods_code = #{record.goodsCode,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -320,7 +331,8 @@
             goods_name = #{record.goodsName,jdbcType=VARCHAR},
             total_sale_num = #{record.totalSaleNum,jdbcType=DECIMAL},
             type = #{record.type,jdbcType=VARCHAR},
-            create_date = #{record.createDate,jdbcType=TIMESTAMP}
+            create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            goods_code = #{record.goodsCode,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -374,6 +386,9 @@
             <if test="createDate != null" >
                 create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="goodsCode != null" >
+                goods_code = #{goodsCode,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -394,9 +409,10 @@
             goods_name = #{goodsName,jdbcType=VARCHAR},
             total_sale_num = #{totalSaleNum,jdbcType=DECIMAL},
             type = #{type,jdbcType=VARCHAR},
-            create_date = #{createDate,jdbcType=TIMESTAMP}
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            goods_code = #{goodsCode,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
-    </update>       
+    </update>
     
     <select id="searchGoodList" parameterType="java.util.Map" resultType="java.util.Map">
         select 
@@ -414,7 +430,8 @@
 		    (select t6.name from tb_item_cat t6 where t6.id = t1.category2_id)category2Name,
 		    t1.type goodsType,
 		    t1.create_date createDate,
-		    t1.total_sale_num totalSaleNum
+		    t1.total_sale_num totalSaleNum,
+		    t1.goods_code goodsCode
 		from tb_goods t1
 		LEFT JOIN tb_brand t2 ON t1.brand_id = t2.id
 		LEFT JOIN tb_seller t3 ON t3.seller_id = t1.seller_id

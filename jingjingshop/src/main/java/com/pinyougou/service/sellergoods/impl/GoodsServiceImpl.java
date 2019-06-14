@@ -281,6 +281,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  String itemVideo = (String)goodsMap.get("itemVideo");
 		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
+		  String goodsCode = (String)goodsMap.get("goodsCode");
 		  String introduce = (String)goodsMap.get("introduce");
 		  String introduceImages = (String)goodsMap.get("introduceImages");
 		  tbGoods.setId(goodsId);
@@ -296,6 +297,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
 		  tbGoods.setSmallPic(smallPic);
 		  tbGoods.setType(goodsType);
+		  tbGoods.setGoodsCode(goodsCode);
 		  tbGoods.setTotalSaleNum(0L);
 		  tbGoods.setCreateDate(new Date());
 		  goodsDesc.setGoodsId(goodsId);
@@ -328,12 +330,17 @@ public class GoodsServiceImpl implements GoodsService {
 		  String smallPic = (String)goodsMap.get("smallPic")==null?"":(String)goodsMap.get("smallPic");
 		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
+		  String goodsCode = (String)goodsMap.get("goodsCode");
 		  String introduce = (String)goodsMap.get("introduce");
 		  String introduceImages = (String)goodsMap.get("introduceImages");
 		  String itemVideo = (String)goodsMap.get("itemVideo");
 		  tbGoods.setBrandId(Long.parseLong(brandId));
-		  tbGoods.setCategory1Id(Long.parseLong(categoryId1));
-		  tbGoods.setCategory2Id(Long.parseLong(categoryId2));
+		  if(categoryId1!=null&&categoryId1.trim().length()>0){
+			  tbGoods.setCategory1Id(Long.parseLong(categoryId1));
+		  }
+		  if(categoryId2!=null&&categoryId2.trim().length()>0){
+			  tbGoods.setCategory2Id(Long.parseLong(categoryId2));
+		  }
 		  tbGoods.setSellerId(sellerId);
 		  tbGoods.setGoodsName(goodsName);
 		  tbGoods.setIsEnableSpec(isEnableSpec);
@@ -341,6 +348,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setPrice(new BigDecimal(price));
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
 		  tbGoods.setType(goodsType);
+		  tbGoods.setGoodsCode(goodsCode);
 		  if(smallPic.trim().length()>0){
 			  tbGoods.setSmallPic(smallPic);
 		  }

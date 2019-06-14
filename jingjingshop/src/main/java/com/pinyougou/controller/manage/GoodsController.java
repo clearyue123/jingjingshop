@@ -110,6 +110,7 @@ public class GoodsController {
 		String goodsName = tbGoods.getGoodsName();
 		String smallPic = tbGoods.getSmallPic();
 		String goodsType = tbGoods.getType();
+		String goodsCode = tbGoods.getGoodsCode();
 		TbGoodsDesc goodsDesc = goods.getGoodsDesc();
 		String itemImages = goodsDesc.getItemImages();
 		String introduceImgs = goodsDesc.getIntroduceimgs();
@@ -119,8 +120,8 @@ public class GoodsController {
 		Map<String,String> entityData = new HashMap<>();
 		entityData.put("goodsId", id.toString());
 		entityData.put("brandId", brandId.toString());
-		entityData.put("categoryId1", categoryId1.toString());
-		entityData.put("categoryId2", categoryId2.toString());
+		entityData.put("categoryId1", categoryId1==null?"":categoryId1.toString());
+		entityData.put("categoryId2", categoryId2==null?"":categoryId2.toString());
 		entityData.put("sellerId", sellerId.toString());
 		entityData.put("price", price.toString());
 		entityData.put("reducedPrice", reducedPrice.toString());
@@ -133,10 +134,13 @@ public class GoodsController {
 		entityData.put("goodsType",goodsType);
 		entityData.put("introduceImgs",introduceImgs);
 		entityData.put("itemVideo", itemVideoPath);
+		entityData.put("goodsCode", goodsCode==null?"":goodsCode);
 		data.put("entityData", entityData);
-		List<TbItemCat> childCategoryList = itemCatSerive.findByParentId(categoryId1);
-		if(childCategoryList!=null&&childCategoryList.size()>0){
-			data.put("childCategoryList", childCategoryList);
+		if(categoryId1!=null){
+			List<TbItemCat> childCategoryList = itemCatSerive.findByParentId(categoryId1);
+			if(childCategoryList!=null&&childCategoryList.size()>0){
+				data.put("childCategoryList", childCategoryList);
+			}
 		}
 		return data;
 	}

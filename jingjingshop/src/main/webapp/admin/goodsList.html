@@ -80,6 +80,7 @@
 									      <th class="sorting">是否上架</th>
 									      <th class="sorting">是否启用规格</th>
 									      <th class="sorting">型号</th>
+									      <th class="sorting">编码</th>
 									      <th class="sorting">创建时间</th>
 									      <th class="sorting">销量</th>
 									      <th class="sorting">商品图片</th>
@@ -100,6 +101,7 @@
 				                          <td>{{entity.isMarketable}}</td>
 				                          <td>{{entity.isEnableSpec}}</td>
 				                          <td>{{entity.goodsType}}</td>
+				                          <td>{{entity.goodsCode}}</td>
 				                          <td>{{entity.createDate}}</td>
 				                          <td>{{entity.totalSaleNum}}</td>
 				                          <td><img alt="{{entity.goodsName}}" src="{{entity.smallPic}}" height="50" width="100"></td>
@@ -193,6 +195,12 @@
 		      	    <td>型号</td>
 		      		<td>
 		      		   <input type="text" ng-model="entity.goodsType" class="form-control" placeholder="商品型号" >
+					</td>
+		      	</tr>
+		      	<tr>
+		      	    <td>编码</td>
+		      		<td>
+		      		   <input type="text" ng-model="entity.goodsCode" class="form-control" placeholder="商品编码" >
 					</td>
 		      	</tr>
 		      	<tr>
