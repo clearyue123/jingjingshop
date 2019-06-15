@@ -2,6 +2,7 @@ package com.pinyougou.service.order;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.Page;
 import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbPayLog;
 
@@ -118,4 +119,13 @@ public interface OrderService {
 	 * @return
 	 */
 	public List<Map<String,Object>> selectItemsByOrderId(Long orderId);
+
+    /**
+     * 后台订单管理 
+     * @param searchMap 搜索条件
+     * @param page 当前页数
+     * @param rows 当前页条数
+     * @return
+     */
+	public Page<Map<String,Object>> search(Map<String, String> searchMap,Integer page,Integer rows);
 }

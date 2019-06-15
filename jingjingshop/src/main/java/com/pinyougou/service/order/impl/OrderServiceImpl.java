@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pinyougou.mapper.TbOrderItemMapper;
 import com.pinyougou.mapper.TbOrderMapper;
 import com.pinyougou.mapper.TbPayLogMapper;
@@ -20,6 +21,7 @@ import com.pinyougou.pojo.TbPayLog;
 import com.pinyougou.service.order.OrderService;
 
 import entity.PageResult;
+import util.DateUtils;
 
 /**
  * 服务实现层
@@ -252,6 +254,46 @@ public class OrderServiceImpl implements OrderService {
 	public List<Map<String, Object>> itemList(Long orderId) {
 		try{
 			return orderMapper.selectItemsByOrderId(orderId);
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Page<Map<String,Object>> search(Map<String, String> searchMap,Integer page,Integer rows) {
+		try{
+			 PageHelper.startPage(page, rows);
+			 List<Map<String,Object>> orderList = orderMapper.searchOrderList(searchMap);
+			 for(Map<String,Object> orderMap:orderList){
+				 String orderStatus = (String) orderMap.get("orderStatus");//1、未付款，2、已付款，3、待发货，4、已发货，5、交易成功，6、交易关闭,7、待评价
+				 if("1".equals(orderStatus)){
+					 orderStatus = "未付款";
+				 }else if("2".equals(orderStatus)){
+					 orderStatus = "已付款";
+				 }else if("3".equals(orderStatus)){
+					 orderStatus = "待发货";
+				 }else if("4".equals(orderStatus)){
+					 orderStatus = "已发货";
+				 }else if("5".equals(orderStatus)){
+					 orderStatus = "交易成功";
+				 }else if("6".equals(orderStatus)){
+					 orderStatus = "交易关闭";
+				 }else if("7".equals(orderStatus)){
+					 orderStatus = "待评价";
+				 }
+				 orderMap.put("orderStatus", orderStatus);
+				 Date createDate = (Date)orderMap.get("createTime");
+				 if(createDate!=null){
+					 orderMap.put("createTime", DateUtils.getDateStrFromDate(createDate));
+				 }
+				 Date paymentTime = (Date)orderMap.get("paymentTime");
+				 if(createDate!=null){
+					 orderMap.put("paymentTime", DateUtils.getDateStrFromDate(paymentTime));
+				 }
+			 }
+			 Page<Map<String,Object>> pageData = (Page<Map<String,Object>>)orderList;
+			 return pageData;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

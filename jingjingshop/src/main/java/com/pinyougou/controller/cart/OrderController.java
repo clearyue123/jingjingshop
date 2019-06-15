@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.mapper.TbGoodsMapper;
 import com.pinyougou.mapper.TbIndexMessageMapper;
@@ -154,15 +157,25 @@ public class OrderController {
 	}
 	
 	/**
-	 * 查询+分页
+	 * 后台 订单管理 
 	 * @param brand
 	 * @param page
 	 * @param rows
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public PageResult search(@RequestBody(required = false) TbOrder order, int page, int rows  ){
-		return orderService.findPage(order, page, rows);		
+	public ApiResult search(@RequestParam(value="searchEntity",required=false)Map<String,String> searchEntity, int page, int rows  ){
+		try{
+			
+			 Page<Map<String, Object>> pageData = orderService.search(searchEntity,page,rows);
+			 Map<String, Object> data = new HashMap<String,Object>();
+			 data.put("rows", pageData.getResult());
+			 data.put("total", pageData.getTotal());
+			return new ApiResult(200, "success", data);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "error", "");
+		}		
 	}
 	
 	
@@ -292,6 +305,7 @@ public class OrderController {
 				 Map<String,Object> orderStatusMap = new HashMap<>();
 		         orderStatusMap.put("ORDERID", orderId);
 		         orderStatusMap.put("STATUS", "3");//待发货
+		         orderStatusMap.put("PAYMENTTIME", new Date());
 			     orderService.updateStatusById(orderStatusMap);
 			     return new ApiResult(200, "已付款","");
 			}else if("3".equals(operateFlag)){//已收货

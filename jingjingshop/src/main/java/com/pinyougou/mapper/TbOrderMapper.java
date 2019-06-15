@@ -38,4 +38,11 @@ public interface TbOrderMapper {
     Map<String,Object> showOrderDetail(Map<String,Object> paramMap);
     
 	void updateStatusById(Map<String, Object> paramMap);
+    
+	/**
+	 * 后台订单管理 搜索
+	 * @param searchMap
+	 * @return
+	 */
+	List<Map<String, Object>> searchOrderList(Map<String, String> searchMap);
 }

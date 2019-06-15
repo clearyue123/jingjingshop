@@ -27,7 +27,7 @@
     <script type="text/javascript" src="../js/service/orderService.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="orderController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pinyougou" ng-controller="orderController" ng-init="searchEntity={};search();">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">订单列表页面</h3>
@@ -67,7 +67,6 @@
 										  <th class="sorting_asc">订单ID</th>
 										  <th class="sorting">金额</th>
 									      <th class="sorting">订单状态</th>
-									      <th class="sorting">微信Code</th>
 									      <th class="sorting">物流单号</th>
 									      <th class="sorting">用户名</th>
 									      <th class="sorting">收货人地址</th>							
@@ -84,14 +83,13 @@
 			                              <td><input  type="checkbox"></td>			                              
 				                          <td>{{entity.orderId}}</td>
 				                          <td>{{entity.payment}}</td>
-									      <td>{{entity.status}}</td>
+									      <td>{{entity.orderStatus}}</td>
 									      <td>{{entity.shippingCode}}</td>
-									      <td>{{entity.shippingCode}}</td>
-									      <td>{{entity.userId}}</td>
-									      <td>{{entity.receiverAreaName}}</td>							
-									      <td>{{entity.receiver}}</td>							
+									      <td>{{entity.nickName}}</td>
+									      <td>{{entity.receiverAddress}}</td>							
+									      <td>{{entity.receiverName}}</td>							
 									      <td>{{entity.receiverMobile}}</td>							
-									      <td>{{entity.sellerId}}</td>							
+									      <td>{{entity.sellerName}}</td>							
 									      <td>{{entity.createTime}}</td>							
 									      <td>{{entity.paymentTime}}</td>							
 		                                  <td class="text-center">                                           

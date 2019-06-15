@@ -9,8 +9,8 @@ app.controller("orderController",function($scope,$controller,$http,orderService)
 	$scope.search = function(page,rows){
 		// 向后台发送请求获取数据:
 		orderService.search(page,rows,$scope.searchEntity).success(function(response){
-			$scope.paginationConf.totalItems = response.total;
-			$scope.list = response.rows;
+			$scope.paginationConf.totalItems = response.data.total;
+			$scope.list = response.data.rows;
 		});
 	}
 	
