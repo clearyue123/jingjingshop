@@ -396,10 +396,6 @@
 	from tb_doctor where union_id = #{unionId,jdbcType=VARCHAR}
   </select>
   
-  <insert id="add" parameterType="com.pinyougou.pojo.TbDoctor">
-  	insert into tb_doctor (did,head_pic,name) values (#{did},#{headPic},#{name})
-  </insert>
-  
   <update id="updateInfo" parameterType="com.pinyougou.pojo.TbDoctor">
   	update tb_doctor set 
   	name = #{name} ,
