@@ -539,6 +539,7 @@
 			tb_goods t
 	    <where>
 	        t.is_delete = '0'
+	        and t.is_marketable = '1'
 	        <if test="category1Id != null ">
 	            and t.category1_id = #{category1Id}
 	        </if>

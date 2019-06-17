@@ -266,7 +266,7 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     
     //一级分类初始
     $scope.initCategory1List = function(){
-    	$http.get("../itemCat/findAll.do").success(function(response){
+    	$http.get("../itemCat/findByParentId.do?parentId=0").success(function(response){
 	    	$scope.categoryParentList=response;
 	    });
     }

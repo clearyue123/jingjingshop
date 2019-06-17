@@ -25,7 +25,7 @@ import util.DateUtils;
 
 /**
  * 服务实现层
- * @author Administrator
+ * @author yue
  *
  */
 @Service
@@ -283,12 +283,12 @@ public class OrderServiceImpl implements OrderService {
 					 orderStatus = "待评价";
 				 }
 				 orderMap.put("orderStatus", orderStatus);
-				 Date createDate = (Date)orderMap.get("createTime");
-				 if(createDate!=null){
-					 orderMap.put("createTime", DateUtils.getDateStrFromDate(createDate));
+				 Date createTime = (Date)orderMap.get("createTime");
+				 if(createTime!=null){
+					 orderMap.put("createTime", DateUtils.getDateStrFromDate(createTime));
 				 }
 				 Date paymentTime = (Date)orderMap.get("paymentTime");
-				 if(createDate!=null){
+				 if(paymentTime!=null){
 					 orderMap.put("paymentTime", DateUtils.getDateStrFromDate(paymentTime));
 				 }
 			 }
