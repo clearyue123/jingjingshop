@@ -11,6 +11,23 @@ import java.util.Date;
  */
 public class DateUtils {
     
+	/**
+	 * 返回特定df日期
+	 * @param dateFormat
+	 * @param date
+	 * @return
+	 */
+	public static String getDateStrFromDf(String dateFormat,Date date){
+		try{
+			DateFormat df = new SimpleDateFormat(dateFormat);
+			String dateStr = df.format(date);
+			return dateStr;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public static String getDateStrFromTimeStamp(Long dateTime){
 		try{
 			Date date = new Date(dateTime);
@@ -35,7 +52,7 @@ public class DateUtils {
 	}
 	
 	public static void main(String[] args) {
-		String testDateStr = DateUtils.getDateStrFromDate(new Date());
+		String testDateStr = DateUtils.getDateStrFromDf("yyyyMMdd", new Date());
 		System.out.println("时间："+testDateStr);
 	}
 }

@@ -633,6 +633,7 @@
   
   <select id="showOrderDetail" parameterType="java.util.Map" resultType="java.util.Map">
 		    SELECT
+		        t1.user_id userId,
 				t1.payment,
 				t1.`status`,
 				t1.item_num itemNum,
