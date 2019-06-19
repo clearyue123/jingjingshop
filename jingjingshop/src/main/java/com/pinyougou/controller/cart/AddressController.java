@@ -1,6 +1,7 @@
 package com.pinyougou.controller.cart;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -106,7 +107,7 @@ public class AddressController {
 	}
 	
 	@RequestMapping("/findListByLoginUser")
-	public List<TbAddress> findListByLoginUser(){
+	public Object findListByLoginUser(){
 		//获取登陆用户
 		String username = "zhaoliu";
 		return addressService.findListByUserId(username);		
@@ -119,10 +120,10 @@ public class AddressController {
 	 * @return
 	 */
 	@RequestMapping("/findListByUserId")
-    public Object findListByUserId(String userId){
+    public Object findListByUserId(@RequestParam(value="userId",required=true)String userId){
 		try{
-			List<TbAddress> listAddress = (List<TbAddress>) addressService.findListByUserId(userId);
-			return new ApiResult(200, "地址信息查询成功", listAddress);
+			Map<String, Object> address = addressService.findListByUserId(userId);
+			return new ApiResult(200, "地址信息查询成功", address);
 		}catch(Exception e){
 			return new ApiResult(201, "地址信息查询失败", null);
 		}

@@ -366,12 +366,14 @@ public class OrderController {
 			@RequestParam(required=true,value="userId")String userId,
 			@RequestParam(required=true,value="cartIds")String[] cartIds){
 		try{	
-			List<TbAddress> addressList = addressService.findListByUserId(userId);
-            if(addressList==null||addressList.size()==0){
+			Map<String,Object> address = addressService.findListByUserId(userId);
+            if(address==null){
             	return new ApiResult(201, "请先去添加收货信息！","");
             }else{
 				//获取用户地址
-				TbAddress addr = addressList.get(0);
+            	String areaName= (String)address.get("address");
+            	String mobile= (String)address.get("mobile");
+            	String contact= (String)address.get("contact");
 				TbOrder tbOrder = new TbOrder();
 				TbOrderItem tbOrderItem = new TbOrderItem();
 				//设置orderId
@@ -382,9 +384,9 @@ public class OrderController {
 				tbOrder.setCreateTime(new Date());//下单时间
 				tbOrder.setUpdateTime(new Date());//更新时间
 				tbOrder.setUserId(userId);//当前用户
-				tbOrder.setReceiverAreaName(addr.getAddress());//收货人地址
-				tbOrder.setReceiverMobile(addr.getMobile());//收货人电话
-				tbOrder.setReceiver(addr.getContact());//收货人
+				tbOrder.setReceiverAreaName(areaName);//收货人地址
+				tbOrder.setReceiverMobile(mobile);//收货人电话
+				tbOrder.setReceiver(contact);//收货人
 				tbOrder.setPostFee("0.0");
 				Integer itemNum = 0;
 				BigDecimal payment = new BigDecimal(0);
@@ -450,15 +452,17 @@ public class OrderController {
 			if(speIds!=null&&speIds.length!=speOpIds.length){
 				return new ApiResult(201, "参数错误","");
 			}
-			List<TbAddress> addressList = addressService.findListByUserId(userId);
-	        if(addressList==null||addressList.size()==0){
+			Map<String,Object> address = addressService.findListByUserId(userId);
+	        if(address==null){
 	        	return new ApiResult(201, "请先去添加收货信息！","");
 	        }else{
 	        	TbGoods tbGoods = goodsMapper.selectByPrimaryKey(Long.parseLong(goodsId));
 	        	BigDecimal reducedPrice = tbGoods.getReducedPrice();
 	        	BigDecimal payment = reducedPrice.multiply((new BigDecimal(num)));
 	        	//获取用户地址
-				TbAddress addr = addressList.get(0);
+	        	String areaName= (String)address.get("address");
+            	String mobile= (String)address.get("mobile");
+            	String contact= (String)address.get("contact");
 				TbOrder tbOrder = new TbOrder();
 				TbOrderItem tbOrderItem = new TbOrderItem();
 				long orderId = idWorker.nextId();
@@ -468,9 +472,9 @@ public class OrderController {
 				tbOrder.setCreateTime(new Date());//下单时间
 				tbOrder.setUpdateTime(new Date());//更新时间
 				tbOrder.setUserId(userId);//当前用户
-				tbOrder.setReceiverAreaName(addr.getAddress());//收货人地址
-				tbOrder.setReceiverMobile(addr.getMobile());//收货人电话
-				tbOrder.setReceiver(addr.getContact());//收货人
+				tbOrder.setReceiverAreaName(areaName);//收货人地址
+				tbOrder.setReceiverMobile(mobile);//收货人电话
+				tbOrder.setReceiver(contact);//收货人
 				tbOrder.setPostFee("0.0");
 				tbOrder.setItemNum(Integer.parseInt(num));
 				tbOrder.setPayment(payment);

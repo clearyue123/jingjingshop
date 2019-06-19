@@ -320,4 +320,37 @@
       alias = #{alias,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="findAddressByUserId" parameterType="java.util.Long" resultType="java.util.Map">
+      SELECT
+			t.*, 
+			(
+				SELECT
+					t1.province_name
+				FROM
+					tb_provinces t1
+				WHERE
+					t1.province_code = t.province_id
+			) province_name,
+			(
+				SELECT
+					t2.city_name
+				FROM
+					tb_cities t2
+				WHERE
+					t2.city_code = t.city_id
+			) city_name,
+			(
+				SELECT
+					t3.area_name
+				FROM
+					tb_areas t3
+				WHERE
+					t3.area_code = t.town_id
+			) area_name
+		FROM
+			tb_address t
+		WHERE
+			user_id = #{userId}
+  </select>
 </mapper>

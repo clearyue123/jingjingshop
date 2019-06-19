@@ -1,5 +1,6 @@
 package com.pinyougou.service.user.impl;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,11 +120,13 @@ public class AddressServiceImpl implements AddressService {
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
-	public List<TbAddress> findListByUserId(String userId) {
-		TbAddressExample example=new TbAddressExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andUserIdEqualTo(userId);
-		return addressMapper.selectByExample(example);
+	public Map<String,Object> findListByUserId(String userId) {
+	   try{
+		   Map<String,Object> address = addressMapper.findAddressByUserId(Long.parseLong(userId));
+		   return address;
+	   }catch(Exception e){
+		   return null;
+	   }
 	}
 	
 }

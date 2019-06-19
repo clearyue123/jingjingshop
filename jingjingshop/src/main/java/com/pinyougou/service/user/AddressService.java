@@ -1,5 +1,6 @@
 package com.pinyougou.service.user;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.pojo.TbAddress;
 
@@ -59,6 +60,6 @@ public interface AddressService {
 	 */
 	public PageResult findPage(TbAddress address, int pageNum,int pageSize);
 	
-	public List<TbAddress> findListByUserId(String userId);
+	public Map<String,Object> findListByUserId(String userId);
 	
 }
