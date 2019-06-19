@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pinyougou.mapper.TbRepresentMapper" >
+
+    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbRepresent" >
+        <id column="rid" property="rid" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="head_pic" property="headPic" jdbcType="VARCHAR" />
+        <result column="points" property="points" jdbcType="INTEGER" />
+        <result column="points_all" property="pointsAll" jdbcType="INTEGER" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="script" property="script" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="open_id" property="openId" jdbcType="VARCHAR" />
+        <result column="union_id" property="unionId" jdbcType="VARCHAR" />
+        <result column="ticket" property="ticket" jdbcType="VARCHAR" />
+        <result column="ticket_time" property="ticketTime" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        rid, name, head_pic, points, points_all, phone, username, script, create_date, open_id, 
+        union_id, ticket, ticket_time
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbRepresentExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_represent
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_represent
+        where rid = #{rid,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from tb_represent
+        where rid = #{rid,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbRepresentExample" >
+        delete from tb_represent
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.pinyougou.pojo.TbRepresent" >
+        insert into tb_represent (rid, name, head_pic, 
+            points, points_all, phone, 
+            username, script, create_date, 
+            open_id, union_id, ticket, 
+            ticket_time)
+        values (#{rid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{headPic,jdbcType=VARCHAR}, 
+            #{points,jdbcType=INTEGER}, #{pointsAll,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+            #{username,jdbcType=VARCHAR}, #{script,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+            #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, #{ticket,jdbcType=VARCHAR}, 
+            #{ticketTime,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbRepresent" >
+        insert into tb_represent
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rid != null" >
+                rid,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="headPic != null" >
+                head_pic,
+            </if>
+            <if test="points != null" >
+                points,
+            </if>
+            <if test="pointsAll != null" >
+                points_all,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="username != null" >
+                username,
+            </if>
+            <if test="script != null" >
+                script,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="openId != null" >
+                open_id,
+            </if>
+            <if test="unionId != null" >
+                union_id,
+            </if>
+            <if test="ticket != null" >
+                ticket,
+            </if>
+            <if test="ticketTime != null" >
+                ticket_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rid != null" >
+                #{rid,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="headPic != null" >
+                #{headPic,jdbcType=VARCHAR},
+            </if>
+            <if test="points != null" >
+                #{points,jdbcType=INTEGER},
+            </if>
+            <if test="pointsAll != null" >
+                #{pointsAll,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null" >
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="script != null" >
+                #{script,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="openId != null" >
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="unionId != null" >
+                #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="ticket != null" >
+                #{ticket,jdbcType=VARCHAR},
+            </if>
+            <if test="ticketTime != null" >
+                #{ticketTime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.pinyougou.pojo.TbRepresentExample" resultType="java.lang.Integer" >
+        select count(*) from tb_represent
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_represent
+        <set >
+            <if test="record.rid != null" >
+                rid = #{record.rid,jdbcType=BIGINT},
+            </if>
+            <if test="record.name != null" >
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.headPic != null" >
+                head_pic = #{record.headPic,jdbcType=VARCHAR},
+            </if>
+            <if test="record.points != null" >
+                points = #{record.points,jdbcType=INTEGER},
+            </if>
+            <if test="record.pointsAll != null" >
+                points_all = #{record.pointsAll,jdbcType=INTEGER},
+            </if>
+            <if test="record.phone != null" >
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.username != null" >
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.script != null" >
+                script = #{record.script,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createDate != null" >
+                create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.openId != null" >
+                open_id = #{record.openId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.unionId != null" >
+                union_id = #{record.unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ticket != null" >
+                ticket = #{record.ticket,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ticketTime != null" >
+                ticket_time = #{record.ticketTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_represent
+        set rid = #{record.rid,jdbcType=BIGINT},
+            name = #{record.name,jdbcType=VARCHAR},
+            head_pic = #{record.headPic,jdbcType=VARCHAR},
+            points = #{record.points,jdbcType=INTEGER},
+            points_all = #{record.pointsAll,jdbcType=INTEGER},
+            phone = #{record.phone,jdbcType=VARCHAR},
+            username = #{record.username,jdbcType=VARCHAR},
+            script = #{record.script,jdbcType=VARCHAR},
+            create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            open_id = #{record.openId,jdbcType=VARCHAR},
+            union_id = #{record.unionId,jdbcType=VARCHAR},
+            ticket = #{record.ticket,jdbcType=VARCHAR},
+            ticket_time = #{record.ticketTime,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbRepresent" >
+        update tb_represent
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="headPic != null" >
+                head_pic = #{headPic,jdbcType=VARCHAR},
+            </if>
+            <if test="points != null" >
+                points = #{points,jdbcType=INTEGER},
+            </if>
+            <if test="pointsAll != null" >
+                points_all = #{pointsAll,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null" >
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null" >
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="script != null" >
+                script = #{script,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="openId != null" >
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="unionId != null" >
+                union_id = #{unionId,jdbcType=VARCHAR},
+            </if>
+            <if test="ticket != null" >
+                ticket = #{ticket,jdbcType=VARCHAR},
+            </if>
+            <if test="ticketTime != null" >
+                ticket_time = #{ticketTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where rid = #{rid,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbRepresent" >
+        update tb_represent
+        set name = #{name,jdbcType=VARCHAR},
+            head_pic = #{headPic,jdbcType=VARCHAR},
+            points = #{points,jdbcType=INTEGER},
+            points_all = #{pointsAll,jdbcType=INTEGER},
+            phone = #{phone,jdbcType=VARCHAR},
+            username = #{username,jdbcType=VARCHAR},
+            script = #{script,jdbcType=VARCHAR},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            open_id = #{openId,jdbcType=VARCHAR},
+            union_id = #{unionId,jdbcType=VARCHAR},
+            ticket = #{ticket,jdbcType=VARCHAR},
+            ticket_time = #{ticketTime,jdbcType=VARCHAR}
+        where rid = #{rid,jdbcType=BIGINT}
+    </update>
+</mapper>
