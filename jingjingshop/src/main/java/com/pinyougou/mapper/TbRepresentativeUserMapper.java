@@ -3,6 +3,7 @@ package com.pinyougou.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
@@ -32,7 +33,7 @@ public int FindReDocInnerCount(Long rid);
 
 public TbDoctor  findAllByIdDoc(Long did);
 
-public TbRepresent selectByUnionId(TbRepresent user);
+public Map<String,Object> selectByUnionId(TbRepresent user);
 
 public int add(TbRepresent user);
 

@@ -244,7 +244,7 @@ public class OrderController {
 		try{
 			Map<String,Object> paramMap = new HashMap<>();
 			paramMap.put("USERID", userId);
-			paramMap.put("ORDERID", orderId);
+			paramMap.put("orderId", orderId);
 			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
 			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(Long.parseLong(orderId));
 			if(itemMapList!=null){

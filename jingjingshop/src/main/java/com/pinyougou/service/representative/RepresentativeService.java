@@ -3,8 +3,14 @@ package com.pinyougou.service.representative;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.pinyougou.pojo.*;
+import com.pinyougou.pojo.TbCard;
+import com.pinyougou.pojo.TbDoctor;
+import com.pinyougou.pojo.TbPointList;
+import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbRepresent;
+import com.pinyougou.pojo.TbRepresentDoctor;
 
 /**
  * 代表层接口
@@ -25,7 +31,7 @@ public interface RepresentativeService {
 
     public TbDoctor findAllByIdDoc(Long did);
 
-	public TbRepresent firstInfo(TbRepresent user);
+	public  Map<String,Object> firstInfo(TbRepresent user);
 
 	public int add(TbRepresent user);
 

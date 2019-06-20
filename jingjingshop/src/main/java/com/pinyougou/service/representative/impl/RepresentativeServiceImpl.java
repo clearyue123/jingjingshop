@@ -2,12 +2,18 @@ package com.pinyougou.service.representative.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pinyougou.mapper.TbRepresentativeUserMapper;
+import com.pinyougou.pojo.TbCard;
+import com.pinyougou.pojo.TbDoctor;
+import com.pinyougou.pojo.TbPointList;
+import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbRepresent;
+import com.pinyougou.pojo.TbRepresentDoctor;
 import com.pinyougou.service.representative.RepresentativeService;
 
 
@@ -56,7 +62,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 
 
 	@Override
-	public TbRepresent firstInfo(TbRepresent user) {
+	public Map<String,Object> firstInfo(TbRepresent user) {
 		return tbRepresentativeUserMapper.selectByUnionId(user);
 	}
 

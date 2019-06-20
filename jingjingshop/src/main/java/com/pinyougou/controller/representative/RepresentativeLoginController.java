@@ -1,5 +1,7 @@
 package com.pinyougou.controller.representative;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,15 +26,16 @@ public class RepresentativeLoginController {
 		TbRepresent user = new TbRepresent();
 		user.setOpenId(openid);
 		user.setUnionId(unionid);
-		TbRepresent result = representativeService.firstInfo(user);
+		Map<String,Object> result = representativeService.firstInfo(user);
 		if (result != null) {
-			if(TextUtils.isBlank(result.getName())){
+			String name = (String)result.get("name");
+			if(TextUtils.isBlank(name)){
 				return new ApiResult(201, "登录成功，请绑定微信昵称和头像", result);
 			}
 			return new ApiResult(200, "登录成功", result);
 		} else {
 			representativeService.add(user);
-			TbRepresent result1 = representativeService.firstInfo(user);
+			Map<String,Object> result1 = representativeService.firstInfo(user);
 			return new ApiResult(201, "登录成功，请绑定微信昵称和头像", result1);
 		}
 	}

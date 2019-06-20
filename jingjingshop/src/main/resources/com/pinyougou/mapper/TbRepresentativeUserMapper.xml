@@ -252,17 +252,17 @@ WHERE  r.rid=#{rid}
     </select>
 
 <sql id="Base_Column_List" >
-    rid, name, head_pic, points, phone, points_all, username, script, create_date
+    rid, name, head_pic, points, phone, points_all, username, script, create_date,union_id,open_id
   </sql>
 
-<select id="selectByUnionId" resultType="com.pinyougou.pojo.TbRepresent" parameterType="com.pinyougou.pojo.TbRepresent">
+<select id="selectByUnionId" resultType="java.util.Map" parameterType="com.pinyougou.pojo.TbRepresent">
   	select 
   	<include refid="Base_Column_List"></include>
   	from tb_represent where union_id = #{unionId,jdbcType=VARCHAR}
   </select>
 
   <insert id="add" parameterType="com.pinyougou.pojo.TbRepresent">
-  	insert into tb_represent (rid,open_id,union_id) values (UUID(),#{openId,jdbcType=VARCHAR},#{unionId,jdbcType=VARCHAR})
+  	insert into tb_represent (open_id,union_id) values (#{openId,jdbcType=VARCHAR},#{unionId,jdbcType=VARCHAR})
   </insert>
   
   <update id="updateInfo" parameterType="com.pinyougou.pojo.TbRepresent">
