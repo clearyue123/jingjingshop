@@ -162,7 +162,9 @@ public class DoctorController {
 			int discountPoint = doctorService.DiscountByPoint(doctorId);
 			if (discountPoint <= 0) {
 				//获得到自己的积分数量
-				int byRePoints = doctorService.findByRePoints(doctorId) == null ? 0 : Integer.parseInt(doctorService.findByRePoints(doctorId));
+				String docPoints = doctorService.findByRePoints(doctorId);
+				Integer byRePoints = docPoints==null?0:Integer.parseInt(docPoints);
+				System.out.println("byRePoints:"+byRePoints);
 				//判断兑取积分数是否超额  此为不超额
 				if (byRePoints >= point) {
 					//提交到积分请求表中

@@ -34,6 +34,7 @@ public class ShipUtils {
 			Map<String,Object> paramMap = new HashMap<String,Object>();
 			paramMap.put("orderId", orderId);
 			Map<String, Object> orderDetail = orderService.selectOrderDetail(paramMap);
+			System.out.println(orderDetail);
 			List<Map<String, Object>> orderItems = orderService.selectItemsByOrderId(orderId);
 			APIHttpClient apiClient = new APIHttpClient(); 
 			Map<String, Object> data = new HashMap<String,Object>(); 
@@ -81,5 +82,10 @@ public class ShipUtils {
 	   }catch(Exception e){
 	        e.printStackTrace();
 	   }
+	}
+	
+	public static void main(String[] args) {
+		ShipUtils shipUtils = new ShipUtils();
+		shipUtils.saveOrder(1103726592L);
 	}
 }

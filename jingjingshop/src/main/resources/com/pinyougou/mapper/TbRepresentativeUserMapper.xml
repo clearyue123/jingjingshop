@@ -143,7 +143,7 @@ WHERE  r.rid=#{rid}
 
     <!--新增代表关联医生-->
     <insert  id="addInnerReDoc"  parameterType="com.pinyougou.pojo.TbRepresentDoctor"  >
-         INSERT INTO  tb_represent_doctor(rdid,rid,did)VALUE(UUID(),#{rid},#{did})
+         INSERT INTO  tb_represent_doctor(rid,did)VALUE(#{rid},#{did})
     </insert>
 
 

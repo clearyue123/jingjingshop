@@ -116,7 +116,12 @@ public class AddressController {
     public Object findListByUserId(@RequestParam(value="userId",required=true)String userId){
 		try{
 			Map<String, Object> address = addressService.findListByUserId(userId);
-			return new ApiResult(200, "地址信息查询成功", address);
+			if(address==null){
+				return new ApiResult(202, "未查到地址信息，请新增地址！", "");
+			}else{
+				return new ApiResult(200, "地址信息查询成功", address);
+			}
+			
 		}catch(Exception e){
 			return new ApiResult(201, "地址信息查询失败", null);
 		}

@@ -187,13 +187,13 @@ WHERE  d.did=#{did}
 
     <!--提交兑换积分请求-->
     <insert id="SubmitPointRequest" parameterType="com.pinyougou.pojo.TbPointRequest">
-     INSERT INTO  tb_point_request (prid,point,did,caction) VALUE(UUID(),#{point},#{did},#{caction})
+     INSERT INTO  tb_point_request (point,did,caction) VALUE(#{point},#{did},#{caction})
 </insert>
 
 
     <!--   判断是否重复请求积分-->
     <select id="DiscountByPoint" resultType="java.lang.Integer" parameterType="java.lang.Long">
-        SELECT  COUNT(*)  FROM  tb_point_request   WHERE   DATEDIFF(NOW(),createDate) &lt;  7  AND   did=#{did}  AND  caction="1"
+        SELECT  COUNT(*)  FROM  tb_point_request   WHERE   DATEDIFF(NOW(),create_date) &lt;  7  AND   did=#{did}  AND  caction="1"
 </select>
 
     <!--进行兑换积分审核-->

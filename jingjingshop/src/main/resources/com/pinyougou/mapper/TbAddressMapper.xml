@@ -321,7 +321,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   
-  <select id="findAddressByUserId" parameterType="java.util.Long" resultType="java.util.Map">
+  <select id="findAddressByUserId" parameterType="java.lang.Long" resultType="java.util.Map">
       SELECT
 			t.id,
 			t.user_id userId,
