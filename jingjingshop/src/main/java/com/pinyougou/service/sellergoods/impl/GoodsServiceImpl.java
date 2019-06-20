@@ -284,6 +284,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  String goodsCode = (String)goodsMap.get("goodsCode");
 		  String introduce = (String)goodsMap.get("introduce");
 		  String introduceImages = (String)goodsMap.get("introduceImages");
+		  String pictureMaterial = (String)goodsMap.get("pictureMaterial")==null?"":(String)goodsMap.get("pictureMaterial");
 		  tbGoods.setId(goodsId);
 		  tbGoods.setBrandId(Long.parseLong(brandId));
 		  tbGoods.setCategory1Id(Long.parseLong(categoryId1));
@@ -300,6 +301,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setGoodsCode(goodsCode);
 		  tbGoods.setTotalSaleNum(0L);
 		  tbGoods.setCreateDate(new Date());
+		  tbGoods.setPictureMaterial(pictureMaterial);
 		  goodsDesc.setGoodsId(goodsId);
 		  goodsDesc.setItemVideoPath(itemVideo);
 		  goodsDesc.setItemImages(itemImages);
@@ -331,6 +333,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  String itemImages = (String)goodsMap.get("itemImages");
 		  String goodsType = (String)goodsMap.get("goodsType");
 		  String goodsCode = (String)goodsMap.get("goodsCode");
+		  String pictureMaterial = (String)goodsMap.get("pictureMaterial")==null?"":(String)goodsMap.get("pictureMaterial");
 		  String introduce = (String)goodsMap.get("introduce");
 		  String introduceImages = (String)goodsMap.get("introduceImages");
 		  String itemVideo = (String)goodsMap.get("itemVideo");
@@ -349,6 +352,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
 		  tbGoods.setType(goodsType);
 		  tbGoods.setGoodsCode(goodsCode);
+		  tbGoods.setPictureMaterial(pictureMaterial);
 		  if(smallPic.trim().length()>0){
 			  tbGoods.setSmallPic(smallPic);
 		  }

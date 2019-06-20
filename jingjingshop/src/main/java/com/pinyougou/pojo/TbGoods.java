@@ -5,11 +5,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author:yue
- * @desc:商品实体
- * @date:2019-06-14
+ * @author yue
+ * @date 2019-06-20
  */
-public class TbGoods implements Serializable {
+public class TbGoods implements Serializable{
     /**
      * 主键
      */
@@ -94,6 +93,11 @@ public class TbGoods implements Serializable {
      * 商品编码
      */
     private String goodsCode;
+
+    /**
+     * 图片素材
+     */
+    private String pictureMaterial;
 
     public Long getId() {
         return id;
@@ -229,5 +233,13 @@ public class TbGoods implements Serializable {
 
     public void setGoodsCode(String goodsCode) {
         this.goodsCode = goodsCode == null ? null : goodsCode.trim();
+    }
+
+    public String getPictureMaterial() {
+        return pictureMaterial;
+    }
+
+    public void setPictureMaterial(String pictureMaterial) {
+        this.pictureMaterial = pictureMaterial == null ? null : pictureMaterial.trim();
     }
 }

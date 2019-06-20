@@ -70,7 +70,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-14
+     * @date 2019-06-20
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1212,6 +1212,76 @@ public class TbGoodsExample {
             addCriterion("goods_code not between", value1, value2, "goodsCode");
             return (Criteria) this;
         }
+
+        public Criteria andPictureMaterialIsNull() {
+            addCriterion("picture_material is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialIsNotNull() {
+            addCriterion("picture_material is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialEqualTo(String value) {
+            addCriterion("picture_material =", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialNotEqualTo(String value) {
+            addCriterion("picture_material <>", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialGreaterThan(String value) {
+            addCriterion("picture_material >", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialGreaterThanOrEqualTo(String value) {
+            addCriterion("picture_material >=", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialLessThan(String value) {
+            addCriterion("picture_material <", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialLessThanOrEqualTo(String value) {
+            addCriterion("picture_material <=", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialLike(String value) {
+            addCriterion("picture_material like", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialNotLike(String value) {
+            addCriterion("picture_material not like", value, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialIn(List<String> values) {
+            addCriterion("picture_material in", values, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialNotIn(List<String> values) {
+            addCriterion("picture_material not in", values, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialBetween(String value1, String value2) {
+            addCriterion("picture_material between", value1, value2, "pictureMaterial");
+            return (Criteria) this;
+        }
+
+        public Criteria andPictureMaterialNotBetween(String value1, String value2) {
+            addCriterion("picture_material not between", value1, value2, "pictureMaterial");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1226,7 +1296,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-14
+     * @date 2019-06-20
      */
     public static class Criterion {
         private String condition;

@@ -111,6 +111,7 @@ public class GoodsController {
 		String smallPic = tbGoods.getSmallPic();
 		String goodsType = tbGoods.getType();
 		String goodsCode = tbGoods.getGoodsCode();
+		String pictureMaterial = tbGoods.getPictureMaterial();
 		TbGoodsDesc goodsDesc = goods.getGoodsDesc();
 		String itemImages = goodsDesc.getItemImages();
 		String introduceImgs = goodsDesc.getIntroduceimgs();
@@ -134,6 +135,7 @@ public class GoodsController {
 		entityData.put("goodsType",goodsType);
 		entityData.put("introduceImgs",introduceImgs);
 		entityData.put("itemVideo", itemVideoPath);
+		entityData.put("pictureMaterial", pictureMaterial==null?"":pictureMaterial);
 		entityData.put("goodsCode", goodsCode==null?"":goodsCode);
 		data.put("entityData", entityData);
 		if(categoryId1!=null){
