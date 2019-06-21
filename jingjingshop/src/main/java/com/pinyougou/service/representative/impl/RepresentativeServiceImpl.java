@@ -165,4 +165,11 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
         return tbRepresentativeUserMapper.FindPointRequestByPrid(rid);
     }
 
+
+	@Override
+	public List<Map<String, Object>> findGoodsMsg(Long representId) {
+		List<Map<String, Object>> data = tbRepresentativeUserMapper.findGoodsMsg(representId);
+		return data;
+	}
+
 }

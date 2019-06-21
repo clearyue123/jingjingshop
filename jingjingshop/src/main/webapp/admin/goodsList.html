@@ -192,6 +192,13 @@
 		      		</td>
 		      	</tr>
 		      	<tr>
+		      		<td>是否推送首页广告</td>
+		      		<td >
+                       <input type="radio"  name="isIndexad" ng-click="setIsIndexad(1)"/>启用
+		      		   <input type="radio"  name="isIndexad" ng-checked="true" ng-click="setIsIndexad(0)"/>不启用		      		
+		      		</td>
+		      	</tr>
+		      	<tr>
 		      	    <td>型号</td>
 		      		<td>
 		      		   <input type="text" ng-model="entity.goodsType" class="form-control" placeholder="商品型号" >

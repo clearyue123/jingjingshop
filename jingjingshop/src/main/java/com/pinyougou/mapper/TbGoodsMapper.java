@@ -36,4 +36,6 @@ public interface TbGoodsMapper {
 	List<Map<String, Object>> searchGoodsByName(@Param("searchGoodsName")String searchGoodsName);
 
 	List<Map<String, Object>> findGoodsList(Map<String, Object> paramMap);
+
+	List<Map<String, Object>> findIndexAdList();
 }

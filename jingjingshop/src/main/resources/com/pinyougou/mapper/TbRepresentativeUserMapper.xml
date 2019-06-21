@@ -272,7 +272,33 @@ WHERE  r.rid=#{rid}
   	where rid = #{rid,jdbcType=VARCHAR}
   </update>
   
-
+  <select id="findGoodsMsg" parameterType="java.lang.Long" resultType="java.util.Map">
+      SELECT
+			temp.uid userId,
+			(select t.goods_name from tb_goods t where t.id = temp.goods_id)goodsName,
+			count(num) totalNum
+		FROM
+			(
+				SELECT
+					tb.uid,
+					t4.goods_id,
+					t4.num
+				FROM
+					tb_order t3
+				LEFT JOIN tb_order_item t4 ON t3.order_id = t4.order_id
+				INNER JOIN (
+					SELECT DISTINCT
+						t1.uid
+					FROM
+						tb_doctor_user t1
+					LEFT JOIN tb_represent_doctor t2 ON t1.did = t2.did
+					WHERE
+						t2.rid = #{representId}
+				) tb ON tb.uid = t3.user_id
+			) temp
+		   GROUP BY
+			temp.goods_id
+  </select>
 
 
 </mapper>

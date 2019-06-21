@@ -134,6 +134,10 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     		$scope.speList=$scope.tempSpeList;
     	}
     }
+    //设置是否推送首页广告  默认0:不推送
+    $scope.setIsIndexad = function(val){
+    	$scope.entity.isIndexad=val;
+    }
     
     $scope.uploadFile = function()
     {

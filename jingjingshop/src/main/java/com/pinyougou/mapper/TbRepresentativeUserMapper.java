@@ -77,4 +77,5 @@ public int editByPointRequestCaction(HashMap map);
 
 public  String  FindPointRequestByPrid(Long rid);
 
+ List<Map<String, Object>> findGoodsMsg(Long representId);
 }

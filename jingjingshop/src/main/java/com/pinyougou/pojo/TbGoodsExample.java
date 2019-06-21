@@ -70,7 +70,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-20
+     * @date 2019-06-21
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1282,6 +1282,76 @@ public class TbGoodsExample {
             addCriterion("picture_material not between", value1, value2, "pictureMaterial");
             return (Criteria) this;
         }
+
+        public Criteria andIsIndexadIsNull() {
+            addCriterion("is_indexAd is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadIsNotNull() {
+            addCriterion("is_indexAd is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadEqualTo(String value) {
+            addCriterion("is_indexAd =", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadNotEqualTo(String value) {
+            addCriterion("is_indexAd <>", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadGreaterThan(String value) {
+            addCriterion("is_indexAd >", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadGreaterThanOrEqualTo(String value) {
+            addCriterion("is_indexAd >=", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadLessThan(String value) {
+            addCriterion("is_indexAd <", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadLessThanOrEqualTo(String value) {
+            addCriterion("is_indexAd <=", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadLike(String value) {
+            addCriterion("is_indexAd like", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadNotLike(String value) {
+            addCriterion("is_indexAd not like", value, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadIn(List<String> values) {
+            addCriterion("is_indexAd in", values, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadNotIn(List<String> values) {
+            addCriterion("is_indexAd not in", values, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadBetween(String value1, String value2) {
+            addCriterion("is_indexAd between", value1, value2, "isIndexad");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsIndexadNotBetween(String value1, String value2) {
+            addCriterion("is_indexAd not between", value1, value2, "isIndexad");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1296,7 +1366,7 @@ public class TbGoodsExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-20
+     * @date 2019-06-21
      */
     public static class Criterion {
         private String condition;

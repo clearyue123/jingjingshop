@@ -101,4 +101,7 @@ public interface GoodsService {
      * @return
      */
 	public Page<Map<String,Object>> findGoodsList(Map<String, Object> paramMap,Integer page,Integer rows);
+
+
+	public List<Map<String,Object>> findIndexAdList();
 }

@@ -654,7 +654,7 @@
         UPDATE tb_order t
 		SET t.STATUS = #{STATUS}
 		<if test="STATUS == 3 and PAYMENTTIME != null">
-		   t.payment_time = #{PAYMENTTIME}
+		   ,t.payment_time = #{PAYMENTTIME}
 		</if>
 		WHERE
 			t.order_id = #{ORDERID}

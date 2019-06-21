@@ -270,6 +270,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  long goodsId = idWorker.nextId();
 		  String isMarketable = (String)goodsMap.get("isMarketable")==null?"1":(String)goodsMap.get("isMarketable");
 		  String isEnableSpec = (String)goodsMap.get("isEnableSpec")==null?"1":(String)goodsMap.get("isEnableSpec");
+		  String isIndexad = (String)goodsMap.get("isIndexad")==null?"0":(String)goodsMap.get("isIndexad");
 		  String categoryId1 = (String)goodsMap.get("categoryId1");
 		  String categoryId2 = (String)goodsMap.get("categoryId2");
 		  String goodsName = (String)goodsMap.get("goodsName");
@@ -293,6 +294,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  tbGoods.setGoodsName(goodsName);
 		  tbGoods.setIsEnableSpec(isEnableSpec);
 		  tbGoods.setIsMarketable(isMarketable);
+		  tbGoods.setIsIndexad(isIndexad);
 		  tbGoods.setIsDelete("0");
 		  tbGoods.setPrice(new BigDecimal(price));
 		  tbGoods.setReducedPrice(new BigDecimal(reducedPrice));
@@ -322,6 +324,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  TbGoods tbGoods = goodsMapper.selectByPrimaryKey(Long.parseLong(goodsId));
 		  String isMarketable = (String)goodsMap.get("isMarketable").toString();
 		  String isEnableSpec = (String)goodsMap.get("isEnableSpec").toString();
+		  String isIndexad = (String)goodsMap.get("isIndexad").toString();
 		  String categoryId1 = (String)goodsMap.get("categoryId1");
 		  String categoryId2 = (String)goodsMap.get("categoryId2");
 		  String goodsName = (String)goodsMap.get("goodsName");
@@ -344,6 +347,7 @@ public class GoodsServiceImpl implements GoodsService {
 		  if(categoryId2!=null&&categoryId2.trim().length()>0){
 			  tbGoods.setCategory2Id(Long.parseLong(categoryId2));
 		  }
+		  tbGoods.setIsIndexad(isIndexad);
 		  tbGoods.setSellerId(sellerId);
 		  tbGoods.setGoodsName(goodsName);
 		  tbGoods.setIsEnableSpec(isEnableSpec);
@@ -384,5 +388,11 @@ public class GoodsServiceImpl implements GoodsService {
 		List<Map<String, Object>> data = goodsMapper.findGoodsList(paramMap);
 		Page<Map<String,Object>> pageResult = (Page<Map<String,Object>>)data;
 		return pageResult;
+	}
+
+	@Override
+	public List<Map<String, Object>> findIndexAdList() {
+		List<Map<String, Object>> indexAdList =goodsMapper.findIndexAdList();
+		return indexAdList;
 	}
 }

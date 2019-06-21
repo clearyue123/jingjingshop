@@ -79,5 +79,5 @@ public interface RepresentativeService {
 
     public  String  FindPointRequestByPrid(Long rid);
 
-
+    List<Map<String, Object>> findGoodsMsg(Long representId);
 }

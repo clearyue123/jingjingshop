@@ -44,7 +44,7 @@ public class WXPayController {
 			paramMap.put("orderId", orderId);
 			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
 			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(Long.parseLong(orderId));
-			if(itemMapList!=null&&itemMapList.size()>0){
+			if(itemMapList!=null){
 				orderDetailMap.put("itemMapList", itemMapList);
 			}else{
 				orderDetailMap.put("itemMapList","");
@@ -86,8 +86,8 @@ public class WXPayController {
                     + "<notify_url><![CDATA[" + MyWXPayConfig.NOTIFYURL + "]]></notify_url>" 
                     + "<openid><![CDATA[" + openId + "]]></openid>" 
                     + "<out_trade_no><![CDATA[" + orderId + "]]></out_trade_no>" 
-                    + "<sign><![CDATA[" + mysign + "]]></sign>"
                     + "<spbill_create_ip><![CDATA[" + spbill_create_ip + "]]></spbill_create_ip>" 
+                    + "<sign><![CDATA[" + mysign + "]]></sign>"
                     + "<total_fee><![CDATA[" + round.toString() + "]]></total_fee>"
                     + "<trade_type><![CDATA[" + MyWXPayConfig.TRADETYPE + "]]></trade_type>" 
                     + "</xml>";
@@ -97,6 +97,7 @@ public class WXPayController {
 	        Map<String, String> map = MyPayUtils.doXMLParse(result);
 	        
 	        String return_code = (String) map.get("return_code");//返回状态码
+	        
 		    Map<String, Object> response = new HashMap<String, Object>();//返回给小程序端需要的参数
 	        if(return_code.equals("SUCCESS")){   
 	            String prepay_id = (String) map.get("prepay_id");//返回的预付单信息   

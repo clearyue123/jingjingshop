@@ -6,9 +6,9 @@ import java.util.Date;
 
 /**
  * @author yue
- * @date 2019-06-20
+ * @date 2019-06-21
  */
-public class TbGoods implements Serializable{
+public class TbGoods implements Serializable {
     /**
      * 主键
      */
@@ -98,6 +98,11 @@ public class TbGoods implements Serializable{
      * 图片素材
      */
     private String pictureMaterial;
+
+    /**
+     * 是否是精选
+     */
+    private String isIndexad;
 
     public Long getId() {
         return id;
@@ -241,5 +246,13 @@ public class TbGoods implements Serializable{
 
     public void setPictureMaterial(String pictureMaterial) {
         this.pictureMaterial = pictureMaterial == null ? null : pictureMaterial.trim();
+    }
+
+    public String getIsIndexad() {
+        return isIndexad;
+    }
+
+    public void setIsIndexad(String isIndexad) {
+        this.isIndexad = isIndexad == null ? null : isIndexad.trim();
     }
 }

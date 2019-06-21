@@ -3,6 +3,7 @@ package com.pinyougou.controller.representative;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -449,7 +450,6 @@ public class RepresentativeController {
     /**
      * 查询医生信息
      */
-
     @RequestMapping("/finddoc")
     public ApiResult findAllByIdDoc(String did) {
         try {
@@ -464,6 +464,25 @@ public class RepresentativeController {
         }
 
     }
-
+   
+   /**
+    * 通过代表id查对应患者商品总销量 今日销量
+    * @param representId
+    * @return
+    */
+   @RequestMapping("/findGoodsMsg")
+   public ApiResult findGoodsMsg(@RequestParam(value="representId",required=true)String representId){
+    	try{
+    		List<Map<String, Object>> goodsMsgMap = representativeService.findGoodsMsg(Long.parseLong(representId));
+    		if(goodsMsgMap==null){
+    			return new ApiResult(201, "未查询到数据！", "");
+    		}else{
+    			return new ApiResult(200, "查询成功", goodsMsgMap);
+    		}
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return new ApiResult(201, "查询失败", "");
+    	}
+    }
 
 }

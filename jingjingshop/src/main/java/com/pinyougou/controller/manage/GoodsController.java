@@ -107,6 +107,7 @@ public class GoodsController {
 		BigDecimal reducedPrice = tbGoods.getReducedPrice();
 		String isEnableSpec = tbGoods.getIsEnableSpec();
 		String isMarketable = tbGoods.getIsMarketable();
+		String isIndexad = tbGoods.getIsIndexad();
 		String goodsName = tbGoods.getGoodsName();
 		String smallPic = tbGoods.getSmallPic();
 		String goodsType = tbGoods.getType();
@@ -128,6 +129,7 @@ public class GoodsController {
 		entityData.put("reducedPrice", reducedPrice.toString());
 		entityData.put("isEnableSpec", isEnableSpec);
 		entityData.put("isMarketable", isMarketable);
+		entityData.put("isIndexad", isIndexad);
 		entityData.put("goodsName", goodsName);
 		entityData.put("smallPic", smallPic);
 		entityData.put("itemImages", itemImages);
@@ -289,4 +291,19 @@ public class GoodsController {
 			   return new ApiResult(201, "商品列表查询失败！","");
 		   }
 	   }
+	   
+	 /**
+	  *  推送首页广告
+	  * @return
+	  */
+	@RequestMapping("/findIndexAdList")
+	public ApiResult findIndexAdList(){
+		try{
+			List<Map<String, Object>> findIndexAdList = goodsService.findIndexAdList();
+			return new ApiResult(200, "查询成功", findIndexAdList);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "查询失败", "");
+		}
+	}
 }
