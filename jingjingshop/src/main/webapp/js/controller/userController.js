@@ -13,25 +13,19 @@ app.controller("userController",function($scope,$controller,$http,userService){
 		});
 	}
 	
-	$scope.save=function(){
-		var object = userService.save($scope.entity);
-		object.success(function(response){
-			alert(response);
-			if(response.flag==true){
-				// 保存成功
-				alert(response.message);
-				$scope.reloadList();
-			}else{
-				alert(response.message);
+	$scope.del = function(){
+		userService.dele($scope.selectIds).success(
+			function(response){
+				if(response.code==200){
+					alert("删除成功！");
+					$scope.reloadList();
+				}else{
+					alert("删除失败！");
+					$scope.reloadList();
+				}
 			}
-		})
-	}
-	
-	// 查询一个:
-	$scope.findById = function(id){
-		userService.findById(id).success(function(response){
-			$scope.entity = response;
-		});
+		
+		)
 	}
 	
 });

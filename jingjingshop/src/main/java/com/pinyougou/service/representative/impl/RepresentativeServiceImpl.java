@@ -7,6 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.pinyougou.mapper.TbRepresentMapper;
 import com.pinyougou.mapper.TbRepresentativeUserMapper;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
@@ -14,8 +17,11 @@ import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
 import com.pinyougou.pojo.TbRepresent;
 import com.pinyougou.pojo.TbRepresentDoctor;
+import com.pinyougou.pojo.TbRepresentExample;
+import com.pinyougou.pojo.TbRepresentExample.Criteria;
 import com.pinyougou.service.representative.RepresentativeService;
 
+import util.DateUtils;
 
 @Service
 public class RepresentativeServiceImpl  implements RepresentativeService {
@@ -24,7 +30,8 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
     @Autowired
     private TbRepresentativeUserMapper  tbRepresentativeUserMapper;
 
-
+    @Autowired
+    private TbRepresentMapper representMapper;
 
     public TbRepresent findAllByIdRepresentative(Long rid) {
         return tbRepresentativeUserMapper.findAllByIdRepresentative(rid);
@@ -170,6 +177,28 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 	public List<Map<String, Object>> findGoodsMsg(Long representId) {
 		List<Map<String, Object>> data = tbRepresentativeUserMapper.findGoodsMsg(representId);
 		return data;
+	}
+
+
+	@Override
+	public Page search(Map<String, String> searchEntity, int page, int rows) {
+		PageHelper.startPage(page, rows);
+		String phone = (String)searchEntity.get("phone");
+		String userName = (String)searchEntity.get("userName");
+		TbRepresentExample example = new TbRepresentExample();
+		Criteria cri = example.createCriteria();
+		if(phone!=null&&phone.trim().length()>0){
+			cri.andPhoneEqualTo(phone);
+		}
+		if(userName!=null&&userName.trim().length()>0){
+			cri.andUsernameEqualTo(userName);
+		}
+		List<TbRepresent> data = representMapper.selectByExample(example);
+		for(TbRepresent represent:data){
+			represent.setCreateDateStr(DateUtils.getDateStrFromDate(represent.getCreateDate()));
+		}
+		Page<TbRepresent> pageData = (Page<TbRepresent>)data;
+		return pageData;
 	}
 
 }

@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.Page;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
 import com.pinyougou.pojo.TbDoctorUser;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbRepresent;
 import com.pinyougou.pojo.TbUser;
 
 import entity.PageResult;
@@ -109,5 +111,14 @@ public interface DoctorService {
      * @param docUserParamMap
      */
 	Integer doctorRelatePatient(Map<String, Object> docUserParamMap);
+    
+	/**
+     * 后台医生管理 搜索
+     * @param searchEntity
+     * @param page
+     * @param rows
+     * @return
+     */
+	public Page<TbDoctor> search(Map<String, String> searchEntity, int page, int rows);
 
 }

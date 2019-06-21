@@ -51,8 +51,10 @@ public class TbDoctor {
     private String script;
 
     private Date createDate;
-
-    private String unionId;
+    
+    private String createDateStr;
+    
+	private String unionId;
 
     /**
      * wx获取二维码ticket
@@ -216,4 +218,12 @@ public class TbDoctor {
     public void setTicketTime(String ticketTime) {
         this.ticketTime = ticketTime == null ? null : ticketTime.trim();
     }
+    
+    public String getCreateDateStr() {
+		return createDateStr;
+	}
+
+	public void setCreateDateStr(String createDateStr) {
+		this.createDateStr = createDateStr;
+	}
 }

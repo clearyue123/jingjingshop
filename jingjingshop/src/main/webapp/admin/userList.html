@@ -39,7 +39,7 @@
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#addModal" ng-click="entity={}"><i class="fa fa-file-o"></i> 新建</button>
-                                        <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>           
+                                        <button type="button" class="btn btn-default" title="删除" ng-click="del()"><i class="fa fa-trash-o"></i> 删除</button>           
                                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                                     </div>
                                 </div>
@@ -60,6 +60,7 @@
 			                              <th class="" style="padding-right:0px">
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th> 
+										  <th class="sorting_asc">用户ID</th>
 										  <th class="sorting_asc">用户名</th>
 									      <th class="sorting">手机号</th>									      
 									      <th class="sorting">用户昵称</th>									      
@@ -74,6 +75,7 @@
 			                      <tbody>
 			                          <tr ng-repeat="entity in list">
 			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>			                              
+				                          <td>{{entity.id}}</td>
 				                          <td>{{entity.username}}</td>
 									      <td>{{entity.phone}}</td>									     
 		                                  <td>{{entity.nickName}}</td>	
@@ -148,93 +150,5 @@
 	</div>
 </div>
 
-<!-- 新增窗口 -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" >
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">新增用户</h3>
-		</div>
-		<div class="modal-body">		
-			<table class="table table-bordered table-striped"  width="800px">
-		      	<tr>
-		      		<td>用户名</td>
-		      		<td><input ng-model="entity.username" class="form-control" placeholder="用户名" >  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>密码</td>
-		      		<td><input ng-model="entity.password" class="form-control" placeholder="密码" >  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>手机号</td>
-		      		<td><input ng-model="entity.phone" class="form-control" placeholder="手机号" >  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>性别</td>
-		      		<td class="form-control">
-						<input type="radio"  name="a" ng-value="1" ng-checked="true" ng-model="entity.sex">男 
-                        <input type="radio"  name="a" ng-value="0" ng-model="entity.sex">女
-                    </td>
-		      	</tr>
-		      	<tr>
-		      		<td>邮箱</td>
-		      		<td><input ng-model="entity.email" class="form-control" placeholder="邮箱" >  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>昵称</td>
-		      		<td><input ng-model="entity.nickName" class="form-control" placeholder="昵称" >  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>真实姓名</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="真实姓名" >  </td>
-		      	</tr>
-		      	
-		      	<tr>
-		      		<td>qq号</td>
-		      		<td><input ng-model="entity.wcCode" class="form-control" placeholder="微信号" >  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>生日</td>
-		      		<td><input ng-model="entity.birthday" class="form-control" placeholder="生日" >  </td>
-		      	</tr>
-			 </table>				
-		</div>
-		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
-			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
-		</div>
-	  </div>
-	</div>
-</div>
-
-<!-- 删除窗口 -->
-<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" >
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">删除用户</h3>
-		</div>
-		<div class="modal-body">		
-			<table class="table table-bordered table-striped"  width="800px">
-		      	<tr>
-		      		<td>品牌名称</td>
-		      		<td><input ng-model="entity.name" class="form-control" placeholder="品牌名称" >  </td>
-		      	</tr>		      	
-		      	<tr>
-		      		<td>首字母</td>
-		      		<td><input ng-model="entity.firstChar" class="form-control" placeholder="首字母">  </td>
-		      	</tr>		      	
-			 </table>				
-		</div>
-		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
-			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
-		</div>
-	  </div>
-	</div>
-</div>
-   
 </body>
 </html>

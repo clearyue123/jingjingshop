@@ -8,10 +8,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbDoctorMapper;
 import com.pinyougou.mapper.TbDoctorUserMapper;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
+import com.pinyougou.pojo.TbDoctorExample;
+import com.pinyougou.pojo.TbDoctorExample.Criteria;
 import com.pinyougou.pojo.TbDoctorUser;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
@@ -19,6 +23,7 @@ import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.doctor.DoctorService;
 
 import entity.PageResult;
+import util.DateUtils;
 
 
 @Service
@@ -230,6 +235,27 @@ public class DoctorServiceImpl  implements DoctorService {
 		docUserParamMap.put("script", "");
 		Integer insertNum = tbDocUserMapper.insert(docUserParamMap);
 		return insertNum;
+	}
+
+	@Override
+	public Page<TbDoctor> search(Map<String, String> searchEntity, int page, int rows) {
+		PageHelper.startPage(page, rows);
+		String phone = (String)searchEntity.get("phone");
+		String userName = (String)searchEntity.get("userName");
+		TbDoctorExample example = new TbDoctorExample();
+		Criteria cri = example.createCriteria();
+		if(phone!=null&&phone.trim().length()>0){
+			cri.andPhoneEqualTo(phone);
+		}
+		if(userName!=null&&userName.trim().length()>0){
+			cri.andUsernameEqualTo(userName);
+		}
+		 List<TbDoctor> data = tbDocMapper.selectByExample(example);
+		for(TbDoctor doctor:data){
+			doctor.setCreateDateStr(DateUtils.getDateStrFromDate(doctor.getCreateDate()));
+		}
+		Page<TbDoctor> pageData = (Page<TbDoctor>)data;
+		return pageData;
 	}
 
 

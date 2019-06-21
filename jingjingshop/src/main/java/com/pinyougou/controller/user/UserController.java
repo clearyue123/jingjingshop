@@ -148,13 +148,14 @@ public class UserController {
      * @return
      */
     @RequestMapping("/delete")
-    public Result delete(Long[] ids) {
+    public ApiResult delete(final Long[] ids) {
         try {
+        	System.out.println("ids:"+ids);
             userService.delete(ids);
-            return new Result(true, "删除成功");
+            return new ApiResult(200,"删除成功","");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(false, "删除失败");
+            return new ApiResult(201,"删除失败","");
         }
     }
 

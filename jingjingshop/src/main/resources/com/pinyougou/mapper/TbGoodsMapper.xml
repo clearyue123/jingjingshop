@@ -623,5 +623,6 @@
 				t1.is_indexAd = 1
 			AND t1.is_delete = 0
 			AND t1.is_marketable = 1
+			limit 0,4
     </select>
 </mapper>

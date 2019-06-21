@@ -5,16 +5,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.Page;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
 import com.pinyougou.pojo.TbDoctorUser;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbRepresent;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.card.CardService;
 import com.pinyougou.service.doctor.DoctorService;
@@ -518,4 +521,18 @@ public class DoctorController {
 			return new ApiResult(201, "新增积分失败", "");
 		}
 	}
+	
+	@RequestMapping("/search")
+	public ApiResult search(@RequestBody Map<String,String> searchEntity,int page, int rows){
+		   try{
+			   Page<TbDoctor> result = doctorService.search(searchEntity,page,rows);
+			   Map<String,Object> data = new HashMap<String,Object>();
+			   data.put("rows", result.getResult());
+			   data.put("total", result.getTotal());
+			   return new ApiResult(200, "success", data);
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return new ApiResult(201, "error", "");
+		   }
+	   }
 }

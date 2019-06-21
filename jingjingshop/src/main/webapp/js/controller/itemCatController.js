@@ -34,7 +34,6 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	 
 	//批量删除 
 	$scope.dele=function(){	
-		alert("111");
 		//获取选中的复选框			
 		itemCatService.dele( $scope.selectIds ).success(
 			function(response){

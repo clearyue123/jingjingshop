@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.Page;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
@@ -33,19 +35,8 @@ public class RepresentativeController {
     private RepresentativeService representativeService;
 
     /**
-     * 二次改动    2019-5-15
-     * @param rid
-     * @param username
-     * @param phone
-     * @return
-     */
-
-
-
-    /**
      * 获取积分请求表的prid
      */
-
     @RequestMapping("/findprid")
     public ApiResult findprid(@RequestParam(required = false, value = "rid") String rid) {
         try {
@@ -484,5 +475,22 @@ public class RepresentativeController {
     		return new ApiResult(201, "查询失败", "");
     	}
     }
-
+   
+   /**
+    * 后台 代表管理 列表
+    * @return
+    */
+   @RequestMapping("/search")
+   public ApiResult search(@RequestBody Map<String,String> searchEntity,int page, int rows){
+	   try{
+		   Page<TbRepresent> result = representativeService.search(searchEntity,page,rows);
+		   Map<String,Object> data = new HashMap<String,Object>();
+		   data.put("rows", result.getResult());
+		   data.put("total", result.getTotal());
+		   return new ApiResult(200, "success", data);
+	   }catch(Exception e){
+		   e.printStackTrace();
+		   return new ApiResult(201, "error", "");
+	   }
+   }
 }

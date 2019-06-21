@@ -5,11 +5,8 @@ app.service("userService",function($http){
 		return $http.post("../user/search.do?page="+page+"&rows="+rows,searchEntity);
 	}
 	
-	this.save = function(entity){
-		return $http.post("../user/add.do",entity);
+	this.dele = function(ids){
+		return $http.post("../user/delete.do?ids="+ids);
 	}
 	
-	this.findById = function(id){
-		return $http.get("../user/findOne.do?id="+id);
-	}
 });

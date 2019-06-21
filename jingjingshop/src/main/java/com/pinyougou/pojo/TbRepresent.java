@@ -56,7 +56,9 @@ public class TbRepresent {
      */
     private Date createDate;
 
-    private String openId;
+    private String createDateStr;
+    
+	private String openId;
 
     private String unionId;
 
@@ -207,4 +209,11 @@ public class TbRepresent {
     public void setTicketTime(String ticketTime) {
         this.ticketTime = ticketTime == null ? null : ticketTime.trim();
     }
+    public String getCreateDateStr() {
+		return createDateStr;
+	}
+
+	public void setCreateDateStr(String createDateStr) {
+		this.createDateStr = createDateStr;
+	}
 }

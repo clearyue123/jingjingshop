@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
     public PageResult findPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         Page<TbUser> page = (Page<TbUser>) userMapper.selectByExample(null);
-        System.out.println(page);
         return new PageResult(page.getTotal(), page.getResult());
     }
 
@@ -81,7 +80,9 @@ public class UserServiceImpl implements UserService {
      */
     public void delete(Long[] ids) {
         for (Long id : ids) {
-            userMapper.deleteByPrimaryKey(id);
+        	TbUser user = userMapper.selectByPrimaryKey(id);
+        	user.setIsDelete("1");
+            userMapper.updateByPrimaryKey(user);
         }
     }
 
@@ -91,7 +92,7 @@ public class UserServiceImpl implements UserService {
 
         TbUserExample example = new TbUserExample();
         Criteria criteria = example.createCriteria();
-
+        criteria.andIsDeleteEqualTo("0");
         if (user != null) {
             if (user.getUsername() != null && user.getUsername().length() > 0) {
                 criteria.andUsernameLike("%" + user.getUsername() + "%");

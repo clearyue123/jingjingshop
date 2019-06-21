@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.Page;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
 import com.pinyougou.pojo.TbPointList;
@@ -78,6 +79,20 @@ public interface RepresentativeService {
     public int editByPointRequestCaction(HashMap map);
 
     public  String  FindPointRequestByPrid(Long rid);
-
+    
+    /**
+     * 代表查看商品数量信息
+     * @param representId
+     * @return
+     */
     List<Map<String, Object>> findGoodsMsg(Long representId);
+    
+    /**
+     * 代表管理 搜索功能
+     * @param searchEntity
+     * @param page
+     * @param rows
+     * @return
+     */
+	public Page<TbRepresent> search(Map<String, String> searchEntity, int page, int rows);
 }
