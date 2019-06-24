@@ -275,13 +275,41 @@ WHERE  r.rid=#{rid}
   <select id="findGoodsMsg" parameterType="java.lang.Long" resultType="java.util.Map">
       SELECT
 			temp.uid userId,
-			(select t.goods_name from tb_goods t where t.id = temp.goods_id)goodsName,
-			count(num) totalNum
+			temp.goods_id goodsId,
+			temp.payment_time paymentTime,
+			(
+				SELECT
+					t.goods_name
+				FROM
+					tb_goods t
+				WHERE
+					t.id = temp.goods_id
+			) goodsName,
+			(
+				SELECT
+					tg.small_pic
+				FROM
+					tb_goods tg
+				WHERE
+					tg.id = temp.goods_id
+			) goodsPic,
+			count(num) todayNum,
+			(
+				SELECT
+					count(tit.num)
+				FROM
+					tb_order tor
+				LEFT JOIN tb_order_item tit ON tor.order_id = tit.order_id
+				WHERE
+					tor.`status` >= 2
+			) historyTotalNum
 		FROM
 			(
 				SELECT
+					t3.order_id orderId,
 					tb.uid,
 					t4.goods_id,
+					t3.payment_time,
 					t4.num
 				FROM
 					tb_order t3
@@ -295,8 +323,11 @@ WHERE  r.rid=#{rid}
 					WHERE
 						t2.rid = #{representId}
 				) tb ON tb.uid = t3.user_id
+				WHERE
+					t3.payment_time BETWEEN CAST(SYSDATE() AS DATE)
+				AND CAST(SYSDATE() AS DATE) + INTERVAL 1 DAY
 			) temp
-		   GROUP BY
+		GROUP BY
 			temp.goods_id
   </select>
 
