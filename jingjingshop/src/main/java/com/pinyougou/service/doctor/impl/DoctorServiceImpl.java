@@ -189,7 +189,8 @@ public class DoctorServiceImpl  implements DoctorService {
 
 	@Override
 	public int add(TbDoctor user) {
-		return tbDocMapper.add(user);
+		user.setCreateDate(new Date());
+		return tbDocMapper.insert(user);
 	}
 
 	@Override
@@ -256,6 +257,13 @@ public class DoctorServiceImpl  implements DoctorService {
 		}
 		Page<TbDoctor> pageData = (Page<TbDoctor>)data;
 		return pageData;
+	}
+
+	@Override
+	public void delete(Long[] ids) {
+		for(Long id:ids){
+			tbDocMapper.deleteByPrimaryKey(id);
+		}
 	}
 
 

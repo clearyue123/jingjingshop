@@ -16,4 +16,8 @@ app.service("userService",function($http){
 	this.findOne = function(userId){
 		return $http.post("../user/findOne.do?id="+userId);
 	}
+	
+	this.update = function(entity){
+		return $http.post("../user/update.do",entity);
+	}
 });

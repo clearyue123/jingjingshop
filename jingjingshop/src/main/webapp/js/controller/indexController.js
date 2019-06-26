@@ -1,5 +1,6 @@
 app.controller("indexController",function($scope,$http,loginService){
 	
+	$scope.loginName= "admin";
 	
 	//消息提醒列表
 	$scope.showMsgList = function(){
@@ -12,7 +13,8 @@ app.controller("indexController",function($scope,$http,loginService){
 	}
 	
 	//展示登陆用户名
-	loginService.showName().success(function(response){
-		$scope.loginName= response.loginName;
-	});
+//	loginService.showName().success(function(response){
+//		alert("login.........");
+//		
+//	});
 });

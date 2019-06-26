@@ -37,8 +37,6 @@ public interface TbDoctorMapper {
     
     PageResult updateByPrimaryKey(Long pid);
 
-	int add(TbDoctor user);
-
 	TbDoctor selectById(Long did);
 
 	int updateInfo(TbDoctor user);

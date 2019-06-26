@@ -13,4 +13,50 @@ app.controller("doctorController",function($scope,$controller,$http,doctorServic
 		});
 	}
 	
+	//新增医生
+	$scope.save = function(){
+		var serviceObject;
+		if($scope.entity.did == null){
+			serviceObject = doctorService.add($scope.entity);
+		}else{
+			serviceObject = doctorService.update($scope.entity);
+		}
+		serviceObject.success(
+				function(reponse){
+				   if(response.code == 200){
+					   alert(response.message);
+					   $scope.reloadList();
+				   }else{
+					   alert(response.message);
+				   }
+			});
+	}
+	
+	//删除医生
+	$scope.dele = function(){
+		doctorService.dele($scope.selectIds).success(
+		    function(response){
+		    	if(response.code == 200){
+					   alert(response.message);
+					   $scope.reloadList();
+				   }else{
+					   alert(response.message);
+				   }
+		    }		
+		);
+	}
+	
+	//通过医生id查医生信息
+	$scope.findDoctorById = function(id){
+		doctorService.findOne(id).success(
+		    function(response){
+		    	if(response.code == 200){
+		    		$scope.entity = response.data;
+		    	}else{
+		    		alert(response.message);
+		    	}
+		    }		
+		
+		);
+	}
 });

@@ -387,5 +387,6 @@
 			WHERE
 				t.goods_id = #{goodsId}
 			AND t.is_deleted = '0'
+			ORDER BY t.evaluate_date DESC
     </select>
 </mapper>

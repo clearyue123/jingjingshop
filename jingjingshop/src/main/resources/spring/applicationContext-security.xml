@@ -11,8 +11,7 @@
 	<http pattern="/img/**" security="none"/>
 	<http pattern="/js/**" security="none"/>
 	<http pattern="/plugins/**" security="none"/>
-	<http pattern="/**.do" security="none"/>
-	
+	<http pattern="/**/**.do" security="none"/>
 	<!-- use-expressions:设置是否启动SpEL表达式，默认值是true。 -->
 	<http use-expressions="false">
 		<!-- 
@@ -33,8 +32,8 @@
 		<form-login login-page="/login.html" 
 		            default-target-url="/admin/index.html" 
 		            always-use-default-target="true" 
-		            authentication-failure-url="/login.html"/>
-		
+		            authentication-failure-url="/login.html"
+		            login-processing-url="/springLogin"/>
 		
 		<!-- 不使用csrf的校验 -->
 		<csrf disabled="true"/>
@@ -54,6 +53,7 @@
 		<authentication-provider>
 			<user-service>
 				<user name="yue" password="123456" authorities="ROLE_ADMIN"/>
+				<user name="admin" password="123456" authorities="ROLE_ADMIN"/>
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>

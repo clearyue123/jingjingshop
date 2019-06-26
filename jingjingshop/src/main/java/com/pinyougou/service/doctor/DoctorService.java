@@ -83,8 +83,6 @@ public interface DoctorService {
 
 	TbDoctor firstInfo(TbDoctor user);
 
-	int add(TbDoctor user);
-    
 	/**
 	 * id查医生
 	 * @param did
@@ -120,5 +118,18 @@ public interface DoctorService {
      * @return
      */
 	public Page<TbDoctor> search(Map<String, String> searchEntity, int page, int rows);
-
+	
+	/**
+	 * 后台管理 新增医生
+	 * @param user
+	 * @return
+	 */
+	public int add(TbDoctor user);
+    
+	/**
+	 * 后台管理 通过id删除医生
+	 * @param ids
+	 */
+	public void delete(Long[] ids);
+	
 }

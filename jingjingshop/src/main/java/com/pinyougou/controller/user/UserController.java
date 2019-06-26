@@ -13,7 +13,6 @@ import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.user.UserService;
 
 import entity.PageResult;
-import entity.Result;
 
 /**
  * 用户管理 controller
@@ -95,26 +94,6 @@ public class UserController {
     public PageResult findPage(int page, int rows) {
         return userService.findPage(page, rows);
     }
-
-    
-
-    /**
-     * 修改
-     *
-     * @param user
-     * @return
-     */
-    @RequestMapping("/update")
-    public Result update(@RequestBody TbUser user) {
-        try {
-            userService.update(user);
-            return new Result(true, "修改成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false, "修改失败");
-        }
-    }
-
     
     /**
      * 批量删除
@@ -125,7 +104,6 @@ public class UserController {
     @RequestMapping("/delete")
     public ApiResult delete(final Long[] ids) {
         try {
-        	System.out.println("ids:"+ids);
             userService.delete(ids);
             return new ApiResult(200,"删除成功","");
         } catch (Exception e) {
@@ -183,4 +161,22 @@ public class UserController {
     	}
     }
 
+    
+    /**
+     * 后台管理 用户修改
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping("/update")
+    public ApiResult update(@RequestBody TbUser user) {
+        try {
+        	System.out.println("sex:"+user.getSex());
+            userService.update(user);
+            return new ApiResult(200, "修改成功！","");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResult(201, "修改失败！","");
+        }
+    }
 }

@@ -18,10 +18,10 @@ app.controller("userController",function($scope,$controller,$http,userService){
 		userService.dele($scope.selectIds).success(
 			function(response){
 				if(response.code==200){
-					alert("删除成功！");
+					alert(response.message);
 					$scope.reloadList();
 				}else{
-					alert("删除失败！");
+					alert(response.message);
 					$scope.reloadList();
 				}
 			}
@@ -31,7 +31,7 @@ app.controller("userController",function($scope,$controller,$http,userService){
 	
 	//设置用户性别
 	$scope.setSex = function(sexVal){
-		$entity.sex = sexVal;
+		$scope.entity.sex = sexVal;
 	}
 	
 	//保存用户
@@ -58,7 +58,6 @@ app.controller("userController",function($scope,$controller,$http,userService){
 	$scope.findUserById = function(userId){
 		userService.findOne(userId).success(
 				function(response){
-					alert(response.code);
 			      if(response.code == 200){
 			    	  $scope.entity = response.data;
 			      }else{

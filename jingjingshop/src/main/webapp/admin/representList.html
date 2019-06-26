@@ -60,6 +60,7 @@
 			                              <th class="" style="padding-right:0px">
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th> 
+										  <th class="sorting_asc">代表ID</th>
 										  <th class="sorting_asc">用户名</th>
 										  <th class="sorting_asc">微信名</th>
 									      <th class="sorting">手机号</th>									      
@@ -70,6 +71,7 @@
 			                      <tbody>
 			                          <tr ng-repeat="entity in list">
 			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>		
+			                              <td>{{entity.rid}}</td>		
 			                              <td>{{entity.username}}</td>		
 			                              <td>{{entity.name}}</td>		
 			                              <td>{{entity.phone}}</td>		

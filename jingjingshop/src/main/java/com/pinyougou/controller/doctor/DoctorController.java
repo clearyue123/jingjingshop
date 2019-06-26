@@ -503,6 +503,11 @@ public class DoctorController {
 		}
 	}
 	
+	/**
+	 * 小程序 医生新增50积分
+	 * @param doctorId
+	 * @return
+	 */
 	@RequestMapping("/addFiftyPoints")
 	public ApiResult addFiftyPotints(@RequestParam(value="doctorId",required=true)String doctorId){
 		try{
@@ -522,6 +527,13 @@ public class DoctorController {
 		}
 	}
 	
+	/**
+	 * 后台管理 搜索+列表
+	 * @param searchEntity
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
 	@RequestMapping("/search")
 	public ApiResult search(@RequestBody Map<String,String> searchEntity,int page, int rows){
 		   try{
@@ -535,4 +547,36 @@ public class DoctorController {
 			   return new ApiResult(201, "error", "");
 		   }
 	   }
+	
+	/**
+	 * 后台管理 新增医生
+	 * @param doctor
+	 * @return
+	 */
+	@RequestMapping("/add")
+	public ApiResult add(@RequestBody TbDoctor doctor){
+		try{
+			doctorService.add(doctor);
+		    return new ApiResult(200, "新增成功！", "");
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "新增失败！", "");
+		}
+	}
+	
+	/**
+	 * 后台管理 批量删除
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	public ApiResult delete(@RequestParam Long[] ids){
+		try{
+			doctorService.delete(ids);
+			return new ApiResult(200, "删除成功！", "");
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "删除失败！", "");
+		}
+	}
 }
