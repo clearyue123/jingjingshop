@@ -18,7 +18,6 @@ import com.pinyougou.common.ApiResult;
 import util.FileUtils;
 import util.UUIDUtils;
 
-
 /**
  * @desc:文件上传
  * @author:yue

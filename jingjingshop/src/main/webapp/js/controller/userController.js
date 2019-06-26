@@ -13,6 +13,7 @@ app.controller("userController",function($scope,$controller,$http,userService){
 		});
 	}
 	
+	//删除用户
 	$scope.del = function(){
 		userService.dele($scope.selectIds).success(
 			function(response){
@@ -26,6 +27,44 @@ app.controller("userController",function($scope,$controller,$http,userService){
 			}
 		
 		)
+	}
+	
+	//设置用户性别
+	$scope.setSex = function(sexVal){
+		$entity.sex = sexVal;
+	}
+	
+	//保存用户
+	$scope.save = function(){
+		var serviceObject;
+		if($scope.entity.id != null){
+			serviceObject = userService.update($scope.entity);
+		}else{
+			serviceObject = userService.add($scope.entity);
+		}
+		serviceObject.success(
+				function(response){
+			      if(response.code==200){
+			    	  alert(response.message);
+			    	  $scope.reloadList();
+			      }else{
+			    	  alert(response.message);
+			      }
+		    }
+	)
+	}
+	
+	//通过id查询用户信息
+	$scope.findUserById = function(userId){
+		userService.findOne(userId).success(
+				function(response){
+					alert(response.code);
+			      if(response.code == 200){
+			    	  $scope.entity = response.data;
+			      }else{
+			    	  alert(response.message);
+			      }
+		})
 	}
 	
 });

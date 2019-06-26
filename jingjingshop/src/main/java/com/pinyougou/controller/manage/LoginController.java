@@ -3,6 +3,7 @@ package com.pinyougou.controller.manage;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
 	@RequestMapping("/showName")
-	public Map<String,Object> showName() {
-		String name = "yuejingjing";
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("loginName", name);
+	public Map<String,String> showName() {
+		Map<String,String> map = new HashMap<String,String>();
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		map.put("loginName", username);
 		return map;
 	}
 	

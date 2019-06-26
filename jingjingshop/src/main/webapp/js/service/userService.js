@@ -9,4 +9,11 @@ app.service("userService",function($http){
 		return $http.post("../user/delete.do?ids="+ids);
 	}
 	
+	this.add = function(entity){
+		return $http.post("../user/add.do",entity);
+	}
+	
+	this.findOne = function(userId){
+		return $http.post("../user/findOne.do?id="+userId);
+	}
 });

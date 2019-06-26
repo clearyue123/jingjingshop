@@ -1,5 +1,6 @@
 package com.pinyougou.service.user.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,8 @@ public class UserServiceImpl implements UserService {
      * 增加
      */
     public int add(TbUser user) {
-    	user.setPassword(user.getPassword());
+    	user.setIsDelete("0");
+    	user.setCreated(new Date());
         return userMapper.insert(user);
     }
 

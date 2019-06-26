@@ -14,7 +14,6 @@ import com.pinyougou.service.user.UserService;
 
 import entity.PageResult;
 import entity.Result;
-import util.PhoneFormatCheckUtils;
 
 /**
  * 用户管理 controller
@@ -97,21 +96,7 @@ public class UserController {
         return userService.findPage(page, rows);
     }
 
-    /**
-     * 增加
-     * @param user
-     * @return
-     */
-    @RequestMapping("/add")
-    public Result add(@RequestBody TbUser user, String smscode) {
-        try {
-            userService.add(user);
-            return new Result(true, "增加成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false, "增加失败");
-        }
-    }
+    
 
     /**
      * 修改
@@ -130,17 +115,7 @@ public class UserController {
         }
     }
 
-    /**
-     * 获取实体
-     *
-     * @param id
-     * @return
-     */
-    @RequestMapping("/findOne")
-    public TbUser findOne(Long id) {
-        return userService.findOne(id);
-    }
-
+    
     /**
      * 批量删除
      *
@@ -172,19 +147,40 @@ public class UserController {
         return userService.findPage(user, page, rows);
     }
 
-    @RequestMapping("/sendCode")
-    public Result sendCode(String phone) {
-
-        if (!PhoneFormatCheckUtils.isPhoneLegal(phone)) {
-            return new Result(false, "手机格式不正确");
-        }
-
-        try {
-            return new Result(true, "验证码发送成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false, "验证码发送失败");
-        }
+    /**
+     * 后台用户管理 新增用户
+     * @param user
+     * @return
+     */
+    @RequestMapping("/add")
+    public ApiResult addUser(@RequestBody TbUser user){
+    	try{
+    		int i = userService.add(user);
+    		if(i>0){
+    			return new ApiResult(200, "新增成功！", "");
+    		}else{
+    			return new ApiResult(201, "新增失败！", "");
+    		}
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return new ApiResult(201, "新增失败！", "");
+    	}
+    }
+    
+    /**
+     * 后台用户管理 修改用户信息
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findOne")
+    public ApiResult findOne(Long id) {
+    	try{
+    		TbUser user = userService.findOne(id);
+    		return new ApiResult(200, "查询失败！", user);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return new ApiResult(201, "查询失败！", "");
+    	}
     }
 
 }

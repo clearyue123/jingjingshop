@@ -1,5 +1,5 @@
-app.controller("indexController",function($scope,$http){
-	$scope.loginName='yuejingjing';
+app.controller("indexController",function($scope,$http,loginService){
+	
 	
 	//消息提醒列表
 	$scope.showMsgList = function(){
@@ -10,4 +10,9 @@ app.controller("indexController",function($scope,$http){
 				}			
 			);
 	}
+	
+	//展示登陆用户名
+	loginService.showName().success(function(response){
+		$scope.loginName= response.loginName;
+	});
 });

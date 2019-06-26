@@ -1,7 +1,6 @@
 package com.pinyougou.controller.manage;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.service.evaluate.EvaluateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -79,7 +77,6 @@ public class EvaluateController {
     		@RequestParam(value="pageNum",required=true)Integer pageNum,
     		@RequestParam(value="pageSize",required=true)Integer pageSize){
     	try{
-    		System.out.println(goodsId);
     		Page<Map<String,Object>> page = evaluateService.selectEvaluateList(Long.parseLong(goodsId), pageNum, pageSize);
     		Map<String,Object> data = new HashMap<>();
     		data.put("total",page.getTotal());

@@ -63,7 +63,7 @@ public class CartController {
 					Integer addNum = tbShopCart.getNum()+Integer.parseInt(num);
 					tbShopCart.setNum(addNum);
 					cartMapper.updateByPrimaryKey(tbShopCart);
-					return new ApiResult(200, "商品新增成功!", "");
+					return new ApiResult(200, "商品已添加到购物车!", "");
 				}else{
 					long cartId = idWorker.nextId();
 					TbShopCart tbShopCart = new TbShopCart();
@@ -75,7 +75,7 @@ public class CartController {
 					speMap.put("speIds",speIds);
 					speMap.put("speOpIds", speOpIds);
 					cartService.add(tbShopCart,speMap);
-					return new ApiResult(200, "购物车添加成功!", "");
+					return new ApiResult(200, "商品已添加到购物车!", "");
 				}
 			}
 		}catch(Exception e){
@@ -140,7 +140,7 @@ public class CartController {
 			return new ApiResult(200,"购物车更新成功","");
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ApiResult(201,"购物车更新成功","");
+			return new ApiResult(201,"购物车更新失败","");
 		}
 	}
 }

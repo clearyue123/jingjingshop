@@ -211,7 +211,11 @@ public class GoodsController {
 		return new ApiResult(200, "查询成功", goods);
 	}
 	
-	
+	/**
+	 * 小程序 商品全局搜索
+	 * @param searchGoodsName
+	 * @return
+	 */
 	@RequestMapping("/searchByGoodsName")
 	public ApiResult searchByGoodsName(@RequestParam(value="searchGoodsName",required=false)String searchGoodsName){
 		try{

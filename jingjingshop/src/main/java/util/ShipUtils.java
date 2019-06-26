@@ -43,29 +43,34 @@ public class ShipUtils {
 	        Date createTime = (Date)orderDetail.get("createTime");
 	        String buyerMessage = (String)orderDetail.get("buyerMessage")==null?"":(String)orderDetail.get("buyerMessage");
 	        Long userId = (Long)orderDetail.get("userId");
-	        List<TbAddress> listAddress = (List<TbAddress>) addressService.findListByUserId(userId.toString());
-	        TbAddress address = listAddress.get(0);
+	        Map<String,Object> addressMap = (Map<String,Object>) addressService.findListByUserId(userId.toString());
+	        Long provinceId = (Long)addressMap.get("provinceId");
+	        Long cityId = (Long)addressMap.get("cityId");
+	        Long townId = (Long)addressMap.get("townId");
+	        String contact = (String)addressMap.get("contact");
+	        String address = (String)addressMap.get("address");
+	        String mobile = (String)addressMap.get("mobile");
 	        TbUser user = userService.findOne(userId);
-	        orderMap.put("code", orderId.toString());
+	        orderMap.put("code", orderId.toString());//订单id
 	        orderMap.put("organization", "1099");
 	        orderMap.put("orderType", "ZS12");
 	        orderMap.put("unit", "22000748");
 	        orderMap.put("payMethod", "online");
 	        orderMap.put("currency", "CNY");
-	        orderMap.put("submitDate", DateUtils.getDateStrFromDf("yyyyMMdd", createTime));
-	        orderMap.put("creater", "10050465");
-	        orderMap.put("shipDate", "20190715");
+	        orderMap.put("submitDate", DateUtils.getDateStrFromDf("yyyyMMdd", createTime));//提交日期
+	        orderMap.put("creater", "10050465");//创建用户
+	        orderMap.put("shipDate", "20190715");//发货日期
 	        orderMap.put("salesMan", "admin");
 	        orderMap.put("manager", "admin");
-	        orderMap.put("note", buyerMessage);
+	        orderMap.put("note", buyerMessage);//买家留言
 	        orderMap.put("country", "CN");
-	        orderMap.put("region", address.getProvinceId());
-	        orderMap.put("city", address.getCityId());
-	        orderMap.put("cityDistict", address.getTownId());
-	        orderMap.put("streeName",address.getAddress());
-	        orderMap.put("firstName",user.getNickName());
+	        orderMap.put("region", provinceId.toString());
+	        orderMap.put("city", cityId.toString());
+	        orderMap.put("cityDistict", townId.toString());
+	        orderMap.put("streeName",address);
+	        orderMap.put("firstName",contact);
 	        orderMap.put("companyName", "阿里巴巴");
-	        orderMap.put("cellPhone", address.getMobile());
+	        orderMap.put("cellPhone", mobile);
 	        Map<String, Object> entries = new HashMap<String,Object>(); 
 	        entries.put("code", "1103726592");
 	        entries.put("entryNumber", "10");
