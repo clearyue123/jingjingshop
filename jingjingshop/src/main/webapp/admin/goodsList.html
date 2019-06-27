@@ -180,22 +180,22 @@
 		      	<tr>
 		      		<td>是否上架</td>
 		      		<td >
-		      		   <input type="radio"  name="isMarketable" ng-checked="true" ng-click="setIsMarketable(1)"/>上架
-		      		   <input type="radio"  name="isMarketable" ng-click="setIsMarketable(0)"/>不上架
+		      		   <input type="radio"  name="isMarketable" ng-checked="setIsMarketableChecked()"  ng-click="setIsMarketable(1)"/>上架
+		      		   <input type="radio"  name="isMarketable" ng-checked="entity.isMarketable==0"  ng-click="setIsMarketable(0)"/>不上架
 		      		</td>
 		      	</tr>
 		      	<tr>
 		      		<td>是否启用规格</td>
 		      		<td >
-                       <input type="radio"  name="isEnableSpec" ng-checked="true"  ng-click="setIsEnableSpec(1)"/>启用
-		      		   <input type="radio"  name="isEnableSpec" ng-click="setIsEnableSpec(0)"/>不启用		      		
+                       <input type="radio"  name="isEnableSpec" ng-checked="setIsEnableSpecChecked()"  ng-click="setIsEnableSpec(1)"/>启用
+		      		   <input type="radio"  name="isEnableSpec" ng-checked="entity.isEnableSpec==0"  ng-click="setIsEnableSpec(0)"/>不启用		      		
 		      		</td>
 		      	</tr>
 		      	<tr>
 		      		<td>是否推送首页广告</td>
 		      		<td >
-                       <input type="radio"  name="isIndexad" ng-click="setIsIndexad(1)"/>推送
-		      		   <input type="radio"  name="isIndexad" ng-checked="true" ng-click="setIsIndexad(0)"/>不推送		      		
+                       <input type="radio"  name="isIndexad" ng-checked="entity.isIndexad==1" ng-click="setIsIndexad(1)"/>推送
+		      		   <input type="radio"  name="isIndexad" ng-checked="setIsIndexadChecked()" ng-click="setIsIndexad(0)"/>不推送		      		
 		      		</td>
 		      	</tr>
 		      	<tr>

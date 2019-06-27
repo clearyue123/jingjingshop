@@ -177,10 +177,6 @@ public class GoodsController {
 		}
 	}
 
-	@RequestMapping("/genHtml")
-	public void genHtml(Long goodsId) {
-	}
-
 	/**
 	 * 小程序接口 商品列表功能
 	 * @param page

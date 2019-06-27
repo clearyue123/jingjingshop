@@ -120,10 +120,35 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
 	    	$scope.sellerList=response;
 	    });
 	}
+	//设置默认上架
+	$scope.setIsMarketableChecked = function(){
+		if($scope.entity.isMarketable==1){
+			return true;
+		}else{
+			if($scope.entity.isMarketable==undefined){
+				return true;
+			}else{
+			    return false;
+			}
+		}
+	}
     //设置是否上架 默认1:上架
     $scope.setIsMarketable = function(val){
     	$scope.entity.isMarketable=val
     }
+    
+    //设置默认启用规格
+	$scope.setIsEnableSpecChecked = function(){
+		if($scope.entity.isEnableSpec==1){
+			return true;
+		}else{
+			if($scope.entity.isEnableSpec==undefined){
+				return true;
+			}else{
+			    return false;
+			}
+		}
+	}
     //设置是否启用规格 默认1:启用
     $scope.setIsEnableSpec = function(val){
     	$scope.entity.isEnableSpec=val;
@@ -137,6 +162,18 @@ app.controller('goodsController' ,function($scope,$controller,itemCatService,goo
     //设置是否推送首页广告  默认0:不推送
     $scope.setIsIndexad = function(val){
     	$scope.entity.isIndexad=val;
+    }
+   //设置默认推送广告
+    $scope.setIsIndexadChecked = function(){
+    	if($scope.entity.isIndexad==0){
+			return true;
+		}else{
+			if($scope.entity.isIndexad==undefined){
+				return true;
+			}else{
+			    return false;
+			}
+		}
     }
     
     $scope.uploadFile = function()
