@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbOrderEvaluateMapper;
+import com.pinyougou.pojo.TbOrderEvaluate;
+import com.pinyougou.pojo.TbOrderEvaluateExample;
+import com.pinyougou.pojo.TbOrderEvaluateExample.Criteria;
 import com.pinyougou.service.evaluate.EvaluateService;
 
 @Service
@@ -47,4 +50,24 @@ public class EvaluateServiceImpl implements EvaluateService {
 			return null;
 		}
 	}
+
+	@Override
+	public Boolean selectByGUID(Map<String, Object> paramMap) {
+		String userId = (String)paramMap.get("userId");
+		String orderId = (String)paramMap.get("orderId");
+		String[] goodsIds = (String[])paramMap.get("goodsIds");
+		for(String goodsId:goodsIds){
+			TbOrderEvaluateExample example = new TbOrderEvaluateExample();
+			Criteria cri = example.createCriteria();
+			cri.andUserIdEqualTo(Long.parseLong(userId));
+			cri.andOrderIdEqualTo(Long.parseLong(orderId));
+			cri.andGoodsIdEqualTo(Long.parseLong(goodsId));
+			List<TbOrderEvaluate> evaluateList = evaluateMapper.selectByExample(example);
+			if(evaluateList!=null&&evaluateList.size()>0){
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

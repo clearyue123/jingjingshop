@@ -2,6 +2,7 @@ package com.pinyougou.controller.manage;
 
 import com.github.pagehelper.Page;
 import com.pinyougou.common.ApiResult;
+import com.pinyougou.pojo.TbOrderEvaluate;
 import com.pinyougou.service.evaluate.EvaluateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,8 +60,13 @@ public class EvaluateController {
             paramMap.put("sellerEvaluateScore",sellerEvaluateScore);
             paramMap.put("shipSpeedScore",shipSpeedScore);
             paramMap.put("shipServiceScore",shipServiceScore);
-            evaluateService.add(paramMap);
-            return new ApiResult(200,"评论成功","");
+            Boolean isEvaluateFlag = evaluateService.selectByGUID(paramMap);
+            if(isEvaluateFlag){
+            	return new ApiResult(201,"该商品已经评论过！","");
+            }else{
+            	evaluateService.add(paramMap);
+            	return new ApiResult(200,"评论成功！","");
+            }
         }catch(Exception e){
             e.printStackTrace();
             return new ApiResult(201,"评论失败","");

@@ -24,4 +24,11 @@ public interface EvaluateService {
      */
 	Page<Map<String, Object>> selectEvaluateList(long goodsId,Integer pageNum,Integer pageSize);
     
+	/**
+	 * goodid userid 通过
+	 * @param paramMap
+	 * @return
+	 */
+	Boolean selectByGUID(Map<String, Object> paramMap);
+    
 }

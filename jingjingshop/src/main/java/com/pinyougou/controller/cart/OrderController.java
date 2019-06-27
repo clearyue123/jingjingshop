@@ -242,7 +242,11 @@ public class OrderController {
 			Map<String,Object> paramMap = new HashMap<>();
 			paramMap.put("USERID", userId);
 			paramMap.put("orderId", orderId);
+			Map<String,Object> address = addressService.findListByUserId(userId);
 			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
+			orderDetailMap.put("provinceName", address.get("province_name"));
+			orderDetailMap.put("cityName", address.get("city_name"));
+			orderDetailMap.put("areaName", address.get("area_name"));
 			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(Long.parseLong(orderId));
 			if(itemMapList!=null){
 				orderDetailMap.put("itemMapList", itemMapList);

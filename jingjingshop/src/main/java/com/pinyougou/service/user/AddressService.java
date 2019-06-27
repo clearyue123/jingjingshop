@@ -60,6 +60,11 @@ public interface AddressService {
 	 */
 	public PageResult findPage(TbAddress address, int pageNum,int pageSize);
 	
+	/**
+	 * 通过用户id查地址信息
+	 * @param userId
+	 * @return
+	 */
 	public Map<String,Object> findListByUserId(String userId);
 	
 }
