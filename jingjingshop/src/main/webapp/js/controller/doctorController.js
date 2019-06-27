@@ -22,7 +22,7 @@ app.controller("doctorController",function($scope,$controller,$http,doctorServic
 			serviceObject = doctorService.update($scope.entity);
 		}
 		serviceObject.success(
-				function(reponse){
+				function(response){
 				   if(response.code == 200){
 					   alert(response.message);
 					   $scope.reloadList();

@@ -211,14 +211,20 @@ public class DoctorServiceImpl  implements DoctorService {
 		for(int i=0;i<total;i++){
 			Map<String,Object> doctorMap = listDoctor.get(i);
 			Double rowNum = (Double)doctorMap.get("rowNum");
-			if(rowNum<=quarter&&rowNum>1){
-				doctorMap.put("doctorLevel", "A");
-			}else if(rowNum<=quarter*2&&rowNum>quarter){
-				doctorMap.put("doctorLevel", "B");
-			}else if(rowNum<=quarter*3&&rowNum>quarter*2){
-				doctorMap.put("doctorLevel", "C");
-			}else{
+			Integer points = (Integer)doctorMap.get("points")==null?0:(Integer)doctorMap.get("points");
+			if(points==0){
+				doctorMap.put("points", points);
 				doctorMap.put("doctorLevel", "D");
+			}else{
+				if(rowNum<=quarter&&rowNum>=1){
+					doctorMap.put("doctorLevel", "A");
+				}else if(rowNum<=quarter*2&&rowNum>quarter){
+					doctorMap.put("doctorLevel", "B");
+				}else if(rowNum<=quarter*3&&rowNum>quarter*2){
+					doctorMap.put("doctorLevel", "C");
+				}else{
+					doctorMap.put("doctorLevel", "D");
+				}
 			}
 		}
 		return listDoctor;
@@ -264,6 +270,17 @@ public class DoctorServiceImpl  implements DoctorService {
 		for(Long id:ids){
 			tbDocMapper.deleteByPrimaryKey(id);
 		}
+	}
+
+	@Override
+	public TbDoctor findDoctorById(Long did) {
+		TbDoctor doctor = tbDocMapper.selectById(did);
+		return doctor;
+	}
+
+	@Override
+	public void update(TbDoctor doctor) {
+		tbDocMapper.updateByPrimaryKey(doctor);
 	}
 
 

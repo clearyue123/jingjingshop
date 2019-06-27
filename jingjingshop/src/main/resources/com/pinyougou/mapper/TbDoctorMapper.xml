@@ -417,7 +417,7 @@
 			tb_doctor t,
 		  (SELECT @rowNum:=0) b
 		ORDER BY
-			t.points_all
+			t.points
 		DESC
   </select>
   

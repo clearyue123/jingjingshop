@@ -579,4 +579,36 @@ public class DoctorController {
 			return new ApiResult(201, "删除失败！", "");
 		}
 	}
+	
+	/**
+	 * 后台管理 医生id查医生信息
+	 * @param did
+	 * @return
+	 */
+	@RequestMapping("/findOne")
+	public ApiResult findOne(@RequestParam(value="id",required=true)Long did){
+		try{
+			TbDoctor doctor = doctorService.findDoctorById(did);
+			return new ApiResult(200, "查询成功！",doctor);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "查询失败！","");
+		}
+	}
+	
+	/**
+	 * 后台管理 医生更新
+	 * @param doctor
+	 * @return
+	 */
+	@RequestMapping("/update")
+	public ApiResult update(@RequestBody TbDoctor doctor){
+		try{
+			doctorService.update(doctor);
+			return new ApiResult(200, "更新成功！","");
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "更新失败！","");
+		}
+	}
 }

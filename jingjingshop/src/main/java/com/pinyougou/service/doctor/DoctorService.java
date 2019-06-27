@@ -127,9 +127,22 @@ public interface DoctorService {
 	public int add(TbDoctor user);
     
 	/**
-	 * 后台管理 通过id删除医生
+	 * 后台管理 通过id数组删除医生
 	 * @param ids
 	 */
 	public void delete(Long[] ids);
+    
+	/**
+	 * 后台管理 通过医生id查询医生信息
+	 * @param did
+	 * @return
+	 */
+	public TbDoctor findDoctorById(Long did);
+
+	/**
+	 * 后台管理 医生更新
+	 * @param doctor
+	 */
+	public void update(TbDoctor doctor);
 	
 }
