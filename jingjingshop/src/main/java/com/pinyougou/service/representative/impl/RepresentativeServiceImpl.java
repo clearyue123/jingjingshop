@@ -1,5 +1,6 @@
 package com.pinyougou.service.representative.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,6 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 
     @Autowired
     private TbRepresentativeUserMapper  tbRepresentativeUserMapper;
-
     @Autowired
     private TbRepresentMapper representMapper;
 
@@ -72,13 +72,6 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 	public Map<String,Object> firstInfo(TbRepresent user) {
 		return tbRepresentativeUserMapper.selectByUnionId(user);
 	}
-
-
-	@Override
-	public int add(TbRepresent user) {
-		return tbRepresentativeUserMapper.add(user);
-	}
-
 
 	@Override
 	public int updateInfo(TbRepresent user) {
@@ -181,7 +174,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 
 
 	@Override
-	public Page search(Map<String, String> searchEntity, int page, int rows) {
+	public Page<TbRepresent> search(Map<String, String> searchEntity, int page, int rows) {
 		PageHelper.startPage(page, rows);
 		String phone = (String)searchEntity.get("phone");
 		String userName = (String)searchEntity.get("userName");
@@ -199,6 +192,42 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 		}
 		Page<TbRepresent> pageData = (Page<TbRepresent>)data;
 		return pageData;
+	}
+
+	@Override
+	public int add(TbRepresent represent) {
+		represent.setCreateDate(new Date());
+		return representMapper.insert(represent);
+	}
+
+
+	@Override
+	public void delete(Long[] ids) {
+	   for (Long id : ids) {
+		  representMapper.deleteByPrimaryKey(id);
+	  }
+	}
+
+
+	@Override
+	public TbRepresent findOne(Long id) {
+		return representMapper.selectByPrimaryKey(id);
+	}
+
+
+	@Override
+	public void update(TbRepresent tbRepresent) {
+		TbRepresent originalRepresent = representMapper.selectByPrimaryKey(tbRepresent.getRid());
+		if(tbRepresent.getUsername()!=null&&tbRepresent.getUsername().trim().length()>0){
+			originalRepresent.setUsername(tbRepresent.getUsername());
+		}
+		if(tbRepresent.getName()!=null&&tbRepresent.getName().trim().length()>0){
+			originalRepresent.setName(tbRepresent.getName());
+		}
+		if(tbRepresent.getPhone()!=null&&tbRepresent.getPhone().trim().length()>0){
+			originalRepresent.setPhone(tbRepresent.getPhone());
+		}
+		representMapper.updateByPrimaryKey(tbRepresent);
 	}
 
 }

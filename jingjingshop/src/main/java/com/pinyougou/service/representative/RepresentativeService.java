@@ -81,18 +81,37 @@ public interface RepresentativeService {
     public  String  FindPointRequestByPrid(Long rid);
     
     /**
-     * 代表查看商品数量信息
+     * 后台 代表查看商品数量信息
      * @param representId
      * @return
      */
     List<Map<String, Object>> findGoodsMsg(Long representId);
     
     /**
-     * 代表管理 搜索功能
+     * 后台 代表管理 搜索功能
      * @param searchEntity
      * @param page
      * @param rows
      * @return
      */
 	public Page<TbRepresent> search(Map<String, String> searchEntity, int page, int rows);
+    
+	/**
+	 * 后台 代表管理 删除
+	 * @param ids
+	 */
+	public void delete(Long[] ids);
+   
+	/**
+    * 后台 通过代表id查代表信息
+    * @param id
+    * @return
+    */
+	public TbRepresent findOne(Long id);
+    
+	/**
+	 * 后台 更新代表
+	 * @param tbRepresent
+	 */
+	public void update(TbRepresent tbRepresent);
 }

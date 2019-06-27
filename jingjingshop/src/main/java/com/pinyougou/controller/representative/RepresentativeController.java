@@ -493,4 +493,68 @@ public class RepresentativeController {
 		   return new ApiResult(201, "error", "");
 	   }
    }
+   
+   /**
+    * 后台 代表管理 新增代表
+    * @param tbRepresent
+    * @return
+    */
+   @RequestMapping("/add")
+   public ApiResult add(@RequestBody TbRepresent tbRepresent){
+	   try{
+		   representativeService.add(tbRepresent);
+		   return new ApiResult(200, "新增成功", "");
+	   }catch(Exception e){
+		   e.printStackTrace();
+		   return new ApiResult(201, "新增失败", "");
+	   }
+   }
+   
+   /**
+    * 后台 代表管理 批量删除
+    * @param ids
+    * @return
+    */
+   @RequestMapping("/dele")
+   public ApiResult delete(@RequestParam(value="ids",required=true)Long[] ids){
+	   try{
+		   representativeService.delete(ids);
+		   return new ApiResult(200, "删除成功", "");
+	   }catch(Exception e){
+		   e.printStackTrace();
+		   return new ApiResult(201, "删除失败", "");
+	   }
+   }
+   
+   /**
+    * 后台 代表管理 通过代表id查代表信息
+    * @param id
+    * @return
+    */
+   @RequestMapping("/findOne")
+   public ApiResult findOne(Long id){
+	   try{
+		   TbRepresent represent = representativeService.findOne(id);
+		   return new ApiResult(200, "查询成功！", represent);
+	   }catch(Exception e){
+		   e.printStackTrace();
+		   return new ApiResult(201, "查询失败！", "");
+	   }
+   }
+   
+   /**
+    * 后台 代表管理 更新代表信息
+    * @param tbRepresent
+    * @return
+    */
+   @RequestMapping("/update")
+   public ApiResult update(@RequestBody TbRepresent tbRepresent){
+	   try{
+		   representativeService.update(tbRepresent);
+		   return new ApiResult(200, "更新成功！", "");
+	   }catch(Exception e){
+		   e.printStackTrace();
+		   return new ApiResult(201, "更新失败！", "");
+	   }
+   }
 }

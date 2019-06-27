@@ -13,4 +13,51 @@ app.controller("representController",function($scope,$controller,$http,represent
 		});
 	}
 	
+	
+	//新增代表
+	$scope.save = function(){
+		var serviceObject;
+		if($scope.entity.did == null){
+			serviceObject = representService.add($scope.entity);
+		}else{
+			serviceObject = representService.update($scope.entity);
+		}
+		serviceObject.success(
+				function(response){
+				   if(response.code == 200){
+					   alert(response.message);
+					   $scope.reloadList();
+				   }else{
+					   alert(response.message);
+				   }
+			});
+	}
+	
+	//删除代表
+	$scope.dele = function(){
+		representService.dele($scope.selectIds).success(
+		    function(response){
+		    	if(response.code == 200){
+					   alert(response.message);
+					   $scope.reloadList();
+				   }else{
+					   alert(response.message);
+				   }
+		    }		
+		);
+	}
+	
+	//通过代表id查代表信息
+	$scope.findRepresentById = function(id){
+		representService.findOne(id).success(
+		    function(response){
+		    	if(response.code == 200){
+		    		$scope.entity = response.data;
+		    	}else{
+		    		alert(response.message);
+		    	}
+		    }		
+		
+		);
+	}
 });

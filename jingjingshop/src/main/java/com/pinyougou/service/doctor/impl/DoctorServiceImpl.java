@@ -280,6 +280,17 @@ public class DoctorServiceImpl  implements DoctorService {
 
 	@Override
 	public void update(TbDoctor doctor) {
+		Long did = doctor.getDid();
+		TbDoctor originalDoctor = tbDocMapper.selectById(did);
+		if(doctor.getUsername()!=null&&doctor.getUsername().trim().length()>0){
+			originalDoctor.setUsername(doctor.getUsername());
+		}
+		if(doctor.getName()!=null&&doctor.getName().trim().length()>0){
+			originalDoctor.setName(doctor.getName());
+		}
+		if(doctor.getPhone()!=null&&doctor.getPhone().trim().length()>0){
+			originalDoctor.setPhone(doctor.getPhone());
+		}
 		tbDocMapper.updateByPrimaryKey(doctor);
 	}
 
