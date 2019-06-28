@@ -2,8 +2,9 @@ package com.pinyougou.controller.manage;
 
 import com.github.pagehelper.Page;
 import com.pinyougou.common.ApiResult;
-import com.pinyougou.pojo.TbOrderEvaluate;
 import com.pinyougou.service.evaluate.EvaluateService;
+import com.pinyougou.service.order.OrderService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,9 @@ public class EvaluateController {
     @Autowired
     private EvaluateService evaluateService;
 
+    @Autowired
+    private OrderService orderService;
+    
     /**
      * 商品发表评论
      * @param userId 用户ID
@@ -62,9 +66,13 @@ public class EvaluateController {
             paramMap.put("shipServiceScore",shipServiceScore);
             Boolean isEvaluateFlag = evaluateService.selectByGUID(paramMap);
             if(isEvaluateFlag){
-            	return new ApiResult(201,"该商品已经评论过！","");
+            	return new ApiResult(201,"该商品已经评论过,请勿重复提交！","");
             }else{
             	evaluateService.add(paramMap);
+            	Map<String,Object> statusMap = new HashMap<>();
+            	statusMap.put("ORDERID", orderId);
+            	statusMap.put("STATUS", "5");//交易成功
+            	orderService.updateStatusById(statusMap);
             	return new ApiResult(200,"评论成功！","");
             }
         }catch(Exception e){

@@ -523,6 +523,7 @@
 			tb_goods t
 	    <where>
 	        t.is_delete = '0'
+	        adn t.is_marketable = '1'
 	        <if test="searchGoodsName != null">
 	         and t.goods_name LIKE CONCAT(
 				'%',

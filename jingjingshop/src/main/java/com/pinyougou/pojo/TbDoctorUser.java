@@ -32,6 +32,8 @@ public class TbDoctorUser {
      */
     private Date createDate;
 
+    public TbDoctorUser(){}
+    
     public TbDoctorUser(Long did, Long uid) {
 		this.did = did;
 		this.uid = uid;

@@ -1,5 +1,6 @@
 package com.pinyougou.controller.doctor;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,8 @@ public class DoctorLoginController {
 		if(unionid!=null&&unionid.trim().length()>0){
 			doctor.setUnionId(unionid);
 		}
-		doctor.setPoints(0);
-		doctor.setPointsAll(0);
+		doctor.setPoints(new BigDecimal("0"));
+		doctor.setPointsAll(new BigDecimal("0"));
 		doctor.setCreateDate(new Date());
 		TbDoctor result = doctorService.firstInfo(doctor);//union查
 		if (result != null) {

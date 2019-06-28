@@ -1,5 +1,6 @@
 package com.pinyougou.pojo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,7 +70,7 @@ public class TbUserExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-14
+     * @date 2019-06-28
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1662,52 +1663,52 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andPointsEqualTo(Integer value) {
+        public Criteria andPointsEqualTo(BigDecimal value) {
             addCriterion("points =", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotEqualTo(Integer value) {
+        public Criteria andPointsNotEqualTo(BigDecimal value) {
             addCriterion("points <>", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsGreaterThan(Integer value) {
+        public Criteria andPointsGreaterThan(BigDecimal value) {
             addCriterion("points >", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPointsGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("points >=", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsLessThan(Integer value) {
+        public Criteria andPointsLessThan(BigDecimal value) {
             addCriterion("points <", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsLessThanOrEqualTo(Integer value) {
+        public Criteria andPointsLessThanOrEqualTo(BigDecimal value) {
             addCriterion("points <=", value, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsIn(List<Integer> values) {
+        public Criteria andPointsIn(List<BigDecimal> values) {
             addCriterion("points in", values, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotIn(List<Integer> values) {
+        public Criteria andPointsNotIn(List<BigDecimal> values) {
             addCriterion("points not in", values, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsBetween(Integer value1, Integer value2) {
+        public Criteria andPointsBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("points between", value1, value2, "points");
             return (Criteria) this;
         }
 
-        public Criteria andPointsNotBetween(Integer value1, Integer value2) {
+        public Criteria andPointsNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("points not between", value1, value2, "points");
             return (Criteria) this;
         }
@@ -1722,52 +1723,52 @@ public class TbUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllEqualTo(Integer value) {
+        public Criteria andPointsAllEqualTo(BigDecimal value) {
             addCriterion("points_all =", value, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllNotEqualTo(Integer value) {
+        public Criteria andPointsAllNotEqualTo(BigDecimal value) {
             addCriterion("points_all <>", value, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllGreaterThan(Integer value) {
+        public Criteria andPointsAllGreaterThan(BigDecimal value) {
             addCriterion("points_all >", value, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPointsAllGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("points_all >=", value, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllLessThan(Integer value) {
+        public Criteria andPointsAllLessThan(BigDecimal value) {
             addCriterion("points_all <", value, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllLessThanOrEqualTo(Integer value) {
+        public Criteria andPointsAllLessThanOrEqualTo(BigDecimal value) {
             addCriterion("points_all <=", value, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllIn(List<Integer> values) {
+        public Criteria andPointsAllIn(List<BigDecimal> values) {
             addCriterion("points_all in", values, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllNotIn(List<Integer> values) {
+        public Criteria andPointsAllNotIn(List<BigDecimal> values) {
             addCriterion("points_all not in", values, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllBetween(Integer value1, Integer value2) {
+        public Criteria andPointsAllBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("points_all between", value1, value2, "pointsAll");
             return (Criteria) this;
         }
 
-        public Criteria andPointsAllNotBetween(Integer value1, Integer value2) {
+        public Criteria andPointsAllNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("points_all not between", value1, value2, "pointsAll");
             return (Criteria) this;
         }
@@ -2055,7 +2056,7 @@ public class TbUserExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-14
+     * @date 2019-06-28
      */
     public static class Criterion {
         private String condition;

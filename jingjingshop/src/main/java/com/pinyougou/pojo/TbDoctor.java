@@ -1,12 +1,10 @@
 package com.pinyougou.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 
- * 
  * @author yue
- * 
  * @date 2019-06-11
  */
 public class TbDoctor {
@@ -27,14 +25,14 @@ public class TbDoctor {
     /**
      * 个人积分
      */
-    private Integer points;
+    private BigDecimal points;
 
-    private String phone;
+	private String phone;
 
     /**
      * 累计积分
      */
-    private Integer pointsAll;
+    private BigDecimal pointsAll;
 
     /**
      * 科室
@@ -139,28 +137,12 @@ public class TbDoctor {
         this.headPic = headPic == null ? null : headPic.trim();
     }
 
-    public Integer getPoints() {
-        return points;
-    }
-
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
-    }
-
-    public Integer getPointsAll() {
-        return pointsAll;
-    }
-
-    public void setPointsAll(Integer pointsAll) {
-        this.pointsAll = pointsAll;
     }
 
     public String getOffice() {
@@ -226,4 +208,20 @@ public class TbDoctor {
 	public void setCreateDateStr(String createDateStr) {
 		this.createDateStr = createDateStr;
 	}
+	
+    public BigDecimal getPoints() {
+			return points;
+		}
+
+    public void setPoints(BigDecimal points) {
+			this.points = points;
+		}
+
+    public BigDecimal getPointsAll() {
+			return pointsAll;
+		}
+
+   public void setPointsAll(BigDecimal pointsAll) {
+			this.pointsAll = pointsAll;
+		}
 }

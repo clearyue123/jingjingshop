@@ -1,13 +1,11 @@
 package com.pinyougou.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
 /**
- * 
- * 
  * @author yue
- * 
  * @date 2019-06-11
  */
 public class TbRepresent {
@@ -29,12 +27,12 @@ public class TbRepresent {
     /**
      * 积分
      */
-    private Integer points;
+    private BigDecimal points;
 
     /**
      * 最终累计积分
      */
-    private Integer pointsAll;
+    private BigDecimal pointsAll;
 
     /**
      * 手机号
@@ -93,8 +91,8 @@ public class TbRepresent {
 
 	public TbRepresent(Long rid, int po, int po_all, Date createDate) {
 		this.rid = rid;
-		this.points = po;
-		this.pointsAll = po_all;
+		this.points = new BigDecimal(po);
+		this.pointsAll = new BigDecimal(po_all);
 		this.createDate= createDate;
 	}
 
@@ -130,23 +128,23 @@ public class TbRepresent {
         this.headPic = headPic == null ? null : headPic.trim();
     }
 
-    public Integer getPoints() {
-        return points;
-    }
+    public BigDecimal getPoints() {
+		return points;
+	}
 
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
+	public void setPoints(BigDecimal points) {
+		this.points = points;
+	}
 
-    public Integer getPointsAll() {
-        return pointsAll;
-    }
+	public BigDecimal getPointsAll() {
+		return pointsAll;
+	}
 
-    public void setPointsAll(Integer pointsAll) {
-        this.pointsAll = pointsAll;
-    }
+	public void setPointsAll(BigDecimal pointsAll) {
+		this.pointsAll = pointsAll;
+	}
 
-    public String getPhone() {
+	public String getPhone() {
         return phone;
     }
 

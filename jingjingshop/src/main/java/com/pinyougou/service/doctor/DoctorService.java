@@ -145,4 +145,12 @@ public interface DoctorService {
 	 */
 	public void update(TbDoctor doctor);
 	
+	/**
+	 * 小程序 购买成功后更新医生代表积分
+	 * 计算规则：
+	 *     1.医生积分=支付金额*0.01
+	 *     2.代表积分=支付金额*0.005
+	 * @param userId
+	 */
+	public void updatePoints(Long userId,Long orderId);
 }

@@ -33,6 +33,7 @@ import com.pinyougou.pojo.TbShopCartSpeExample;
 import com.pinyougou.pojo.TbShopCartSpeExample.Criteria;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.cart.CartService;
+import com.pinyougou.service.doctor.DoctorService;
 import com.pinyougou.service.order.OrderService;
 import com.pinyougou.service.user.AddressService;
 
@@ -68,6 +69,8 @@ public class OrderController {
     private TbUserMapper userMapper;
     @Autowired
     private TbShopCartMapper shopCartMapper;
+    @Autowired
+    private DoctorService doctorService;
 	//设置id生成器
 	private IdWorker idWorker = new IdWorker();
 	/**
@@ -302,12 +305,13 @@ public class OrderController {
 		        orderStatusMap.put("STATUS", "4");//待发货
 			    orderService.updateStatusById(orderStatusMap);
 				return new ApiResult(200, "已提醒发货","");
-			}else if("2".equals(operateFlag)){//待发货
+			}else if("2".equals(operateFlag)){//已付款，提醒发货
 				 Map<String,Object> orderStatusMap = new HashMap<>();
 		         orderStatusMap.put("ORDERID", orderId);
-		         orderStatusMap.put("STATUS", "3");//待发货
+		         orderStatusMap.put("STATUS", "3");//已付款，提醒发货
 		         orderStatusMap.put("PAYMENTTIME", new Date());
-			     orderService.updateStatusById(orderStatusMap);
+			     orderService.updateStatusById(orderStatusMap);//更新订单状态
+			     doctorService.updatePoints(Long.parseLong(userId), Long.parseLong(orderId));//付完款医生代表新增积分
 			     return new ApiResult(200, "已付款","");
 			}else if("3".equals(operateFlag)){//已收货
 				Map<String,Object> paramMap = new HashMap<>();

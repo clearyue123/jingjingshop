@@ -1,5 +1,6 @@
 package com.pinyougou.controller.doctor;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,6 @@ import com.pinyougou.pojo.TbDoctor;
 import com.pinyougou.pojo.TbDoctorUser;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
-import com.pinyougou.pojo.TbRepresent;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.card.CardService;
 import com.pinyougou.service.doctor.DoctorService;
@@ -515,9 +515,9 @@ public class DoctorController {
 			if(doctor==null){
 				return new ApiResult(201, "新增积分失败，该医生不存在!", "");
 			}else{
-				Integer addPoints = doctor.getPoints()==null?0:doctor.getPoints();
+				Double addPoints = doctor.getPoints()==null?0:doctor.getPoints().doubleValue();
 				addPoints+=50;
-				doctor.setPoints(addPoints);
+				doctor.setPoints(new BigDecimal(addPoints));
 				doctorService.updateByPrimaryKey(doctor);
 				return new ApiResult(200, "新增积分成功", "");
 			}

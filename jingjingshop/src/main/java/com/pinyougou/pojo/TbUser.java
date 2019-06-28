@@ -1,5 +1,6 @@
 package com.pinyougou.pojo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -114,12 +115,12 @@ public class TbUser {
     /**
      * 积分
      */
-    private Integer points;
+    private BigDecimal points;
 
     /**
      * 最终累计积分
      */
-    private Integer pointsAll;
+    private BigDecimal pointsAll;
 
     /**
      * 病历
@@ -325,23 +326,23 @@ public class TbUser {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public Integer getPoints() {
-        return points;
-    }
+    public BigDecimal getPoints() {
+		return points;
+	}
 
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
+	public void setPoints(BigDecimal points) {
+		this.points = points;
+	}
 
-    public Integer getPointsAll() {
-        return pointsAll;
-    }
+	public BigDecimal getPointsAll() {
+		return pointsAll;
+	}
 
-    public void setPointsAll(Integer pointsAll) {
-        this.pointsAll = pointsAll;
-    }
+	public void setPointsAll(BigDecimal pointsAll) {
+		this.pointsAll = pointsAll;
+	}
 
-    public String getIllness() {
+	public String getIllness() {
         return illness;
     }
 
