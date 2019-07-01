@@ -228,7 +228,7 @@ public class DoctorServiceImpl  implements DoctorService {
 		for(int i=0;i<total;i++){
 			Map<String,Object> doctorMap = listDoctor.get(i);
 			Double rowNum = (Double)doctorMap.get("rowNum");
-			Integer points = (Integer)doctorMap.get("points")==null?0:(Integer)doctorMap.get("points");
+			Double points = (BigDecimal)doctorMap.get("points")==null?0:((BigDecimal)doctorMap.get("points")).doubleValue();
 			if(points==0){
 				doctorMap.put("points", points);
 				doctorMap.put("doctorLevel", "D");
