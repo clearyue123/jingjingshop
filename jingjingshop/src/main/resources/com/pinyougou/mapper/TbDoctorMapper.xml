@@ -443,4 +443,28 @@
 			t.user_id = #{patientId}
   </select>
   
+  <select id="searchDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
+	     SELECT
+			t.did,
+			t.`name` doctorName,
+			t.points,
+			t.office,
+			t.hospital,
+			t.phone,
+			t.points_all pointsAll,
+			t.username,
+			t.create_date createDate
+		FROM
+			tb_doctor t
+         <where>
+            <if test="userName != null" >
+                t.username like CONCAT('%',#{userName},'%')
+            </if>
+             <if test="phone != null" >
+                t.phone = #{phone,jdbcType=VARCHAR}
+            </if>
+         </where>
+          
+  </select>
+  
 </mapper>

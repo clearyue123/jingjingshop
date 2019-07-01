@@ -262,23 +262,14 @@ public class DoctorServiceImpl  implements DoctorService {
 	}
 
 	@Override
-	public Page<TbDoctor> search(Map<String, String> searchEntity, int page, int rows) {
+	public Page<Map<String,Object>> search(Map<String, String> searchEntity, int page, int rows) {
 		PageHelper.startPage(page, rows);
-		String phone = (String)searchEntity.get("phone");
-		String userName = (String)searchEntity.get("userName");
-		TbDoctorExample example = new TbDoctorExample();
-		Criteria cri = example.createCriteria();
-		if(phone!=null&&phone.trim().length()>0){
-			cri.andPhoneEqualTo(phone);
+		List<Map<String,Object>> data = tbDocMapper.searchDoctorList(searchEntity);
+		for (Map<String, Object> doctorMap : data) {
+			Date createDate = (Date)doctorMap.get("createDate");
+			doctorMap.put("createDateStr", DateUtils.getDateStrFromDate(createDate));
 		}
-		if(userName!=null&&userName.trim().length()>0){
-			cri.andUsernameEqualTo(userName);
-		}
-		 List<TbDoctor> data = tbDocMapper.selectByExample(example);
-		for(TbDoctor doctor:data){
-			doctor.setCreateDateStr(DateUtils.getDateStrFromDate(doctor.getCreateDate()));
-		}
-		Page<TbDoctor> pageData = (Page<TbDoctor>)data;
+		Page<Map<String,Object>> pageData = (Page<Map<String,Object>>)data;
 		return pageData;
 	}
 

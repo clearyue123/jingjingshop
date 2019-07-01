@@ -46,4 +46,11 @@ public interface TbDoctorMapper {
 	TbDoctor selectByUnionId(TbDoctor user);
 
 	List<Map<String, Object>> selectPurchaseRecord(long patientId);
+    
+	/**
+     * 后台管理 搜索医生列表
+     * @param searchEntity
+     * @return
+     */
+	List<Map<String, Object>> searchDoctorList(Map<String, String> searchEntity);
 }

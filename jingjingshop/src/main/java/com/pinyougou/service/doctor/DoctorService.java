@@ -117,7 +117,7 @@ public interface DoctorService {
      * @param rows
      * @return
      */
-	public Page<TbDoctor> search(Map<String, String> searchEntity, int page, int rows);
+	public Page<Map<String,Object>> search(Map<String, String> searchEntity, int page, int rows);
 	
 	/**
 	 * 后台管理 新增医生

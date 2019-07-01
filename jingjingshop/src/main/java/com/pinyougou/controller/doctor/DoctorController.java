@@ -537,7 +537,7 @@ public class DoctorController {
 	@RequestMapping("/search")
 	public ApiResult search(@RequestBody Map<String,String> searchEntity,int page, int rows){
 		   try{
-			   Page<TbDoctor> result = doctorService.search(searchEntity,page,rows);
+			   Page<Map<String,Object>> result = doctorService.search(searchEntity,page,rows);
 			   Map<String,Object> data = new HashMap<String,Object>();
 			   data.put("rows", result.getResult());
 			   data.put("total", result.getTotal());

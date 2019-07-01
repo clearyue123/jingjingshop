@@ -32,7 +32,7 @@ public class ShipController {
 	 * @param shipCompanyCode 物流公司编码
 	 * @param expressCode 快递单号
 	 * @param orderId 订单id
-	 * @param httpKey(o0otui0fghuas8t8)
+	 * @param md5code
 	 * @return
 	 */
 	@RequestMapping("/updateShipMessage")

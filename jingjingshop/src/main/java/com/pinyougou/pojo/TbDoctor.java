@@ -23,14 +23,14 @@ public class TbDoctor {
     private String headPic;
 
     /**
-     * 个人积分
+     * 累计积分
      */
     private BigDecimal points;
 
 	private String phone;
 
     /**
-     * 累计积分
+     * 已兑换积分
      */
     private BigDecimal pointsAll;
 

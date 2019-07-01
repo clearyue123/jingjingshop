@@ -17,7 +17,7 @@ app.controller("representController",function($scope,$controller,$http,represent
 	//新增代表
 	$scope.save = function(){
 		var serviceObject;
-		if($scope.entity.did == null){
+		if($scope.entity.rid == null){
 			serviceObject = representService.add($scope.entity);
 		}else{
 			serviceObject = representService.update($scope.entity);

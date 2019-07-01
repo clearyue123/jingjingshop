@@ -64,6 +64,8 @@
 										  <th class="sorting_asc">用户名</th>
 										  <th class="sorting_asc">微信名</th>
 									      <th class="sorting">手机号</th>									      
+									      <th class="sorting">累计积分</th>									      
+									      <th class="sorting">已兑换积分</th>									      
 									      <th class="sorting">创建日期</th>									      
 					                      <th class="text-center">操作</th>
 			                          </tr>
@@ -75,6 +77,8 @@
 			                              <td>{{entity.username}}</td>		
 			                              <td>{{entity.name}}</td>		
 			                              <td>{{entity.phone}}</td>		
+			                              <td>{{entity.points}}</td>		
+			                              <td>{{entity.pointsAll}}</td>		
 			                              <td>{{entity.createDateStr}}</td>		
                                           <td class="text-center">                                           
 		                                 	    <button type="button" class="btn bg-olive btn-xs"  data-toggle="modal" data-target="#editModal" ng-click="findRepresentById(entity.rid)">修改</button>                                           
@@ -110,6 +114,14 @@
 		      	<tr>
 		      		<td>手机号</td>
 		      		<td><input ng-model="entity.phone" class="form-control" placeholder="手机号" >  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>累计积分</td>
+		      		<td><input ng-model="entity.points" class="form-control" placeholder="累计积分" >  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>累计兑换积分</td>
+		      		<td><input ng-model="entity.pointsAll" class="form-control" placeholder="累计兑换积分" >  </td>
 		      	</tr>
 			 </table>				
 		</div>
