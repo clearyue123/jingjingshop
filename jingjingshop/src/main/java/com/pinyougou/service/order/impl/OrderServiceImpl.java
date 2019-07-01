@@ -114,9 +114,6 @@ public class OrderServiceImpl implements OrderService {
 			if(order.getStatus()!=null && order.getStatus().length()>0){
 				criteria.andStatusLike("%"+order.getStatus()+"%");
 			}
-			if(order.getShippingName()!=null && order.getShippingName().length()>0){
-				criteria.andShippingNameLike("%"+order.getShippingName()+"%");
-			}
 			if(order.getShippingCode()!=null && order.getShippingCode().length()>0){
 				criteria.andShippingCodeLike("%"+order.getShippingCode()+"%");
 			}

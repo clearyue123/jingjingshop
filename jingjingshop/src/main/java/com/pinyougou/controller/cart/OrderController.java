@@ -247,9 +247,12 @@ public class OrderController {
 			paramMap.put("orderId", orderId);
 			Map<String,Object> address = addressService.findListByUserId(userId);
 			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
-			orderDetailMap.put("provinceName", address.get("province_name"));
-			orderDetailMap.put("cityName", address.get("city_name"));
-			orderDetailMap.put("areaName", address.get("area_name"));
+			String provinceName = (String)orderDetailMap.get("provinceName");
+			String cityName = (String)orderDetailMap.get("cityName");
+			String areaName = (String)orderDetailMap.get("areaName");
+			orderDetailMap.put("provinceName", provinceName==null?address.get("city_name"):provinceName);
+			orderDetailMap.put("cityName",cityName==null?address.get("city_name"):cityName);
+			orderDetailMap.put("areaName",areaName==null?address.get("area_name"):areaName);
 			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(Long.parseLong(orderId));
 			if(itemMapList!=null){
 				orderDetailMap.put("itemMapList", itemMapList);
@@ -376,9 +379,12 @@ public class OrderController {
             	return new ApiResult(201, "请先去添加收货信息！","");
             }else{
 				//获取用户地址
-            	String areaName= (String)address.get("address");
+            	String addressDetail= (String)address.get("address");
             	String mobile= (String)address.get("mobile");
             	String contact= (String)address.get("contact");
+            	String provinceName = (String)address.get("province_name");
+            	String cityName = (String)address.get("city_name");
+            	String areaName = (String)address.get("area_name");
 				TbOrder tbOrder = new TbOrder();
 				TbOrderItem tbOrderItem = new TbOrderItem();
 				//设置orderId
@@ -389,9 +395,12 @@ public class OrderController {
 				tbOrder.setCreateTime(new Date());//下单时间
 				tbOrder.setUpdateTime(new Date());//更新时间
 				tbOrder.setUserId(userId);//当前用户
-				tbOrder.setReceiverAreaName(areaName);//收货人地址
+				tbOrder.setReceiverAreaName(addressDetail);//收货人地址
 				tbOrder.setReceiverMobile(mobile);//收货人电话
 				tbOrder.setReceiver(contact);//收货人
+				tbOrder.setReceiverProvince(provinceName);//收货人省名称
+				tbOrder.setReceiverCity(cityName);//收货人市名称
+				tbOrder.setReceiverArea(areaName);//收货人区名称
 				tbOrder.setPostFee("0.0");
 				Integer itemNum = 0;
 				BigDecimal payment = new BigDecimal(0);
@@ -465,9 +474,12 @@ public class OrderController {
 	        	BigDecimal reducedPrice = tbGoods.getReducedPrice();
 	        	BigDecimal payment = reducedPrice.multiply((new BigDecimal(num)));
 	        	//获取用户地址
-	        	String areaName= (String)address.get("address");
+	        	String addressDetail= (String)address.get("address");
             	String mobile= (String)address.get("mobile");
             	String contact= (String)address.get("contact");
+            	String provinceName = (String)address.get("province_name");
+            	String cityName = (String)address.get("city_name");
+            	String areaName = (String)address.get("area_name");
 				TbOrder tbOrder = new TbOrder();
 				TbOrderItem tbOrderItem = new TbOrderItem();
 				long orderId = idWorker.nextId();
@@ -477,9 +489,12 @@ public class OrderController {
 				tbOrder.setCreateTime(new Date());//下单时间
 				tbOrder.setUpdateTime(new Date());//更新时间
 				tbOrder.setUserId(userId);//当前用户
-				tbOrder.setReceiverAreaName(areaName);//收货人地址
+				tbOrder.setReceiverAreaName(addressDetail);//收货人地址
 				tbOrder.setReceiverMobile(mobile);//收货人电话
 				tbOrder.setReceiver(contact);//收货人
+				tbOrder.setReceiverProvince(provinceName);//收货人省名称
+				tbOrder.setReceiverCity(cityName);//收货人市名称
+				tbOrder.setReceiverArea(areaName);//收货人区名称
 				tbOrder.setPostFee("0.0");
 				tbOrder.setItemNum(Integer.parseInt(num));
 				tbOrder.setPayment(payment);

@@ -57,10 +57,8 @@ public class IdWorker {
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
     /**
-     * @param workerId
-     *            工作机器ID
-     * @param datacenterId
-     *            序列号
+     * @param workerId 工作机器ID
+     * @param datacenterId 序列号
      */
     public IdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {

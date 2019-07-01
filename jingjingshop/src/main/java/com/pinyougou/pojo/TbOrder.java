@@ -62,11 +62,12 @@ public class TbOrder {
      * 交易关闭时间
      */
     private Date closeTime;
-
+    
+    
     /**
-     * 物流名称
+     * 快递公司编码
      */
-    private String shippingName;
+    private String shippingCompanyCode;
 
     /**
      * 物流单号
@@ -142,7 +143,27 @@ public class TbOrder {
      * 派送类型
      */
     private String shippingType;
+    
+    /**
+     * 收货省名称
+     */
+    private String receiverProvince;
 
+    /**
+     * 收货市名称
+     */
+    private String receiverCity;
+
+    /**
+     * 收货区名称
+     */
+    private String receiverArea;
+
+    /**
+     * 快递单号
+     */
+    private String expressCode;
+    
     public Long getOrderId() {
         return orderId;
     }
@@ -231,15 +252,23 @@ public class TbOrder {
         this.closeTime = closeTime;
     }
 
-    public String getShippingName() {
-        return shippingName;
-    }
+    public String getShippingCompanyCode() {
+		return shippingCompanyCode;
+	}
 
-    public void setShippingName(String shippingName) {
-        this.shippingName = shippingName == null ? null : shippingName.trim();
-    }
+	public void setShippingCompanyCode(String shippingCompanyCode) {
+		this.shippingCompanyCode = shippingCompanyCode;
+	}
 
-    public String getShippingCode() {
+	public String getExpressCode() {
+		return expressCode;
+	}
+
+	public void setExpressCode(String expressCode) {
+		this.expressCode = expressCode;
+	}
+
+	public String getShippingCode() {
         return shippingCode;
     }
 
@@ -358,4 +387,29 @@ public class TbOrder {
     public void setShippingType(String shippingType) {
         this.shippingType = shippingType == null ? null : shippingType.trim();
     }
+
+	public String getReceiverProvince() {
+		return receiverProvince;
+	}
+
+	public void setReceiverProvince(String receiverProvince) {
+		this.receiverProvince = receiverProvince;
+	}
+
+	public String getReceiverCity() {
+		return receiverCity;
+	}
+
+	public void setReceiverCity(String receiverCity) {
+		this.receiverCity = receiverCity;
+	}
+
+	public String getReceiverArea() {
+		return receiverArea;
+	}
+
+	public void setReceiverArea(String receiverArea) {
+		this.receiverArea = receiverArea;
+	}
+    
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pinyougou.mapper.TbOrderMapper" >
-
-    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbOrder" >
+   
+   <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbOrder" >
         <id column="order_id" property="orderId" jdbcType="BIGINT" />
         <result column="payment" property="payment" jdbcType="DECIMAL" />
         <result column="payment_type" property="paymentType" jdbcType="VARCHAR" />
@@ -14,7 +14,7 @@
         <result column="consign_time" property="consignTime" jdbcType="TIMESTAMP" />
         <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
         <result column="close_time" property="closeTime" jdbcType="TIMESTAMP" />
-        <result column="shipping_name" property="shippingName" jdbcType="VARCHAR" />
+        <result column="shipping_company_code" property="shippingCompanyCode" jdbcType="VARCHAR" />
         <result column="shipping_code" property="shippingCode" jdbcType="VARCHAR" />
         <result column="user_id" property="userId" jdbcType="VARCHAR" />
         <result column="buyer_message" property="buyerMessage" jdbcType="VARCHAR" />
@@ -30,6 +30,10 @@
         <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
         <result column="item_num" property="itemNum" jdbcType="INTEGER" />
         <result column="shipping_type" property="shippingType" jdbcType="VARCHAR" />
+        <result column="receiver_province" property="receiverProvince" jdbcType="VARCHAR" />
+        <result column="receiver_city" property="receiverCity" jdbcType="VARCHAR" />
+        <result column="receiver_area" property="receiverArea" jdbcType="VARCHAR" />
+        <result column="express_code" property="expressCode" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -94,9 +98,10 @@
 
     <sql id="Base_Column_List" >
         order_id, payment, payment_type, post_fee, status, create_time, update_time, payment_time, 
-        consign_time, end_time, close_time, shipping_name, shipping_code, user_id, buyer_message, 
-        buyer_nick, buyer_rate, receiver_area_name, receiver_mobile, receiver_zip_code, receiver, 
-        expire, invoice_type, source_type, seller_id, item_num, shipping_type
+        consign_time, end_time, close_time, shipping_company_code, shipping_code, user_id, 
+        buyer_message, buyer_nick, buyer_rate, receiver_area_name, receiver_mobile, receiver_zip_code, 
+        receiver, expire, invoice_type, source_type, seller_id, item_num, shipping_type, 
+        receiver_province, receiver_city, receiver_area, express_code
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbOrderExample" >
@@ -137,23 +142,25 @@
         insert into tb_order (order_id, payment, payment_type, 
             post_fee, status, create_time, 
             update_time, payment_time, consign_time, 
-            end_time, close_time, shipping_name, 
+            end_time, close_time, shipping_company_code, 
             shipping_code, user_id, buyer_message, 
             buyer_nick, buyer_rate, receiver_area_name, 
             receiver_mobile, receiver_zip_code, receiver, 
             expire, invoice_type, source_type, 
-            seller_id, item_num, shipping_type
-            )
+            seller_id, item_num, shipping_type, 
+            receiver_province, receiver_city, receiver_area, 
+            express_code)
         values (#{orderId,jdbcType=BIGINT}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=VARCHAR}, 
             #{postFee,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
             #{updateTime,jdbcType=TIMESTAMP}, #{paymentTime,jdbcType=TIMESTAMP}, #{consignTime,jdbcType=TIMESTAMP}, 
-            #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{shippingName,jdbcType=VARCHAR}, 
+            #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, #{shippingCompanyCode,jdbcType=VARCHAR}, 
             #{shippingCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{buyerMessage,jdbcType=VARCHAR}, 
             #{buyerNick,jdbcType=VARCHAR}, #{buyerRate,jdbcType=VARCHAR}, #{receiverAreaName,jdbcType=VARCHAR}, 
             #{receiverMobile,jdbcType=VARCHAR}, #{receiverZipCode,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, 
             #{expire,jdbcType=TIMESTAMP}, #{invoiceType,jdbcType=VARCHAR}, #{sourceType,jdbcType=VARCHAR}, 
-            #{sellerId,jdbcType=VARCHAR}, #{itemNum,jdbcType=INTEGER}, #{shippingType,jdbcType=VARCHAR}
-            )
+            #{sellerId,jdbcType=VARCHAR}, #{itemNum,jdbcType=INTEGER}, #{shippingType,jdbcType=VARCHAR}, 
+            #{receiverProvince,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR}, #{receiverArea,jdbcType=VARCHAR}, 
+            #{expressCode,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbOrder" >
@@ -192,8 +199,8 @@
             <if test="closeTime != null" >
                 close_time,
             </if>
-            <if test="shippingName != null" >
-                shipping_name,
+            <if test="shippingCompanyCode != null" >
+                shipping_company_code,
             </if>
             <if test="shippingCode != null" >
                 shipping_code,
@@ -240,6 +247,18 @@
             <if test="shippingType != null" >
                 shipping_type,
             </if>
+            <if test="receiverProvince != null" >
+                receiver_province,
+            </if>
+            <if test="receiverCity != null" >
+                receiver_city,
+            </if>
+            <if test="receiverArea != null" >
+                receiver_area,
+            </if>
+            <if test="expressCode != null" >
+                express_code,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="orderId != null" >
@@ -275,8 +294,8 @@
             <if test="closeTime != null" >
                 #{closeTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="shippingName != null" >
-                #{shippingName,jdbcType=VARCHAR},
+            <if test="shippingCompanyCode != null" >
+                #{shippingCompanyCode,jdbcType=VARCHAR},
             </if>
             <if test="shippingCode != null" >
                 #{shippingCode,jdbcType=VARCHAR},
@@ -322,6 +341,18 @@
             </if>
             <if test="shippingType != null" >
                 #{shippingType,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverProvince != null" >
+                #{receiverProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverCity != null" >
+                #{receiverCity,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverArea != null" >
+                #{receiverArea,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCode != null" >
+                #{expressCode,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -369,8 +400,8 @@
             <if test="record.closeTime != null" >
                 close_time = #{record.closeTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.shippingName != null" >
-                shipping_name = #{record.shippingName,jdbcType=VARCHAR},
+            <if test="record.shippingCompanyCode != null" >
+                shipping_company_code = #{record.shippingCompanyCode,jdbcType=VARCHAR},
             </if>
             <if test="record.shippingCode != null" >
                 shipping_code = #{record.shippingCode,jdbcType=VARCHAR},
@@ -417,6 +448,18 @@
             <if test="record.shippingType != null" >
                 shipping_type = #{record.shippingType,jdbcType=VARCHAR},
             </if>
+            <if test="record.receiverProvince != null" >
+                receiver_province = #{record.receiverProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiverCity != null" >
+                receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiverArea != null" >
+                receiver_area = #{record.receiverArea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.expressCode != null" >
+                express_code = #{record.expressCode,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -436,7 +479,7 @@
             consign_time = #{record.consignTime,jdbcType=TIMESTAMP},
             end_time = #{record.endTime,jdbcType=TIMESTAMP},
             close_time = #{record.closeTime,jdbcType=TIMESTAMP},
-            shipping_name = #{record.shippingName,jdbcType=VARCHAR},
+            shipping_company_code = #{record.shippingCompanyCode,jdbcType=VARCHAR},
             shipping_code = #{record.shippingCode,jdbcType=VARCHAR},
             user_id = #{record.userId,jdbcType=VARCHAR},
             buyer_message = #{record.buyerMessage,jdbcType=VARCHAR},
@@ -451,7 +494,11 @@
             source_type = #{record.sourceType,jdbcType=VARCHAR},
             seller_id = #{record.sellerId,jdbcType=VARCHAR},
             item_num = #{record.itemNum,jdbcType=INTEGER},
-            shipping_type = #{record.shippingType,jdbcType=VARCHAR}
+            shipping_type = #{record.shippingType,jdbcType=VARCHAR},
+            receiver_province = #{record.receiverProvince,jdbcType=VARCHAR},
+            receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
+            receiver_area = #{record.receiverArea,jdbcType=VARCHAR},
+            express_code = #{record.expressCode,jdbcType=VARCHAR}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -490,8 +537,8 @@
             <if test="closeTime != null" >
                 close_time = #{closeTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="shippingName != null" >
-                shipping_name = #{shippingName,jdbcType=VARCHAR},
+            <if test="shippingCompanyCode != null" >
+                shipping_company_code = #{shippingCompanyCode,jdbcType=VARCHAR},
             </if>
             <if test="shippingCode != null" >
                 shipping_code = #{shippingCode,jdbcType=VARCHAR},
@@ -538,6 +585,18 @@
             <if test="shippingType != null" >
                 shipping_type = #{shippingType,jdbcType=VARCHAR},
             </if>
+            <if test="receiverProvince != null" >
+                receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverCity != null" >
+                receiver_city = #{receiverCity,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverArea != null" >
+                receiver_area = #{receiverArea,jdbcType=VARCHAR},
+            </if>
+            <if test="expressCode != null" >
+                express_code = #{expressCode,jdbcType=VARCHAR},
+            </if>
         </set>
         where order_id = #{orderId,jdbcType=BIGINT}
     </update>
@@ -554,7 +613,7 @@
             consign_time = #{consignTime,jdbcType=TIMESTAMP},
             end_time = #{endTime,jdbcType=TIMESTAMP},
             close_time = #{closeTime,jdbcType=TIMESTAMP},
-            shipping_name = #{shippingName,jdbcType=VARCHAR},
+            shipping_company_code = #{shippingCompanyCode,jdbcType=VARCHAR},
             shipping_code = #{shippingCode,jdbcType=VARCHAR},
             user_id = #{userId,jdbcType=VARCHAR},
             buyer_message = #{buyerMessage,jdbcType=VARCHAR},
@@ -569,10 +628,14 @@
             source_type = #{sourceType,jdbcType=VARCHAR},
             seller_id = #{sellerId,jdbcType=VARCHAR},
             item_num = #{itemNum,jdbcType=INTEGER},
-            shipping_type = #{shippingType,jdbcType=VARCHAR}
+            shipping_type = #{shippingType,jdbcType=VARCHAR},
+            receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+            receiver_city = #{receiverCity,jdbcType=VARCHAR},
+            receiver_area = #{receiverArea,jdbcType=VARCHAR},
+            express_code = #{expressCode,jdbcType=VARCHAR}
         where order_id = #{orderId,jdbcType=BIGINT}
     </update>
-  
+    
   <select id="selectItemsByOrderId" parameterType="long" resultType="java.util.Map">
 		      SELECT
 					t2.id goodsId,
@@ -630,12 +693,12 @@
 				    </if>
 				</where>
 				ORDER BY
-	            t.payment_time DESC
+	            t.create_time DESC
   </select>
   
   <select id="showOrderDetail" parameterType="java.util.Map" resultType="java.util.Map">
 		    SELECT
-		        t1.user_id userId,
+				t1.user_id userId,
 				t1.payment,
 				t1.`status`,
 				t1.item_num itemNum,
@@ -645,11 +708,12 @@
 				t1.buyer_message buyerMessage,
 				t1.order_id orderId,
 				t1.create_time createTime,
-				t1.shipping_type shippingType
+				t1.shipping_type shippingType,
+				t1.receiver_province provinceName,
+				t1.receiver_city cityName,
+				t1.receiver_area areaName
 			FROM
 				tb_order t1
-			WHERE
-				t1.order_id = #{orderId}
   </select>
   
   <update id="updateStatusById" parameterType="java.util.Map">
