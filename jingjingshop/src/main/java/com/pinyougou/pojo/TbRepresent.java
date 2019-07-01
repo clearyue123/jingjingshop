@@ -5,8 +5,9 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * @author yue
- * @date 2019-06-11
+ * @desc:代表管理
+ * @author：yue
+ * @date：2019-06-11
  */
 public class TbRepresent {
     /**

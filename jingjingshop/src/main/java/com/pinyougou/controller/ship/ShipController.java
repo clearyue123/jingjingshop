@@ -36,11 +36,11 @@ public class ShipController {
 	 * @return
 	 */
 	@RequestMapping("/updateShipMessage")
-	public ApiResult updateShipMessage(@RequestParam(value="shipCode",required=true)String shipCode,
-			                        @RequestParam(value="shipCompanyCode",required=true)String shipCompanyCode,
-			                        @RequestParam(value="expressCode",required=true)String expressCode,
-			                        @RequestParam(value="orderId",required=true)String orderId,
-			                        @RequestParam(value="md5code",required=true)String md5code){
+	public ApiResult updateShipMessage( @RequestParam(value="shipCode",required=true)String shipCode,
+				                        @RequestParam(value="shipCompanyCode",required=true)String shipCompanyCode,
+				                        @RequestParam(value="expressCode",required=true)String expressCode,
+				                        @RequestParam(value="orderId",required=true)String orderId,
+				                        @RequestParam(value="md5code",required=true)String md5code){
 		try{
 			String md5Content = "yuyue"+shipCode+shipCompanyCode+expressCode+orderId+"yuyue";
 			String myMD5Code = MyMD5Utils.getMD5Str(md5Content, "utf-8");
