@@ -296,5 +296,10 @@ public class OrderServiceImpl implements OrderService {
 			return null;
 		}
 	}
+
+	@Override
+	public void updateShipMessage(Map<String, Object> paramMap) {
+		orderMapper.updateShipMessage(paramMap);
+	}
 	
 }

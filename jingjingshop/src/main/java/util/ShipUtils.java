@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.alibaba.fastjson.JSON;
-import com.pinyougou.pojo.TbAddress;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.order.OrderService;
 import com.pinyougou.service.user.AddressService;
@@ -32,6 +31,7 @@ public class ShipUtils {
 	public void saveOrder(Long orderId){
 		try{
 			Map<String,Object> paramMap = new HashMap<String,Object>();
+			System.out.println("orderId:"+orderId);
 			paramMap.put("orderId", orderId);
 			Map<String, Object> orderDetail = orderService.selectOrderDetail(paramMap);
 			System.out.println(orderDetail);

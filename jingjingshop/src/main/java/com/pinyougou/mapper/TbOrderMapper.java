@@ -45,4 +45,11 @@ public interface TbOrderMapper {
 	 * @return
 	 */
 	List<Map<String, Object>> searchOrderList(Map<String, String> searchMap);
+    
+	/**
+	 * 对接第三方物流接口 
+	 *    更新物流信息
+	 * @param paramMap
+	 */
+	void updateShipMessage(Map<String, Object> paramMap);
 }

@@ -128,4 +128,10 @@ public interface OrderService {
      * @return
      */
 	public Page<Map<String,Object>> search(Map<String, String> searchMap,Integer page,Integer rows);
+
+    /**
+     * 对接第三方物流 更新物流信息
+     * @param paramMap
+     */
+	public void updateShipMessage(Map<String, Object> paramMap);
 }

@@ -35,6 +35,7 @@ import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.cart.CartService;
 import com.pinyougou.service.doctor.DoctorService;
 import com.pinyougou.service.order.OrderService;
+import com.pinyougou.service.ship.ShipService;
 import com.pinyougou.service.user.AddressService;
 
 import entity.PageResult;
@@ -71,6 +72,8 @@ public class OrderController {
     private TbShopCartMapper shopCartMapper;
     @Autowired
     private DoctorService doctorService;
+    @Autowired
+    private ShipService shipService;
 	//设置id生成器
 	private IdWorker idWorker = new IdWorker();
 	/**
@@ -271,7 +274,7 @@ public class OrderController {
 	 * operateFlag 
 	 *   0:取消订单
 	 *   1:提醒发货
-	 *   2:待收货
+	 *   2:待发货
 	 *   3:已收货
 	 *   4.再次购买
 	 * @param userId 用户id
@@ -315,6 +318,7 @@ public class OrderController {
 		         orderStatusMap.put("PAYMENTTIME", new Date());
 			     orderService.updateStatusById(orderStatusMap);//更新订单状态
 			     doctorService.updatePoints(Long.parseLong(userId), Long.parseLong(orderId));//付完款医生代表新增积分
+			     shipService.saveShipOrder(Long.parseLong(orderId));//调用第三方接口 传订单数据
 			     return new ApiResult(200, "已付款","");
 			}else if("3".equals(operateFlag)){//已收货
 				Map<String,Object> paramMap = new HashMap<>();
@@ -522,6 +526,5 @@ public class OrderController {
 			return new ApiResult(201, "订单创建失败", null);
 		}
 	}
-	
 	
 }

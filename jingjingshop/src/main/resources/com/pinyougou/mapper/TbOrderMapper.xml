@@ -651,7 +651,6 @@
 						WHERE
 							t3.id = t2.brand_id
 					) brandName,
-					t1.goods_id goodsId,
 					(
 						SELECT
 							t4.`name`
@@ -714,6 +713,8 @@
 				t1.receiver_area areaName
 			FROM
 				tb_order t1
+			where 
+			   t1.order_id = #{orderId}
   </select>
   
   <update id="updateStatusById" parameterType="java.util.Map">
@@ -753,4 +754,25 @@
 			ORDER BY t1.create_time DESC
   </select>
   
+  <update id="updateShipMessage" parameterType="java.util.Map">
+      update tb_order
+        <set >
+            <if test="STATUS != null" >
+                status = #{STATUS,jdbcType=VARCHAR},
+            </if>
+            <if test="UPDATEDATE != null" >
+                update_time = #{UPDATEDATE,jdbcType=TIMESTAMP},
+            </if>
+            <if test="SHIPCOMPANYCODE != null" >
+                shipping_company_code = #{SHIPCOMPANYCODE,jdbcType=VARCHAR},
+            </if>
+            <if test="SHIPCODE != null" >
+                shipping_code = #{SHIPCODE,jdbcType=VARCHAR},
+            </if>
+            <if test="EXPRESSCODE != null" >
+                express_code = #{EXPRESSCODE,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
 </mapper>
