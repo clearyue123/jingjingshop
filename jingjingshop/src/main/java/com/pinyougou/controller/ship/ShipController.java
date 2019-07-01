@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pinyougou.common.ApiResult;
 import com.pinyougou.service.order.OrderService;
 
+import util.MyMD5Utils;
+
 /**
  * @desc:物流控制层
  * @author:yue
@@ -38,16 +40,18 @@ public class ShipController {
 			                        @RequestParam(value="shipCompanyCode",required=true)String shipCompanyCode,
 			                        @RequestParam(value="expressCode",required=true)String expressCode,
 			                        @RequestParam(value="orderId",required=true)String orderId,
-			                        @RequestParam(value="httpKey",required=true)String httpKey){
+			                        @RequestParam(value="md5code",required=true)String md5code){
 		try{
-			if(!"o0otui0fghuas8t8".equals(httpKey)){
-				return new ApiResult(202, "HTTPKEY ERROR!", "pleas confirm your httpKey!");
+			String md5Content = "yuyue"+shipCode+shipCompanyCode+expressCode+orderId+"yuyue";
+			String myMD5Code = MyMD5Utils.getMD5Str(md5Content, "utf-8");
+			System.out.println("md5Content:"+md5Content+","+"md5code:"+myMD5Code);
+			if(!myMD5Code.equals(md5code)){
+				return new ApiResult(202, "MD5CODE ERROR!", "pleas confirm your md5code!");
 			}else{
 				Map<String,Object> paramMap = new HashMap<String,Object>();
 				paramMap.put("orderId", orderId);
 				Map<String, Object> selectOrderDetail = orderService.selectOrderDetail(paramMap);
 				String status = (String)selectOrderDetail.get("status");
-				System.out.println("订单状态:"+status);
 				if(!"3".equals(status)){
 					return new ApiResult(201, "ORDER STATUS ERROR!", "订单状态异常！");
 				}

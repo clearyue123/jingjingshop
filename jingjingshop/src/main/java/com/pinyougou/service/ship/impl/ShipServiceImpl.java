@@ -2,6 +2,7 @@ package com.pinyougou.service.ship.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +45,13 @@ public class ShipServiceImpl implements ShipService{
         Map<String,Object> addressMap = (Map<String,Object>) addressService.findListByUserId(userId.toString());
         String provinceId = (String)addressMap.get("provinceId");
         String cityId = (String)addressMap.get("cityId");
-        String townId = (String)addressMap.get("townId");
+        String areaName = (String)addressMap.get("area_name");
         String contact = (String)addressMap.get("contact");
         String address = (String)addressMap.get("address");
         String mobile = (String)addressMap.get("mobile");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_MONTH, +1);
         orderMap.put("code", orderId.toString());//订单id
         orderMap.put("organization", "1099");
         orderMap.put("orderType", "ZS12");
@@ -56,14 +60,14 @@ public class ShipServiceImpl implements ShipService{
         orderMap.put("currency", "CNY");
         orderMap.put("submitDate", DateUtils.getDateStrFromDf("yyyyMMdd", createTime));//提交日期
         orderMap.put("creater", "10050465");//创建用户
-        orderMap.put("shipDate", "20190715");//发货日期
+        orderMap.put("shipDate", DateUtils.getDateStrFromDf("yyyyMMdd", cal.getTime()));//发货日期
         orderMap.put("salesMan", "admin");
         orderMap.put("manager", "admin");
         orderMap.put("note", buyerMessage);//买家留言
         orderMap.put("country", "CN");
         orderMap.put("region", provinceId.toString());
         orderMap.put("city", cityId.toString());
-        orderMap.put("cityDistict", townId.toString());
+        orderMap.put("cityDistict", areaName);
         orderMap.put("streeName",address);
         orderMap.put("firstName",contact);
         orderMap.put("companyName", "阿里巴巴");
