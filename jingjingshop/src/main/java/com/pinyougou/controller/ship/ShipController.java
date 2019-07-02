@@ -42,7 +42,7 @@ public class ShipController {
 				                        @RequestParam(value="orderId",required=true)String orderId,
 				                        @RequestParam(value="md5code",required=true)String md5code){
 		try{
-			String md5Content = "yuyue"+shipCode+shipCompanyCode+expressCode+orderId+"yuyue";
+			String md5Content = "yuyue"+shipCode+"&"+shipCompanyCode+"&"+expressCode+"&"+orderId+"yuyue";
 			String myMD5Code = MyMD5Utils.getMD5Str(md5Content, "utf-8");
 			System.out.println("md5Content:"+md5Content+","+"md5code:"+myMD5Code);
 			if(!myMD5Code.equals(md5code)){
