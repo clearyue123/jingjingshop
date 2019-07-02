@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.pinyougou.mapper.TbDoctorMapper" >
-
-    <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbDoctor" >
+  <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbDoctor" >
         <id column="did" property="did" jdbcType="BIGINT" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="open_id" property="openId" jdbcType="VARCHAR" />
         <result column="head_pic" property="headPic" jdbcType="VARCHAR" />
-        <result column="points" property="points" jdbcType="INTEGER" />
+        <result column="points" property="points" jdbcType="DECIMAL" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
-        <result column="points_all" property="pointsAll" jdbcType="INTEGER" />
+        <result column="points_all" property="pointsAll" jdbcType="DECIMAL" />
         <result column="office" property="office" jdbcType="VARCHAR" />
         <result column="hospital" property="hospital" jdbcType="VARCHAR" />
         <result column="username" property="username" jdbcType="VARCHAR" />
@@ -18,6 +17,7 @@
         <result column="union_id" property="unionId" jdbcType="VARCHAR" />
         <result column="ticket" property="ticket" jdbcType="VARCHAR" />
         <result column="ticket_time" property="ticketTime" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -81,8 +81,8 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        did, name, open_id, head_pic, points, phone, points_all, office, hospital, username, script, 
-        create_date, union_id, ticket, ticket_time
+        did, name, open_id, head_pic, points, phone, points_all, office, hospital, username, 
+        script, create_date, union_id, ticket, ticket_time, update_date
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbDoctorExample" >
@@ -124,14 +124,14 @@
             head_pic, points, phone, 
             points_all, office, hospital, 
             username, script, create_date, 
-            union_id, ticket, ticket_time
-            )
+            union_id, ticket, ticket_time, 
+            update_date)
         values (#{did,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
-            #{headPic,jdbcType=VARCHAR}, #{points,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
-            #{pointsAll,jdbcType=INTEGER}, #{office,jdbcType=VARCHAR}, #{hospital,jdbcType=VARCHAR}, 
+            #{headPic,jdbcType=VARCHAR}, #{points,jdbcType=DECIMAL}, #{phone,jdbcType=VARCHAR}, 
+            #{pointsAll,jdbcType=DECIMAL}, #{office,jdbcType=VARCHAR}, #{hospital,jdbcType=VARCHAR}, 
             #{username,jdbcType=VARCHAR}, #{script,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-            #{unionId,jdbcType=VARCHAR}, #{ticket,jdbcType=VARCHAR}, #{ticketTime,jdbcType=VARCHAR}
-            )
+            #{unionId,jdbcType=VARCHAR}, #{ticket,jdbcType=VARCHAR}, #{ticketTime,jdbcType=VARCHAR}, 
+            #{updateDate,jdbcType=TIMESTAMP})
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbDoctor" >
@@ -182,6 +182,9 @@
             <if test="ticketTime != null" >
                 ticket_time,
             </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="did != null" >
@@ -197,13 +200,13 @@
                 #{headPic,jdbcType=VARCHAR},
             </if>
             <if test="points != null" >
-                #{points,jdbcType=INTEGER},
+                #{points,jdbcType=DECIMAL},
             </if>
             <if test="phone != null" >
                 #{phone,jdbcType=VARCHAR},
             </if>
             <if test="pointsAll != null" >
-                #{pointsAll,jdbcType=INTEGER},
+                #{pointsAll,jdbcType=DECIMAL},
             </if>
             <if test="office != null" >
                 #{office,jdbcType=VARCHAR},
@@ -228,6 +231,9 @@
             </if>
             <if test="ticketTime != null" >
                 #{ticketTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -255,13 +261,13 @@
                 head_pic = #{record.headPic,jdbcType=VARCHAR},
             </if>
             <if test="record.points != null" >
-                points = #{record.points,jdbcType=INTEGER},
+                points = #{record.points,jdbcType=DECIMAL},
             </if>
             <if test="record.phone != null" >
                 phone = #{record.phone,jdbcType=VARCHAR},
             </if>
             <if test="record.pointsAll != null" >
-                points_all = #{record.pointsAll,jdbcType=INTEGER},
+                points_all = #{record.pointsAll,jdbcType=DECIMAL},
             </if>
             <if test="record.office != null" >
                 office = #{record.office,jdbcType=VARCHAR},
@@ -287,6 +293,9 @@
             <if test="record.ticketTime != null" >
                 ticket_time = #{record.ticketTime,jdbcType=VARCHAR},
             </if>
+            <if test="record.updateDate != null" >
+                update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+            </if>
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -299,9 +308,9 @@
             name = #{record.name,jdbcType=VARCHAR},
             open_id = #{record.openId,jdbcType=VARCHAR},
             head_pic = #{record.headPic,jdbcType=VARCHAR},
-            points = #{record.points,jdbcType=INTEGER},
+            points = #{record.points,jdbcType=DECIMAL},
             phone = #{record.phone,jdbcType=VARCHAR},
-            points_all = #{record.pointsAll,jdbcType=INTEGER},
+            points_all = #{record.pointsAll,jdbcType=DECIMAL},
             office = #{record.office,jdbcType=VARCHAR},
             hospital = #{record.hospital,jdbcType=VARCHAR},
             username = #{record.username,jdbcType=VARCHAR},
@@ -309,7 +318,8 @@
             create_date = #{record.createDate,jdbcType=TIMESTAMP},
             union_id = #{record.unionId,jdbcType=VARCHAR},
             ticket = #{record.ticket,jdbcType=VARCHAR},
-            ticket_time = #{record.ticketTime,jdbcType=VARCHAR}
+            ticket_time = #{record.ticketTime,jdbcType=VARCHAR},
+            update_date = #{record.updateDate,jdbcType=TIMESTAMP}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
@@ -328,13 +338,13 @@
                 head_pic = #{headPic,jdbcType=VARCHAR},
             </if>
             <if test="points != null" >
-                points = #{points,jdbcType=INTEGER},
+                points = #{points,jdbcType=DECIMAL},
             </if>
             <if test="phone != null" >
                 phone = #{phone,jdbcType=VARCHAR},
             </if>
             <if test="pointsAll != null" >
-                points_all = #{pointsAll,jdbcType=INTEGER},
+                points_all = #{pointsAll,jdbcType=DECIMAL},
             </if>
             <if test="office != null" >
                 office = #{office,jdbcType=VARCHAR},
@@ -360,6 +370,9 @@
             <if test="ticketTime != null" >
                 ticket_time = #{ticketTime,jdbcType=VARCHAR},
             </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where did = #{did,jdbcType=BIGINT}
     </update>
@@ -369,9 +382,9 @@
         set name = #{name,jdbcType=VARCHAR},
             open_id = #{openId,jdbcType=VARCHAR},
             head_pic = #{headPic,jdbcType=VARCHAR},
-            points = #{points,jdbcType=INTEGER},
+            points = #{points,jdbcType=DECIMAL},
             phone = #{phone,jdbcType=VARCHAR},
-            points_all = #{pointsAll,jdbcType=INTEGER},
+            points_all = #{pointsAll,jdbcType=DECIMAL},
             office = #{office,jdbcType=VARCHAR},
             hospital = #{hospital,jdbcType=VARCHAR},
             username = #{username,jdbcType=VARCHAR},
@@ -379,12 +392,12 @@
             create_date = #{createDate,jdbcType=TIMESTAMP},
             union_id = #{unionId,jdbcType=VARCHAR},
             ticket = #{ticket,jdbcType=VARCHAR},
-            ticket_time = #{ticketTime,jdbcType=VARCHAR}
+            ticket_time = #{ticketTime,jdbcType=VARCHAR},
+            update_date = #{updateDate,jdbcType=TIMESTAMP}
         where did = #{did,jdbcType=BIGINT}
     </update>
     
-    
-     <select id="selectPatientList" parameterType="com.pinyougou.pojo.TbDoctor" resultMap="BaseResultMap">
+  <select id="selectPatientList" parameterType="com.pinyougou.pojo.TbDoctor" resultMap="BaseResultMap">
   	select 
   	<include refid="Base_Column_List"></include>
   	from tb_doctor tb 
@@ -464,6 +477,7 @@
                 t.phone = #{phone,jdbcType=VARCHAR}
             </if>
          </where>
+         ORDER BY t.create_date DESC
           
   </select>
   

@@ -58,7 +58,8 @@ public class PatientLoginController {
 				user.setOpenId(openId);
 				user.setUnionId(unionId);
 				user.setIsDelete("0");
-				user.setCreated(new Date());
+				user.setCreateDate(new Date());
+				user.setUpdateDate(new Date());
 				int row = tbUserMapper.insert(user);
 				List<TbUser> tbUserList1 = tbUserMapper.selectByExample(userExamlpe);
 				if(row>0&&tbUserList1.get(0)!=null){

@@ -49,7 +49,8 @@ public class UserLoginController {
 					}
 					return new ApiResult(200, "登录成功", result);
 				} else {
-					user.setCreated(new Date());
+					user.setCreateDate(new Date());
+					user.setUpdateDate(new Date());
 					user.setIsDelete("0");
 					userService.add(user);
 					TbUser result1 = userService.firstInfo(user);

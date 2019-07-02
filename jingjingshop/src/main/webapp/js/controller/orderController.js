@@ -6,7 +6,10 @@ app.controller("orderController",function($scope,$controller,$http,orderService)
 	//分页 条件查询
     $scope.searchEntity={};
 	// 假设定义一个查询的实体：searchEntity
-	$scope.search = function(page,rows){
+	$scope.search = function(){
+		var page = $scope.paginationConf.currentPage;
+		var rows = $scope.paginationConf.itemsPerPage;
+		alert("状态码:"+$scope.searchEntity.status);
 		// 向后台发送请求获取数据:
 		orderService.search(page,rows,$scope.searchEntity).success(function(response){
 			$scope.paginationConf.totalItems = response.data.total;

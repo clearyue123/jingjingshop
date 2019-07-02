@@ -1,6 +1,7 @@
 package com.pinyougou.controller.doctor;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -343,6 +344,7 @@ public class DoctorController {
 			if(!TextUtils.isBlank(script)){
 				doc.setScript(script);
 			}
+			doc.setUpdateDate(new Date());
 			doctorService.updateByPrimaryKey(doc);
 			return new ApiResult(200, "医生信息修改成功", "");
 		} catch (Exception e) {
@@ -518,6 +520,7 @@ public class DoctorController {
 				Double addPoints = doctor.getPoints()==null?0:doctor.getPoints().doubleValue();
 				addPoints+=50;
 				doctor.setPoints(new BigDecimal(addPoints));
+				doctor.setUpdateDate(new Date());
 				doctorService.updateByPrimaryKey(doctor);
 				return new ApiResult(200, "新增积分成功", "");
 			}

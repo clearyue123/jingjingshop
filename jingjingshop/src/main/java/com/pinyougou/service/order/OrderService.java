@@ -127,7 +127,7 @@ public interface OrderService {
      * @param rows 当前页条数
      * @return
      */
-	public Page<Map<String,Object>> search(Map<String, String> searchMap,Integer page,Integer rows);
+	public Page<Map<String,Object>> search(Map<String,Object> searchMap,Integer page,Integer rows);
 
     /**
      * 对接第三方物流 更新物流信息

@@ -165,9 +165,9 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public ApiResult search(@RequestParam(value="searchEntity",required=false)Map<String,String> searchEntity, int page, int rows  ){
+	public ApiResult search(@RequestParam(value="searchEntity",required=false)Map<String,Object> searchEntity, int page, int rows  ){
 		try{
-			
+			 System.out.println("status:"+(String)searchEntity.get("status"));
 			 Page<Map<String, Object>> pageData = orderService.search(searchEntity,page,rows);
 			 Map<String, Object> data = new HashMap<String,Object>();
 			 data.put("rows", pageData.getResult());
@@ -309,10 +309,10 @@ public class OrderController {
 		        orderStatusMap.put("STATUS", "4");//待发货
 			    orderService.updateStatusById(orderStatusMap);
 				return new ApiResult(200, "已提醒发货","");
-			}else if("2".equals(operateFlag)){//已付款，提醒发货
+			}else if("2".equals(operateFlag)){//待发货，提醒发货
 				 Map<String,Object> orderStatusMap = new HashMap<>();
 		         orderStatusMap.put("ORDERID", orderId);
-		         orderStatusMap.put("STATUS", "3");//已付款，提醒发货
+		         orderStatusMap.put("STATUS", "3");//待发货，提醒发货
 		         orderStatusMap.put("PAYMENTTIME", new Date());
 			     orderService.updateStatusById(orderStatusMap);//更新订单状态
 			     doctorService.updatePoints(Long.parseLong(userId), Long.parseLong(orderId));//付完款医生代表新增积分

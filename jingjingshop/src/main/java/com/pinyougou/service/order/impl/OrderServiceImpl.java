@@ -258,7 +258,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Page<Map<String,Object>> search(Map<String, String> searchMap,Integer page,Integer rows) {
+	public Page<Map<String,Object>> search(Map<String, Object> searchMap,Integer page,Integer rows) {
 		try{
 			 PageHelper.startPage(page, rows);
 			 List<Map<String,Object>> orderList = orderMapper.searchOrderList(searchMap);

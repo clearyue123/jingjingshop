@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author:yue
  * @desc:用户信息实体
+ * @author:yue
  * @date:2019-06-14
  */
 public class TbUser {
@@ -34,9 +34,12 @@ public class TbUser {
     /**
      * 创建时间
      */
-    private Date created;
+    private Date createDate;
 
-    private Date updated;
+    /**
+     * 更新时间
+     */
+    private Date updateDate;
 
     /**
      * 会员来源：1:PC，2：H5，3：Android，4：IOS，5：WeChat
@@ -141,8 +144,21 @@ public class TbUser {
      * 患者备注
      */
     private String remarks;
+    
+    /**
+     * 创建日期
+     */
+    private String createDateStr;
 
-    public Long getId() {
+    public String getCreateDateStr() {
+		return createDateStr;
+	}
+
+	public void setCreateDateStr(String createDateStr) {
+		this.createDateStr = createDateStr;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -182,23 +198,23 @@ public class TbUser {
         this.email = email == null ? null : email.trim();
     }
 
-    public Date getCreated() {
-        return created;
-    }
+    public Date getCreateDate() {
+		return createDate;
+	}
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public Date getUpdated() {
-        return updated;
-    }
+	public Date getUpdateDate() {
+		return updateDate;
+	}
 
-    public void setUpdated(Date updated) {
-        this.updated = updated;
-    }
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
 
-    public String getSourceType() {
+	public String getSourceType() {
         return sourceType;
     }
 

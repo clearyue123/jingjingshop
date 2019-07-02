@@ -44,7 +44,7 @@ public interface TbOrderMapper {
 	 * @param searchMap
 	 * @return
 	 */
-	List<Map<String, Object>> searchOrderList(Map<String, String> searchMap);
+	List<Map<String, Object>> searchOrderList(Map<String, Object> searchMap);
     
 	/**
 	 * 对接第三方物流接口 

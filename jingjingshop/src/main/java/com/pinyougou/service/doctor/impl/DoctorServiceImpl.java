@@ -207,6 +207,7 @@ public class DoctorServiceImpl  implements DoctorService {
 	@Override
 	public int add(TbDoctor user) {
 		user.setCreateDate(new Date());
+		user.setUpdateDate(new Date());
 		return tbDocMapper.insert(user);
 	}
 
@@ -288,48 +289,38 @@ public class DoctorServiceImpl  implements DoctorService {
 
 	@Override
 	public void update(TbDoctor doctor) {
-		Long did = doctor.getDid();
-		TbDoctor originalDoctor = tbDocMapper.selectById(did);
-		if(doctor.getUsername()!=null&&doctor.getUsername().trim().length()>0){
-			originalDoctor.setUsername(doctor.getUsername());
-		}
-		if(doctor.getName()!=null&&doctor.getName().trim().length()>0){
-			originalDoctor.setName(doctor.getName());
-		}
-		if(doctor.getPhone()!=null&&doctor.getPhone().trim().length()>0){
-			originalDoctor.setPhone(doctor.getPhone());
-		}
-		tbDocMapper.updateByPrimaryKey(doctor);
+		doctor.setUpdateDate(new Date());
+		tbDocMapper.updateByPrimaryKeySelective(doctor);
 	}
 
 	@Override
 	public void updatePoints(Long userId,Long orderId) {
-		TbOrder order = orderMapper.selectByPrimaryKey(orderId);
-		Double payment = order.getPayment().doubleValue();
-		Double doctorPoints = payment*0.01;
-		Double representPoints = payment*0.005;
-		TbDoctorUserExample example = new TbDoctorUserExample();
-		com.pinyougou.pojo.TbDoctorUserExample.Criteria cri = example.createCriteria();
-		cri.andUidEqualTo(userId);
-		List<TbDoctorUser> doctorUserList = tbDocUserMapper.selectByExample(example);
-		for(TbDoctorUser doctorUser:doctorUserList){
-			Long did = doctorUser.getDid();
-			TbDoctor doctor = tbDocMapper.selectByPrimaryKey(did);
-			Double addPoints1 = doctorPoints + doctor.getPoints().doubleValue();
-			doctor.setPoints(new BigDecimal(addPoints1));
-			tbDocMapper.updateByPrimaryKey(doctor);
-			TbRepresentDoctorExample tdExample = new TbRepresentDoctorExample();
-			com.pinyougou.pojo.TbRepresentDoctorExample.Criteria cr2 = tdExample.createCriteria();
-			cr2.andDidEqualTo(did);
-			List<TbRepresentDoctor> representDoctorList = representDoctorMapper.selectByExample(tdExample);
-			for (TbRepresentDoctor tbRepresentDoctor : representDoctorList) {
-				Long rid = tbRepresentDoctor.getRid();
-				TbRepresent tbRepresent = representMapper.selectByPrimaryKey(rid);
-				Double addPoints2 = representPoints + tbRepresent.getPoints().doubleValue();
-				tbRepresent.setPoints(new BigDecimal(addPoints2));
-				representMapper.updateByPrimaryKey(tbRepresent);
-			}
-		}
+//		TbOrder order = orderMapper.selectByPrimaryKey(orderId);
+//		Double payment = order.getPayment().doubleValue();
+//		Double doctorPoints = payment*0.01;
+//		Double representPoints = payment*0.005;
+//		TbDoctorUserExample example = new TbDoctorUserExample();
+//		com.pinyougou.pojo.TbDoctorUserExample.Criteria cri = example.createCriteria();
+//		cri.andUidEqualTo(userId);
+//		List<TbDoctorUser> doctorUserList = tbDocUserMapper.selectByExample(example);
+//		for(TbDoctorUser doctorUser:doctorUserList){
+//			Long did = doctorUser.getDid();
+//			TbDoctor doctor = tbDocMapper.selectByPrimaryKey(did);
+//			Double addPoints1 = doctorPoints + doctor.getPoints().doubleValue();
+//			doctor.setPoints(new BigDecimal(addPoints1));
+//			tbDocMapper.updateByPrimaryKey(doctor);
+//			TbRepresentDoctorExample tdExample = new TbRepresentDoctorExample();
+//			com.pinyougou.pojo.TbRepresentDoctorExample.Criteria cr2 = tdExample.createCriteria();
+//			cr2.andDidEqualTo(did);
+//			List<TbRepresentDoctor> representDoctorList = representDoctorMapper.selectByExample(tdExample);
+//			for (TbRepresentDoctor tbRepresentDoctor : representDoctorList) {
+//				Long rid = tbRepresentDoctor.getRid();
+//				TbRepresent tbRepresent = representMapper.selectByPrimaryKey(rid);
+//				Double addPoints2 = representPoints + tbRepresent.getPoints().doubleValue();
+//				tbRepresent.setPoints(new BigDecimal(addPoints2));
+//				representMapper.updateByPrimaryKey(tbRepresent);
+//			}
+//		}
 	}
 
 

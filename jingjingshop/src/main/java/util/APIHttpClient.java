@@ -38,7 +38,6 @@ public class APIHttpClient {
     
     /** 
      * 0.成功 1.执行方法失败 2.协议错误 3.网络错误 
-     *  
      * @return the status 
      */  
     public int getStatus() {  

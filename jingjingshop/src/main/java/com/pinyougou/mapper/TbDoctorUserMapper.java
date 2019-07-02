@@ -4,40 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
 import com.pinyougou.pojo.TbDoctorUser;
-import com.pinyougou.pojo.TbDoctorUserExample;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
 import com.pinyougou.pojo.TbUser;
 
 public interface TbDoctorUserMapper {
-    int countByExample(TbDoctorUserExample example);
-
-    int deleteByExample(TbDoctorUserExample example);
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(TbDoctorUser record);
-
-    int insertSelective(TbDoctorUser record);
-
-    List<TbDoctorUser> selectByExample(TbDoctorUserExample example);
-
-    TbDoctorUser selectByPrimaryKey(Long id);
-
-    int updateByExampleSelective(@Param("record") TbDoctorUser record, @Param("example") TbDoctorUserExample example);
-
-    int updateByExample(@Param("record") TbDoctorUser record, @Param("example") TbDoctorUserExample example);
-
-    int updateByPrimaryKeySelective(TbDoctorUser record);
-
-    int updateByPrimaryKey(TbDoctorUser record);
-    
-    /**=====================================**/
     
     public TbDoctor  findAllByIdTbDoc(Long rid);
 

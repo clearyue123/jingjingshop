@@ -72,6 +72,11 @@ public class TbRepresent {
     private String ticketTime;
     
     /**
+     * 更新时间
+     */
+    private Date updateDate;
+    
+    /**
      * 关联的医生表
      */
     private Set<TbDoctor>  tbDocs;
@@ -215,4 +220,13 @@ public class TbRepresent {
 	public void setCreateDateStr(String createDateStr) {
 		this.createDateStr = createDateStr;
 	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	
 }

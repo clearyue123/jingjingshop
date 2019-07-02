@@ -179,6 +179,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 		String phone = (String)searchEntity.get("phone");
 		String userName = (String)searchEntity.get("userName");
 		TbRepresentExample example = new TbRepresentExample();
+		example.setOrderByClause("create_date DESC");
 		Criteria cri = example.createCriteria();
 		if(phone!=null&&phone.trim().length()>0){
 			cri.andPhoneEqualTo(phone);

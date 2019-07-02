@@ -277,10 +277,6 @@ public class RepresentativeController {
 
 
     /**
-     * 之前操作   有改动  2-19-5-15
-     */
-
-    /**
      * 查询个人信息
      */
 

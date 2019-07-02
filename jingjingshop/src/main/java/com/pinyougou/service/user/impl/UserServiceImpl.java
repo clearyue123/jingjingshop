@@ -16,6 +16,7 @@ import com.pinyougou.pojo.TbUserExample.Criteria;
 import com.pinyougou.service.user.UserService;
 
 import entity.PageResult;
+import util.DateUtils;
 
 /**
  * 服务实现层
@@ -55,7 +56,8 @@ public class UserServiceImpl implements UserService {
      */
     public int add(TbUser user) {
     	user.setIsDelete("0");
-    	user.setCreated(new Date());
+    	user.setCreateDate(new Date());
+    	user.setUpdateDate(new Date());
         return userMapper.insert(user);
     }
 
@@ -64,6 +66,7 @@ public class UserServiceImpl implements UserService {
      * 修改
      */
     public int update(TbUser user) {
+    	user.setUpdateDate(new Date());
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
@@ -93,6 +96,7 @@ public class UserServiceImpl implements UserService {
         PageHelper.startPage(pageNum, pageSize);
 
         TbUserExample example = new TbUserExample();
+        example.setOrderByClause("create_date desc");
         Criteria criteria = example.createCriteria();
         criteria.andIsDeleteEqualTo("0");
         if (user != null) {
@@ -117,6 +121,7 @@ public class UserServiceImpl implements UserService {
         	TbUser userModel = userList.get(i);
         	String sex = userModel.getSex()==null?"1":userModel.getSex();
         	userModel.setSex(sex.equals("1")?"男":"女");
+        	userModel.setCreateDateStr(DateUtils.getDateStrFromDate(userModel.getCreateDate()));
         }
         PageInfo<TbUser> page = new PageInfo<>(userList);
         return new PageResult(page.getTotal(), page.getList());

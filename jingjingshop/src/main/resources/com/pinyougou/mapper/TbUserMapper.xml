@@ -7,8 +7,8 @@
         <result column="password" property="password" jdbcType="VARCHAR" />
         <result column="phone" property="phone" jdbcType="VARCHAR" />
         <result column="email" property="email" jdbcType="VARCHAR" />
-        <result column="created" property="created" jdbcType="TIMESTAMP" />
-        <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
         <result column="source_type" property="sourceType" jdbcType="VARCHAR" />
         <result column="union_id" property="unionId" jdbcType="VARCHAR" />
         <result column="open_id" property="openId" jdbcType="VARCHAR" />
@@ -25,8 +25,8 @@
         <result column="experience_value" property="experienceValue" jdbcType="INTEGER" />
         <result column="birthday" property="birthday" jdbcType="VARCHAR" />
         <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
-        <result column="points" property="points" jdbcType="INTEGER" />
-        <result column="points_all" property="pointsAll" jdbcType="INTEGER" />
+        <result column="points" property="points" jdbcType="DECIMAL" />
+        <result column="points_all" property="pointsAll" jdbcType="DECIMAL" />
         <result column="illness" property="illness" jdbcType="VARCHAR" />
         <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
         <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
@@ -94,10 +94,10 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, username, password, phone, email, created, updated, source_type, union_id, open_id, 
-        nick_name, name, status, head_pic, wx_code, account_balance, is_mobile_check, is_email_check, 
-        sex, user_level, experience_value, birthday, last_login_time, points, points_all, 
-        illness, is_delete, delete_time, remarks
+        id, username, password, phone, email, create_date, update_date, source_type, union_id, 
+        open_id, nick_name, name, status, head_pic, wx_code, account_balance, is_mobile_check, 
+        is_email_check, sex, user_level, experience_value, birthday, last_login_time, points, 
+        points_all, illness, is_delete, delete_time, remarks
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbUserExample" >
@@ -136,8 +136,8 @@
 
     <insert id="insert" parameterType="com.pinyougou.pojo.TbUser" >
         insert into tb_user (id, username, password, 
-            phone, email, created, 
-            updated, source_type, union_id, 
+            phone, email, create_date, 
+            update_date, source_type, union_id, 
             open_id, nick_name, name, 
             status, head_pic, wx_code, 
             account_balance, is_mobile_check, is_email_check, 
@@ -146,14 +146,14 @@
             points_all, illness, is_delete, 
             delete_time, remarks)
         values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-            #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
-            #{updated,jdbcType=TIMESTAMP}, #{sourceType,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+            #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+            #{updateDate,jdbcType=TIMESTAMP}, #{sourceType,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
             #{openId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
             #{status,jdbcType=VARCHAR}, #{headPic,jdbcType=VARCHAR}, #{wxCode,jdbcType=VARCHAR}, 
             #{accountBalance,jdbcType=DECIMAL}, #{isMobileCheck,jdbcType=VARCHAR}, #{isEmailCheck,jdbcType=VARCHAR}, 
             #{sex,jdbcType=VARCHAR}, #{userLevel,jdbcType=INTEGER}, #{experienceValue,jdbcType=INTEGER}, 
-            #{birthday,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{points,jdbcType=INTEGER}, 
-            #{pointsAll,jdbcType=INTEGER}, #{illness,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, 
+            #{birthday,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{points,jdbcType=DECIMAL}, 
+            #{pointsAll,jdbcType=DECIMAL}, #{illness,jdbcType=VARCHAR}, #{isDelete,jdbcType=VARCHAR}, 
             #{deleteTime,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR})
     </insert>
 
@@ -175,11 +175,11 @@
             <if test="email != null" >
                 email,
             </if>
-            <if test="created != null" >
-                created,
+            <if test="createDate != null" >
+                create_date,
             </if>
-            <if test="updated != null" >
-                updated,
+            <if test="updateDate != null" >
+                update_date,
             </if>
             <if test="sourceType != null" >
                 source_type,
@@ -264,11 +264,11 @@
             <if test="email != null" >
                 #{email,jdbcType=VARCHAR},
             </if>
-            <if test="created != null" >
-                #{created,jdbcType=TIMESTAMP},
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="updated != null" >
-                #{updated,jdbcType=TIMESTAMP},
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
             </if>
             <if test="sourceType != null" >
                 #{sourceType,jdbcType=VARCHAR},
@@ -319,10 +319,10 @@
                 #{lastLoginTime,jdbcType=TIMESTAMP},
             </if>
             <if test="points != null" >
-                #{points,jdbcType=INTEGER},
+                #{points,jdbcType=DECIMAL},
             </if>
             <if test="pointsAll != null" >
-                #{pointsAll,jdbcType=INTEGER},
+                #{pointsAll,jdbcType=DECIMAL},
             </if>
             <if test="illness != null" >
                 #{illness,jdbcType=VARCHAR},
@@ -364,11 +364,11 @@
             <if test="record.email != null" >
                 email = #{record.email,jdbcType=VARCHAR},
             </if>
-            <if test="record.created != null" >
-                created = #{record.created,jdbcType=TIMESTAMP},
+            <if test="record.createDate != null" >
+                create_date = #{record.createDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="record.updated != null" >
-                updated = #{record.updated,jdbcType=TIMESTAMP},
+            <if test="record.updateDate != null" >
+                update_date = #{record.updateDate,jdbcType=TIMESTAMP},
             </if>
             <if test="record.sourceType != null" >
                 source_type = #{record.sourceType,jdbcType=VARCHAR},
@@ -419,10 +419,10 @@
                 last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.points != null" >
-                points = #{record.points,jdbcType=INTEGER},
+                points = #{record.points,jdbcType=DECIMAL},
             </if>
             <if test="record.pointsAll != null" >
-                points_all = #{record.pointsAll,jdbcType=INTEGER},
+                points_all = #{record.pointsAll,jdbcType=DECIMAL},
             </if>
             <if test="record.illness != null" >
                 illness = #{record.illness,jdbcType=VARCHAR},
@@ -449,8 +449,8 @@
             password = #{record.password,jdbcType=VARCHAR},
             phone = #{record.phone,jdbcType=VARCHAR},
             email = #{record.email,jdbcType=VARCHAR},
-            created = #{record.created,jdbcType=TIMESTAMP},
-            updated = #{record.updated,jdbcType=TIMESTAMP},
+            create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            update_date = #{record.updateDate,jdbcType=TIMESTAMP},
             source_type = #{record.sourceType,jdbcType=VARCHAR},
             union_id = #{record.unionId,jdbcType=VARCHAR},
             open_id = #{record.openId,jdbcType=VARCHAR},
@@ -467,8 +467,8 @@
             experience_value = #{record.experienceValue,jdbcType=INTEGER},
             birthday = #{record.birthday,jdbcType=VARCHAR},
             last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
-            points = #{record.points,jdbcType=INTEGER},
-            points_all = #{record.pointsAll,jdbcType=INTEGER},
+            points = #{record.points,jdbcType=DECIMAL},
+            points_all = #{record.pointsAll,jdbcType=DECIMAL},
             illness = #{record.illness,jdbcType=VARCHAR},
             is_delete = #{record.isDelete,jdbcType=VARCHAR},
             delete_time = #{record.deleteTime,jdbcType=TIMESTAMP},
@@ -493,11 +493,11 @@
             <if test="email != null" >
                 email = #{email,jdbcType=VARCHAR},
             </if>
-            <if test="created != null" >
-                created = #{created,jdbcType=TIMESTAMP},
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="updated != null" >
-                updated = #{updated,jdbcType=TIMESTAMP},
+            <if test="updateDate != null" >
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
             </if>
             <if test="sourceType != null" >
                 source_type = #{sourceType,jdbcType=VARCHAR},
@@ -548,10 +548,10 @@
                 last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
             </if>
             <if test="points != null" >
-                points = #{points,jdbcType=INTEGER},
+                points = #{points,jdbcType=DECIMAL},
             </if>
             <if test="pointsAll != null" >
-                points_all = #{pointsAll,jdbcType=INTEGER},
+                points_all = #{pointsAll,jdbcType=DECIMAL},
             </if>
             <if test="illness != null" >
                 illness = #{illness,jdbcType=VARCHAR},
@@ -575,8 +575,8 @@
             password = #{password,jdbcType=VARCHAR},
             phone = #{phone,jdbcType=VARCHAR},
             email = #{email,jdbcType=VARCHAR},
-            created = #{created,jdbcType=TIMESTAMP},
-            updated = #{updated,jdbcType=TIMESTAMP},
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
             source_type = #{sourceType,jdbcType=VARCHAR},
             union_id = #{unionId,jdbcType=VARCHAR},
             open_id = #{openId,jdbcType=VARCHAR},
@@ -593,8 +593,8 @@
             experience_value = #{experienceValue,jdbcType=INTEGER},
             birthday = #{birthday,jdbcType=VARCHAR},
             last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-            points = #{points,jdbcType=INTEGER},
-            points_all = #{pointsAll,jdbcType=INTEGER},
+            points = #{points,jdbcType=DECIMAL},
+            points_all = #{pointsAll,jdbcType=DECIMAL},
             illness = #{illness,jdbcType=VARCHAR},
             is_delete = #{isDelete,jdbcType=VARCHAR},
             delete_time = #{deleteTime,jdbcType=TIMESTAMP},

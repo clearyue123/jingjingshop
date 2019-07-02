@@ -171,7 +171,6 @@ public class UserController {
     @RequestMapping("/update")
     public ApiResult update(@RequestBody TbUser user) {
         try {
-        	System.out.println("sex:"+user.getSex());
             userService.update(user);
             return new ApiResult(200, "修改成功！","");
         } catch (Exception e) {

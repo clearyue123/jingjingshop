@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
+ * @desc:医生信息
  * @author yue
  * @date 2019-06-11
  */
@@ -63,6 +64,12 @@ public class TbDoctor {
      * ticket保存时间
      */
     private String ticketTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateDate;
+
     
     private TbUser user;
     
@@ -221,7 +228,16 @@ public class TbDoctor {
 			return pointsAll;
 		}
 
-   public void setPointsAll(BigDecimal pointsAll) {
+    public void setPointsAll(BigDecimal pointsAll) {
 			this.pointsAll = pointsAll;
 		}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+   
 }

@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.pinyougou.pojo.group.Goods;
 import com.pinyougou.service.order.OrderService;
+import com.pinyougou.service.sellergoods.GoodsService;
 import com.pinyougou.service.ship.ShipService;
 import com.pinyougou.service.user.AddressService;
 
@@ -26,6 +28,8 @@ public class ShipServiceImpl implements ShipService{
 	private OrderService orderService;
 	@Autowired
 	private AddressService addressService;
+	@Autowired
+	private GoodsService goodsService;
 	
 	@Override
 	public String saveShipOrder(Long orderId) {
@@ -33,18 +37,17 @@ public class ShipServiceImpl implements ShipService{
 		System.out.println("orderId:"+orderId);
 		paramMap.put("orderId", orderId);
 		Map<String, Object> orderDetail = orderService.selectOrderDetail(paramMap);
-		System.out.println(orderDetail);
 		List<Map<String, Object>> orderItems = orderService.selectItemsByOrderId(orderId);
 		APIHttpClient apiClient = new APIHttpClient(); 
 		Map<String, Object> data = new HashMap<String,Object>(); 
-        List<Map<String,Object>> orderDataList = new ArrayList<>();
+        List<Object> orderDataList = new ArrayList<>();
         Map<String,Object> orderMap=new HashMap<String,Object>(); 
         Date createTime = (Date)orderDetail.get("createTime");
         String buyerMessage = (String)orderDetail.get("buyerMessage")==null?"":(String)orderDetail.get("buyerMessage");
         String userId = (String)orderDetail.get("userId");
         Map<String,Object> addressMap = (Map<String,Object>) addressService.findListByUserId(userId.toString());
         String provinceId = (String)addressMap.get("provinceId");
-        String cityId = (String)addressMap.get("cityId");
+        String cityId = (String)orderDetail.get("cityName")==null?(String)addressMap.get("city_name"):(String)orderDetail.get("cityName");
         String areaName = (String)addressMap.get("area_name");
         String contact = (String)addressMap.get("contact");
         String address = (String)addressMap.get("address");
@@ -54,7 +57,7 @@ public class ShipServiceImpl implements ShipService{
         cal.add(Calendar.DAY_OF_MONTH, +1);
         orderMap.put("code", orderId.toString());//订单id
         orderMap.put("organization", "1099");
-        orderMap.put("orderType", "ZS12");
+        orderMap.put("orderType", "ZH07");
         orderMap.put("unit", "22000748");
         orderMap.put("payMethod", "online");
         orderMap.put("currency", "CNY");
@@ -70,22 +73,27 @@ public class ShipServiceImpl implements ShipService{
         orderMap.put("cityDistict", areaName);
         orderMap.put("streeName",address);
         orderMap.put("firstName",contact);
-        orderMap.put("companyName", "阿里巴巴");
+        orderMap.put("companyName", "唐裕平台-零售");
         orderMap.put("cellPhone", mobile);
+        List<Map<String, Object>> entries = new ArrayList<>(); 
         for(Map<String,Object> orderItem:orderItems){
-        	Map<String, Object> entries = new HashMap<String,Object>(); 
+        	Map<String,Object> entity = new HashMap<>();
         	Long goodsId = (Long)orderItem.get("goodsId"); 
+        	Goods goods = goodsService.findOne(goodsId);
+        	String goodsCode = goods.getGoods().getGoodsCode();
         	Integer num = (Integer)orderItem.get("num");
         	BigDecimal basePrice = (BigDecimal)orderItem.get("reducedPrice");
-	        entries.put("code", orderId.toString());
-	        entries.put("entryNumber", "10");
-	        entries.put("product",goodsId.toString());
-	        entries.put("quantity",num.toString());
-	        entries.put("basePrice",basePrice.toString());
-	        entries.put("note", "备注");
-	        orderDataList.add(orderMap);
+        	entity.put("code", orderId.toString());
+        	entity.put("entryNumber", "10");
+        	entity.put("product",goodsCode.toString());
+        	entity.put("quantity",num.toString());
+        	entity.put("basePrice",basePrice.toString());
+        	entity.put("note", "备注");
+        	entries.add(entity);
         }
-       data.put("entries", orderDataList);
+       orderMap.put("entries", entries);
+       orderDataList.add(orderMap);
+       data.put("orderDataList", orderDataList);
        String jsonString = JSON.toJSONString(data);
        String responseMsg = apiClient.post(jsonString);
        System.out.println("返回信息:"+responseMsg);
