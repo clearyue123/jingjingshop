@@ -18,16 +18,9 @@ import com.pinyougou.mapper.TbRepresentDoctorMapper;
 import com.pinyougou.mapper.TbRepresentMapper;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
-import com.pinyougou.pojo.TbDoctorExample;
-import com.pinyougou.pojo.TbDoctorExample.Criteria;
 import com.pinyougou.pojo.TbDoctorUser;
-import com.pinyougou.pojo.TbDoctorUserExample;
-import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
-import com.pinyougou.pojo.TbRepresent;
-import com.pinyougou.pojo.TbRepresentDoctor;
-import com.pinyougou.pojo.TbRepresentDoctorExample;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.doctor.DoctorService;
 
@@ -45,15 +38,6 @@ public class DoctorServiceImpl  implements DoctorService {
 	@Autowired
 	private TbDoctorUserMapper  tbDocUserMapper;
 
-    @Autowired
-    private TbOrderMapper orderMapper;
-	
-	@Autowired
-	private TbRepresentDoctorMapper representDoctorMapper;
-    
-	@Autowired
-	private TbRepresentMapper representMapper;
-	
 	@Override
 	public int editByPointRequestCaction(HashMap map) {
 		return tbDocUserMapper.editByPointRequestCaction(map);

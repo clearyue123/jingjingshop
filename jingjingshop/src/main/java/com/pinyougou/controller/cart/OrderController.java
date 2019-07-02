@@ -165,9 +165,8 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public ApiResult search(@RequestParam(value="searchEntity",required=false)Map<String,Object> searchEntity, int page, int rows  ){
+	public ApiResult search(@RequestBody(required=false) Map<String,Object> searchEntity, int page, int rows  ){
 		try{
-			 System.out.println("status:"+(String)searchEntity.get("status"));
 			 Page<Map<String, Object>> pageData = orderService.search(searchEntity,page,rows);
 			 Map<String, Object> data = new HashMap<String,Object>();
 			 data.put("rows", pageData.getResult());

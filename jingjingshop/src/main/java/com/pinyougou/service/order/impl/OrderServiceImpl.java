@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.pinyougou.mapper.TbOrderItemMapper;
 import com.pinyougou.mapper.TbOrderMapper;
 import com.pinyougou.mapper.TbPayLogMapper;
 import com.pinyougou.pojo.TbOrder;
@@ -26,7 +24,6 @@ import util.DateUtils;
 /**
  * 服务实现层
  * @author yue
- *
  */
 @Service
 @Transactional
@@ -56,9 +53,6 @@ public class OrderServiceImpl implements OrderService {
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
-	@Autowired
-	private TbOrderItemMapper orderItemMapper;
-	
 	/**
 	 * 增加
 	 */
@@ -261,6 +255,9 @@ public class OrderServiceImpl implements OrderService {
 	public Page<Map<String,Object>> search(Map<String, Object> searchMap,Integer page,Integer rows) {
 		try{
 			 PageHelper.startPage(page, rows);
+			 if((String)searchMap.get("status")!=null&&((String)searchMap.get("status")).trim().length()==0){
+				 searchMap.remove("status");
+			 }
 			 List<Map<String,Object>> orderList = orderMapper.searchOrderList(searchMap);
 			 for(Map<String,Object> orderMap:orderList){
 				 String orderStatus = (String) orderMap.get("orderStatus");//1、未付款，2、已付款，3、待发货，4、已发货，5、交易成功，6、交易关闭,7、待评价

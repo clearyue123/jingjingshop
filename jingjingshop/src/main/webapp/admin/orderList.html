@@ -51,7 +51,7 @@
                                 <div class="has-feedback">
 							                   订单状态:
 							                <select ng-model="searchEntity.status">
-		      		                             <option  ng-selected="true">--请选择--</option> 
+		      		                             <option  ng-selected="true" value="">--请选择--</option> 
 		      		                             <option  value="1" >未付款</option> 
 		      		                             <option  value="2" >已付款</option> 
 		      		                             <option  value="3" >待发货</option> 
@@ -62,7 +62,7 @@
 		      		                         </select>
 							                   订单号: <input type="text" ng-model="searchEntity.orderId" >
 							                   物流单号:<input type="text" ng-model="searchEntity.shippingCode" >
-									   用户名: <input type="text" ng-model="searchEntity.userId">									
+									   用户名: <input type="text" ng-model="searchEntity.userName">									
 									<button class="btn btn-default" ng-click="search()">查询</button>                                    
                                 </div>
                             </div>
