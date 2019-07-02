@@ -114,4 +114,11 @@ public interface RepresentativeService {
 	 * @param tbRepresent
 	 */
 	public void update(TbRepresent tbRepresent);
+
+	/**
+	 * 后台 代表id查询关联医生列表
+	 * @param representId
+	 * @return
+	 */
+	public List<Map<String, Object>> selectRelatedDoctorList(long representId);
 }

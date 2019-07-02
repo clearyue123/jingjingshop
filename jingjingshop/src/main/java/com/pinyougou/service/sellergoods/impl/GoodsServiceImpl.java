@@ -33,7 +33,7 @@ import com.pinyougou.service.sellergoods.GoodsService;
 
 import entity.PageResult;
 import util.DateUtils;
-import util.IdWorker;
+import util.IDUtils;
 
 /**
  * 服务实现层
@@ -49,7 +49,6 @@ public class GoodsServiceImpl implements GoodsService {
 	@Autowired
 	private TbGoodsDescMapper tbGoodsDescMapper;
 	
-	private IdWorker idWorker = new IdWorker();
 	/**
 	 * 查询全部
 	 */
@@ -103,7 +102,6 @@ public class GoodsServiceImpl implements GoodsService {
 				// item.setTitle(title);
 				String title = goods.getGoods().getGoodsName();
 				Map<String,String> map = JSON.parseObject(item.getSpec(), Map.class);
-				//Map<String,String> map = item.getSpec();
 				for (String key : map.keySet()) {
 					title+= " "+map.get(key);
 				}
@@ -267,7 +265,7 @@ public class GoodsServiceImpl implements GoodsService {
 	  try{	
 		  TbGoods tbGoods = new TbGoods();
 		  TbGoodsDesc goodsDesc = new TbGoodsDesc();
-		  long goodsId = idWorker.nextId();
+		  Long goodsId = IDUtils.generateGoodsID();
 		  String isMarketable = (String)goodsMap.get("isMarketable")==null?"1":(String)goodsMap.get("isMarketable");
 		  String isEnableSpec = (String)goodsMap.get("isEnableSpec")==null?"1":(String)goodsMap.get("isEnableSpec");
 		  String isIndexad = (String)goodsMap.get("isIndexad")==null?"0":(String)goodsMap.get("isIndexad");

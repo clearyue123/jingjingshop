@@ -40,7 +40,7 @@ import com.pinyougou.service.user.AddressService;
 
 import entity.PageResult;
 import entity.Result;
-import util.IdWorker;
+import util.IDUtils;
 /**
  * @desc:订单控制层
  * @author yue
@@ -74,8 +74,6 @@ public class OrderController {
     private DoctorService doctorService;
     @Autowired
     private ShipService shipService;
-	//设置id生成器
-	private IdWorker idWorker = new IdWorker();
 	/**
 	 * 返回全部列表
 	 * @return
@@ -392,7 +390,7 @@ public class OrderController {
 				TbOrder tbOrder = new TbOrder();
 				TbOrderItem tbOrderItem = new TbOrderItem();
 				//设置orderId
-				long orderId = idWorker.nextId();
+				Long orderId = IDUtils.generateOrderID();
 				tbOrder.setOrderId(orderId);
 				tbOrder.setPaymentType("1");//支付类型：1:在线支付 2:货到付款
 				tbOrder.setStatus("1");//未付款 
@@ -486,7 +484,7 @@ public class OrderController {
             	String areaName = (String)address.get("area_name");
 				TbOrder tbOrder = new TbOrder();
 				TbOrderItem tbOrderItem = new TbOrderItem();
-				long orderId = idWorker.nextId();
+				Long orderId = IDUtils.generateOrderID();
 				tbOrder.setOrderId(orderId);
 				tbOrder.setPaymentType("1");//支付类型 1:在线支付 2:货到付款
 				tbOrder.setStatus("1");//未付款 

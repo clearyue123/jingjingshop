@@ -557,4 +557,20 @@ public class RepresentativeController {
 		   return new ApiResult(201, "更新失败！", "");
 	   }
    }
+   
+   /**
+    * 后台管理 代表id查询关联医生列表
+    * @param representId
+    * @return
+    */
+   @RequestMapping("/selectRelatedDoctorList")
+   public ApiResult selectRelatedDoctorList(@RequestParam(value="representId",required=true)String representId){
+	   try{
+		   List<Map<String,Object>> doctorList = representativeService.selectRelatedDoctorList(Long.parseLong(representId));
+		   return new ApiResult(200, "查询成功！", "");
+	   }catch(Exception e){
+		   e.printStackTrace();
+		   return new ApiResult(201, "查询失败！", "");
+	   }
+   }
 }

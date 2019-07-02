@@ -46,14 +46,14 @@ public class ShipController {
 			String myMD5Code = MyMD5Utils.getMD5Str(md5Content, "utf-8");
 			System.out.println("md5Content:"+md5Content+","+"md5code:"+myMD5Code);
 			if(!myMD5Code.equals(md5code)){
-				return new ApiResult(202, "MD5CODE ERROR!", "pleas confirm your md5code!");
+				return new ApiResult(202, "MD5CODE ERROR!", "秘钥不对！");
 			}else{
 				Map<String,Object> paramMap = new HashMap<String,Object>();
 				paramMap.put("orderId", orderId);
 				Map<String, Object> selectOrderDetail = orderService.selectOrderDetail(paramMap);
 				String status = (String)selectOrderDetail.get("status");
 				if(!"3".equals(status)){
-					return new ApiResult(201, "ORDER STATUS ERROR!", "订单状态异常！");
+					return new ApiResult(203, "ORDER STATUS ERROR!", "订单状态不对！");
 				}
 				paramMap.put("SHIPCODE", shipCode);
 				paramMap.put("SHIPCOMPANYCODE", shipCompanyCode);
@@ -61,11 +61,11 @@ public class ShipController {
 				paramMap.put("UPDATEDATE", new Date());
 				paramMap.put("STATUS", "4");
 				orderService.updateShipMessage(paramMap);
-				return new ApiResult(200, "物流信息更新成功！", "");
+				return new ApiResult(200, "SUCCESS!", "物流信息更新成功！");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ApiResult(201, "物流信息更新失败！", "");
+			return new ApiResult(201, "ERROR!", "物流信息更新失败！");
 		}
 	}
 }

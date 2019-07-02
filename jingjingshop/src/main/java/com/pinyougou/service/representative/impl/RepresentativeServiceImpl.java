@@ -230,4 +230,11 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 		representMapper.updateByPrimaryKey(tbRepresent);
 	}
 
+
+	@Override
+	public List<Map<String, Object>> selectRelatedDoctorList(long representId) {
+		List<Map<String, Object>> doctorList = representMapper.selectRelatedDoctorList(representId);
+		return doctorList;
+	}
+
 }

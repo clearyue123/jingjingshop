@@ -3,6 +3,7 @@ package util;
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.util.Date;
 
 /**
  * <p>名称：IdWorker.java</p>
@@ -20,7 +21,7 @@ import java.net.NetworkInterface;
  * <p>
  * 64位ID (42(毫秒)+5(机器ID)+5(业务编码)+12(重复累加))
  *
- * @author Polim
+ * @author Administrators
  */
 public class IdWorker {
     // 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
@@ -41,6 +42,7 @@ public class IdWorker {
     private final static long datacenterIdShift = sequenceBits + workerIdBits;
     // 时间毫秒左移22位
     private final static long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+//    private final static long timestampLeftShift = 3;
 
     private final static long sequenceMask = -1L ^ (-1L << sequenceBits);
     /* 上次生产id时间戳 */
@@ -75,7 +77,7 @@ public class IdWorker {
      *
      * @return
      */
-    public synchronized long nextId() {
+    public synchronized Long nextId() {
         long timestamp = timeGen();
         if (timestamp < lastTimestamp) {
             throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
@@ -96,8 +98,7 @@ public class IdWorker {
         Long nextId = ((timestamp - twepoch) << timestampLeftShift)
                 | (datacenterId << datacenterIdShift)
                 | (workerId << workerIdShift) | sequence;
-
-        return Long.parseLong(nextId.toString().substring(8));
+        return nextId;
     }
 
     private long tilNextMillis(final long lastTimestamp) {
@@ -156,13 +157,14 @@ public class IdWorker {
         }
         return id;
     }
-
     
-    /*public static void main(String[] args) {
-		
-    	IdWorker idWorker=new IdWorker(1,1);
-    	long nextId = idWorker.nextId();
-    	System.out.println(nextId);
-	}*/
+    public static void main(String[] args) {
+//    	IdWorker idWorker = new IdWorker();
+//    	for(int i = 0;i<100;i++){
+//    		Long nextId = idWorker.nextId();
+//    		String idStr = idWorker.nextId().toString().substring(2,7)+idWorker.nextId().toString().substring(nextId.toString().length()-3);
+//    		System.out.println(nextId+","+idStr);
+//    	}
+	}
 
 }
