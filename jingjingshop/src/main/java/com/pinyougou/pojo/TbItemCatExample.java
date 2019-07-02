@@ -68,7 +68,7 @@ public class TbItemCatExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-05
+     * @date 2019-07-02
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -430,6 +430,76 @@ public class TbItemCatExample {
             addCriterion("is_delete not between", value1, value2, "isDelete");
             return (Criteria) this;
         }
+
+        public Criteria andCategoryPictureIsNull() {
+            addCriterion("category_picture is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureIsNotNull() {
+            addCriterion("category_picture is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureEqualTo(String value) {
+            addCriterion("category_picture =", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureNotEqualTo(String value) {
+            addCriterion("category_picture <>", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureGreaterThan(String value) {
+            addCriterion("category_picture >", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureGreaterThanOrEqualTo(String value) {
+            addCriterion("category_picture >=", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureLessThan(String value) {
+            addCriterion("category_picture <", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureLessThanOrEqualTo(String value) {
+            addCriterion("category_picture <=", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureLike(String value) {
+            addCriterion("category_picture like", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureNotLike(String value) {
+            addCriterion("category_picture not like", value, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureIn(List<String> values) {
+            addCriterion("category_picture in", values, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureNotIn(List<String> values) {
+            addCriterion("category_picture not in", values, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureBetween(String value1, String value2) {
+            addCriterion("category_picture between", value1, value2, "categoryPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryPictureNotBetween(String value1, String value2) {
+            addCriterion("category_picture not between", value1, value2, "categoryPicture");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -444,7 +514,7 @@ public class TbItemCatExample {
      * 
      * @author wcyong
      * 
-     * @date 2019-06-05
+     * @date 2019-07-02
      */
     public static class Criterion {
         private String condition;

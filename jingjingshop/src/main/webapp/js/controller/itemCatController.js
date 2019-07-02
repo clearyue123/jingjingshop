@@ -144,4 +144,35 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 		});
 	}
     
+	//文件上传
+	$scope.uploadFile = function(){
+		alert("111...");
+		// 向后台传递数据:
+		var formData = new FormData();
+		var categoryPicture = document.querySelector('input[id=categoryPicture]').files[0];
+		formData.append("uploadFile",categoryPicture);
+		return $http({
+			method:'post',
+			url:'../upload/uploadFile.do',
+			data:formData,
+			headers:{'Content-Type': undefined} ,// Content-Type : text/html  text/plain
+			transformRequest: angular.identity
+		});
+	}
+
+	
+	//上传分类图片
+	$scope.uploadCategoryPicture = function(){
+		$scope.uploadFile().success(function(response){
+    		if(response.code==200){
+    			alert(response.data);
+				// 获得url
+				$scope.entity.categoryPicture = response.data;
+				alert(response.message);
+			}else{
+				alert(response.message);
+			}
+		});
+	}
+	
 });	

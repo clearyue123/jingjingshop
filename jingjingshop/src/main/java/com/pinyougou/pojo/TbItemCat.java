@@ -33,6 +33,11 @@ public class TbItemCat implements Serializable {
      * 逻辑删除
      */
     private String isDelete;
+    
+    /**
+     * 分类图片
+     */
+    private String categoryPicture;
 
     public Long getId() {
         return id;
@@ -73,4 +78,13 @@ public class TbItemCat implements Serializable {
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete == null ? null : isDelete.trim();
     }
+
+	public String getCategoryPicture() {
+		return categoryPicture;
+	}
+
+	public void setCategoryPicture(String categoryPicture) {
+		this.categoryPicture = categoryPicture;
+	}
+    
 }

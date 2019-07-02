@@ -77,4 +77,5 @@ app.controller('contentCategoryController' ,function($scope,$controller   ,conte
 		);
 	}
     
+	
 });	

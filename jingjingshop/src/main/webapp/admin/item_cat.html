@@ -117,7 +117,18 @@
 		      	<tr>
 		      		<td>商品分类名称</td>
 		      		<td><input  class="form-control" placeholder="商品分类名称" ng-model="categoryEntity.name">  </td>
-		      	</tr>			  
+		      	</tr>	
+		      	<tr>
+		      	            <td>商品分类图片: </td> 
+		      	            <td>
+		      	                   <input type="file" id="categoryPicture"  ng-model="entity.categoryPicture"/>
+		      	             </td>
+		      	             <td>
+		      	                  <button class="btn btn-primary" type="button" ng-click="uploadCategoryPicture()">
+				                   		上传
+				                   </button>
+		      	             </td>		  
+		       </tr>
 			 </table>				
 		</div>
 		<div class="modal-footer">						

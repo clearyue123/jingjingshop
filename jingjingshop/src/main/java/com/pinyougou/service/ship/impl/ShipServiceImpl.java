@@ -64,7 +64,7 @@ public class ShipServiceImpl implements ShipService{
         orderMap.put("submitDate", DateUtils.getDateStrFromDf("yyyyMMdd", createTime));//提交日期
         orderMap.put("creater", "10050465");//创建用户
         orderMap.put("shipDate", DateUtils.getDateStrFromDf("yyyyMMdd", cal.getTime()));//发货日期
-        orderMap.put("salesMan", "admin");
+        orderMap.put("salesMan", "10050465");
         orderMap.put("manager", "admin");
         orderMap.put("note", buyerMessage);//买家留言
         orderMap.put("country", "CN");
