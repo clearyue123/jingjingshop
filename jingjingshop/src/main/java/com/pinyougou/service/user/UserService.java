@@ -66,4 +66,12 @@ public interface UserService {
 
 
 	public int BindDid(TbUser user);
+
+    /**
+     * 公众号绑定微信 
+     * @param wxname 微信名
+     * @param headimg 微信头像
+     * @return
+     */
+	public List<TbUser> selectUserByWxnameAndHeadimg(String wxname, String headimg);
 }

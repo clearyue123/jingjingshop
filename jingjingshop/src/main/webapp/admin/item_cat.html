@@ -69,8 +69,7 @@
 			                              </th> 
 										  <th class="sorting_asc">分类ID</th>
 									      <th class="sorting">分类名称</th>									   
-									      <th class="sorting">类型模板ID</th>
-									     						
+									      <th class="sorting">分类图片</th>									   
 					                      <th class="text-center">操作</th>
 			                          </tr>
 			                      </thead>
@@ -79,9 +78,7 @@
 			                              <td><input  type="checkbox"  ng-click="updateSelection($event,entity.id)"></td>			                              
 				                          <td>{{entity.id}}</td>
 									      <td>{{entity.name}}</td>									    
-									      <td>
-									      	{{entity.typeId}}  
-									      </td>									      
+									       <td><img alt="{{entity.name}}" src="{{entity.categoryPicture}}" height="50" width="100"></td>								      
 		                                  <td class="text-center">		      
 			                                  <span ng-if="grade != 3">                          
 			                                      <button type="button" ng-click="setGrade(grade+1);selectList(entity);" class="btn bg-olive btn-xs" >查询下级</button> 		                                     
@@ -121,13 +118,17 @@
 		      	<tr>
 		      	            <td>商品分类图片: </td> 
 		      	            <td>
-		      	                   <input type="file" id="categoryPicture"  ng-model="entity.categoryPicture"/>
+		      	                   <input type="file" id="categoryPicture"  ng-model="categoryEntity.categoryPicture"/>
 		      	             </td>
 		      	             <td>
 		      	                  <button class="btn btn-primary" type="button" ng-click="uploadCategoryPicture()">
 				                   		上传
 				                   </button>
 		      	             </td>		  
+		       </tr>
+		       <tr>
+		      	            <td>商品分类图片预览: </td> 
+		      	            <td><img src="{{categoryEntity.categoryPicture}}" height="50" width="100"></td>
 		       </tr>
 			 </table>				
 		</div>

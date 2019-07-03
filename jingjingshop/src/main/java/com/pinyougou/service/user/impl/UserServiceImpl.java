@@ -147,4 +147,14 @@ public class UserServiceImpl implements UserService {
 		return userMapper.BindDid(user);
 	}
 
+	@Override
+	public List<TbUser> selectUserByWxnameAndHeadimg(String wxname, String headimg) {
+		TbUserExample example = new TbUserExample();
+		Criteria cri = example.createCriteria();
+		cri.andNickNameEqualTo(wxname);
+		cri.andHeadPicEqualTo(headimg);
+		List<TbUser> userList = userMapper.selectByExample(example);
+		return userList;
+	}
+
 }

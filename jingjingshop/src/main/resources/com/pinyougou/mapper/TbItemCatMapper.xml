@@ -243,7 +243,8 @@
     <select id="findCategory1List" resultType="java.util.Map">
         SELECT
 			t1.id category1Id,
-			t1.`name` category1Name
+			t1.`name` category1Name,
+			t1.category_picture categoryPicture
 		FROM
 			tb_item_cat t1
 		WHERE

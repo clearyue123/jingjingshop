@@ -54,18 +54,20 @@ public class ShipServiceImpl implements ShipService{
         String mobile = (String)addressMap.get("mobile");
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.DAY_OF_MONTH, +1);
+        cal.add(Calendar.DAY_OF_MONTH, +2);
         orderMap.put("code", orderId.toString());//订单id
         orderMap.put("organization", "1099");
-        orderMap.put("orderType", "ZH07");
+        //orderMap.put("orderType", "ZH04");
+        orderMap.put("orderType", "ZS12");
         orderMap.put("unit", "22000748");
-        orderMap.put("payMethod", "online");
+        //orderMap.put("payMethod", "online");
+        orderMap.put("payMethod", "CASH");
         orderMap.put("currency", "CNY");
         orderMap.put("submitDate", DateUtils.getDateStrFromDf("yyyyMMdd", createTime));//提交日期
         orderMap.put("creater", "10050465");//创建用户
         orderMap.put("shipDate", DateUtils.getDateStrFromDf("yyyyMMdd", cal.getTime()));//发货日期
-        orderMap.put("salesMan", "10050465");
-        orderMap.put("manager", "admin");
+        orderMap.put("salesMan", "tangyu");
+        orderMap.put("manager", "tangyu");
         orderMap.put("note", buyerMessage);//买家留言
         orderMap.put("country", "CN");
         orderMap.put("region", provinceId.toString());

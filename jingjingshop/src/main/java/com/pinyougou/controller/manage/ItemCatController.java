@@ -55,6 +55,7 @@ public class ItemCatController {
 		try {
 			itemCat.setTypeId(35L);
 			itemCat.setIsDelete("0");
+			System.out.println(itemCat.getCategoryPicture());
 			itemCatService.add(itemCat);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {

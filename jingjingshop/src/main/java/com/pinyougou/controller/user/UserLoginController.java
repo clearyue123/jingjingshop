@@ -1,6 +1,7 @@
 package com.pinyougou.controller.user;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,7 +65,6 @@ public class UserLoginController {
 
 	/**
 	 * 绑定微信信息
-	 * 
 	 * @param id
 	 * @param wxname
 	 * @param headimg
@@ -99,5 +99,33 @@ public class UserLoginController {
 			return new ApiResult(200, "绑定成功", tbUser);
 		}
 	}
-
+	
+	/**
+	 * 从公众号绑定微信
+	 * @param wxname 微信名
+	 * @param headimg 头像
+	 * @return
+	 */
+	@RequestMapping(value="/bindWXFromPublic",method = RequestMethod.POST)
+    public ApiResult bindWXFromPublic(String wxname, String headimg){
+		try{
+			List<TbUser> userList = userService.selectUserByWxnameAndHeadimg(wxname,headimg);
+			if(userList!=null&&userList.size()>0){
+				TbUser tbUser = userList.get(0);
+				return new ApiResult(200, "用户已存在", tbUser);
+			}else{
+				TbUser user = new TbUser();
+				user.setNickName(wxname);
+				user.setHeadPic(headimg);
+				userService.add(user);
+				List<TbUser> userList2 = userService.selectUserByWxnameAndHeadimg(wxname,headimg);
+				TbUser tbUser2 = userList2.get(0);
+				return new ApiResult(200, "新增用户", tbUser2);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "查询失败", "");
+			
+		}
+	}
 }

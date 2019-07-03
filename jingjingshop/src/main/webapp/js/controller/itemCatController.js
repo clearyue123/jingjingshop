@@ -1,5 +1,5 @@
  //控制层 
-app.controller('itemCatController' ,function($scope,$controller   ,itemCatService){	
+app.controller('itemCatController' ,function($scope,$controller,itemCatService,$http){	
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -146,11 +146,10 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
     
 	//文件上传
 	$scope.uploadFile = function(){
-		alert("111...");
 		// 向后台传递数据:
 		var formData = new FormData();
-		var categoryPicture = document.querySelector('input[id=categoryPicture]').files[0];
-		formData.append("uploadFile",categoryPicture);
+		var uploadFile = document.querySelector('input[id=categoryPicture]').files[0];
+		formData.append("uploadFile",uploadFile);
 		return $http({
 			method:'post',
 			url:'../upload/uploadFile.do',
@@ -165,9 +164,8 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	$scope.uploadCategoryPicture = function(){
 		$scope.uploadFile().success(function(response){
     		if(response.code==200){
-    			alert(response.data);
 				// 获得url
-				$scope.entity.categoryPicture = response.data;
+				$scope.categoryEntity.categoryPicture = response.data;
 				alert(response.message);
 			}else{
 				alert(response.message);

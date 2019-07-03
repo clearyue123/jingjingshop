@@ -1,5 +1,6 @@
 package com.pinyougou.controller.representative;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class RepresentativeLoginController {
 		TbRepresent user = new TbRepresent();
 		user.setOpenId(openid);
 		user.setUnionId(unionid);
+		user.setPoints(new BigDecimal("0"));
+		user.setPointsAll(new BigDecimal("0"));
 		Map<String,Object> result = representativeService.firstInfo(user);
 		if (result != null) {
 			String name = (String)result.get("name");
