@@ -40,8 +40,8 @@ public class HttpUtils {
     //public static final String APPID="wx04666848fc542a4d";
    //public static final String secret="1f2857250a8f65c09d03ab14ebac3445";
 
-    //public static final String APPID2="wx2c5c710434000d96";
-    //public static final String secret2="fd75c8d2d08f0ce7f257d514d5443755://
+//    public static final String APPID2="wx2c5c710434000d96";
+//    public static final String secret2="fd75c8d2d08f0ce7f257d514d5443755";
     /**
      * get请求
      * @return

@@ -34,7 +34,6 @@ public class UserLoginController {
 					+ wxcode + "&grant_type=authorization_code";
 
 		String ss = HttpUtils.doGet(url);
-
 		if (ss != null) {
 			JSONObject jsonObject = JSON.parseObject(ss);
 			if (jsonObject.getIntValue("errcode") != 0) {
