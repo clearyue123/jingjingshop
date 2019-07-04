@@ -5968,9 +5968,17 @@ button.close {
   height: 50px;
   overflow: scroll;
 }
+
+/**
 @media (min-width: 768px) {
   .modal-dialog {
     width: 600px;
+    margin: 30px auto;
+  }
+*/
+@media (min-width: 968px) {
+  .modal-dialog {
+    width: 800px;
     margin: 30px auto;
   }
   .modal-content {
@@ -6753,5 +6761,16 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+/* 自定义弹出框 */
+.modal.fade .modal-list {
+  -webkit-transition: -webkit-transform .3s ease-out;
+       -o-transition:      -o-transform .3s ease-out;
+          transition:         transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+      -ms-transform: translate(0, -25%);
+       -o-transform: translate(0, -25%);
+          transform: translate(0, -25%);
 }
 /*# sourceMappingURL=bootstrap.css.map */
