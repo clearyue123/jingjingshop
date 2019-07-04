@@ -36,14 +36,18 @@ public class UserLoginController {
 		String ss = HttpUtils.doGet(url);
 		if (ss != null) {
 			JSONObject jsonObject = JSON.parseObject(ss);
+			System.out.println("jsonObject:"+jsonObject.toJSONString());
 			if (jsonObject.getIntValue("errcode") != 0) {
 				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
 			} else {
 				wxcode = jsonObject.getString("openid");
+				String session_key = jsonObject.getString("session_key");
+				System.out.println("session_key:"+session_key);
 				TbUser user = new TbUser();
 				user.setOpenId(wxcode);
 				TbUser result = userService.firstInfo(user);
 				if (result != null) {
+					result.setSession_key(session_key);
 					if(TextUtils.isBlank(result.getNickName())){
 						return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result);
 					}
@@ -54,6 +58,7 @@ public class UserLoginController {
 					user.setIsDelete("0");
 					userService.add(user);
 					TbUser result1 = userService.firstInfo(user);
+					result1.setSession_key(session_key);
 					return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result1);
 				}
 			}

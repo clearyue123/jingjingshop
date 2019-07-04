@@ -560,10 +560,10 @@ public class RepresentativeController {
     * @return
     */
    @RequestMapping("/selectRelatedDoctorList")
-   public ApiResult selectRelatedDoctorList(@RequestParam(value="representId",required=true)String representId){
+   public ApiResult selectRelatedDoctorList(@RequestParam(value="id",required=true)String representId){
 	   try{
 		   List<Map<String,Object>> doctorList = representativeService.selectRelatedDoctorList(Long.parseLong(representId));
-		   return new ApiResult(200, "查询成功！", "");
+		   return new ApiResult(200, "查询成功！", doctorList);
 	   }catch(Exception e){
 		   e.printStackTrace();
 		   return new ApiResult(201, "查询失败！", "");

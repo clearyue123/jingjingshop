@@ -479,9 +479,6 @@
 			<if test="sellerName !=null">
 			   and t3.`name` like CONCAT('%',#{sellerName},'%')
 			</if>
-			<if test="categoryName !=null">
-			   and t5.`name` like CONCAT('%',#{categoryName},'%')
-			</if>
 		</where> 
     </select>
     
@@ -624,6 +621,6 @@
 				t1.is_indexAd = 1
 			AND t1.is_delete = 0
 			AND t1.is_marketable = 1
-			limit 0,4
+			limit 0,8
     </select>
 </mapper>

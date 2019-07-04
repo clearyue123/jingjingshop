@@ -657,7 +657,7 @@
 						FROM
 							tb_item_cat t4
 						WHERE
-							t4.id = t2.category3_id
+							t4.id = t2.category2_id
 					) categoryName,
 					(
 						SELECT
@@ -736,6 +736,7 @@
 				t1.payment_time paymentTime,
 				t1.shipping_code shippingCode,
 				t2.nick_name nickName,
+				t1.user_id userId,
 				t3.address receiverAddress,
 				t3.contact receiverName,
 				t3.mobile receiverMobile,

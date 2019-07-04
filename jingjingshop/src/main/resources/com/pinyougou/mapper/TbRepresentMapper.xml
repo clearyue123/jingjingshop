@@ -365,4 +365,21 @@
         where rid = #{rid,jdbcType=BIGINT}
     </update>   
     
+    <select id="selectRelatedDoctorList" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        SELECT
+			t1.did,
+			t1. NAME doctorName,
+			t1.points,
+			t1.points_all pointsAll,
+			t1.username,
+			t1.hospital,
+			t1.office,
+		    t1.phone,
+		    t1.create_date createDate
+		FROM
+			tb_doctor t1
+		LEFT JOIN tb_represent_doctor t2 ON t1.did = t2.did
+		WHERE
+			t2.rid = #{representId}
+    </select>
 </mapper>

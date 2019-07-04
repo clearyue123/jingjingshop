@@ -235,6 +235,10 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 	@Override
 	public List<Map<String, Object>> selectRelatedDoctorList(long representId) {
 		List<Map<String, Object>> doctorList = representMapper.selectRelatedDoctorList(representId);
+		for(Map<String,Object> map:doctorList){
+			Date createDate = (Date)map.get("createDate");
+			map.put("createDateStr", DateUtils.getDateStrFromDate(createDate));
+		}
 		return doctorList;
 	}
 

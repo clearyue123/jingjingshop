@@ -247,6 +247,18 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public Page<Map<String, Object>> search(Map<String, String> searchMap, int page, int rows) {
 		PageHelper.startPage(page, rows);
+		String goodsName = (String)searchMap.get("goodsName");
+		if(goodsName!=null&&goodsName.trim().length()==0){
+			searchMap.remove("goodsName");
+		}
+		String brandName = (String)searchMap.get("brandName");
+		if(brandName!=null&&brandName.trim().length()==0){
+			searchMap.remove("brandName");
+		}
+		String sellerName = (String)searchMap.get("sellerName");
+		if(sellerName!=null&&sellerName.trim().length()==0){
+			searchMap.remove("sellerName");
+		}
 		List<Map<String, Object>> searchGoodList = goodsMapper.searchGoodList(searchMap);
 		for(Map<String,Object> targetMap:searchGoodList){
 			String isMarketable = ((String)targetMap.get("isMarketable")).equals("1")?"已上架":"未上架";

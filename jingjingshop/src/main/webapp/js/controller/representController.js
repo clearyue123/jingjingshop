@@ -60,4 +60,17 @@ app.controller("representController",function($scope,$controller,$http,represent
 		
 		);
 	}
+	
+	//查看代表关联医生列表
+	$scope.findRelatedDoctors = function(id){
+		representService.findRelatedDoctors(id).success(
+		     function(response){
+		    	 if(response.code == 200){
+		    		 $scope.relatedDoctorList = response.data;
+		    	 }else{
+		    		 alert(response.message);
+		    	 }
+		     }		
+		 );
+	}
 });

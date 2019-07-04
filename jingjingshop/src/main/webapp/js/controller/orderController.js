@@ -26,4 +26,12 @@ app.controller("orderController",function($scope,$controller,$http,orderService)
 		});
 	}
 	
+	//查看订单明细
+	$scope.showOrderDetatil = function(orderId){
+		orderService.showOrderDetatil(orderId).success(function(response){
+			$scope.orderDetaiId = orderId;
+			$scope.orderItemList = response.data.itemMapList;
+			$scope.orderTotal = response.data.orderDetailMap.payment;
+		})
+	}
 });

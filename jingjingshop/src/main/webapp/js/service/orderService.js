@@ -19,4 +19,8 @@ app.service("orderService",function($http){
 	this.findById = function(id){
 		return $http.post("../order/findOne.do?id="+id);
 	}
+	
+	this.showOrderDetatil = function(orderId){
+		return $http.post("../order/manageOrderDetail.do?orderId="+orderId);
+	}
 });

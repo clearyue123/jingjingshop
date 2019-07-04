@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -78,7 +79,7 @@ public class OrderController {
 	 * 返回全部列表
 	 * @return
 	 */
-	@RequestMapping("/findAll")
+	@RequestMapping(value="/findAll",method = RequestMethod.POST)
 	public List<TbOrder> findAll(){			
 		return orderService.findAll();
 	}
@@ -88,7 +89,7 @@ public class OrderController {
 	 * 返回全部列表
 	 * @return
 	 */
-	@RequestMapping("/findPage")
+	@RequestMapping(value="/findPage",method = RequestMethod.POST)
 	public PageResult  findPage(int page,int rows){			
 		return orderService.findPage(page, rows);
 	}
@@ -98,7 +99,7 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
-	@RequestMapping("/add")
+	@RequestMapping(value="/add",method = RequestMethod.POST)
 	public Result add(@RequestBody TbOrder order){
 		
 		//获取当前登录人账号
@@ -120,7 +121,7 @@ public class OrderController {
 	 * @param order
 	 * @return
 	 */
-	@RequestMapping("/update")
+	@RequestMapping(value="/update",method = RequestMethod.POST)
 	public Result update(@RequestBody TbOrder order){
 		try {
 			orderService.update(order);
@@ -136,7 +137,7 @@ public class OrderController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/findOne")
+	@RequestMapping(value="/findOne",method = RequestMethod.POST)
 	public TbOrder findOne(Long id){
 		return orderService.findOne(id);		
 	}
@@ -146,7 +147,7 @@ public class OrderController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping("/delete")
+	@RequestMapping(value="/delete",method = RequestMethod.POST)
 	public Result delete(Long [] ids){
 		try {
 			orderService.delete(ids);
@@ -164,7 +165,7 @@ public class OrderController {
 	 * @param rows
 	 * @return
 	 */
-	@RequestMapping("/search")
+	@RequestMapping(value="/search",method = RequestMethod.POST)
 	public ApiResult search(@RequestBody(required=false) Map<String,Object> searchEntity, int page, int rows  ){
 		try{
 			 Page<Map<String, Object>> pageData = orderService.search(searchEntity,page,rows);
@@ -185,7 +186,7 @@ public class OrderController {
 	 * @param status 订单状态
 	 * @return
 	 */
-	@RequestMapping("/ordersList")
+	@RequestMapping(value="/ordersList",method = RequestMethod.POST)
 	public Object OrdersList(@RequestParam(required = true, value = "userId")String userId,
 			                 @RequestParam(required = false, value = "status")String status){
 		try{
@@ -217,7 +218,7 @@ public class OrderController {
 	 * @param userId 用户id
 	 * @return
 	 */
-	@RequestMapping("/delOrder")
+	@RequestMapping(value="/delOrder",method = RequestMethod.POST)
 	public Object delOrder(@RequestParam(required = true, value = "orderId")String orderId,
             @RequestParam(required = true, value = "userId")String userId){
 		try{
@@ -237,7 +238,7 @@ public class OrderController {
 	 * @param status 订单状态
 	 * @return
 	 */
-	@RequestMapping("/showOrderDetail")
+	@RequestMapping(value="/showOrderDetail",method = RequestMethod.POST)
 	public Object showOrderDetail(
 			          @RequestParam(required=true,value="userId")String userId,
 			          @RequestParam(required=true,value="orderId")String orderId){
@@ -280,7 +281,7 @@ public class OrderController {
 	 * @param operateFlag 订单操作
 	 * @return
 	 */
-	@RequestMapping("/oprateOrder")
+	@RequestMapping(value="/oprateOrder",method = RequestMethod.POST)
 	public Object oprateOrder(
 			  @RequestParam(required=true,value="userId")String userId,
 	          @RequestParam(required=true,value="orderId")String orderId,
@@ -344,7 +345,7 @@ public class OrderController {
 	 * @param message 用户留言
 	 * @return
 	 */
-	@RequestMapping("/payOrder")
+	@RequestMapping(value="/payOrder",method = RequestMethod.POST)
 	public Object payOrder( 
 			  @RequestParam(required=true,value="userId")String userId,
 	          @RequestParam(required=false,value="userType")String userType,
@@ -370,7 +371,7 @@ public class OrderController {
 	 * @param listParams
 	 * @return
 	 */
-	@RequestMapping("/createOrderFromCart")
+	@RequestMapping(value="/createOrderFromCart",method = RequestMethod.POST)
 	public Object createOrderFromCart(
 			@RequestParam(required=true,value="userId")String userId,
 			@RequestParam(required=true,value="cartIds")String[] cartIds){
@@ -390,6 +391,7 @@ public class OrderController {
 				TbOrderItem tbOrderItem = new TbOrderItem();
 				//设置orderId
 				Long orderId = IDUtils.generateOrderID();
+				tbOrder.setSellerId("yuyue");//设置商铺名
 				tbOrder.setOrderId(orderId);
 				tbOrder.setPaymentType("1");//支付类型：1:在线支付 2:货到付款
 				tbOrder.setStatus("1");//未付款 
@@ -456,7 +458,7 @@ public class OrderController {
 	 * @param speOpIds
 	 * @return
 	 */
-	@RequestMapping("/createOrderFromGoods")
+	@RequestMapping(value="/createOrderFromGoods",method = RequestMethod.POST)
 	public Object createOrderFromGoods(
 			@RequestParam(required=true,value="userId")String userId,
 			@RequestParam(required=true,value="goodsId")String goodsId,
@@ -474,6 +476,7 @@ public class OrderController {
 	        	TbGoods tbGoods = goodsMapper.selectByPrimaryKey(Long.parseLong(goodsId));
 	        	BigDecimal reducedPrice = tbGoods.getReducedPrice();
 	        	BigDecimal payment = reducedPrice.multiply((new BigDecimal(num)));
+	        	String sellerId = tbGoods.getSellerId();
 	        	//获取用户地址
 	        	String addressDetail= (String)address.get("address");
             	String mobile= (String)address.get("mobile");
@@ -485,6 +488,7 @@ public class OrderController {
 				TbOrderItem tbOrderItem = new TbOrderItem();
 				Long orderId = IDUtils.generateOrderID();
 				tbOrder.setOrderId(orderId);
+				tbOrder.setSellerId(sellerId);//设置商铺id
 				tbOrder.setPaymentType("1");//支付类型 1:在线支付 2:货到付款
 				tbOrder.setStatus("1");//未付款 
 				tbOrder.setCreateTime(new Date());//下单时间
@@ -524,4 +528,25 @@ public class OrderController {
 		}
 	}
 	
+	/**
+	 * 后台管理 订单详情商品明细列表
+	 * @param orderId
+	 * @return
+	 */
+	@RequestMapping(value="/manageOrderDetail",method = RequestMethod.POST)
+	public ApiResult manageOrderDetail(@RequestParam(required=true,value="orderId")String orderId){
+		try{
+			Map<String,Object> data = new HashMap<String,Object>();
+			Map<String,Object> paramMap = new HashMap<String,Object>();
+			paramMap.put("orderId", orderId);
+			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
+			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(Long.parseLong(orderId));
+			data.put("orderDetailMap", orderDetailMap);
+			data.put("itemMapList", itemMapList);
+			return new ApiResult(200, "查询成功！", data);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "查询失败！", "");
+		}
+	}
 }

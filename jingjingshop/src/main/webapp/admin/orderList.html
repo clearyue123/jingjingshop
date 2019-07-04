@@ -103,10 +103,9 @@
 									      <td>{{entity.sellerName}}</td>							
 									      <td>{{entity.createTime}}</td>							
 									      <td>{{entity.paymentTime}}</td>							
-		                                  <td class="text-center">                                           
-		                                      <button type="button" ng-click="findById(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button>
-		                                 	  <button type="button" ng-click="" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#detailModal">详情</button>                                           
-		                                  </td>
+		                                  <td class="text-center" style="width:150px">                                           
+		                                      <span><button type="button" ng-click="findById(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button></span>
+		                                 	  <span><button type="button" ng-click="showOrderDetatil(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#orderDetailModal">详情</button></span>		                                  </td>
 			                          </tr>
 			                      </tbody>
 			                  </table>
@@ -130,60 +129,8 @@
 		</div>
 		<div class="modal-body">		
 			<table class="table table-bordered table-striped"  width="800px">
-		      	<tr>
-		      		<td>用户名</td>
-		      		<td><input ng-model="entity.userId" class="form-control" placeholder="用户名" >  </td>
-		      	</tr>		      	
-		      	<tr>
-		      		<td>订单状态</td>
-		      		<td><input ng-model="entity.status" class="form-control" placeholder="订单状态" >  </td>
-		      	</tr>		      	
-		      	<tr>
-		      		<td>订单金额</td>
-		      		<td><input ng-model="entity.payment" class="form-control" placeholder="订单金额">  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>支付类型</td>
-		      		<td><input ng-model="entity.paymentType" class="form-control" placeholder="支付类型" >  </td>
-		      	</tr>		      	
-		      	<tr>
-		      		<td>物流单号</td>
-		      		<td><input ng-model="entity.shippingCode" class="form-control" placeholder="物流单号">  </td>
-		      	</tr>
-		      	
-		      	<tr>
-		      		<td>用户留言</td>
-		      		<td><input ng-model="entity.buyerMessage" class="form-control" placeholder="用户留言">  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>买家昵称</td>
-		      		<td><input ng-model="entity.buyerNick" class="form-control" placeholder="买家昵称" >  </td>
-		      	</tr>		      	
-		      	<tr>
-		      		<td>是否已经评价</td>
-		      		<td><input ng-model="entity.buyerRate" class="form-control" placeholder="是否已经评价">  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>收货地址</td>
-		      		<td><input ng-model="entity.receiverAreaName" class="form-control" placeholder="收货地址" >  </td>
-		      	</tr>		      	
-		      	<tr>
-		      		<td>收货人手机号</td>
-		      		<td><input ng-model="entity.receiverMobile" class="form-control" placeholder="收货人手机号">  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>收货人</td>
-		      		<td><input ng-model="entity.receiver" class="form-control" placeholder="收货人" >  </td>
-		      	</tr>		      	
-		      	<tr>
-		      		<td>订单商品数量</td>
-		      		<td><input ng-model="entity.itemNum" class="form-control" placeholder="订单商品数量">  </td>
-		      	</tr>
-		      	<tr>
-		      		<td>配送方式</td>
-		      		<td><input ng-model="entity.shippingType" class="form-control" placeholder="配送方式" >  </td>
-		      	</tr>		      	
-			 </table>				
+		    
+		    </table>		
 		</div>
 		<div class="modal-footer">						
 			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="update()">保存</button>
@@ -192,6 +139,54 @@
 	  </div>
 	</div>
 </div>
+
+
+<!-- 订单详情明细窗口 -->
+<div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:1000px">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">订单详情明细</h3>
+		</div>
+		<div class="modal-body">		
+			<table class="table table-bordered table-striped">
+			      <thead>
+			           <tr>
+						 <th class="sorting">订单ID</th>
+					     <th class="sorting">商品ID</th>
+					     <th class="sorting">商品名称</th>
+					     <th class="sorting">打折前价格</th>
+				         <th class="sorting">打折后价格</th>
+					     <th class="sorting">品牌名</th>
+				         <th class="sorting">分类名</th>							
+				         <th class="sorting">商铺名</th>							
+					     <th class="sorting">购买数量</th>							
+			        </tr>
+			      </thead>
+			      <tbody>
+			         <tr ng-repeat="orderItem in orderItemList">
+			                 <td>{{orderDetaiId}}</td>
+			                 <td>{{orderItem.goodsId}}</td>
+			                 <td>{{orderItem.goodsName}}</td>
+			                 <td>{{orderItem.price}}</td>
+			                 <td>{{orderItem.reducedPrice}}</td>
+			                 <td>{{orderItem.brandName}}</td>
+			                 <td>{{orderItem.categoryName}}</td>
+			                 <td>{{orderItem.sellerName}}</td>
+			                 <td>{{orderItem.num}}</td>
+			         </tr>
+			      </tbody>
+			</table>
+			     <div style="text-align: right;">
+			            <h3>订单总金额: <font color="red">{{orderTotal}}</font>元</h3>
+			     </div>
+        </div>
+	</div>
+			</div>
+			</div>
+			</div>
+		
 
 </body>
 

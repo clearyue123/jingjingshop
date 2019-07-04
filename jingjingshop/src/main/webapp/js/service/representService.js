@@ -20,4 +20,8 @@ app.service("representService",function($http){
 	this.update = function(entity){
 		return $http.post("../representative/update.do",entity);
 	}
+	
+	this.findRelatedDoctors = function(id){
+		return $http.post("../representative/selectRelatedDoctorList.do?id="+id);
+	}
 });

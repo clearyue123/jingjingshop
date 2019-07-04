@@ -150,7 +150,17 @@ public class TbUser {
      */
     private String createDateStr;
 
-    public String getCreateDateStr() {
+    private String session_key;
+    
+    public String getSession_key() {
+		return session_key;
+	}
+
+	public void setSession_key(String session_key) {
+		this.session_key = session_key;
+	}
+
+	public String getCreateDateStr() {
 		return createDateStr;
 	}
 
