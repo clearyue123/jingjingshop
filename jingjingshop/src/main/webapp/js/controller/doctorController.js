@@ -59,4 +59,17 @@ app.controller("doctorController",function($scope,$controller,$http,doctorServic
 		
 		);
 	}
+	
+	//通过医生ID查患者列表
+	$scope.findUserList = function(id){
+		doctorService.findUserList(id).success(
+		    function(response){
+		    	if(response.code == 200){
+		    		$scope.userList = response.data;
+		    	}else{
+		    		alert(response.message);
+		    	}
+		    }		
+		)
+	}
 });

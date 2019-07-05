@@ -153,4 +153,11 @@ public interface DoctorService {
 	 * @param userId
 	 */
 	public void updatePoints(Long userId,Long orderId);
+   
+	/**
+	 * 后台管理 医生id查关联患者列表
+	 * @param id
+	 * @return
+	 */
+	public List<Map<String, Object>> findUserListById(long id);
 }

@@ -126,6 +126,10 @@
         where order_id = #{orderId,jdbcType=BIGINT}
     </select>
 
+    <delete id="deleteAll">
+       delete from tb_order
+    </delete>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
         delete from tb_order
         where order_id = #{orderId,jdbcType=BIGINT}

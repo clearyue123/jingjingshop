@@ -86,7 +86,7 @@
 			                              <td>{{entity.createDateStr}}</td>		
                                           <td class="text-center">                                           
 		                                 	    <button type="button" class="btn bg-olive btn-xs"  data-toggle="modal" data-target="#editModal" ng-click="findDoctorById(entity.did)" >修改</button>                                           
-		                                 	    <button type="button" class="btn bg-olive btn-xs"  data-toggle="modal" data-target="" ng-click="" >关联详情</button>                                           
+		                                 	    <button type="button" class="btn bg-olive btn-xs"  data-toggle="modal" data-target="#userListModal" ng-click="findUserList(entity.did)" >关联详情</button>                                           
 		                                  </td>
 			                          </tr>
 			                      </tbody>
@@ -147,6 +147,42 @@
 		<div class="modal-footer">						
 			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<!-- 关联医生列表 -->
+<div class="modal fade" id="userListModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:1000px" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">医生关联患者列表</h3>
+		</div>
+		<div class="modal-body">
+			     <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+										  <th class="sorting_asc">用户ID</th>
+										  <th class="sorting_asc">用户名</th>
+										  <th class="sorting_asc">微信名</th>
+										  <th class="sorting_asc">真实姓名</th>
+									      <th class="sorting">手机号</th>									      
+									      <th class="sorting">创建日期</th>									      
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+			                         <tr ng-repeat="user in userList">
+			                              <td>{{user.id}}</td>
+			                              <td>{{user.username}}</td>
+			                              <td>{{user.nickName}}</td>
+			                              <td>{{user.realName}}</td>
+			                              <td>{{user.phone}}</td>
+			                              <td>{{user.createDateStr}}</td>
+			                         </tr>
+			                      </tbody>
+			 </table>		
 		</div>
 	  </div>
 	</div>

@@ -148,7 +148,7 @@ WHERE  r.rid=#{rid}
 
 
     <select id="dicountInnerReDoc"  parameterType="java.util.Map"  resultType="java.lang.Integer">
-          SELECT  COUNT(*)  FROM  tb_represent_doctor   WHERE     rid=#{rid}  AND  did=#{did}
+          SELECT  COUNT(*)  FROM  tb_represent_doctor   WHERE   did=#{did}
     </select>
 
 <!--积分兑换-->

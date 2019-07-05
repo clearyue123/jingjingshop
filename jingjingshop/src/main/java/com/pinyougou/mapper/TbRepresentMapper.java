@@ -36,4 +36,11 @@ public interface TbRepresentMapper {
      * @return
      */
 	List<Map<String, Object>> selectRelatedDoctorList(long representId);
+    
+	/**
+	 * 医生查代表
+	 * @param doctorId
+	 * @return
+	 */
+	Map<String, Object> selectRepresentByDoctorId(Long doctorId);
 }

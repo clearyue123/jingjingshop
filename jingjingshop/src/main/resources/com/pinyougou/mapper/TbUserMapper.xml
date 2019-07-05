@@ -126,6 +126,10 @@
         delete from tb_user
         where id = #{id,jdbcType=BIGINT}
     </delete>
+    
+    <delete id="deleteAll">
+        delete from tb_user
+    </delete>
 
     <delete id="deleteByExample" parameterType="com.pinyougou.pojo.TbUserExample" >
         delete from tb_user

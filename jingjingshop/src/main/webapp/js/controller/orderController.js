@@ -22,7 +22,7 @@ app.controller("orderController",function($scope,$controller,$http,orderService)
 
 	$scope.findById = function(id){
 		orderService.findById(id).success(function(response){
-			$scope.entity = response;
+			$scope.entity = response.data;
 		});
 	}
 	

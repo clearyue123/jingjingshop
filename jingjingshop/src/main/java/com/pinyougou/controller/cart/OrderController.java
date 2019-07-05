@@ -90,7 +90,7 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value="/findPage",method = RequestMethod.POST)
-	public PageResult  findPage(int page,int rows){			
+	public PageResult findPage(int page,int rows){			
 		return orderService.findPage(page, rows);
 	}
 	
@@ -138,9 +138,26 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value="/findOne",method = RequestMethod.POST)
-	public TbOrder findOne(Long id){
-		return orderService.findOne(id);		
+	public ApiResult findOne(Long id){
+		try{
+			TbOrder order = orderService.findOne(id);		
+			return new ApiResult(200, "查询失败！", order);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "查询失败！", "");
+		}
 	}
+	
+	
+    @RequestMapping(value="/deleteAll")
+	public ApiResult deleteAll(){
+    	try{
+    		orderService.deleteAll();
+    		return new ApiResult(200, "删除成功", "");
+    	}catch(Exception e){
+    		e.printStackTrace();}
+    	    return new ApiResult(201, "删除失败", "");
+    }
 	
 	/**
 	 * 批量删除
@@ -365,10 +382,9 @@ public class OrderController {
 	}
 	
 	/**
-	 * 购物车 创建订单	 
+	 *  购物车 创建订单
 	 * @param userId
-	 * @param userType
-	 * @param listParams
+	 * @param cartIds
 	 * @return
 	 */
 	@RequestMapping(value="/createOrderFromCart",method = RequestMethod.POST)

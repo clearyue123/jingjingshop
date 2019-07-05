@@ -382,4 +382,13 @@
 		WHERE
 			t2.rid = #{representId}
     </select>
+    
+    <select id="selectRepresentByDoctorId" parameterType="java.lang.Long" resultType="java.util.HashMap">
+         SELECT
+				*
+			FROM
+				tb_represent_doctor t
+			WHERE
+				t.did = #{doctorId}
+    </select>
 </mapper>

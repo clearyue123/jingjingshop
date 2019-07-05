@@ -102,9 +102,10 @@ public class RepresentativeController {
             if (i <= 0) {
                 TbRepresentDoctor tbReDoc = new TbRepresentDoctor(representId, doctorId);
                 representativeService.addInnerReDoc(tbReDoc);
-                return new ApiResult(200, "新增成功", "新增成功");
+                return new ApiResult(200, "已成功关联代表医生！", "");
+            }else{
+            	return new ApiResult(201, "关联失败，该医生已关联过代表！", "");
             }
-            return new ApiResult(201, "操作失败", "关联关系不可重复添加");
         } catch (Exception e) {
             e.printStackTrace();
             return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
@@ -246,11 +247,7 @@ public class RepresentativeController {
             e.printStackTrace();
             return new ApiResult(201, "操作失败", "字段超出范围或者格式不正确");
         }
-
     }
-
-//
-
 
     /**
      * 查询积分记录表

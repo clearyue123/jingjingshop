@@ -30,7 +30,7 @@ public interface UserService {
 	*/
 	public int add(TbUser user);
 	
-	
+	public void deleteAll();
 	/**
 	 * 修改
 	 */
@@ -74,4 +74,7 @@ public interface UserService {
      * @return
      */
 	public List<TbUser> selectUserByWxnameAndHeadimg(String wxname, String headimg);
+
+
+	
 }

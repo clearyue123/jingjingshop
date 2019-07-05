@@ -157,4 +157,9 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
+	@Override
+	public void deleteAll() {
+		userMapper.deleteAll();
+	}
+
 }

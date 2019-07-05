@@ -16,6 +16,8 @@ public interface TbUserMapper {
 
     int deleteByPrimaryKey(Long id);
 
+    void deleteAll();
+    
     int insert(TbUser record);
 
     int insertSelective(TbUser record);
@@ -39,4 +41,5 @@ public interface TbUserMapper {
 	int BindDid(TbUser user);
 	
 	TbUser selectByOpenId(TbUser user);
+	
 }

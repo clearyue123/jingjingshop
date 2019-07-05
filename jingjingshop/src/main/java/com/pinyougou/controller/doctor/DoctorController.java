@@ -30,7 +30,8 @@ import sun.misc.BASE64Encoder;
 import util.TextUtils;
 
 /**
- * 医生管理
+ * @desc:医生管理
+ * @date:2019.7.6
  */
 @RestController
 @RequestMapping("/doctor")
@@ -614,4 +615,22 @@ public class DoctorController {
 			return new ApiResult(201, "更新失败！","");
 		}
 	}
+	
+	/**
+	 * 后台管理 
+	 *  医生id查关联患者
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/findUserListById")
+	public ApiResult findUserListById(String id){
+		try{
+			List<Map<String,Object>> userList = doctorService.findUserListById(Long.parseLong(id));
+			return new ApiResult(200, "查询成功！", userList);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "查询失败！", "");
+		}
+	}
+	
 }

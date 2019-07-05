@@ -478,7 +478,35 @@
             </if>
          </where>
          ORDER BY t.create_date DESC
-          
   </select>
   
+  <select id="findUserListById" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        SELECT
+			  t1.id,
+			  t1.nick_name nickName,
+			  t1.username username,
+			  t1.`name` realName,
+			  t1.phone,
+			  t1.create_date createDate
+			FROM
+				tb_doctor_user t
+			INNER JOIN tb_user t1
+			on t.uid = t1.id
+			WHERE
+				t.did = #{id}
+  </select>
+  
+  <select id="selectDoctorList" parameterType="java.lang.Long" resultType="java.util.Map">
+       SELECT
+			t.did doctorId,
+			t.uid userId,
+			t.script,
+			t.create_date createDate
+		FROM
+			tb_doctor_user t
+		WHERE
+			t.uid = #{userId}
+		ORDER BY
+			t.create_date DESC
+  </select>
 </mapper>

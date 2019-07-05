@@ -14,13 +14,14 @@ import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbDoctorMapper;
 import com.pinyougou.mapper.TbDoctorUserMapper;
 import com.pinyougou.mapper.TbOrderMapper;
-import com.pinyougou.mapper.TbRepresentDoctorMapper;
 import com.pinyougou.mapper.TbRepresentMapper;
 import com.pinyougou.pojo.TbCard;
 import com.pinyougou.pojo.TbDoctor;
 import com.pinyougou.pojo.TbDoctorUser;
+import com.pinyougou.pojo.TbOrder;
 import com.pinyougou.pojo.TbPointList;
 import com.pinyougou.pojo.TbPointRequest;
+import com.pinyougou.pojo.TbRepresent;
 import com.pinyougou.pojo.TbUser;
 import com.pinyougou.service.doctor.DoctorService;
 
@@ -37,7 +38,13 @@ public class DoctorServiceImpl  implements DoctorService {
 
 	@Autowired
 	private TbDoctorUserMapper  tbDocUserMapper;
-
+	
+	@Autowired 
+	private TbOrderMapper orderMapper;
+    
+	@Autowired
+	private TbRepresentMapper representMapper;
+	
 	@Override
 	public int editByPointRequestCaction(HashMap map) {
 		return tbDocUserMapper.editByPointRequestCaction(map);
@@ -279,32 +286,31 @@ public class DoctorServiceImpl  implements DoctorService {
 
 	@Override
 	public void updatePoints(Long userId,Long orderId) {
-//		TbOrder order = orderMapper.selectByPrimaryKey(orderId);
-//		Double payment = order.getPayment().doubleValue();
-//		Double doctorPoints = payment*0.01;
-//		Double representPoints = payment*0.005;
-//		TbDoctorUserExample example = new TbDoctorUserExample();
-//		com.pinyougou.pojo.TbDoctorUserExample.Criteria cri = example.createCriteria();
-//		cri.andUidEqualTo(userId);
-//		List<TbDoctorUser> doctorUserList = tbDocUserMapper.selectByExample(example);
-//		for(TbDoctorUser doctorUser:doctorUserList){
-//			Long did = doctorUser.getDid();
-//			TbDoctor doctor = tbDocMapper.selectByPrimaryKey(did);
-//			Double addPoints1 = doctorPoints + doctor.getPoints().doubleValue();
-//			doctor.setPoints(new BigDecimal(addPoints1));
-//			tbDocMapper.updateByPrimaryKey(doctor);
-//			TbRepresentDoctorExample tdExample = new TbRepresentDoctorExample();
-//			com.pinyougou.pojo.TbRepresentDoctorExample.Criteria cr2 = tdExample.createCriteria();
-//			cr2.andDidEqualTo(did);
-//			List<TbRepresentDoctor> representDoctorList = representDoctorMapper.selectByExample(tdExample);
-//			for (TbRepresentDoctor tbRepresentDoctor : representDoctorList) {
-//				Long rid = tbRepresentDoctor.getRid();
-//				TbRepresent tbRepresent = representMapper.selectByPrimaryKey(rid);
-//				Double addPoints2 = representPoints + tbRepresent.getPoints().doubleValue();
-//				tbRepresent.setPoints(new BigDecimal(addPoints2));
-//				representMapper.updateByPrimaryKey(tbRepresent);
-//			}
-//		}
+		TbOrder tbOrder = orderMapper.selectByPrimaryKey(orderId);
+		BigDecimal payment = tbOrder.getPayment();
+		List<Map<String,Object>> doctorList = tbDocMapper.selectDoctorList(userId);
+		Map<String, Object> lastDoctorMap = doctorList.get(0);
+		Long doctorId = (Long)lastDoctorMap.get("doctorId");
+		TbDoctor doctor = tbDocMapper.selectByPrimaryKey(doctorId);
+		BigDecimal docPoints = new BigDecimal(payment.doubleValue()*0.01+doctor.getPoints().intValue());
+		doctor.setPoints(docPoints);
+		tbDocMapper.updateByPrimaryKeySelective(doctor);//更新医生积分
+		Map<String,Object> representMap = (Map<String,Object>)representMapper.selectRepresentByDoctorId(doctorId);
+		Long representId = (Long)representMap.get("rid");
+		TbRepresent tbRepresent = representMapper.selectByPrimaryKey(representId);
+		BigDecimal representPoints = new BigDecimal(payment.doubleValue()*0.005+tbRepresent.getPoints().doubleValue());
+		tbRepresent.setPoints(representPoints);
+		representMapper.updateByPrimaryKeySelective(tbRepresent);
+	}
+
+	@Override
+	public List<Map<String, Object>> findUserListById(long id) {
+		List<Map<String, Object>> userList = tbDocMapper.findUserListById(id);
+		for(Map<String,Object> userMap:userList){
+			Date createDate = (Date)userMap.get("createDate");
+			userMap.put("createDateStr", DateUtils.getDateStrFromDate(createDate));
+		}
+		return userList;
 	}
 
 

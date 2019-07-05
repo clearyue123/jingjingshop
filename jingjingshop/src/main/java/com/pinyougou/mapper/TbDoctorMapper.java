@@ -53,4 +53,8 @@ public interface TbDoctorMapper {
      * @return
      */
 	List<Map<String, Object>> searchDoctorList(Map<String, String> searchEntity);
+
+	List<Map<String, Object>> findUserListById(long id);
+
+	List<Map<String, Object>> selectDoctorList(Long userId);
 }

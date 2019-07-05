@@ -47,7 +47,10 @@ public interface OrderService {
 	 */
 	public TbOrder findOne(Long id);
 	
-	
+	/**
+	 * 删除
+	 */
+	public void deleteAll();
 	/**
 	 * 批量删除
 	 * @param ids
@@ -134,4 +137,5 @@ public interface OrderService {
      * @param paramMap
      */
 	public void updateShipMessage(Map<String, Object> paramMap);
+
 }

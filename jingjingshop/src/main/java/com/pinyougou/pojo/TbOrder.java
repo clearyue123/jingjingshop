@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author yue
- * @date 2019-05-08
+ * @desc:订单实体
+ * @author:yue
+ * @date:2019-05-08
  */
 public class TbOrder {
     /**
@@ -164,7 +165,20 @@ public class TbOrder {
      */
     private String expressCode;
     
-    public Long getOrderId() {
+    /**
+     * 创建时间（字符串）
+     */
+    private String createDateStr;
+    
+    public String getCreateDateStr() {
+		return createDateStr;
+	}
+
+	public void setCreateDateStr(String createDateStr) {
+		this.createDateStr = createDateStr;
+	}
+
+	public Long getOrderId() {
         return orderId;
     }
 

@@ -20,4 +20,8 @@ app.service("doctorService",function($http){
 	this.update = function(entity){
 		return $http.post("../doctor/update.do",entity);
 	}
+	
+	this.findUserList = function(id){
+		return $http.post("../doctor/findUserListById.do?id="+id);
+	}
 });

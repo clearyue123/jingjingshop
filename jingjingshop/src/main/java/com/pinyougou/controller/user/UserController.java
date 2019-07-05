@@ -112,6 +112,17 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/deleteAll")
+    public ApiResult deleteAll(){
+    	try{
+    		userService.deleteAll();
+    		return new ApiResult(200, "", "");
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return new ApiResult(201, "", "");
+    	}
+    }
+    
     /**
      * 查询+分页
      *
@@ -178,4 +189,5 @@ public class UserController {
             return new ApiResult(201, "修改失败！","");
         }
     }
+    
 }

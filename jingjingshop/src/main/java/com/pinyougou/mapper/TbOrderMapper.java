@@ -19,6 +19,8 @@ public interface TbOrderMapper {
 
     int insertSelective(TbOrder record);
 
+    void deleteAll();
+    
     List<TbOrder> selectByExample(TbOrderExample example);
 
     TbOrder selectByPrimaryKey(Long orderId);
@@ -52,4 +54,5 @@ public interface TbOrderMapper {
 	 * @param paramMap
 	 */
 	void updateShipMessage(Map<String, Object> paramMap);
+	
 }

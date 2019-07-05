@@ -77,7 +77,25 @@ public class OrderServiceImpl implements OrderService {
 	 */
 	@Override
 	public TbOrder findOne(Long id){
-		return orderMapper.selectByPrimaryKey(id);
+		TbOrder tbOrder = orderMapper.selectByPrimaryKey(id);
+		String status = tbOrder.getStatus();
+		if("1".equals(status)){
+			tbOrder.setStatus("未付款");
+		}else if("2".equals(status)){
+			tbOrder.setStatus("已付款");
+		}else if("3".equals(status)){
+			tbOrder.setStatus("未发货");
+		}else if("4".equals(status)){
+			tbOrder.setStatus("已发货");
+		}else if("5".equals(status)){
+			tbOrder.setStatus("交易成功");
+		}else if("6".equals(status)){
+			tbOrder.setStatus("交易关闭");
+		}else{
+			tbOrder.setStatus("待评价");
+		}
+		tbOrder.setCreateDateStr(DateUtils.getDateStrFromDate(tbOrder.getCreateTime()));//创建时间
+		return tbOrder;
 	}
 
 	/**
@@ -250,6 +268,11 @@ public class OrderServiceImpl implements OrderService {
 			return null;
 		}
 	}
+	
+	@Override
+	public void deleteAll() {
+		orderMapper.deleteAll();  		
+	}
 
 	@Override
 	public Page<Map<String,Object>> search(Map<String, Object> searchMap,Integer page,Integer rows) {
@@ -298,5 +321,5 @@ public class OrderServiceImpl implements OrderService {
 	public void updateShipMessage(Map<String, Object> paramMap) {
 		orderMapper.updateShipMessage(paramMap);
 	}
-	
+
 }

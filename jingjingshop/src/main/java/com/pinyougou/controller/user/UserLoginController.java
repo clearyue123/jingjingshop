@@ -132,4 +132,22 @@ public class UserLoginController {
 			
 		}
 	}
+	
+	/**
+	 * 小程序测试 发送unionId
+	 * @param unionId
+	 * @param openId
+	 * @return
+	 */
+	@RequestMapping("/sendUnionId")
+	public ApiResult sendUnionId(String unionId,String openId){
+		try{
+			System.out.println("unionId:"+unionId+",openId"+openId);
+			return new ApiResult(200, "发送成功", "");
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "发送成功", "");
+		}
+	}
+	
 }
