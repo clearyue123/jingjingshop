@@ -144,7 +144,7 @@ public class UserLoginController {
 	@RequestMapping(value = "/wxLogin1", method = RequestMethod.POST)
 	public ApiResult wxLogin1(@RequestParam(value="wxcode",required=true)String wxcode){
 		if (TextUtils.isBlank(wxcode)) {
-			return new ApiResult(101, "微信账号不能为空", null);
+			return new ApiResult(101, "微信CODE不能为空", null);
 		}
 		String url = HttpUtils.WXGETAPPID + "?appid=" + HttpUtils.APPID + "&secret=" + HttpUtils.secret + "&js_code="
 					+ wxcode + "&grant_type=authorization_code";
