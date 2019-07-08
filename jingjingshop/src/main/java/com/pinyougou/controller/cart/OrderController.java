@@ -122,13 +122,13 @@ public class OrderController {
 	 * @return
 	 */
 	@RequestMapping(value="/update",method = RequestMethod.POST)
-	public Result update(@RequestBody TbOrder order){
+	public ApiResult update(@RequestBody TbOrder order){
 		try {
 			orderService.update(order);
-			return new Result(true, "修改成功");
+			return new ApiResult(200,"编辑成功","");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "修改失败");
+			return new ApiResult(200, "编辑失败","");
 		}
 	}	
 	

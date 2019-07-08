@@ -162,12 +162,9 @@ public class UserLoginController {
 				TbUser result = userService.firstInfo(user);
 				if (result != null) {
 					result.setSession_key(session_key);
-					if(TextUtils.isBlank(result.getNickName())){
-						return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result);
-					}
 					return new ApiResult(200, "登录成功", result);
 				} else {
-					return new ApiResult(101, "登录成功，请绑定微信昵称和头像", jsonObject);
+					return new ApiResult(101, "该用户不存在，请先绑定微信昵称和头像", jsonObject);
 				}
 			}
 		} else {

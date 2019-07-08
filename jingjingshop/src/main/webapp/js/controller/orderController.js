@@ -17,7 +17,15 @@ app.controller("orderController",function($scope,$controller,$http,orderService)
 	}
 	
 	$scope.update = function(){
-		orderService.update($scope.entity);
+		orderService.update($scope.entity).success(
+				function(response){
+			        if(response.code==200){
+			        	alert(response.message);
+			        	$scope.reloadList();
+			        }else{
+			        	alert(response.message);
+			        }
+	 	      });
 	}
 
 	$scope.findById = function(id){

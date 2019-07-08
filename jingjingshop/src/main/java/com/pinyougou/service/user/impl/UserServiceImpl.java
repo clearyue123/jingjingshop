@@ -168,9 +168,6 @@ public class UserServiceImpl implements UserService {
 		if(user.getUnionId()!=null){
 			cri.andUnionIdEqualTo(user.getUnionId());
 		}
-		if(user.getOpenId()!=null){
-			cri.andOpenIdEqualTo(user.getOpenId());
-		}
 		List<TbUser> userList = userMapper.selectByExample(userExample);
 		return userList;
 	}
