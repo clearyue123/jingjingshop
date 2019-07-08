@@ -31,9 +31,13 @@ public class WXPayController {
     
 	@Autowired
 	private OrderService orderService;
-    /**
-	 * @Description: 发起微信支付
-	 * @param request
+    
+	/**
+	 * @desc:微信支付
+	 * @param openId  小程序openId
+	 * @param orderId 订单id
+	 * @param request http请求
+	 * @return
 	 */
 	@RequestMapping("/payOrder")
 	public Map<String, Object> wxPay(@RequestParam(value="openId",required=true)String openId,

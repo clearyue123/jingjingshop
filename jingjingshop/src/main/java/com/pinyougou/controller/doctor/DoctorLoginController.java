@@ -13,7 +13,6 @@ import com.pinyougou.mapper.TbDoctorMapper;
 import com.pinyougou.pojo.TbDoctor;
 import com.pinyougou.service.doctor.DoctorService;
 
-import util.IdWorker;
 import util.TextUtils;
 
 /**

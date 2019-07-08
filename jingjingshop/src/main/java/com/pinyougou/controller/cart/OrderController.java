@@ -470,6 +470,7 @@ public class OrderController {
 	 * @param userId
 	 * @param goodsId
 	 * @param num
+	 * @param doctorId
 	 * @param speIds
 	 * @param speOpIds
 	 * @return
@@ -479,8 +480,9 @@ public class OrderController {
 			@RequestParam(required=true,value="userId")String userId,
 			@RequestParam(required=true,value="goodsId")String goodsId,
 			@RequestParam(required=true,value="num")String num,
-			@RequestParam(value="speIds",required=false)String[] speIds,
-            @RequestParam(value="speOpIds",required=false)String[] speOpIds){
+			@RequestParam(required=false,value="doctorId")String doctorId,
+			@RequestParam(required=false,value="speIds")String[] speIds,
+            @RequestParam(required=false,value="speOpIds")String[] speOpIds){
 		try{
 			if(speIds!=null&&speIds.length!=speOpIds.length){
 				return new ApiResult(201, "参数错误","");
@@ -536,6 +538,8 @@ public class OrderController {
 			    }
 			    orderItemMapper.insert(tbOrderItem);
 			    orderService.add(tbOrder);
+//			    Map<String,Object> responseData = new HashMap<String,Object>();
+//			    responseData.put("orderId", orderId);
 				return new ApiResult(200, "订单创建成功", orderId);
 	        }
 		}catch(Exception e){

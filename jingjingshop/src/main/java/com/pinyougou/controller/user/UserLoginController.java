@@ -1,7 +1,9 @@
 package com.pinyougou.controller.user;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -143,7 +145,10 @@ public class UserLoginController {
 	public ApiResult sendUnionId(String unionId,String openId){
 		try{
 			System.out.println("unionId:"+unionId+",openId"+openId);
-			return new ApiResult(200, "发送成功", "");
+			Map<String,Object> data = new HashMap<String,Object>();
+			data.put("unionId", unionId);
+			data.put("openId", openId);
+			return new ApiResult(200, "发送成功", data);
 		}catch(Exception e){
 			e.printStackTrace();
 			return new ApiResult(201, "发送成功", "");
