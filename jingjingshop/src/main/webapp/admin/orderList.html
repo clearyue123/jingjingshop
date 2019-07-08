@@ -104,7 +104,7 @@
 									      <td>{{entity.createTime}}</td>							
 									      <td>{{entity.paymentTime}}</td>							
 		                                  <td class="text-center" style="width:150px">                                           
-		                                      <span><button type="button" ng-click="findById(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >查看</button></span>
+		                                      <span><button type="button" ng-click="findById(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button></span>
 		                                 	  <span><button type="button" ng-click="showOrderDetatil(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#orderDetailModal">商品详情</button></span>		                                  </td>
 			                          </tr>
 			                      </tbody>
@@ -125,7 +125,7 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">订单详情</h3>
+			<h3 id="myModalLabel">订单修改</h3>
 		</div>
 		<div class="modal-body">		
 			<table class="table table-bordered table-striped"  width="800px">
@@ -150,8 +150,16 @@
 		      	    <tr>
 			      		<td>订单状态</td>
 			      		<td>
-				      		 {{entity.status}}
-	                    </td>
+	                       <select ng-model="entity.status">
+		      		              <option ng-selected="entity.status==1" value="1" >未付款</option> 
+		      		              <option ng-selected="entity.status==2" value="2" >已付款</option> 
+		      		              <option ng-selected="entity.status==3" value="3" >待发货</option> 
+		      		              <option ng-selected="entity.status==4" value="4" >已发货</option> 
+		      		              <option ng-selected="entity.status==5" value="5" >交易成功</option> 
+		      		              <option ng-selected="entity.status==6" value="6" >交易关闭</option> 
+		      		              <option ng-selected="entity.status==7" value="7" >待评价</option> 
+		      		      </select>
+		      		    </td>
 		      	   </tr>
 		      	    <tr>
 			      		<td>创建时间</td>
@@ -159,46 +167,24 @@
 				      		 {{entity.createDateStr}}
 	                    </td>
 		      	   </tr>
-		      	    <tr>
-			      		<td>省</td>
-			      		<td>
-				      		 {{entity.receiverProvince}}
-	                    </td>
-		      	   </tr>
-		      	   <tr>
-			      		<td>市</td>
-			      		<td>
-				      		 {{entity.receiverCity}}
-	                    </td>
-		      	   </tr>
-		      	   <tr>
-			      		<td>区</td>
-			      		<td>
-				      		 {{entity.receiverArea}}
-	                    </td>
-		      	   </tr>
 		      	   <tr>
 			      		<td>收货人</td>
-			      		<td>
-				      		 {{entity.receiver}}
-	                    </td>
+				        <td><input ng-model="entity.receiver" class="form-control" placeholder="收货人" >  </td>
 		      	   </tr>
 		      	   <tr>
 			      		<td>收货人电话</td>
-			      		<td>
-				      		 {{entity.receiverMobile}}
-	                    </td>
+				        <td><input ng-model="entity.receiverMobile" class="form-control" placeholder="收货电话" >  </td>
 		      	   </tr>
 		      	   <tr>
 			      		<td>收货人详细地址</td>
 			      		<td>
-				      		 {{entity.receiverAreaName}}
+				      		 <input ng-model="entity.receiverAreaName" class="form-control" placeholder="收货地址" >
 	                    </td>
 		      	   </tr>
 		    </table>		
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="">保存</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="update()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

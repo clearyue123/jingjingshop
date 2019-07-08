@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
@@ -136,23 +137,90 @@ public class UserLoginController {
 	}
 	
 	/**
-	 * 小程序测试 发送unionId
-	 * @param unionId
-	 * @param openId
+	 * 小程序 微信登录
+	 * @param wxcode 微信code
 	 * @return
 	 */
-	@RequestMapping("/sendUnionId")
-	public ApiResult sendUnionId(String unionId,String openId){
+	@RequestMapping(value = "/wxLogin1", method = RequestMethod.POST)
+	public ApiResult wxLogin1(@RequestParam(value="wxcode",required=true)String wxcode){
+		if (TextUtils.isBlank(wxcode)) {
+			return new ApiResult(101, "微信账号不能为空", null);
+		}
+		String url = HttpUtils.WXGETAPPID + "?appid=" + HttpUtils.APPID + "&secret=" + HttpUtils.secret + "&js_code="
+					+ wxcode + "&grant_type=authorization_code";
+
+		String ss = HttpUtils.doGet(url);
+		if (ss != null) {
+			JSONObject jsonObject = JSON.parseObject(ss);
+			String session_key = jsonObject.getString("session_key");
+			if (jsonObject.getIntValue("errcode") != 0) {
+				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
+			} else {
+				wxcode = jsonObject.getString("openid");
+				TbUser user = new TbUser();
+				user.setOpenId(wxcode);
+				TbUser result = userService.firstInfo(user);
+				if (result != null) {
+					result.setSession_key(session_key);
+					if(TextUtils.isBlank(result.getNickName())){
+						return new ApiResult(101, "登录成功，请绑定微信昵称和头像", result);
+					}
+					return new ApiResult(200, "登录成功", result);
+				} else {
+					return new ApiResult(101, "登录成功，请绑定微信昵称和头像", jsonObject);
+				}
+			}
+		} else {
+			return new ApiResult(102, "登录出错", ss);
+		}
+	}
+	
+	/**
+	 * 小程序 绑定微信
+	 * @param openID 
+	 * @param unionID
+	 * @param wxname   微信名
+	 * @param headimg  微信头像
+	 * @return
+	 */
+	@RequestMapping(value = "/bindwx1", method = RequestMethod.POST)
+	public ApiResult bindWx1(@RequestParam(value="openID",required=true)String openID,
+			                 @RequestParam(value="unionID",required=true)String unionID, 
+			                 @RequestParam(value="wxname",required=true)String wxname, 
+			                 @RequestParam(value="headimg",required=true)String headimg) {
 		try{
-			System.out.println("unionId:"+unionId+",openId"+openId);
-			Map<String,Object> data = new HashMap<String,Object>();
-			data.put("unionId", unionId);
-			data.put("openId", openId);
-			return new ApiResult(200, "发送成功", data);
+			if (TextUtils.isBlank(openID)) {
+				return new ApiResult(101, "openID不能为空", null);
+			}
+			if (TextUtils.isBlank(unionID)) {
+				return new ApiResult(101, "unionID不能为空", null);
+			}
+			if (TextUtils.isBlank(wxname)) {
+				return new ApiResult(101, "微信昵称不能为空", null);
+			}
+			if (TextUtils.isBlank(headimg)) {
+				return new ApiResult(101, "微信头像不能为空", null);
+			}
+			TbUser user = new TbUser();
+			user.setNickName(wxname);
+			user.setHeadPic(headimg);
+			user.setOpenId(openID);
+			user.setUnionId(unionID);
+			List<TbUser> userList = userService.selectUserListByInfo(user);
+			if(userList!=null&&userList.size()>0){
+				TbUser result = userList.get(0);
+				return new ApiResult(200, "已绑定过微信！", result);
+			}else{
+				userService.insertUser(user);
+				List<TbUser> insertUserList = userService.selectUserListByInfo(user);
+				TbUser result = insertUserList.get(0);
+				return new ApiResult(200, "新增用户，绑定成功！", result);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return new ApiResult(201, "发送成功", "");
+			return new ApiResult(201, "微信绑定异常！", "");
 		}
+		
 	}
 	
 }

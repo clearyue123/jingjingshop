@@ -20,8 +20,7 @@ import util.DateUtils;
 
 /**
  * 服务实现层
- *
- * @author Administrator
+ * @author yue
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -160,6 +159,27 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteAll() {
 		userMapper.deleteAll();
+	}
+
+	@Override
+	public List<TbUser> selectUserListByInfo(TbUser user) {
+		TbUserExample userExample = new TbUserExample();
+		Criteria cri = userExample.createCriteria();
+		if(user.getUnionId()!=null){
+			cri.andUnionIdEqualTo(user.getUnionId());
+		}
+		if(user.getOpenId()!=null){
+			cri.andOpenIdEqualTo(user.getOpenId());
+		}
+		List<TbUser> userList = userMapper.selectByExample(userExample);
+		return userList;
+	}
+
+	@Override
+	public void insertUser(TbUser user) {
+		user.setCreateDate(new Date());
+		user.setUpdateDate(new Date());
+		userMapper.insert(user);
 	}
 
 }

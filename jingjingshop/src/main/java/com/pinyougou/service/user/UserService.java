@@ -75,6 +75,19 @@ public interface UserService {
      */
 	public List<TbUser> selectUserByWxnameAndHeadimg(String wxname, String headimg);
 
+    /**
+     * 绑定接口:通过unionID openID 微信头像 微信昵称查用户信息
+     * @param user
+     * @return
+     */
+	public List<TbUser> selectUserListByInfo(TbUser user);
+
+    /**
+     * 绑定接口:创建新用户
+     * @param user
+     */
+	public void insertUser(TbUser user);
+
 
 	
 }

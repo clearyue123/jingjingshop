@@ -16,7 +16,7 @@ import com.pinyougou.pojo.TbUser;
 import entity.PageResult;
 
 /**
- * 代表层接口
+ * 医生服务层接口
  */
 public interface DoctorService {
 
