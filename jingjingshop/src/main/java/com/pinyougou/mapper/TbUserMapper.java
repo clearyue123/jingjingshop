@@ -1,6 +1,7 @@
 package com.pinyougou.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -41,5 +42,12 @@ public interface TbUserMapper {
 	int BindDid(TbUser user);
 	
 	TbUser selectByOpenId(TbUser user);
+    
+	/**
+	 * 查看当前用户购买记录（订单状态:2、已付款，3、待发货，4、已发货，5、交易成功，7、待评价）
+	 * @param userId
+	 * @return
+	 */
+	List<Map<String, Object>> findOrderList(Long userId);
 	
 }

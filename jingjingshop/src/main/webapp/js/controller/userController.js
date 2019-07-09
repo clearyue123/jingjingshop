@@ -66,4 +66,15 @@ app.controller("userController",function($scope,$controller,$http,userService){
 		})
 	}
 	
+	$scope.findPurchaseOrder = function(userId){
+		userService.findPurchaseOrder(userId).success(
+		     function(response){
+		    	 if(response.code == 200){
+			    	  $scope.purchaseOrderList = response.data;
+			      }else{
+			    	  alert(response.message);
+			      }
+		     }		
+		)
+	}
 });

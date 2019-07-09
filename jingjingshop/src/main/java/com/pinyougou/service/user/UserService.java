@@ -1,5 +1,6 @@
 package com.pinyougou.service.user;
 import java.util.List;
+import java.util.Map;
 
 import com.pinyougou.pojo.TbUser;
 import entity.PageResult;
@@ -87,6 +88,13 @@ public interface UserService {
      * @param user
      */
 	public void insertUser(TbUser user);
+
+    /**
+     * 后台管理:用户id查用户购买记录
+     * @param userId
+     * @return
+     */
+	public List<Map<String, Object>> findPurchaseOrder(long userId);
 
 
 	

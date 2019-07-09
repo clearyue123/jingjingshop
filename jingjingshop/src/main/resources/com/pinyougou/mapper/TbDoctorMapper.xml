@@ -470,11 +470,12 @@
 		FROM
 			tb_doctor t
          <where>
+             t.`name` is not null
             <if test="userName != null" >
-                t.username like CONCAT('%',#{userName},'%')
+              AND  t.username like CONCAT('%',#{userName},'%')
             </if>
-             <if test="phone != null" >
-                t.phone = #{phone,jdbcType=VARCHAR}
+            <if test="phone != null" >
+              AND  t.phone = #{phone,jdbcType=VARCHAR}
             </if>
          </where>
          ORDER BY t.create_date DESC

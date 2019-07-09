@@ -20,4 +20,8 @@ app.service("userService",function($http){
 	this.update = function(entity){
 		return $http.post("../user/update.do",entity);
 	}
+	
+	this.findPurchaseOrder = function(userId){
+		return $http.post("../user/findPurchaseOrder.do?userId="+userId);
+	}
 });

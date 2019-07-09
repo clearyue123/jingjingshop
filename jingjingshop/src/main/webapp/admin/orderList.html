@@ -79,11 +79,11 @@
 										  <th class="sorting">金额</th>
 									      <th class="sorting">订单状态</th>
 									      <th class="sorting">物流单号</th>
-									      <th class="sorting">用户名</th>
-									      <th class="sorting">收货人地址</th>							
+									      <th class="sorting">微信昵称</th>
+									      <th style="width:200px">收货人地址</th>							
 									      <th class="sorting">收货人姓名</th>							
 									      <th class="sorting">收货人手机号</th>							
-									      <th class="sorting">店铺</th>							
+									      <!-- <th class="sorting">店铺</th>	 -->						
 									      <th class="sorting">创建时间</th>							
 									      <th class="sorting">付款时间</th>							
 					                      <th class="text-center">操作</th>
@@ -100,11 +100,11 @@
 									      <td>{{entity.receiverAddress}}</td>							
 									      <td>{{entity.receiverName}}</td>							
 									      <td>{{entity.receiverMobile}}</td>							
-									      <td>{{entity.sellerName}}</td>							
+									      <!-- <td>{{entity.sellerName}}</td> -->							
 									      <td>{{entity.createTime}}</td>							
 									      <td>{{entity.paymentTime}}</td>							
 		                                  <td class="text-center" style="width:150px">                                           
-		                                      <span><button type="button" ng-click="findById(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button></span>
+		                                     <!--  <span><button type="button" ng-click="findById(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button></span> -->
 		                                 	  <span><button type="button" ng-click="showOrderDetatil(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#orderDetailModal">商品详情</button></span>		                                  </td>
 			                          </tr>
 			                      </tbody>

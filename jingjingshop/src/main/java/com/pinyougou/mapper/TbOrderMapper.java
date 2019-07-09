@@ -54,5 +54,4 @@ public interface TbOrderMapper {
 	 * @param paramMap
 	 */
 	void updateShipMessage(Map<String, Object> paramMap);
-	
 }

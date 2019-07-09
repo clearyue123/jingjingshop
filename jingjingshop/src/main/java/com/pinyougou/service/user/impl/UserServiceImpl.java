@@ -2,6 +2,7 @@ package com.pinyougou.service.user.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,6 +99,7 @@ public class UserServiceImpl implements UserService {
         example.setOrderByClause("create_date desc");
         Criteria criteria = example.createCriteria();
         criteria.andIsDeleteEqualTo("0");
+        criteria.andNickNameIsNotNull();
         if (user != null) {
             if (user.getUsername() != null && user.getUsername().length() > 0) {
                 criteria.andUsernameLike("%" + user.getUsername() + "%");
@@ -118,9 +120,13 @@ public class UserServiceImpl implements UserService {
         List<TbUser> userList = userMapper.selectByExample(example);
         for(int i=0;i<userList.size();i++){
         	TbUser userModel = userList.get(i);
+        	Long userId = userModel.getId();
+        	List<Map<String,Object>> orderList =userMapper.findOrderList(userId);
+        	Integer orderNum = orderList!=null?orderList.size():0;
+        	userModel.setOrderNum(orderNum);
         	String sex = userModel.getSex()==null?"1":userModel.getSex();
         	userModel.setSex(sex.equals("1")?"男":"女");
-        	userModel.setCreateDateStr(DateUtils.getDateStrFromDate(userModel.getCreateDate()));
+        	userModel.setCreateDateStr(DateUtils.getDateStrFromDf("yyyy-MM-dd", userModel.getCreateDate()));
         }
         PageInfo<TbUser> page = new PageInfo<>(userList);
         return new PageResult(page.getTotal(), page.getList());
@@ -177,6 +183,35 @@ public class UserServiceImpl implements UserService {
 		user.setCreateDate(new Date());
 		user.setUpdateDate(new Date());
 		userMapper.insert(user);
+	}
+
+	@Override
+	public List<Map<String, Object>> findPurchaseOrder(long userId) {
+		List<Map<String, Object>> orderList = userMapper.findOrderList(userId);
+		for(Map<String,Object> orderMap:orderList){
+			String orderStatus = (String) orderMap.get("orderStatus");//1、未付款，2、已付款，3、待发货，4、已发货，5、交易成功，6、交易关闭,7、待评价
+			 if("1".equals(orderStatus)){
+				 orderStatus = "未付款";
+			 }else if("2".equals(orderStatus)){
+				 orderStatus = "已付款";
+			 }else if("3".equals(orderStatus)){
+				 orderStatus = "待发货";
+			 }else if("4".equals(orderStatus)){
+				 orderStatus = "已发货";
+			 }else if("5".equals(orderStatus)){
+				 orderStatus = "交易成功";
+			 }else if("6".equals(orderStatus)){
+				 orderStatus = "交易关闭";
+			 }else if("7".equals(orderStatus)){
+				 orderStatus = "待评价";
+			 }
+			 orderMap.put("orderStatus", orderStatus);
+			 Date paymentTime = (Date)orderMap.get("paymentTime");
+			 if(paymentTime!=null){
+				 orderMap.put("paymentTime", DateUtils.getDateStrFromDf("yyyy-MM-dd",paymentTime));
+			 }
+		}
+		return orderList;
 	}
 
 }

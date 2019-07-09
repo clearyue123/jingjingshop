@@ -32,6 +32,16 @@ public class IDUtils {
 		return Long.parseLong(goodsIDStr);
 	}
 	
+	/**
+	 * 购物车ID生成器
+	 *   11位随机数字
+	 * @return
+	 */
+	public static Long generateCartID(){
+		String goodsIDStr = idWorker.nextId().toString().substring(8);
+		return Long.parseLong(goodsIDStr);
+	}
+	
 	public static void main(String[] args) {
 		for(int i=0;i<100;i++){
 			Long generateOrderID = generateOrderID();

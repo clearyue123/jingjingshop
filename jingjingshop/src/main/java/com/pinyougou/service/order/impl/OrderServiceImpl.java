@@ -262,6 +262,7 @@ public class OrderServiceImpl implements OrderService {
 	public Page<Map<String,Object>> search(Map<String, Object> searchMap,Integer page,Integer rows) {
 		try{
 			 PageHelper.startPage(page, rows);
+			 
 			 if((String)searchMap.get("status")!=null&&((String)searchMap.get("status")).trim().length()==0){
 				 searchMap.remove("status");
 			 }
@@ -286,11 +287,11 @@ public class OrderServiceImpl implements OrderService {
 				 orderMap.put("orderStatus", orderStatus);
 				 Date createTime = (Date)orderMap.get("createTime");
 				 if(createTime!=null){
-					 orderMap.put("createTime", DateUtils.getDateStrFromDate(createTime));
+					 orderMap.put("createTime", DateUtils.getDateStrFromDf("yyyy-MM-dd", createTime));
 				 }
 				 Date paymentTime = (Date)orderMap.get("paymentTime");
 				 if(paymentTime!=null){
-					 orderMap.put("paymentTime", DateUtils.getDateStrFromDate(paymentTime));
+					 orderMap.put("paymentTime", DateUtils.getDateStrFromDf("yyyy-MM-dd",paymentTime));
 				 }
 			 }
 			 Page<Map<String,Object>> pageData = (Page<Map<String,Object>>)orderList;

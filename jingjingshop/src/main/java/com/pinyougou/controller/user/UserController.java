@@ -1,6 +1,7 @@
 package com.pinyougou.controller.user;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -175,7 +176,6 @@ public class UserController {
     
     /**
      * 后台管理 用户修改
-     *
      * @param user
      * @return
      */
@@ -190,4 +190,19 @@ public class UserController {
         }
     }
     
+    /**
+     * 后台管理 用户id查用户购买记录
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/findPurchaseOrder")
+    public ApiResult findPurchaseOrder(String userId){
+    	try{
+    		List<Map<String,Object>> orderList = userService.findPurchaseOrder(Long.parseLong(userId));
+    		return new ApiResult(200, "用户购买记录查询成功！",orderList);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		return new ApiResult(201, "用户购买记录查询失败！","");
+    	}
+    }
 }

@@ -181,6 +181,7 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 		TbRepresentExample example = new TbRepresentExample();
 		example.setOrderByClause("create_date DESC");
 		Criteria cri = example.createCriteria();
+		cri.andNameIsNotNull();
 		if(phone!=null&&phone.trim().length()>0){
 			cri.andPhoneEqualTo(phone);
 		}
@@ -189,6 +190,10 @@ public class RepresentativeServiceImpl  implements RepresentativeService {
 		}
 		List<TbRepresent> data = representMapper.selectByExample(example);
 		for(TbRepresent represent:data){
+			Long rid = represent.getRid();
+			List<Map<String, Object>> docList = representMapper.selectRelatedDoctorList(rid);
+			Integer docNum = docList!=null?docList.size():0;
+			represent.setRealetDocNum(docNum);
 			represent.setCreateDateStr(DateUtils.getDateStrFromDate(represent.getCreateDate()));
 		}
 		Page<TbRepresent> pageData = (Page<TbRepresent>)data;

@@ -150,9 +150,25 @@ public class TbUser {
      */
     private String createDateStr;
 
+    /**
+     * session_key
+     */
     private String session_key;
     
-    public String getSession_key() {
+    /**
+     * 购买过订单总数
+     */
+    private Integer orderNum;
+    
+    public Integer getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public String getSession_key() {
 		return session_key;
 	}
 

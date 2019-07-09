@@ -61,11 +61,12 @@
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th> 
 										  <th class="sorting_asc">代表ID</th>
-										  <th class="sorting_asc">用户名</th>
 										  <th class="sorting_asc">微信名</th>
+										  <th class="sorting_asc">用户名</th>
 									      <th class="sorting">手机号</th>									      
 									      <th class="sorting">累计积分</th>									      
 									      <th class="sorting">已兑换积分</th>									      
+									      <th class="sorting">关联医生数量</th>									      
 									      <th class="sorting">创建日期</th>									      
 					                      <th class="text-center">操作</th>
 			                          </tr>
@@ -74,11 +75,12 @@
 			                          <tr ng-repeat="entity in list">
 			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.rid)"></td>		
 			                              <td>{{entity.rid}}</td>		
-			                              <td>{{entity.username}}</td>		
 			                              <td>{{entity.name}}</td>		
+			                              <td>{{entity.username}}</td>		
 			                              <td>{{entity.phone}}</td>		
 			                              <td>{{entity.points}}</td>		
 			                              <td>{{entity.pointsAll}}</td>		
+			                              <td>{{entity.realetDocNum}}</td>		
 			                              <td>{{entity.createDateStr}}</td>		
                                           <td class="text-center" style="width:150px">                                           
 		                                 	    <button type="button" class="btn bg-olive btn-xs"  data-toggle="modal" data-target="#editModal" ng-click="findRepresentById(entity.rid)">修改</button>                                           
@@ -126,7 +128,10 @@
 		      	</tr>
 		      	<tr>
 		      		<td>备注</td>
-		      		<td><input ng-model="entity.script" class="form-control" placeholder="备注" >  </td>
+		      		<td>
+		      		    <textarea ng-model="entity.script" rows="3" cols="50">
+		      		    </textarea>
+		      	    </td>
 		      	</tr>
 			 </table>				
 		</div>

@@ -258,8 +258,12 @@ public class DoctorServiceImpl  implements DoctorService {
 		PageHelper.startPage(page, rows);
 		List<Map<String,Object>> data = tbDocMapper.searchDoctorList(searchEntity);
 		for (Map<String, Object> doctorMap : data) {
+			Long did = (Long)doctorMap.get("did");
+			List<Map<String, Object>> userList = tbDocMapper.findUserListById(did);
+			Integer relateUserNum = userList!=null?userList.size():0;
 			Date createDate = (Date)doctorMap.get("createDate");
-			doctorMap.put("createDateStr", DateUtils.getDateStrFromDate(createDate));
+			doctorMap.put("relateUserNum", relateUserNum);
+			doctorMap.put("createDateStr", DateUtils.getDateStrFromDf("yyyy-MM-dd", createDate));
 		}
 		Page<Map<String,Object>> pageData = (Page<Map<String,Object>>)data;
 		return pageData;

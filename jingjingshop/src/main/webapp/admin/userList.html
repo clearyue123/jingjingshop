@@ -57,35 +57,38 @@
 			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
 			                      <thead>
 			                          <tr>
-			                              <th class="" style="padding-right:0px">
+			                              <th class="text-center" style="width:50px" style="padding-right:0px">
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
 			                              </th> 
-										  <th class="sorting_asc">用户ID</th>
-										  <th class="sorting_asc">用户名</th>
-									      <th class="sorting">手机号</th>									      
-									      <th class="sorting">微信昵称</th>									      
-									      <th class="sorting">姓名</th>									     				
-									      <th class="sorting">性别</th>									     				
-									      <th class="sorting">生日</th>									      
-									      <th class="sorting">邮箱</th>									     				
-									      <th class="sorting">创建时间</th>									     				
+										  <th class="text-center" style="width:100px">用户ID</th>
+									      <th class="text-center" style="width:200px">微信昵称</th>									      
+										  <th class="text-center" style="width:200px">用户名</th>
+									      <th class="text-center" style="width:150px">手机号</th>									      
+									      <th class="text-center" style="width:100px">姓名</th>									     				
+									      <th class="text-center" style="width:50px">性别</th>									     				
+									      <th class="text-center" style="width:150px">生日</th>									      
+									      <th class="text-center" style="width:150px">邮箱</th>									     				
+									      <th class="text-center" style="width:100px">下单数量</th>									     				
+									      <th class="text-center" style="width:200px">创建时间</th>									     				
 					                      <th class="text-center">操作</th>
 			                          </tr>
 			                      </thead>
 			                      <tbody>
 			                          <tr ng-repeat="entity in list">
-			                              <td><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>			                              
-				                          <td>{{entity.id}}</td>
-				                          <td>{{entity.username}}</td>
-									      <td>{{entity.phone}}</td>									     
-		                                  <td>{{entity.nickName}}</td>	
-		                                  <td>{{entity.name}}</td>	
-		                                  <td>{{entity.sex}}</td>	
-		                                  <td>{{entity.birthday}}</td>	
-		                                  <td>{{entity.email}}</td>	
-		                                  <td>{{entity.createDateStr}}</td>	
+			                              <td class="text-center"><input  type="checkbox" ng-click="updateSelection($event,entity.id)"></td>			                              
+				                          <td class="text-center">{{entity.id}}</td>
+		                                  <td class="text-center">{{entity.nickName}}</td>	
+				                          <td class="text-center">{{entity.username}}</td>
+									      <td class="text-center">{{entity.phone}}</td>									     
+		                                  <td class="text-center">{{entity.name}}</td>	
+		                                  <td class="text-center">{{entity.sex}}</td>	
+		                                  <td class="text-center">{{entity.birthday}}</td>	
+		                                  <td class="text-center">{{entity.email}}</td>	
+		                                  <td class="text-center">{{entity.orderNum}}</td>	
+		                                  <td class="text-center">{{entity.createDateStr}}</td>	
 		                                  <td class="text-center">                                           
 		                                 	    <button type="button" class="btn bg-olive btn-xs" ng-click="findUserById(entity.id)" data-toggle="modal" data-target="#editModal"  >修改</button>                                           
+		                                 	    <button type="button" class="btn bg-olive btn-xs" ng-click="findPurchaseOrder(entity.id)" data-toggle="modal" data-target="#orderList"  >查看购买记录</button>                                           
 		                                  </td>
 			                          </tr>
 			                      </tbody>
@@ -142,13 +145,56 @@
 		      	</tr>
 		      	<tr>
 		      		<td>备注</td>
-		      		<td><input ng-model="entity.remarks" class="form-control" placeholder="格式：备注" > </td>
+		      		<td>
+		      		    <textarea ng-model="entity.remarks" rows="3" cols="50">
+		      		    </textarea>
+		      		</td>
 		      	</tr>
 			 </table>				
 		</div>
 		<div class="modal-footer">						
 			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<!-- 用户购买记录列表 -->
+<div class="modal fade" id="orderList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:1000px" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">用户购买记录列表</h3>
+		</div>
+		<div class="modal-body">
+			     <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+										  <th class="sorting_asc">用户ID</th>
+										  <th class="sorting_asc">订单ID</th>
+										  <th class="sorting_asc">订单状态</th>
+									      <th class="sorting">订单金额</th>									      
+									      <th class="sorting">付款时间</th>									      
+									      <th class="sorting">收货人地址</th>									      
+									      <th class="sorting">收货人</th>									      
+									      <th class="sorting">收货人手机号</th>									      
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+			                         <tr ng-repeat="orderEntity in purchaseOrderList">
+			                             <td>{{orderEntity.userId}}</td>
+			                             <td>{{orderEntity.orderId}}</td>
+			                             <td>{{orderEntity.orderStatus}}</td>
+			                             <td>{{orderEntity.payment}}</td>
+			                             <td>{{orderEntity.paymentTime}}</td>
+			                             <td>{{orderEntity.receiverAddress}}</td>
+			                             <td>{{orderEntity.receiver}}</td>
+			                             <td>{{orderEntity.receiverMobile}}</td>
+			                         </tr>
+			                      </tbody>
+			 </table>		
 		</div>
 	  </div>
 	</div>

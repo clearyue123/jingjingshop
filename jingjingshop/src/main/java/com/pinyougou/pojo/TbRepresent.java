@@ -81,7 +81,21 @@ public class TbRepresent {
      */
     private Set<TbDoctor>  tbDocs;
     
-    public TbRepresent() {
+    /**
+     * 关联医生数量
+     */
+    private Integer realetDocNum;
+    
+    
+    public Integer getRealetDocNum() {
+		return realetDocNum;
+	}
+
+	public void setRealetDocNum(Integer realetDocNum) {
+		this.realetDocNum = realetDocNum;
+	}
+
+	public TbRepresent() {
 	}
 
 	public TbRepresent(Long rid, String script) {

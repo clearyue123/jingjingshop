@@ -658,4 +658,22 @@
 	<update id="BindDid" parameterType="com.pinyougou.pojo.TbUser">
 		update tb_user set did = #{did,jdbcType=VARCHAR} where id = #{id,jdbcType=BIGINT}
 	</update>
+	
+	<select id="findOrderList" parameterType="java.lang.Long" resultType="java.util.HashMap">
+          SELECT
+				t.order_id orderId,
+				t.user_id userId,
+				t.`status` orderStatus,
+				t.payment,
+				t.payment_time paymentTime,
+				t.receiver,
+				t.receiver_area_name receiverAddress,
+				t.receiver_mobile receiverMobile
+			FROM
+				tb_order t
+			WHERE
+				t.`status` IN ('2', '3', '4', '5', '7')
+			AND t.user_id = #{userId}
+  </select>
+  
 </mapper>

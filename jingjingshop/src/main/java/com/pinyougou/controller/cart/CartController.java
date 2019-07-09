@@ -16,7 +16,7 @@ import com.pinyougou.pojo.TbShopCartExample;
 import com.pinyougou.pojo.TbShopCartExample.Criteria;
 import com.pinyougou.service.cart.CartService;
 
-import util.IdWorker;
+import util.IDUtils;
 
 /**
  * @desc:购物车 控制层
@@ -31,8 +31,6 @@ public class CartController {
 	private CartService cartService;
 	@Autowired
 	private TbShopCartMapper cartMapper;
-	
-	private IdWorker idWorker = new IdWorker();
 	
 	/**
 	 * 新增购物车
@@ -65,7 +63,7 @@ public class CartController {
 					cartMapper.updateByPrimaryKey(tbShopCart);
 					return new ApiResult(200, "商品已添加到购物车!", "");
 				}else{
-					long cartId = idWorker.nextId();
+					Long cartId = IDUtils.generateCartID();
 					TbShopCart tbShopCart = new TbShopCart();
 					tbShopCart.setCartId(cartId);
 					tbShopCart.setUserId(userId);
