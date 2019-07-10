@@ -42,11 +42,7 @@ import com.pinyougou.service.user.AddressService;
 import entity.PageResult;
 import entity.Result;
 import util.IDUtils;
-/**
- * @desc:订单控制层
- * @author yue
- * @date:2019.5.20
- */
+
 @RestController
 @RequestMapping("/order")
 public class OrderController {
@@ -75,30 +71,18 @@ public class OrderController {
     private DoctorService doctorService;
     @Autowired
     private ShipService shipService;
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
-	@RequestMapping(value="/findAll",method = RequestMethod.POST)
+
+    @RequestMapping(value="/findAll",method = RequestMethod.POST)
 	public List<TbOrder> findAll(){			
 		return orderService.findAll();
 	}
 	
 	
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
 	@RequestMapping(value="/findPage",method = RequestMethod.POST)
 	public PageResult findPage(int page,int rows){			
 		return orderService.findPage(page, rows);
 	}
 	
-	/**
-	 * 增加
-	 * @param order
-	 * @return
-	 */
 	@RequestMapping(value="/add",method = RequestMethod.POST)
 	public Result add(@RequestBody TbOrder order){
 		
@@ -116,11 +100,6 @@ public class OrderController {
 		}
 	}
 	
-	/**
-	 * 修改
-	 * @param order
-	 * @return
-	 */
 	@RequestMapping(value="/update",method = RequestMethod.POST)
 	public ApiResult update(@RequestBody TbOrder order){
 		try {
@@ -132,11 +111,6 @@ public class OrderController {
 		}
 	}	
 	
-	/**
-	 * 获取实体
-	 * @param id
-	 * @return
-	 */
 	@RequestMapping(value="/findOne",method = RequestMethod.POST)
 	public ApiResult findOne(Long id){
 		try{
@@ -148,7 +122,6 @@ public class OrderController {
 		}
 	}
 	
-	
     @RequestMapping(value="/deleteAll")
 	public ApiResult deleteAll(){
     	try{
@@ -159,11 +132,6 @@ public class OrderController {
     	    return new ApiResult(201, "删除失败", "");
     }
 	
-	/**
-	 * 批量删除
-	 * @param ids
-	 * @return
-	 */
 	@RequestMapping(value="/delete",method = RequestMethod.POST)
 	public Result delete(Long [] ids){
 		try {
@@ -175,13 +143,6 @@ public class OrderController {
 		}
 	}
 	
-	/**
-	 * 后台 订单管理 
-	 * @param brand
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
 	@RequestMapping(value="/search",method = RequestMethod.POST)
 	public ApiResult search(@RequestBody(required=false) Map<String,Object> searchEntity, int page, int rows  ){
 		try{
@@ -196,13 +157,6 @@ public class OrderController {
 		}		
 	}
 	
-	
-	/**
-	 * 小程序接口  订单列表查询
-	 * @param userId 用户id
-	 * @param status 订单状态
-	 * @return
-	 */
 	@RequestMapping(value="/ordersList",method = RequestMethod.POST)
 	public Object OrdersList(@RequestParam(required = true, value = "userId")String userId,
 			                 @RequestParam(required = false, value = "status")String status){
@@ -229,12 +183,6 @@ public class OrderController {
 		
 	}
 	
-	/**
-	 * 小程序接口 订单删除
-	 * @param orderId 订单id
-	 * @param userId 用户id
-	 * @return
-	 */
 	@RequestMapping(value="/delOrder",method = RequestMethod.POST)
 	public Object delOrder(@RequestParam(required = true, value = "orderId")String orderId,
             @RequestParam(required = true, value = "userId")String userId){
@@ -246,15 +194,7 @@ public class OrderController {
 			return new ApiResult(201, "订单删除失败", "");
 		}
 	}
-	
-	/**
-	 * 小程序接口 订单详情
-	 * @param userId 用户id
-	 * @param userType 用户类型
-	 * @param orderId 订单id
-	 * @param status 订单状态
-	 * @return
-	 */
+
 	@RequestMapping(value="/showOrderDetail",method = RequestMethod.POST)
 	public Object showOrderDetail(
 			          @RequestParam(required=true,value="userId")String userId,
@@ -285,18 +225,13 @@ public class OrderController {
 	}
 	
 	/**
-	 * 小程序接口  /oprateOrder
+	 * 小程序接口  
 	 * operateFlag 
 	 *   0:取消订单
 	 *   1:提醒发货
 	 *   2:待发货
 	 *   3:已收货
 	 *   4.再次购买
-	 * @param userId 用户id
-	 * @param userType 用户类型
-	 * @param orderId 订单id
-	 * @param operateFlag 订单操作
-	 * @return
 	 */
 	@RequestMapping(value="/oprateOrder",method = RequestMethod.POST)
 	public Object oprateOrder(
@@ -305,7 +240,7 @@ public class OrderController {
 	          @RequestParam(required=true,value="operateFlag")String operateFlag){
 		try{
 			TbUser tbUser = userMapper.selectByPrimaryKey(Long.parseLong(userId));
-			String userName = tbUser.getName();
+			String userName = tbUser.getNickName();
 			if("0".equals(operateFlag)){//取消订单
 				Map<String,Object> paramMap = new HashMap<>();
 				paramMap.put("ORDERID", orderId);
@@ -353,15 +288,6 @@ public class OrderController {
 			return new ApiResult(201, "操作失败","");
 	 }}
 	
-	/**
-	 * 小程序接口 支付成功
-	 * 支付成功后修改订单状态
-	 * @param userId 用户id
-	 * @param userType 用户类型
-	 * @param orderId 订单id
-	 * @param message 用户留言
-	 * @return
-	 */
 	@RequestMapping(value="/payOrder",method = RequestMethod.POST)
 	public Object payOrder( 
 			  @RequestParam(required=true,value="userId")String userId,
@@ -380,13 +306,7 @@ public class OrderController {
 		}
 		
 	}
-	
-	/**
-	 *  购物车 创建订单
-	 * @param userId
-	 * @param cartIds
-	 * @return
-	 */
+
 	@RequestMapping(value="/createOrderFromCart",method = RequestMethod.POST)
 	public Object createOrderFromCart(
 			@RequestParam(required=true,value="userId")String userId,
@@ -465,16 +385,6 @@ public class OrderController {
 		}
 	}
 	
-	/**
-	 * 商品详情 创建订单
-	 * @param userId
-	 * @param goodsId
-	 * @param num
-	 * @param doctorId
-	 * @param speIds
-	 * @param speOpIds
-	 * @return
-	 */
 	@RequestMapping(value="/createOrderFromGoods",method = RequestMethod.POST)
 	public Object createOrderFromGoods(
 			@RequestParam(required=true,value="userId")String userId,
@@ -548,11 +458,6 @@ public class OrderController {
 		}
 	}
 	
-	/**
-	 * 后台管理 订单详情商品明细列表
-	 * @param orderId
-	 * @return
-	 */
 	@RequestMapping(value="/manageOrderDetail",method = RequestMethod.POST)
 	public ApiResult manageOrderDetail(@RequestParam(required=true,value="orderId")String orderId){
 		try{

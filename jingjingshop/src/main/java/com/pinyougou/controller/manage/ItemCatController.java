@@ -25,31 +25,17 @@ public class ItemCatController {
 
 	@Autowired
 	private ItemCatService itemCatService;
-	
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
+
 	@RequestMapping("/findAll")
 	public List<TbItemCat> findAll(){			
 		return itemCatService.findAll();
 	}
 	
-	
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
 	@RequestMapping("/findPage")
 	public PageResult  findPage(int page,int rows){			
 		return itemCatService.findPage(page, rows);
 	}
 	
-	/**
-	 * 增加
-	 * @param itemCat
-	 * @return
-	 */
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbItemCat itemCat){
 		try {
@@ -64,11 +50,6 @@ public class ItemCatController {
 		}
 	}
 	
-	/**
-	 * 修改
-	 * @param itemCat
-	 * @return
-	 */
 	@RequestMapping("/update")
 	public Result update(@RequestBody TbItemCat itemCat){
 		try {
@@ -80,11 +61,6 @@ public class ItemCatController {
 		}
 	}	
 	
-	/**
-	 * 获取实体
-	 * @param id
-	 * @return
-	 */
 	@RequestMapping("/findOne")
 	public ApiResult findOne(Long id){
 		try{

@@ -26,31 +26,17 @@ public class GoodsDescController {
 
 	@Autowired
 	private GoodsDescService goodsDescService;
-	
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
+
 	@RequestMapping("/findAll")
 	public List<TbGoodsDesc> findAll(){			
 		return goodsDescService.findAll();
 	}
 	
-	
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
 	@RequestMapping("/findPage")
 	public PageResult  findPage(int page,int rows){			
 		return goodsDescService.findPage(page, rows);
 	}
 	
-	/**
-	 * 增加
-	 * @param goodsDesc
-	 * @return
-	 */
 	@RequestMapping("/add")
 	public Result add(@RequestBody TbGoodsDesc goodsDesc){
 		try {
@@ -62,11 +48,6 @@ public class GoodsDescController {
 		}
 	}
 	
-	/**
-	 * 修改
-	 * @param goodsDesc
-	 * @return
-	 */
 	@RequestMapping("/update")
 	public Result update(@RequestBody TbGoodsDesc goodsDesc){
 		try {
@@ -78,21 +59,11 @@ public class GoodsDescController {
 		}
 	}	
 	
-	/**
-	 * 获取实体
-	 * @param id
-	 * @return
-	 */
 	@RequestMapping("/findOne")
 	public TbGoodsDesc findOne(Long id){
 		return goodsDescService.findOne(id);		
 	}
 	
-	/**
-	 * 批量删除
-	 * @param ids
-	 * @return
-	 */
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
@@ -104,37 +75,18 @@ public class GoodsDescController {
 		}
 	}
 	
-		/**
-	 * 查询+分页
-	 * @param brand
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbGoodsDesc goodsDesc, int page, int rows  ){
 		return goodsDescService.findPage(goodsDesc, page, rows);		
 	}
 	
-	/**
-	 * 查询+分页  小程序
-	 * @param brand
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
 	@RequestMapping("/getGoodsDescList")
 	public ApiResult getGoodsDescList(int page,int rows){
 		TbGoodsDesc goodsDesc = new TbGoodsDesc();
 		PageResult result = goodsDescService.findPage(goodsDesc, page, rows);		
 		return new ApiResult(200,"获取成功",result);
 	}
-	
-	/**
-	 * 查询根据id获取商品详情  小程序
-	 * @param id
-	 * @return
-	 */
+
 	@RequestMapping("/getGoodsDescDetails")
 	public ApiResult getGoodsDescDetails(@RequestParam(required=true,value="goodsId")String goodsId){
 		try{

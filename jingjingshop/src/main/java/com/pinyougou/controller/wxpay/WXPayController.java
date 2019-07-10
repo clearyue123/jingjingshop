@@ -32,13 +32,6 @@ public class WXPayController {
 	@Autowired
 	private OrderService orderService;
     
-	/**
-	 * @desc:微信支付
-	 * @param openId  小程序openId
-	 * @param orderId 订单id
-	 * @param request http请求
-	 * @return
-	 */
 	@RequestMapping("/payOrder")
 	public Map<String, Object> wxPay(@RequestParam(value="openId",required=true)String openId,
 			                         @RequestParam(value="orderId",required=true)String orderId,
@@ -73,8 +66,8 @@ public class WXPayController {
 			packageParams.put("notify_url", MyWXPayConfig.NOTIFYURL);//支付成功后的回调地址
 			packageParams.put("out_trade_no", orderId);//商户订单号
 			packageParams.put("openid", openId);
-			packageParams.put("total_fee",round.toString());//支付金额，这边需要转成字符串类型，否则后面的签名会失败
 			packageParams.put("trade_type", MyWXPayConfig.TRADETYPE);//支付方式
+			packageParams.put("total_fee",round.toString());//支付金额，这边需要转成字符串类型，否则后面的签名会失败
 			packageParams.put("spbill_create_ip", spbill_create_ip);
 
 	        String prestr = MyPayUtils.createLinkString(packageParams); // 把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串 
@@ -92,8 +85,8 @@ public class WXPayController {
                     + "<out_trade_no><![CDATA[" + orderId + "]]></out_trade_no>" 
                     + "<spbill_create_ip><![CDATA[" + spbill_create_ip + "]]></spbill_create_ip>" 
                     + "<sign><![CDATA[" + mysign + "]]></sign>"
-                    + "<total_fee><![CDATA[" + round.toString() + "]]></total_fee>"
                     + "<trade_type><![CDATA[" + MyWXPayConfig.TRADETYPE + "]]></trade_type>" 
+                    + "<total_fee><![CDATA[" + round.toString() + "]]></total_fee>"
                     + "</xml>";
 	        //调用统一下单接口，并接受返回的结果
 	        String result = MyPayUtils.httpRequest(MyWXPayConfig.PAYURL, "POST", xml);

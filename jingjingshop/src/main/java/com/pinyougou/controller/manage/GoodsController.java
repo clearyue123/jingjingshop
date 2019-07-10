@@ -36,32 +36,17 @@ public class GoodsController {
 	private GoodsService goodsService;
     @Autowired
     private ItemCatService itemCatSerive;
-	/**
-	 * 返回全部列表
-	 * 
-	 * @return
-	 */
-	@RequestMapping("/findAll")
+
+    @RequestMapping("/findAll")
 	public List<TbGoods> findAll() {
 		return goodsService.findAll();
 	}
 
-	/**
-	 * 返回全部列表
-	 * 
-	 * @return
-	 */
 	@RequestMapping("/findPage")
 	public PageResult findPage(int page, int rows) {
 		return goodsService.findPage(page, rows);
 	}
 
-	/**
-	 * 增加
-	 * 
-	 * @param goods
-	 * @return
-	 */
 	@RequestMapping("/add")
 	public Object add(@RequestBody Map<String,String> goodsMap) {
 		try {
@@ -73,12 +58,6 @@ public class GoodsController {
 		}
 	}
 
-	/**
-	 * 修改
-	 * 
-	 * @param goods
-	 * @return
-	 */
 	@RequestMapping("/update")
 	public Object update(@RequestBody Map<String,String> goodsMap) {
 		try {
@@ -90,11 +69,6 @@ public class GoodsController {
 		}
 	}
 
-	/**
-	 * 商品管理 后台 商品id查商品
-	 * @param id
-	 * @return
-	 */
 	@RequestMapping("/findOne")
 	public Object findOne(Long id) {
 		Goods goods = goodsService.findOne(id);
@@ -149,12 +123,6 @@ public class GoodsController {
 		return data;
 	}
 
-	/**
-	 * 后台 批量删除
-	 * 
-	 * @param ids
-	 * @return
-	 */
 	@RequestMapping("/delete")
 	public Object delete(final Long[] ids) {
 		try {
@@ -177,12 +145,6 @@ public class GoodsController {
 		}
 	}
 
-	/**
-	 * 小程序接口 商品列表功能
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
 	@RequestMapping("/getGoodsList")
 	public ApiResult getGoodsList(
 			@RequestParam(required = false, value = "category3Id" ,defaultValue = "-1") Long category2Id,
@@ -196,22 +158,12 @@ public class GoodsController {
 		return new ApiResult(200, "查询成功", result);
 	}
 
-	/**
-	 * 后台 根据id获取商品
-	 * @param id
-	 * @return
-	 */
 	@RequestMapping("/getGoodsDetail")
 	public ApiResult getGoodsDetail(Long id) {
 		Goods goods = goodsService.findOne(id);
 		return new ApiResult(200, "查询成功", goods);
 	}
 	
-	/**
-	 * 小程序 商品全局搜索
-	 * @param searchGoodsName
-	 * @return
-	 */
 	@RequestMapping("/searchByGoodsName")
 	public ApiResult searchByGoodsName(@RequestParam(value="searchGoodsName",required=false)String searchGoodsName){
 		try{
@@ -222,13 +174,7 @@ public class GoodsController {
 			return null;
 		}
 	}
-    /**
-     * 后台商品管理  查询分页
-     * @param searchMap 查询条件map
-     * @param page 页数
-     * @param rows 每页条数
-     * @return
-     */
+   
 	@RequestMapping("/search")
 	public Map<String,Object> search(@RequestBody Map<String,String> searchEntity, int page, int rows) {
 		try{
@@ -292,10 +238,6 @@ public class GoodsController {
 		   }
 	   }
 	   
-	 /**
-	  *  推送首页广告
-	  * @return
-	  */
 	@RequestMapping("/findIndexAdList")
 	public ApiResult findIndexAdList(){
 		try{

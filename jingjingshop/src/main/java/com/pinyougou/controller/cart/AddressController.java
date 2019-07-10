@@ -33,30 +33,16 @@ public class AddressController {
 	@Autowired
 	private TbAddressMapper addressMapper;
 	
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
 	@RequestMapping("/findAll")
 	public List<TbAddress> findAll(){			
 		return addressService.findAll();
 	}
 	
-	
-	/**
-	 * 返回全部列表
-	 * @return
-	 */
 	@RequestMapping("/findPage")
 	public PageResult  findPage(int page,int rows){			
 		return addressService.findPage(page, rows);
 	}
 	
-	/**
-	 * 修改
-	 * @param address
-	 * @return
-	 */
 	@RequestMapping("/update")
 	public Result update(@RequestBody TbAddress address){
 		try {
@@ -68,21 +54,11 @@ public class AddressController {
 		}
 	}	
 	
-	/**
-	 * 获取实体
-	 * @param id
-	 * @return
-	 */
 	@RequestMapping("/findOne")
 	public TbAddress findOne(Long id){
 		return addressService.findOne(id);		
 	}
 	
-	/**
-	 * 批量删除
-	 * @param ids
-	 * @return
-	 */
 	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
@@ -94,24 +70,11 @@ public class AddressController {
 		}
 	}
 	
-	/**
-	 * 查询+分页
-	 * @param brand
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbAddress address, int page, int rows  ){
 		return addressService.findPage(address, page, rows);		
 	}
 	
-	
-	/**
-	 * 小程序 用户id查收货地址
-	 * @param userId
-	 * @return
-	 */
 	@RequestMapping("/findListByUserId")
     public Object findListByUserId(@RequestParam(value="userId",required=true)String userId){
 		try{
@@ -128,19 +91,6 @@ public class AddressController {
 		
 	}	
 	
-	/**
-	 * 小程序  新增地址
-	 * @param userId 用户id
-	 * @param provinceId 省id
-	 * @param cityId 市id
-	 * @param townId 区id
-	 * @param mobile 手机号
-	 * @param address 详细地址
-	 * @param contact 联系人
-	 * @param alias 别名
-	 * @param notes 备注
-	 * @return
-	 */
 	@RequestMapping("/save")
 	public Object save(@RequestParam(required = true, value = "userId")String userId,
 			          @RequestParam(required = true, value = "provinceId")String provinceId,

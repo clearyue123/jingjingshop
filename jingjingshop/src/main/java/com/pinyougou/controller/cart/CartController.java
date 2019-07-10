@@ -32,15 +32,6 @@ public class CartController {
 	@Autowired
 	private TbShopCartMapper cartMapper;
 	
-	/**
-	 * 新增购物车
-	 * @param userId 用户id
-	 * @param goodsId 商品id
-	 * @param num 商品数量
-	 * @param speIds 规格id数组
-	 * @param speOpIds 规格选项id数组
-	 * @return
-	 */
 	@RequestMapping("/add")
 	public Object add(@RequestParam(value="userId",required=true)String userId,
 			@RequestParam(value="goodsId",required=true)String goodsId,
@@ -82,11 +73,6 @@ public class CartController {
 		}
 	}
 	
-	/**
-	 * 购物车列表查询
-	 * @param userId
-	 * @return
-	 */
 	@RequestMapping("/list")
 	public Object listCart(@RequestParam(value="userId",required=true)String userId){
 		try{
@@ -100,14 +86,6 @@ public class CartController {
 		}
 	}
 	
-	/**
-	 * 清空购物车
-	 * @param userId 用户id
-	 * @param userType 用户类型
-	 * @param isClearFlag 是否清空
-	 * @param cartIds 购物车id数组
-	 * @return
-	 */
 	@RequestMapping("/clearCart")
 	public Object clearCart(@RequestParam(value="userId",required=true)String userId,
 			@RequestParam(value="cartIds",required=true)String[] cartIds){
@@ -122,12 +100,6 @@ public class CartController {
 		}
 	}
 	
-	/**
-	 * 更新购物车
-	 * @param cartId
-	 * @param num
-	 * @return
-	 */
 	@RequestMapping("/updateCart")
 	public Object updateCart(@RequestParam(value="cartId",required=true)String cartId,
 			                @RequestParam(value="num",required=true)String num){
