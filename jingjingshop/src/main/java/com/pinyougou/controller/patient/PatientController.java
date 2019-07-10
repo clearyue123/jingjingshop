@@ -21,7 +21,7 @@ public class PatientController {
 	@Autowired
 	private TbUserMapper userMapper;
 	
-	@RequestMapping("editRemarks")
+	@RequestMapping("/editRemarks")
 	public Object editRemarks(@RequestParam(value="userId",required=true)String userId,
 			                  @RequestParam(value="remarks",required=false)String remarks){
 		try{
