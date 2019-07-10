@@ -4,7 +4,6 @@
 
     <resultMap id="BaseResultMap" type="com.pinyougou.pojo.TbOrderItem" >
         <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="item_id" property="itemId" jdbcType="BIGINT" />
         <result column="goods_id" property="goodsId" jdbcType="BIGINT" />
         <result column="order_id" property="orderId" jdbcType="BIGINT" />
         <result column="title" property="title" jdbcType="VARCHAR" />
@@ -78,8 +77,8 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, item_id, goods_id, order_id, title, price, num, total_fee, pic_path, seller_id, 
-        discount_price, cart_id
+        id, goods_id, order_id, title, price, num, total_fee, pic_path, seller_id, discount_price, 
+        cart_id
     </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.pinyougou.pojo.TbOrderItemExample" >
@@ -117,16 +116,14 @@
     </delete>
 
     <insert id="insert" parameterType="com.pinyougou.pojo.TbOrderItem" >
-        insert into tb_order_item (id, item_id, goods_id, 
-            order_id, title, price, 
-            num, total_fee, pic_path, 
-            seller_id, discount_price, cart_id
-            )
-        values (#{id,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, 
-            #{orderId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-            #{num,jdbcType=INTEGER}, #{totalFee,jdbcType=DECIMAL}, #{picPath,jdbcType=VARCHAR}, 
-            #{sellerId,jdbcType=VARCHAR}, #{discountPrice,jdbcType=DECIMAL}, #{cartId,jdbcType=BIGINT}
-            )
+        insert into tb_order_item (id, goods_id, order_id, 
+            title, price, num, 
+            total_fee, pic_path, seller_id, 
+            discount_price, cart_id)
+        values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+            #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, 
+            #{totalFee,jdbcType=DECIMAL}, #{picPath,jdbcType=VARCHAR}, #{sellerId,jdbcType=VARCHAR}, 
+            #{discountPrice,jdbcType=DECIMAL}, #{cartId,jdbcType=BIGINT})
     </insert>
 
     <insert id="insertSelective" parameterType="com.pinyougou.pojo.TbOrderItem" >
@@ -134,9 +131,6 @@
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 id,
-            </if>
-            <if test="itemId != null" >
-                item_id,
             </if>
             <if test="goodsId != null" >
                 goods_id,
@@ -172,9 +166,6 @@
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
                 #{id,jdbcType=BIGINT},
-            </if>
-            <if test="itemId != null" >
-                #{itemId,jdbcType=BIGINT},
             </if>
             <if test="goodsId != null" >
                 #{goodsId,jdbcType=BIGINT},
@@ -222,9 +213,6 @@
             <if test="record.id != null" >
                 id = #{record.id,jdbcType=BIGINT},
             </if>
-            <if test="record.itemId != null" >
-                item_id = #{record.itemId,jdbcType=BIGINT},
-            </if>
             <if test="record.goodsId != null" >
                 goods_id = #{record.goodsId,jdbcType=BIGINT},
             </if>
@@ -264,7 +252,6 @@
     <update id="updateByExample" parameterType="map" >
         update tb_order_item
         set id = #{record.id,jdbcType=BIGINT},
-            item_id = #{record.itemId,jdbcType=BIGINT},
             goods_id = #{record.goodsId,jdbcType=BIGINT},
             order_id = #{record.orderId,jdbcType=BIGINT},
             title = #{record.title,jdbcType=VARCHAR},
@@ -283,9 +270,6 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.pinyougou.pojo.TbOrderItem" >
         update tb_order_item
         <set >
-            <if test="itemId != null" >
-                item_id = #{itemId,jdbcType=BIGINT},
-            </if>
             <if test="goodsId != null" >
                 goods_id = #{goodsId,jdbcType=BIGINT},
             </if>
@@ -322,8 +306,7 @@
 
     <update id="updateByPrimaryKey" parameterType="com.pinyougou.pojo.TbOrderItem" >
         update tb_order_item
-        set item_id = #{itemId,jdbcType=BIGINT},
-            goods_id = #{goodsId,jdbcType=BIGINT},
+        set goods_id = #{goodsId,jdbcType=BIGINT},
             order_id = #{orderId,jdbcType=BIGINT},
             title = #{title,jdbcType=VARCHAR},
             price = #{price,jdbcType=DECIMAL},

@@ -773,6 +773,97 @@
 			ORDER BY t1.create_time DESC
   </select>
   
+  <insert id="createNewOrder" parameterType="java.util.HashMap">
+      INSERT INTO tb_order (
+							order_id,
+							payment,
+							payment_type,
+							post_fee,
+							STATUS,
+							create_time,
+							update_time,
+							payment_time,
+							consign_time,
+							end_time,
+							close_time,
+							shipping_company_code,
+							shipping_code,
+							user_id,
+							buyer_message,
+							buyer_nick,
+							buyer_rate,
+							receiver_area_name,
+							receiver_mobile,
+							receiver_zip_code,
+							receiver,
+							expire,
+							invoice_type,
+							source_type,
+							seller_id,
+							item_num,
+							shipping_type,
+							receiver_province,
+							receiver_city,
+							receiver_area,
+							express_code 
+							)
+							SELECT
+								#{NEWORDERID},
+								t.payment,
+								t.payment_type,
+								t.post_fee,
+								t.STATUS,
+								#{NEWDATE},
+								#{NEWDATE},
+								t.payment_time,
+								t.consign_time,
+								t.end_time,
+								t.close_time,
+								t.shipping_company_code,
+								t.shipping_code,
+								t.user_id,
+								t.buyer_message,
+								t.buyer_nick,
+								t.buyer_rate,
+								t.receiver_area_name,
+								t.receiver_mobile,
+								t.receiver_zip_code,
+								t.receiver,
+								t.expire,
+								t.invoice_type,
+								t.source_type,
+								t.seller_id,
+								t.item_num,
+								t.shipping_type,
+								t.receiver_province,
+								t.receiver_city,
+								t.receiver_area,
+								t.express_code 
+							FROM
+								tb_order t 
+							WHERE
+								t.order_id = #{OLDORDERID}
+  </insert>
+  
+  <insert id="createNewOrderItem" parameterType="java.util.HashMap">
+      INSERT INTO tb_order_item ( goods_id, order_id, title, price, num, total_fee, pic_path, seller_id, discount_price, cart_id ) 
+			SELECT
+			t.goods_id,
+			#{NEWORDERID},
+			t.title,
+			t.price,
+			t.num,
+			t.total_fee,
+			t.pic_path,
+			t.seller_id,
+			t.discount_price,
+			t.cart_id 
+			FROM
+				tb_order_item t 
+			WHERE
+				t.order_id = #{OLDORDERID}
+  </insert>
+  
   <update id="updateShipMessage" parameterType="java.util.Map">
       update tb_order
         <set >

@@ -474,4 +474,15 @@ public class OrderController {
 			return new ApiResult(201, "查询失败！", "");
 		}
 	}
+	
+	@RequestMapping(value="/reCreateOrder",method = RequestMethod.POST)
+	public ApiResult reCreateOrder(@RequestParam(required=true,value="oldOrderId")String oldOrderId){
+		try{
+			Long orderId = orderService.reCreateOrder(Long.parseLong(oldOrderId));
+			return new ApiResult(200, "success", orderId);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "", "");
+		}
+	}
 }

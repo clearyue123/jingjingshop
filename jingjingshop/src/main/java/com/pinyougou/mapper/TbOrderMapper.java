@@ -54,4 +54,16 @@ public interface TbOrderMapper {
 	 * @param paramMap
 	 */
 	void updateShipMessage(Map<String, Object> paramMap);
+    
+	/**
+	 * 创建订单
+	 * @param paramMap
+	 */
+	void createNewOrder(Map<String, Object> paramMap);
+    
+	/**
+	 * 创建订单item
+	 * @param paramMap
+	 */
+	void createNewOrderItem(Map<String, Object> paramMap);
 }

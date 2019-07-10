@@ -3,10 +3,6 @@ package com.pinyougou.pojo;
 import java.math.BigDecimal;
 
 /**
- * 
- * 
- * @author wcyong
- * 
  * @date 2019-05-08
  */
 public class TbOrderItem {
@@ -14,11 +10,6 @@ public class TbOrderItem {
 
     /**
      * 商品id
-     */
-    private Long itemId;
-
-    /**
-     * SPU_ID
      */
     private Long goodsId;
 
@@ -67,14 +58,6 @@ public class TbOrderItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
     }
 
     public Long getGoodsId() {

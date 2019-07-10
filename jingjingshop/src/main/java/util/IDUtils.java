@@ -43,9 +43,7 @@ public class IDUtils {
 	}
 	
 	public static void main(String[] args) {
-		for(int i=0;i<100;i++){
-			Long generateOrderID = generateOrderID();
-			System.out.println("generateOrderID:"+generateOrderID);
-		}
+		Long generateOrderID = generateOrderID();
+		System.out.println("generateOrderID:"+generateOrderID);
 	}
 }

@@ -92,9 +92,7 @@ public class WXPayController {
 	        String result = MyPayUtils.httpRequest(MyWXPayConfig.PAYURL, "POST", xml);
 	        // 将解析结果存储在HashMap中   
 	        Map<String, String> map = MyPayUtils.doXMLParse(result);
-	        
 	        String return_code = (String) map.get("return_code");//返回状态码
-	        
 		    Map<String, Object> response = new HashMap<String, Object>();//返回给小程序端需要的参数
 	        if(return_code.equals("SUCCESS")){   
 	            String prepay_id = (String) map.get("prepay_id");//返回的预付单信息   

@@ -138,4 +138,10 @@ public interface OrderService {
      */
 	public void updateShipMessage(Map<String, Object> paramMap);
 
+    /**
+     * 创建新订单
+     * @param orderId
+     */
+	public Long reCreateOrder(Long orderId);
+
 }

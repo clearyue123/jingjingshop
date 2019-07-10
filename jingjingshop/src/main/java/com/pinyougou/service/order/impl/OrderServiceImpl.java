@@ -20,6 +20,7 @@ import com.pinyougou.service.order.OrderService;
 
 import entity.PageResult;
 import util.DateUtils;
+import util.IDUtils;
 
 /**
  * 服务实现层
@@ -305,6 +306,20 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateShipMessage(Map<String, Object> paramMap) {
 		orderMapper.updateShipMessage(paramMap);
+	}
+
+	@Override
+	public Long reCreateOrder(Long orderId) {
+		Long newOrderId = IDUtils.generateOrderID();
+		System.out.println("OLD ORDERID:"+orderId);
+		System.out.println("NEW ORDERID:"+newOrderId);
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		paramMap.put("OLDORDERID", orderId);
+		paramMap.put("NEWORDERID", newOrderId);
+		paramMap.put("NEWDATE", new Date());
+		orderMapper.createNewOrder(paramMap);//创建订单
+		orderMapper.createNewOrderItem(paramMap);//创建订单item
+		return newOrderId;
 	}
 
 }
