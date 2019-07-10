@@ -288,7 +288,7 @@ public class OrderServiceImpl implements OrderService {
 				 orderMap.put("orderStatus", orderStatus);
 				 Date createTime = (Date)orderMap.get("createTime");
 				 if(createTime!=null){
-					 orderMap.put("createTime", DateUtils.getDateStrFromDf("yyyy-MM-dd", createTime));
+					 orderMap.put("createTime", DateUtils.getDateStrFromDf("yyyy-MM-dd HH:mm:ss", createTime));
 				 }
 				 Date paymentTime = (Date)orderMap.get("paymentTime");
 				 if(paymentTime!=null){
