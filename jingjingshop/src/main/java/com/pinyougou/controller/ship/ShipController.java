@@ -68,4 +68,46 @@ public class ShipController {
 			return new ApiResult(201, "ERROR!", "物流信息更新失败！");
 		}
 	}
+
+	/**
+	 * 更新物流单号
+	 * @param shipCode
+	 * @param orderId
+	 * @param md5code
+	 * @return
+	 */
+	@RequestMapping("/updateShipCode")
+	public ApiResult updateShipCode(@RequestParam(value="shipCode",required=true)String shipCompanyCode,
+			                        @RequestParam(value="orderId",required=true)String orderId,
+			                        @RequestParam(value="md5code",required=true)String md5code){
+		try{
+			return new ApiResult(200, "SUCCESS", "物流单号更新成功！");
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "ERROR", "物流单号更新失败!");
+		}
+	}
+	
+	/**
+	 * 更新物流状态
+	 * @param shipCode
+	 * @param expressCode
+	 * @param orderId
+	 * @param md5code
+	 * @return
+	 */
+	@RequestMapping("/updateShipStatus")
+	public ApiResult updateShipStatus(@RequestParam(value="shipCompanyCode",required=true)String shipCode,
+									  @RequestParam(value="expressCode",required=true)String expressCode,
+									  @RequestParam(value="orderId",required=true)String orderId,
+									  @RequestParam(value="md5code",required=true)String md5code){
+		try{
+			return new ApiResult(200, "SUCCESS", "");
+		}catch(Exception e){
+			e.printStackTrace();
+			return new ApiResult(201, "ERROR", "");
+		}
+	}
+	
+	
 }
