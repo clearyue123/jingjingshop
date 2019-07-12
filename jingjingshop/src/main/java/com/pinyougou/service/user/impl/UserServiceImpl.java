@@ -171,9 +171,7 @@ public class UserServiceImpl implements UserService {
 	public List<TbUser> selectUserListByInfo(TbUser user) {
 		TbUserExample userExample = new TbUserExample();
 		Criteria cri = userExample.createCriteria();
-		if(user.getOpenId()!=null){
-			cri.andOpenIdEqualTo(user.getOpenId());
-		}
+		cri.andIsDeleteEqualTo("0");
 		if(user.getUnionId()!=null){
 			cri.andUnionIdEqualTo(user.getUnionId());
 		}
@@ -215,6 +213,23 @@ public class UserServiceImpl implements UserService {
 			 }
 		}
 		return orderList;
+	}
+
+	@Override
+	public List<TbUser> selectListByOpenId(String opneId) {
+		TbUserExample userExample = new TbUserExample();
+		Criteria cri = userExample.createCriteria();
+		cri.andIsDeleteEqualTo("0");
+		if(opneId!=null){
+			cri.andOpenIdEqualTo(opneId);
+		}
+		List<TbUser> userList = userMapper.selectByExample(userExample);
+		return userList;
+	}
+
+	@Override
+	public void updateUserOpenId(TbUser user) {
+		userMapper.updateByPrimaryKeySelective(user);
 	}
 
 }

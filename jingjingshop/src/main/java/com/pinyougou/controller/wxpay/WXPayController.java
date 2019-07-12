@@ -39,12 +39,7 @@ public class WXPayController {
 			                         HttpServletRequest request){
 		try{
 			Map<String,Object> paramMap = new HashMap<>();
-			Long resultOrderId;
-			if("1".equals(reOrderFlag)){ 
-				resultOrderId = orderService.reCreateOrder(Long.parseLong(orderId));
-			}else{
-				resultOrderId = Long.parseLong(orderId);
-			}
+			Long resultOrderId = Long.parseLong(orderId);
 			paramMap.put("orderId", resultOrderId);
 			Map<String, Object> orderDetailMap = orderService.selectOrderDetail(paramMap);
 			List<Map<String, Object>> itemMapList = orderService.selectItemsByOrderId(resultOrderId);
@@ -57,9 +52,8 @@ public class WXPayController {
 			String nonce_str = MyStringUtils.getRandomStringByLength(32);
 			//获取客户端IP地址
 			String spbill_create_ip = IpUtils.getIpAddr(request);
-			System.out.println("商品详情:"+orderDetailMap.toString());
 			//商品名称
-			String body = "商品测试"+orderDetailMap.toString();
+			String body = "订单"+orderId+"支付测试";
 			//订单金额
 			BigDecimal payment = (BigDecimal)orderDetailMap.get("payment");
 			Double totalFree = payment.doubleValue();

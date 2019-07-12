@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pinyougou.common.ApiResult;
@@ -39,7 +40,8 @@ public class PatientLoginController {
 	 * @return
 	 */
 	@RequestMapping(value = "/wxLogin", method = RequestMethod.POST)
-	public ApiResult wxlogin(String openId, String unionId) {
+	public ApiResult wxlogin(@RequestParam(value="openId",required=false)String openId,
+			                 @RequestParam(value="unionId",required=true)String unionId) {
 		try{
 			TbUserExample userExamlpe = new TbUserExample();
 			Criteria cri = userExamlpe.createCriteria();
@@ -57,9 +59,9 @@ public class PatientLoginController {
 				TbUser user = new TbUser();
 //				user.setOpenId(openId);
 				user.setUnionId(unionId);
-				user.setIsDelete("0");
 				user.setCreateDate(new Date());
 				user.setUpdateDate(new Date());
+				user.setIsDelete("0");
 				int row = tbUserMapper.insert(user);
 				List<TbUser> tbUserList1 = tbUserMapper.selectByExample(userExamlpe);
 				if(row>0&&tbUserList1.get(0)!=null){
@@ -93,6 +95,7 @@ public class PatientLoginController {
 		TbUser user = new TbUser();
 		user.setNickName(wxname);
 		user.setHeadPic(headimg);
+		user.setIsDelete("0");
 		TbUser result = userService.findOne(userId.longValue());
 		if (result != null) {
 			user.setId(result.getId());

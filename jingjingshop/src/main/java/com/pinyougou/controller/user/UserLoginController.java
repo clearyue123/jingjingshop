@@ -159,7 +159,7 @@ public class UserLoginController {
 				TbUser user = new TbUser();
 				user.setOpenId(wxcode);
 				user.setUnionId(unionId);
-				List<TbUser> userList = userService.selectUserListByInfo(user);
+				List<TbUser> userList = userService.selectListByOpenId(wxcode);
 				if(userList!=null&&userList.size()>0){
 					TbUser result = userList.get(0);
 					if (result != null) {
@@ -205,9 +205,14 @@ public class UserLoginController {
 			user.setHeadPic(headimg);
 			user.setOpenId(openID);
 			user.setUnionId(unionID);
+			user.setIsDelete("0");
 			List<TbUser> userList = userService.selectUserListByInfo(user);
 			if(userList!=null&&userList.size()>0){
 				TbUser result = userList.get(0);
+				if(result.getOpenId()==null){
+					result.setOpenId(openID);
+					userService.updateUserOpenId(result);
+				}
 				return new ApiResult(200, "已绑定过微信！", result);
 			}else{
 				userService.insertUser(user);

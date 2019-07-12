@@ -7,7 +7,7 @@ import entity.PageResult;
 
 /**
  * 服务层接口
- * @author Administrator
+ * @author yue
  *
  */
 public interface UserService {
@@ -96,6 +96,16 @@ public interface UserService {
      */
 	public List<Map<String, Object>> findPurchaseOrder(long userId);
 
+    /**
+     * openId查用户
+     * @param opneId
+     * @return
+     */
+	public List<TbUser> selectListByOpenId(String opneId);
 
-	
+    /**
+     * 更新OpenId
+     * @param user
+     */
+	public void  updateUserOpenId(TbUser user);
 }

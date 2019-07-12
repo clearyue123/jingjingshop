@@ -812,7 +812,7 @@
 								t.payment,
 								t.payment_type,
 								t.post_fee,
-								t.STATUS,
+								'1',
 								#{NEWDATE},
 								#{NEWDATE},
 								null,
