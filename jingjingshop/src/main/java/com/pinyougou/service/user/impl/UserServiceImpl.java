@@ -171,6 +171,9 @@ public class UserServiceImpl implements UserService {
 	public List<TbUser> selectUserListByInfo(TbUser user) {
 		TbUserExample userExample = new TbUserExample();
 		Criteria cri = userExample.createCriteria();
+		if(user.getOpenId()!=null){
+			cri.andOpenIdEqualTo(user.getOpenId());
+		}
 		if(user.getUnionId()!=null){
 			cri.andUnionIdEqualTo(user.getUnionId());
 		}

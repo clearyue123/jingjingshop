@@ -815,7 +815,7 @@
 								t.STATUS,
 								#{NEWDATE},
 								#{NEWDATE},
-								t.payment_time,
+								null,
 								t.consign_time,
 								t.end_time,
 								t.close_time,
@@ -875,9 +875,6 @@
             </if>
             <if test="SHIPCOMPANYCODE != null" >
                 shipping_company_code = #{SHIPCOMPANYCODE,jdbcType=VARCHAR},
-            </if>
-            <if test="SHIPCODE != null" >
-                shipping_code = #{SHIPCODE,jdbcType=VARCHAR},
             </if>
             <if test="EXPRESSCODE != null" >
                 express_code = #{EXPRESSCODE,jdbcType=VARCHAR},

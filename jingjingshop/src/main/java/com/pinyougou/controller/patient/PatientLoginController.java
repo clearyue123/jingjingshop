@@ -43,9 +43,9 @@ public class PatientLoginController {
 		try{
 			TbUserExample userExamlpe = new TbUserExample();
 			Criteria cri = userExamlpe.createCriteria();
-			if(openId!=null&&openId.trim().length()>0){
-				cri.andOpenIdEqualTo(openId);
-			}
+//			if(openId!=null&&openId.trim().length()>0){
+//				cri.andOpenIdEqualTo(openId);
+//			}
 			if(unionId!=null&&unionId.trim().length()>0){
 				cri.andUnionIdEqualTo(unionId);
 			}
@@ -55,7 +55,7 @@ public class PatientLoginController {
 				return new ApiResult(200, "患者登陆成功", tbUser);
 			}else{
 				TbUser user = new TbUser();
-				user.setOpenId(openId);
+//				user.setOpenId(openId);
 				user.setUnionId(unionId);
 				user.setIsDelete("0");
 				user.setCreateDate(new Date());

@@ -454,6 +454,7 @@
 		LEFT JOIN tb_goods t2 ON t1.goods_id = t2.id
 		WHERE
 			t.user_id = #{patientId}
+			AND t.status not in (1,6)
   </select>
   
   <select id="searchDoctorList" parameterType="java.util.Map" resultType="java.util.Map">
