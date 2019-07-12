@@ -19,7 +19,7 @@ import util.MyPayUtils;
 import util.MyStringUtils;
 
 /**
- * @author:clearyue
+ * @author:yue
  * @date:2019.5.29
  * @desc:微信支付接口:
  *        1.获取openID
@@ -59,7 +59,7 @@ public class WXPayController {
 			String spbill_create_ip = IpUtils.getIpAddr(request);
 			System.out.println("商品详情:"+orderDetailMap.toString());
 			//商品名称
-			String body = "商品测试";
+			String body = "商品测试"+orderDetailMap.toString();
 			//订单金额
 			BigDecimal payment = (BigDecimal)orderDetailMap.get("payment");
 			Double totalFree = payment.doubleValue();
