@@ -151,22 +151,18 @@ public class UserLoginController {
 		if (ss != null) {
 			JSONObject jsonObject = JSON.parseObject(ss);
 			String session_key = jsonObject.getString("session_key");
+			String openID = jsonObject.getString("openid");
 			if (jsonObject.getIntValue("errcode") != 0) {
 				return new ApiResult(jsonObject.getIntValue("errcode"), jsonObject.getString("errmsg"), ss);
 			} else {
-				wxcode = jsonObject.getString("openid");
-				String unionId = jsonObject.getString("unionid");
 				TbUser user = new TbUser();
-				user.setOpenId(wxcode);
-				user.setUnionId(unionId);
-				List<TbUser> userList = userService.selectListByOpenId(wxcode);
-				if(userList!=null&&userList.size()>0){
-					TbUser result = userList.get(0);
-					if (result != null) {
+				user.setOpenId(openID);
+				TbUser result = userService.firstInfo(user);
+				System.out.println("result:"+result);
+				if (result != null) {
 						result.setSession_key(session_key);
 						return new ApiResult(200, "登录成功", result);
-					} 
-				}
+				} 
 				return new ApiResult(101, "该用户不存在，请先绑定微信昵称和头像", jsonObject);
 			}
 		} else {

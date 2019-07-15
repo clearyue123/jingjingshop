@@ -267,9 +267,9 @@ public class OrderController {
 		         orderStatusMap.put("STATUS", "3");//待发货，提醒发货
 		         orderStatusMap.put("PAYMENTTIME", new Date());
 			     orderService.updateStatusById(orderStatusMap);//更新订单状态
-			     doctorService.updatePoints(Long.parseLong(userId), Long.parseLong(orderId));//付完款医生代表新增积分
-			     String shipMsg = shipService.saveShipOrder(Long.parseLong(orderId));//调用第三方接口 传订单数据
-			     return new ApiResult(200, "已付款",shipMsg);
+			  // doctorService.updatePoints(Long.parseLong(userId), Long.parseLong(orderId));//付完款医生代表新增积分
+			  // String shipMsg = shipService.saveShipOrder(Long.parseLong(orderId));//调用第三方接口 传订单数据
+			     return new ApiResult(200, "已付款","");
 			}else if("3".equals(operateFlag)){//已收货
 				Map<String,Object> paramMap = new HashMap<>();
 				paramMap.put("ORDERID", orderId);

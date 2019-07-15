@@ -94,7 +94,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	
-		@Override
+	@Override
 	public PageResult findPage(TbOrder order, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		
@@ -102,7 +102,7 @@ public class OrderServiceImpl implements OrderService {
 		Criteria criteria = example.createCriteria();
 		
 		if(order!=null){			
-						if(order.getPaymentType()!=null && order.getPaymentType().length()>0){
+			if(order.getPaymentType()!=null && order.getPaymentType().length()>0){
 				criteria.andPaymentTypeLike("%"+order.getPaymentType()+"%");
 			}
 			if(order.getPostFee()!=null && order.getPostFee().length()>0){
@@ -320,6 +320,11 @@ public class OrderServiceImpl implements OrderService {
 		orderMapper.createNewOrder(paramMap);//创建订单
 		orderMapper.createNewOrderItem(paramMap);//创建订单item
 		return newOrderId;
+	}
+
+	@Override
+	public void updateShipCode(TbOrder order) {
+		orderMapper.updateByPrimaryKeySelective(order);
 	}
 
 }

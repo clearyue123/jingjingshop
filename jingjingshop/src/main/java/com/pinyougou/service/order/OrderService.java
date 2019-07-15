@@ -144,4 +144,10 @@ public interface OrderService {
      */
 	public Long reCreateOrder(Long orderId);
 
+    /**
+     * 
+     * @param order
+     */
+	public void updateShipCode(TbOrder order);
+
 }

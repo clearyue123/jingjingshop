@@ -62,7 +62,7 @@
 		      		                         </select>
 							                   订单号: <input type="text" ng-model="searchEntity.orderId" >
 							                   物流单号:<input type="text" ng-model="searchEntity.shippingCode" >
-									           微信昵称: <input type="text" ng-model="searchEntity.userName">
+									   用户名: <input type="text" ng-model="searchEntity.userName">									
 									<button class="btn btn-default" ng-click="search()">查询</button>                                    
                                 </div>
                             </div>
@@ -74,47 +74,35 @@
 			                          <tr>
 			                              <th class="" style="padding-right:0px">
 			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
-			                              </th>
-										  <th class="text-center" style="width:150px">创建时间</th>
+			                              </th> 
 										  <th class="sorting_asc">订单ID</th>
-										  <th class="sorting">商品ID</th>
-										  <th class="sorting">商品名称</th>
 										  <th class="sorting">金额</th>
 									      <th class="sorting">订单状态</th>
 									      <th class="sorting">物流单号</th>
 									      <th class="sorting">微信昵称</th>
-										  <th class="sorting">姓名</th>
-										  <th class="sorting">绑定医生</th>
-										  <th class="sorting">绑定销售</th>
-										  <!--<th style="width:200px">收货人地址</th>-->
-
-									      <!--<th class="sorting">收货人手机号</th>							-->
-									      <!--&lt;!&ndash; <th class="sorting">店铺</th>	 &ndash;&gt;						-->
-
-									      <!--<th class="text-center" class="sorting">付款时间</th>							-->
+									      <th style="width:200px">收货人地址</th>							
+									      <th class="sorting">收货人姓名</th>							
+									      <th class="sorting">收货人手机号</th>							
+									      <!-- <th class="sorting">店铺</th>	 -->						
+									      <th class="text-center" style="width:150px">创建时间</th>							
+									      <th class="text-center" class="sorting">付款时间</th>							
 					                      <th class="text-center">操作</th>
 			                          </tr>
 			                      </thead>
 			                      <tbody>
 			                          <tr ng-repeat="entity in list">
-			                              <td><input  type="checkbox"></td>
-										  <td class="text-center">{{entity.createTime}}</td>
+			                              <td><input  type="checkbox"></td>			                              
 				                          <td>{{entity.orderId}}</td>
-										  <td>{{entity.goodsId}}</td>
-										  <td>{{entity.goodsName}}</td>
 				                          <td>{{entity.payment}}</td>
 									      <td>{{entity.orderStatus}}</td>
 									      <td>{{entity.shippingCode}}</td>
 									      <td>{{entity.nickName}}</td>
-										  <td>{{entity.receiverName}}</td>
-										  <td>{{entity.doctorRelated}}</td>
-										  <td>{{entity.salesRelated}}</td>
-										  <!--<td>{{entity.receiverAddress}}</td>-->
-
-									      <!--<td>{{entity.receiverMobile}}</td>							-->
+									      <td>{{entity.receiverAddress}}</td>							
+									      <td>{{entity.receiverName}}</td>							
+									      <td>{{entity.receiverMobile}}</td>							
 									      <!-- <td>{{entity.sellerName}}</td> -->							
-
-									      <!--<td class="text-center">{{entity.paymentTime}}</td>							-->
+									      <td class="text-center">{{entity.createTime}}</td>							
+									      <td class="text-center">{{entity.paymentTime}}</td>							
 		                                  <td class="text-center" style="width:150px">                                           
 		                                     <!--  <span><button type="button" ng-click="findById(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button></span> -->
 		                                 	  <span><button type="button" ng-click="showOrderDetatil(entity.orderId)" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#orderDetailModal">商品详情</button></span>		                                  </td>

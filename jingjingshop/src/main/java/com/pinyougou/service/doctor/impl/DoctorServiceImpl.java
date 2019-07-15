@@ -293,18 +293,22 @@ public class DoctorServiceImpl  implements DoctorService {
 		TbOrder tbOrder = orderMapper.selectByPrimaryKey(orderId);
 		BigDecimal payment = tbOrder.getPayment();
 		List<Map<String,Object>> doctorList = tbDocMapper.selectDoctorList(userId);
-		Map<String, Object> lastDoctorMap = doctorList.get(0);
-		Long doctorId = (Long)lastDoctorMap.get("doctorId");
-		TbDoctor doctor = tbDocMapper.selectByPrimaryKey(doctorId);
-		BigDecimal docPoints = new BigDecimal(payment.doubleValue()*0.01+doctor.getPoints().intValue());
-		doctor.setPoints(docPoints);
-		tbDocMapper.updateByPrimaryKeySelective(doctor);//更新医生积分
-		Map<String,Object> representMap = (Map<String,Object>)representMapper.selectRepresentByDoctorId(doctorId);
-		Long representId = (Long)representMap.get("rid");
-		TbRepresent tbRepresent = representMapper.selectByPrimaryKey(representId);
-		BigDecimal representPoints = new BigDecimal(payment.doubleValue()*0.005+tbRepresent.getPoints().doubleValue());
-		tbRepresent.setPoints(representPoints);
-		representMapper.updateByPrimaryKeySelective(tbRepresent);
+		if(doctorList!=null&&doctorList.size()!=0){
+			Map<String, Object> lastDoctorMap = doctorList.get(0);
+			Long doctorId = (Long)lastDoctorMap.get("doctorId");
+			TbDoctor doctor = tbDocMapper.selectByPrimaryKey(doctorId);
+			BigDecimal docPoints = new BigDecimal(payment.doubleValue()*0.01+doctor.getPoints().intValue());
+			doctor.setPoints(docPoints);
+			tbDocMapper.updateByPrimaryKeySelective(doctor);//更新医生积分
+			Map<String,Object> representMap = (Map<String,Object>)representMapper.selectRepresentByDoctorId(doctorId);
+			if(representMap!=null){
+				Long representId = (Long)representMap.get("rid");
+				TbRepresent tbRepresent = representMapper.selectByPrimaryKey(representId);
+				BigDecimal representPoints = new BigDecimal(payment.doubleValue()*0.005+tbRepresent.getPoints().doubleValue());
+				tbRepresent.setPoints(representPoints);
+				representMapper.updateByPrimaryKeySelective(tbRepresent);
+			}
+		}
 	}
 
 	@Override

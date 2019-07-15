@@ -85,9 +85,7 @@ public class UserServiceImpl implements UserService {
      */
     public void delete(Long[] ids) {
         for (Long id : ids) {
-        	TbUser user = userMapper.selectByPrimaryKey(id);
-        	user.setIsDelete("1");
-            userMapper.updateByPrimaryKey(user);
+        	userMapper.deleteByPrimaryKey(id);
         }
     }
 
